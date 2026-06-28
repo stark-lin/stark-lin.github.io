@@ -1,0 +1,2517 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lin Stark — Personal Homepage</title>
+  <meta name="description" content="Lin Stark — Computer Science student, backend systems builder, and generative interface experimenter." />
+  <style>
+    :root {
+      --bg: #f6USed;
+      --fg: #171717;
+      --muted: #66615a;
+      --line: rgba(20, 20, 20, 0.16);
+      --card: rgba(255, 255, 255, 0.62);
+      --card-strong: rgba(255, 255, 255, 0.86);
+      --accent: #111111;
+      --accent-soft: rgba(17, 17, 17, 0.08);
+      --danger: #111111;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.08);
+      --radius: 24px;
+      --style-site-width: 960px;
+      --style-line-height: 1.55;
+      --style-hero-pad-top: 82px;
+      --style-hero-pad-bottom: 72px;
+      --style-hero-gap: 28px;
+      --style-section-padding-y: 74px;
+      --style-section-gap: 32px;
+      --style-card-padding: 24px;
+      --style-card-gap: 16px;
+      --style-border-width: 1px;
+      --style-border-style: solid;
+      --style-card-shadow: none;
+      --style-panel-shadow: var(--shadow);
+      --style-blur: 16px;
+      --style-h1-min: 42px;
+      --style-h1-fluid: 8vw;
+      --style-h1-max: 92px;
+      --style-h1-tracking: -0.075em;
+      --style-h2-tracking: -0.055em;
+      --style-h3-tracking: -0.035em;
+      --style-desc-size: 18px;
+      --style-section-lead-size: 17px;
+      --style-button-y: 12px;
+      --style-button-x: 16px;
+      --style-button-size: 14px;
+      --style-meta-transform: uppercase;
+      --style-meta-spacing: 0.08em;
+      --style-title-rule-width: 0px;
+      --style-title-rule-style: solid;
+      --style-title-rule-padding: 0px;
+      --style-index-box-padding: 0px;
+      --style-index-box-border-width: 0px;
+      --style-outline-width: 0px;
+      --style-outline-style: solid;
+      --style-outline-offset: 0px;
+      --style-section-border-width: 1px;
+      --style-section-border-style: solid;
+      --style-micro-opacity: 1;
+      --style-text-width: 760px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --serif: ui-serif, Georgia, Cambria, "Times New Roman", "Noto Serif SC", serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--fg);
+      background: var(--page-background,
+        radial-gradient(circle at top left, var(--accent-soft), transparent 34rem),
+        linear-gradient(135deg, rgba(255,255,255,0.42), transparent 30rem),
+        var(--bg)
+      );
+      line-height: var(--style-line-height);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.28;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+      z-index: -1;
+    }
+
+    body.theme-terminal {
+      --bg: #080a0c;
+      --fg: #e7f0e8;
+      --muted: #8a9b91;
+      --line: rgba(188, 255, 208, 0.14);
+      --card: rgba(13, 19, 16, 0.72);
+      --card-strong: rgba(11, 17, 14, 0.92);
+      --accent: #9cffb7;
+      --accent-soft: rgba(156, 255, 183, 0.11);
+      --shadow: 0 26px 90px rgba(0, 0, 0, 0.45);
+    }
+
+    body.theme-archive {
+      --bg: #eee8da;
+      --fg: #17130f;
+      --muted: #6e6559;
+      --line: rgba(40, 31, 21, 0.18);
+      --card: rgba(255, 252, 245, 0.72);
+      --card-strong: rgba(255, 252, 245, 0.96);
+      --accent: #6a3d15;
+      --accent-soft: rgba(106, 61, 21, 0.10);
+    }
+
+    body.theme-signal {
+      --bg: #101018;
+      --fg: #f3f0ff;
+      --muted: #a8a2be;
+      --line: rgba(207, 199, 255, 0.16);
+      --card: rgba(30, 29, 45, 0.68);
+      --card-strong: rgba(27, 26, 42, 0.92);
+      --accent: #d8ccff;
+      --accent-soft: rgba(216, 204, 255, 0.12);
+      --shadow: 0 26px 90px rgba(0, 0, 0, 0.42);
+    }
+
+    body.theme-paper {
+      --bg: #fbfaf6;
+      --fg: #1d1d1b;
+      --muted: #6b6860;
+      --line: rgba(31, 31, 28, 0.12);
+      --card: rgba(255, 255, 255, 0.76);
+      --card-strong: rgba(255, 255, 255, 0.96);
+      --accent: #2e5748;
+      --accent-soft: rgba(46, 87, 72, 0.10);
+    }
+
+    body.theme-glitch {
+      --bg: #f3f5ff;
+      --fg: #0a0c16;
+      --muted: #555a72;
+      --line: rgba(10, 12, 22, 0.14);
+      --card: rgba(255, 255, 255, 0.7);
+      --card-strong: rgba(255, 255, 255, 0.95);
+      --accent: #2847ff;
+      --accent-soft: rgba(40, 71, 255, 0.10);
+    }
+
+    body.theme-ink {
+      --bg: #11100e;
+      --fg: #f2eee5;
+      --muted: #aaa297;
+      --line: rgba(242, 238, 229, 0.15);
+      --card: rgba(255, 255, 255, 0.065);
+      --card-strong: rgba(255, 255, 255, 0.1);
+      --accent: #f1c15b;
+      --accent-soft: rgba(241, 193, 91, 0.13);
+      --shadow: 0 26px 90px rgba(0, 0, 0, 0.48);
+    }
+
+    body.theme-blueprint {
+      --bg: #0b1220;
+      --fg: #eef5ff;
+      --muted: #9fb1ca;
+      --line: rgba(152, 185, 255, 0.17);
+      --card: rgba(11, 24, 44, 0.72);
+      --card-strong: rgba(13, 29, 52, 0.92);
+      --accent: #8fb7ff;
+      --accent-soft: rgba(143, 183, 255, 0.13);
+      --shadow: 0 26px 90px rgba(0, 0, 0, 0.42);
+    }
+
+    body.theme-clay {
+      --bg: #f1ded0;
+      --fg: #211511;
+      --muted: #715c52;
+      --line: rgba(59, 35, 27, 0.16);
+      --card: rgba(255, 246, 239, 0.66);
+      --card-strong: rgba(255, 246, 239, 0.9);
+      --accent: #9b3f22;
+      --accent-soft: rgba(155, 63, 34, 0.11);
+    }
+
+    body.theme-noir {
+      --bg: #050505;
+      --fg: #f4f4f0;
+      --muted: #9b9b94;
+      --line: rgba(244, 244, 240, 0.16);
+      --card: rgba(255, 255, 255, 0.055);
+      --card-strong: rgba(255, 255, 255, 0.092);
+      --accent: #ffffff;
+      --accent-soft: rgba(255, 255, 255, 0.10);
+      --shadow: 0 28px 100px rgba(0, 0, 0, 0.62);
+    }
+
+    body.theme-amber {
+      --bg: #1b1207;
+      --fg: #fff2d2;
+      --muted: #d4b985;
+      --line: rgba(255, 214, 134, 0.18);
+      --card: rgba(255, 185, 76, 0.08);
+      --card-strong: rgba(255, 218, 145, 0.13);
+      --accent: #ffb23e;
+      --accent-soft: rgba(255, 178, 62, 0.16);
+      --shadow: 0 28px 96px rgba(0, 0, 0, 0.48);
+    }
+
+    body.theme-crimson {
+      --bg: #16070a;
+      --fg: #fff0f2;
+      --muted: #d0a2aa;
+      --line: rgba(255, 177, 191, 0.17);
+      --card: rgba(255, 84, 112, 0.075);
+      --card-strong: rgba(255, 126, 148, 0.13);
+      --accent: #ff5f7e;
+      --accent-soft: rgba(255, 95, 126, 0.14);
+      --shadow: 0 28px 96px rgba(0, 0, 0, 0.5);
+    }
+
+    body.theme-mint {
+      --bg: #effbf2;
+      --fg: #102018;
+      --muted: #53695b;
+      --line: rgba(16, 60, 35, 0.15);
+      --card: rgba(255, 255, 255, 0.68);
+      --card-strong: rgba(255, 255, 255, 0.92);
+      --accent: #137a45;
+      --accent-soft: rgba(19, 122, 69, 0.10);
+    }
+
+    body.theme-frost {
+      --bg: #eef7ff;
+      --fg: #0d1824;
+      --muted: #50677c;
+      --line: rgba(42, 91, 132, 0.16);
+      --card: rgba(255, 255, 255, 0.58);
+      --card-strong: rgba(255, 255, 255, 0.84);
+      --accent: #1f6feb;
+      --accent-soft: rgba(31, 111, 235, 0.11);
+    }
+
+    body.theme-plum {
+      --bg: #170d1e;
+      --fg: #f9edff;
+      --muted: #b69cc2;
+      --line: rgba(227, 190, 255, 0.16);
+      --card: rgba(183, 102, 255, 0.075);
+      --card-strong: rgba(211, 155, 255, 0.13);
+      --accent: #d79cff;
+      --accent-soft: rgba(215, 156, 255, 0.14);
+      --shadow: 0 28px 100px rgba(0, 0, 0, 0.5);
+    }
+
+    body.theme-slate {
+      --bg: #e7ebef;
+      --fg: #111820;
+      --muted: #5c6671;
+      --line: rgba(30, 43, 56, 0.15);
+      --card: rgba(255, 255, 255, 0.62);
+      --card-strong: rgba(255, 255, 255, 0.88);
+      --accent: #26384d;
+      --accent-soft: rgba(38, 56, 77, 0.10);
+    }
+
+    body.theme-limewire {
+      --bg: #071006;
+      --fg: #ecffe7;
+      --muted: #91aa8b;
+      --line: rgba(188, 255, 176, 0.16);
+      --card: rgba(118, 255, 98, 0.07);
+      --card-strong: rgba(166, 255, 151, 0.12);
+      --accent: #b2ff59;
+      --accent-soft: rgba(178, 255, 89, 0.16);
+      --shadow: 0 28px 100px rgba(0, 0, 0, 0.52);
+    }
+
+    body.theme-cobalt {
+      --bg: #07123b;
+      --fg: #eef3ff;
+      --muted: #a5b2d8;
+      --line: rgba(164, 188, 255, 0.18);
+      --card: rgba(84, 125, 255, 0.08);
+      --card-strong: rgba(126, 156, 255, 0.14);
+      --accent: #7ea0ff;
+      --accent-soft: rgba(126, 160, 255, 0.15);
+      --shadow: 0 28px 100px rgba(0, 0, 0, 0.5);
+    }
+
+    body.theme-sand {
+      --bg: #f7efd9;
+      --fg: #241b10;
+      --muted: #73654f;
+      --line: rgba(80, 58, 30, 0.17);
+      --card: rgba(255, 252, 240, 0.62);
+      --card-strong: rgba(255, 252, 240, 0.9);
+      --accent: #8a5a1f;
+      --accent-soft: rgba(138, 90, 31, 0.11);
+    }
+
+    body.bg-grid::before {
+      opacity: 0.28;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 52px 52px;
+    }
+
+    body.bg-dots::before {
+      opacity: 0.34;
+      background-image: radial-gradient(circle, var(--line) 1.15px, transparent 1.25px);
+      background-size: 22px 22px;
+    }
+
+    body.bg-scanlines::before {
+      opacity: 0.20;
+      background-image: linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+      background-size: 100% 9px;
+    }
+
+    body.bg-diagonal::before {
+      opacity: 0.25;
+      background-image: repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 18px);
+      background-size: auto;
+    }
+
+    body.bg-crosshatch::before {
+      opacity: 0.22;
+      background-image: repeating-linear-gradient(45deg, var(--line) 0 1px, transparent 1px 20px), repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 20px);
+      background-size: auto;
+    }
+
+    body.bg-clean::before { opacity: 0; }
+
+    body.bg-halo {
+      --page-background:
+        radial-gradient(circle at 12% 10%, color-mix(in srgb, var(--accent), transparent 78%), transparent 28rem),
+        radial-gradient(circle at 88% 26%, color-mix(in srgb, var(--fg), transparent 90%), transparent 22rem),
+        radial-gradient(circle at 50% 100%, var(--accent-soft), transparent 32rem),
+        var(--bg);
+    }
+
+    body.bg-corner-cut {
+      --page-background:
+        linear-gradient(135deg, color-mix(in srgb, var(--accent), transparent 88%) 0 18%, transparent 18% 100%),
+        radial-gradient(circle at top right, var(--accent-soft), transparent 26rem),
+        var(--bg);
+    }
+
+    body.bg-rings::before {
+      opacity: 0.23;
+      background-image: repeating-radial-gradient(circle at 50% 20%, var(--line) 0 1px, transparent 1px 34px);
+      background-size: auto;
+    }
+
+    body.bg-columns::before {
+      opacity: 0.18;
+      background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 84px 100%;
+    }
+
+    body.bg-checker::before {
+      opacity: 0.18;
+      background-image: linear-gradient(45deg, var(--line) 25%, transparent 25%), linear-gradient(-45deg, var(--line) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--line) 75%), linear-gradient(-45deg, transparent 75%, var(--line) 75%);
+      background-position: 0 0, 0 11px, 11px -11px, -11px 0;
+      background-size: 22px 22px;
+    }
+
+    body.bg-dashed::before {
+      opacity: 0.28;
+      background-image: repeating-linear-gradient(90deg, var(--line) 0 14px, transparent 14px 28px), repeating-linear-gradient(0deg, var(--line) 0 14px, transparent 14px 28px);
+      background-size: 72px 72px;
+    }
+
+    body.bg-pixels::before {
+      opacity: 0.22;
+      background-image: linear-gradient(var(--line) 2px, transparent 2px), linear-gradient(90deg, var(--line) 2px, transparent 2px);
+      background-size: 18px 18px;
+    }
+
+    body.bg-orbit {
+      --page-background:
+        radial-gradient(circle at 20% 15%, var(--accent-soft), transparent 18rem),
+        radial-gradient(circle at 86% 18%, color-mix(in srgb, var(--accent), transparent 84%), transparent 16rem),
+        radial-gradient(circle at 58% 86%, color-mix(in srgb, var(--fg), transparent 92%), transparent 24rem),
+        var(--bg);
+    }
+    body.bg-orbit::before {
+      opacity: 0.18;
+      background-image: repeating-radial-gradient(circle at 80% 12%, var(--line) 0 1px, transparent 1px 42px);
+    }
+
+    body.bg-fold {
+      --page-background:
+        linear-gradient(160deg, transparent 0 54%, color-mix(in srgb, var(--accent), transparent 91%) 54% 100%),
+        linear-gradient(24deg, color-mix(in srgb, var(--fg), transparent 94%) 0 22%, transparent 22% 100%),
+        var(--bg);
+    }
+    body.bg-fold::before { opacity: 0.10; }
+
+    body.bg-split {
+      --page-background:
+        linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 92%) 0 50%, transparent 50% 100%),
+        radial-gradient(circle at top left, var(--accent-soft), transparent 32rem),
+        var(--bg);
+    }
+    body.bg-split::before { opacity: 0.16; }
+
+    body.bg-horizon {
+      --page-background:
+        linear-gradient(to bottom, transparent 0 58%, color-mix(in srgb, var(--accent), transparent 91%) 58% 100%),
+        radial-gradient(circle at 50% 0%, var(--accent-soft), transparent 34rem),
+        var(--bg);
+    }
+    body.bg-horizon::before { opacity: 0.14; }
+
+    body.bg-circuit::before {
+      opacity: 0.26;
+      background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px), linear-gradient(var(--line) 1px, transparent 1px), radial-gradient(circle, var(--line) 1.5px, transparent 1.6px);
+      background-size: 64px 64px, 64px 64px, 32px 32px;
+      background-position: 0 0, 0 0, 16px 16px;
+    }
+
+    body.bg-letterpress::before {
+      opacity: 0.20;
+      background-image: repeating-linear-gradient(0deg, transparent 0 31px, var(--line) 31px 32px), repeating-linear-gradient(90deg, transparent 0 127px, var(--line) 127px 128px);
+      background-size: auto;
+    }
+
+    body.bg-spotlight {
+      --page-background:
+        radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--accent), transparent 78%), transparent 24rem),
+        radial-gradient(circle at 50% 120%, color-mix(in srgb, var(--fg), transparent 94%), transparent 38rem),
+        var(--bg);
+    }
+    body.bg-spotlight::before { opacity: 0.08; }
+
+    body.style-soft {
+      --radius: 32px;
+      --shadow: 0 30px 100px rgba(0, 0, 0, 0.10);
+    }
+
+    body.style-sharp {
+      --radius: 8px;
+      --shadow: none;
+    }
+    body.style-sharp .card,
+    body.style-sharp .hero-card,
+    body.style-sharp .principle,
+    body.style-sharp .timeline-item,
+    body.style-sharp .contact-panel,
+    body.style-sharp .reveal {
+      border-width: 2px;
+      backdrop-filter: none;
+    }
+    body.style-sharp .button, body.style-sharp .tag, body.style-sharp .skill-pill { border-radius: 8px; }
+
+    body.style-editorial h1,
+    body.style-editorial h2 {
+      font-family: var(--serif);
+      letter-spacing: -0.065em;
+    }
+    body.style-editorial .section-head {
+      border-left: 3px solid var(--accent);
+      padding-left: 18px;
+    }
+    body.style-editorial .card,
+    body.style-editorial .principle,
+    body.style-editorial .timeline-item {
+      background: color-mix(in srgb, var(--card-strong), transparent 18%);
+    }
+
+    body.style-terminalish h1,
+    body.style-terminalish h2,
+    body.style-terminalish h3 {
+      font-family: var(--mono);
+      letter-spacing: -0.045em;
+    }
+    body.style-terminalish .card-title-row h3::before { content: "./"; color: var(--accent); }
+    body.style-terminalish .button { text-transform: uppercase; letter-spacing: .06em; font-family: var(--mono); font-size: 12px; }
+
+    body.style-filecard .card,
+    body.style-filecard .hero-card,
+    body.style-filecard .principle,
+    body.style-filecard .timeline-item {
+      box-shadow: inset 0 1px 0 color-mix(in srgb, var(--fg), transparent 86%);
+    }
+    body.style-filecard .card::before,
+    body.style-filecard .timeline-item::before,
+    body.style-filecard .principle::before {
+      content: "record / " attr(class);
+      display: block;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    body.style-plain {
+      --radius: 18px;
+      --shadow: none;
+    }
+    body.style-plain .card,
+    body.style-plain .hero-card,
+    body.style-plain .principle,
+    body.style-plain .timeline-item,
+    body.style-plain .contact-panel {
+      background: transparent;
+      backdrop-filter: none;
+    }
+
+
+    body.style-brutal {
+      --shadow: 8px 8px 0 color-mix(in srgb, var(--accent), transparent 32%);
+    }
+    body.style-brutal h1, body.style-brutal h2 { text-transform: uppercase; }
+    body.style-brutal .card,
+    body.style-brutal .hero-card,
+    body.style-brutal .principle,
+    body.style-brutal .timeline-item,
+    body.style-brutal .contact-panel,
+    body.style-brutal .reveal {
+      border-width: 2px;
+      backdrop-filter: none;
+    }
+
+    body.style-ledger .section {
+      border-top-style: double;
+      border-top-width: 3px;
+    }
+    body.style-ledger .card,
+    body.style-ledger .timeline-item,
+    body.style-ledger .principle {
+      background-image: linear-gradient(to bottom, transparent calc(100% - 1px), color-mix(in srgb, var(--line), transparent 20%) calc(100% - 1px));
+      background-size: 100% 34px;
+    }
+    body.style-ledger .generated-desc-meta { border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+
+    body.style-poster h1 {
+      font-size: clamp(48px, 10vw, 116px);
+      text-transform: uppercase;
+      letter-spacing: -0.095em;
+    }
+    body.style-poster .kicker,
+    body.style-poster .section-index,
+    body.style-poster .tag {
+      font-weight: 800;
+    }
+    body.style-poster .card-title-row {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+    }
+
+    body.style-codeblock h1,
+    body.style-codeblock h2,
+    body.style-codeblock h3,
+    body.style-codeblock .section-index,
+    body.style-codeblock .kicker {
+      font-family: var(--mono);
+    }
+    body.style-codeblock .card,
+    body.style-codeblock .hero-card,
+    body.style-codeblock .timeline-item,
+    body.style-codeblock .principle {
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent), transparent 80%);
+    }
+    body.style-codeblock .generated-description::before { content: "// "; color: var(--accent); }
+
+    body.style-manifesto .card,
+    body.style-manifesto .hero-card,
+    body.style-manifesto .principle,
+    body.style-manifesto .timeline-item {
+      border-left-width: 8px;
+      border-left-color: var(--accent);
+    }
+    body.style-manifesto .section-lead,
+    body.style-manifesto .generated-description,
+    body.style-manifesto .hero-sub {
+      font-size: clamp(18px, 2.5vw, 26px);
+      line-height: 1.38;
+    }
+
+    body.style-receipt .site,
+    body.style-receipt .topbar-inner {
+      max-width: 760px;
+    }
+    body.style-receipt h1, body.style-receipt h2, body.style-receipt h3 {
+      font-family: var(--mono);
+      letter-spacing: -0.04em;
+    }
+    body.style-receipt .card,
+    body.style-receipt .hero-card,
+    body.style-receipt .timeline-item,
+    body.style-receipt .principle,
+    body.style-receipt .contact-panel {
+      box-shadow: none;
+      border-left: 0;
+      border-right: 0;
+    }
+
+    body.style-glass .card,
+    body.style-glass .hero-card,
+    body.style-glass .principle,
+    body.style-glass .timeline-item,
+    body.style-glass .contact-panel {
+      background: color-mix(in srgb, var(--card), transparent 18%);
+      backdrop-filter: blur(28px) saturate(1.25);
+      box-shadow: inset 0 1px 0 color-mix(in srgb, var(--fg), transparent 88%), var(--shadow);
+    }
+
+    body.style-indexed .section-head {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    body.style-indexed .section-index {
+      width: fit-content;
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      background: var(--card);
+    }
+    body.style-indexed .card-title-row::before {
+      content: "#";
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    body.style-generated .hero-card,
+    body.style-generated .card,
+    body.style-generated .principle,
+    body.style-generated .timeline-item,
+    body.style-generated .contact-panel,
+    body.style-generated .reveal {
+      /* No outer outlines: keeps generated chrome without creating wrapper/dashed overlap artifacts. */
+      outline: 0;
+      outline-offset: 0;
+    }
+
+    body.style-generated .section-index {
+      opacity: var(--style-micro-opacity);
+      border: var(--style-index-box-border-width) solid var(--line);
+      padding: var(--style-index-box-padding);
+      width: fit-content;
+    }
+
+    body.style-generated .tag,
+    body.style-generated .skill-pill {
+      border-width: var(--style-border-width);
+      border-style: var(--style-border-style);
+    }
+
+    body.style-generated .hero-sub,
+    body.style-generated .section-lead {
+      max-width: var(--style-text-width, 760px);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    .site {
+      width: min(var(--style-site-width), calc(100vw - 36px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: color-mix(in srgb, var(--bg), transparent 18%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      width: min(var(--style-site-width), calc(100vw - 36px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 760;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--card-strong);
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hero {
+      min-height: auto;
+      display: grid;
+      align-items: center;
+      padding: var(--style-hero-pad-top) 0 var(--style-hero-pad-bottom);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--style-hero-gap);
+      align-items: start;
+    }
+
+    .kicker {
+      font-family: var(--mono);
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(var(--style-h1-min), var(--style-h1-fluid), var(--style-h1-max));
+      line-height: 0.94;
+      letter-spacing: var(--style-h1-tracking);
+      max-width: 900px;
+    }
+
+    .hero-sub {
+      margin: 28px 0 0;
+      max-width: 690px;
+      font-size: clamp(18px, 2.4vw, 25px);
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      appearance: none;
+      border: 1px solid var(--fg);
+      background: var(--fg);
+      color: var(--bg);
+      padding: var(--style-button-y) var(--style-button-x);
+      border-radius: 999px;
+      font: inherit;
+      font-size: var(--style-button-size);
+      cursor: pointer;
+      transition: transform .16s ease, opacity .16s ease, background .16s ease, color .16s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--fg);
+    }
+
+    .button:hover { transform: translateY(-1px); text-decoration: none; }
+    .button:active { transform: translateY(0); opacity: .78; }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: var(--style-card-padding);
+      backdrop-filter: blur(var(--style-blur));
+    }
+
+    .stat-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .stat {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 14px;
+    }
+    .stat:last-child { border-bottom: 0; padding-bottom: 0; }
+    .stat-label {
+      font-family: var(--mono);
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 4px;
+    }
+    .stat-value { font-size: 17px; font-weight: 680; letter-spacing: -0.02em; }
+
+    main {
+      padding: 20px 0 0;
+    }
+
+    .section {
+      border-top: var(--style-section-border-width) var(--style-section-border-style) var(--line);
+      padding: var(--style-section-padding-y) 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+      margin-bottom: var(--style-section-gap);
+    }
+
+    .section-index {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 58px);
+      letter-spacing: var(--style-h2-tracking);
+      line-height: .98;
+    }
+
+    .section-lead {
+      margin: 14px 0 0;
+      color: var(--muted);
+      max-width: 760px;
+      font-size: var(--style-section-lead-size);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--style-card-gap);
+    }
+
+    .card {
+      grid-column: 1 / -1;
+      padding: var(--style-card-padding);
+      border: var(--style-border-width) var(--style-border-style) var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      backdrop-filter: blur(var(--style-blur));
+      box-shadow: var(--style-card-shadow);
+      min-height: auto;
+      overflow-wrap: anywhere;
+    }
+
+    .card.full,
+    .card.third { grid-column: 1 / -1; }
+    .card-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      border-bottom: var(--style-title-rule-width) var(--style-title-rule-style) var(--line);
+      padding-bottom: var(--style-title-rule-padding);
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.1;
+      letter-spacing: var(--style-h3-tracking);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      white-space: nowrap;
+      font-family: var(--mono);
+      background: color-mix(in srgb, var(--card-strong), transparent 20%);
+    }
+
+    .stack {
+      margin: 10px 0 16px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .generated-desc-meta {
+      margin-top: 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: var(--style-meta-spacing);
+      text-transform: var(--style-meta-transform);
+    }
+
+    .generated-description {
+      font-size: var(--style-desc-size);
+      line-height: var(--style-line-height);
+      color: var(--fg);
+      margin-top: 8px;
+    }
+
+    p { margin: 0 0 14px; }
+    ul {
+      margin: 16px 0 0;
+      padding-left: 19px;
+      color: var(--muted);
+    }
+    li { margin: 7px 0; }
+
+    details {
+      margin-top: 18px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+    summary {
+      cursor: pointer;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--style-card-gap);
+    }
+
+    .principle {
+      padding: var(--style-card-padding);
+      border: var(--style-border-width) var(--style-border-style) var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      font-size: 19px;
+      letter-spacing: -0.025em;
+      min-height: 150px;
+    }
+
+    .skill-cloud {
+      display: flex;
+      gap: calc(var(--style-card-gap) * .62);
+      flex-wrap: wrap;
+    }
+
+    .skill-pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 13px;
+      background: var(--card);
+      color: var(--fg);
+      font-size: 14px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: var(--style-card-gap);
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+      padding: var(--style-card-padding);
+      border: var(--style-border-width) var(--style-border-style) var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: var(--style-card-shadow);
+      overflow-wrap: anywhere;
+    }
+    .time-label {
+      font-family: var(--mono);
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
+      gap: 24px;
+      padding: calc(var(--style-card-padding) + 10px);
+      border: var(--style-border-width) var(--style-border-style) var(--line);
+      border-radius: calc(var(--radius) + 10px);
+      background: var(--card-strong);
+      box-shadow: var(--style-panel-shadow);
+      overflow-wrap: anywhere;
+    }
+
+    .contact-panel h2 { max-width: 760px; }
+    .contact-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .reveal {
+      margin: 84px 0 54px;
+      border: var(--style-border-width) var(--style-border-style) var(--line);
+      background: var(--fg);
+      color: var(--bg);
+      border-radius: calc(var(--radius) + 16px);
+      padding: clamp(28px, 5vw, 54px);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .reveal::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .14;
+      background-image: linear-gradient(rgba(255,255,255,.22) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.22) 1px, transparent 1px);
+      background-size: 42px 42px;
+    }
+
+    .reveal > * { position: relative; }
+    .reveal .kicker { color: var(--bg); opacity: .78; }
+    .reveal h2 {
+      font-size: clamp(38px, 6vw, 76px);
+      max-width: 950px;
+    }
+    .reveal p { color: color-mix(in srgb, var(--bg), transparent 24%); max-width: 720px; font-size: 18px; }
+    .reveal-grid {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+      max-width: 420px;
+    }
+    .reveal-stat {
+      border: 1px solid color-mix(in srgb, var(--bg), transparent 76%);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255,255,255,.05);
+      min-height: auto;
+      overflow-wrap: anywhere;
+    }
+    .reveal-stat-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      opacity: .62;
+      margin-bottom: 6px;
+    }
+    .reveal-stat-value { font-weight: 720; letter-spacing: -0.02em; }
+    .reveal-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .reveal .button {
+      background: var(--bg);
+      color: var(--fg);
+      border-color: var(--bg);
+    }
+    .reveal .button.secondary {
+      background: transparent;
+      color: var(--bg);
+      border-color: color-mix(in srgb, var(--bg), transparent 62%);
+    }
+    .reveal .button.surrender {
+      width: 100%;
+      justify-content: center;
+      margin-top: 4px;
+      border-style: dashed;
+    }
+
+    .complete-version[hidden] { display: none; }
+    .complete-version {
+      border-top: 1px solid var(--line);
+      padding: 78px 0 86px;
+    }
+    .complete-version .complete-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .complete-project { grid-column: 1 / -1; }
+    .complete-project .intro-list {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 0;
+    }
+    .complete-project .intro-list p {
+      margin: 0;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--muted);
+      background: color-mix(in srgb, var(--card-strong), transparent 38%);
+    }
+    .complete-version h3 { margin-top: 0; }
+
+    .tiny-footer {
+      padding: 0 0 42px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(18px);
+      padding: 11px 14px;
+      border-radius: 999px;
+      background: var(--fg);
+      color: var(--bg);
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 100;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .regenerating {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: var(--fg);
+      color: var(--bg);
+      display: none;
+      place-items: center;
+      padding: 24px;
+    }
+    .regenerating.active { display: grid; }
+    .regen-box {
+      width: min(620px, 100%);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+    .regen-line { opacity: .58; }
+    .regen-line.active { opacity: 1; }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: rise .56s ease forwards;
+    }
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+
+    body.shape-rounded {
+      --radius: 24px;
+    }
+
+    body.shape-soft-rounded {
+      --radius: 34px;
+    }
+    body.shape-soft-rounded .button,
+    body.shape-soft-rounded .tag,
+    body.shape-soft-rounded .skill-pill,
+    body.shape-soft-rounded .toast { border-radius: 999px; }
+
+    body.shape-right-angle {
+      --radius: 0px;
+    }
+    body.shape-right-angle .card,
+    body.shape-right-angle .hero-card,
+    body.shape-right-angle .principle,
+    body.shape-right-angle .timeline-item,
+    body.shape-right-angle .contact-panel,
+    body.shape-right-angle .reveal,
+    body.shape-right-angle .brand-mark,
+    body.shape-right-angle .button,
+    body.shape-right-angle .tag,
+    body.shape-right-angle .skill-pill,
+    body.shape-right-angle .reveal-stat,
+    body.shape-right-angle .complete-project .intro-list p,
+    body.shape-right-angle .toast {
+      border-radius: 0 !important;
+    }
+
+    body.shape-small-radius {
+      --radius: 10px;
+    }
+    body.shape-small-radius .button,
+    body.shape-small-radius .tag,
+    body.shape-small-radius .skill-pill,
+    body.shape-small-radius .brand-mark,
+    body.shape-small-radius .toast { border-radius: 10px; }
+
+    body.shape-pill-boxes {
+      --radius: 999px;
+    }
+    body.shape-pill-boxes .card,
+    body.shape-pill-boxes .hero-card,
+    body.shape-pill-boxes .principle,
+    body.shape-pill-boxes .timeline-item,
+    body.shape-pill-boxes .contact-panel,
+    body.shape-pill-boxes .reveal,
+    body.shape-pill-boxes .reveal-stat,
+    body.shape-pill-boxes .complete-project .intro-list p {
+      border-radius: 42px;
+    }
+    body.shape-pill-boxes .button,
+    body.shape-pill-boxes .tag,
+    body.shape-pill-boxes .skill-pill,
+    body.shape-pill-boxes .toast { border-radius: 999px; }
+
+    body.shape-no-boxes .card,
+    body.shape-no-boxes .hero-card,
+    body.shape-no-boxes .principle,
+    body.shape-no-boxes .timeline-item,
+    body.shape-no-boxes .contact-panel,
+    body.shape-no-boxes .reveal-stat,
+    body.shape-no-boxes .complete-project .intro-list p {
+      border-left: 0;
+      border-right: 0;
+      border-radius: 0 !important;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+    body.shape-no-boxes .reveal {
+      border-radius: 0 !important;
+      box-shadow: none;
+    }
+    body.shape-no-boxes .button,
+    body.shape-no-boxes .tag,
+    body.shape-no-boxes .skill-pill,
+    body.shape-no-boxes .brand-mark,
+    body.shape-no-boxes .toast {
+      border-radius: 0 !important;
+      background: transparent;
+      color: inherit;
+    }
+    body.shape-no-boxes .button:not(.secondary) {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    body.shape-line-only .card,
+    body.shape-line-only .hero-card,
+    body.shape-line-only .principle,
+    body.shape-line-only .timeline-item,
+    body.shape-line-only .contact-panel {
+      border-left: 0;
+      border-right: 0;
+      border-radius: 0 !important;
+      background: transparent;
+      box-shadow: none;
+      padding-left: 0;
+      padding-right: 0;
+      backdrop-filter: none;
+    }
+    body.shape-line-only .button,
+    body.shape-line-only .tag,
+    body.shape-line-only .skill-pill {
+      border-radius: 0 !important;
+    }
+
+    body.shape-ticket .card,
+    body.shape-ticket .hero-card,
+    body.shape-ticket .principle,
+    body.shape-ticket .timeline-item,
+    body.shape-ticket .contact-panel,
+    body.shape-ticket .reveal-stat {
+      border-radius: 2px 26px 2px 26px;
+    }
+    body.shape-ticket .reveal { border-radius: 4px 42px 4px 42px; }
+    body.shape-ticket .button,
+    body.shape-ticket .tag,
+    body.shape-ticket .skill-pill { border-radius: 2px 14px 2px 14px; }
+
+
+    /* Layout guardrails: random style may change surface tokens, but not document flow. */
+    .site,
+    .topbar-inner,
+    .hero,
+    .hero-grid,
+    main,
+    .section,
+    .section-head,
+    .cards,
+    .card,
+    .card-title-row,
+    .principles,
+    .principle,
+    .timeline,
+    .timeline-item,
+    .contact-panel,
+    .reveal,
+    .complete-version,
+    .complete-version .complete-head,
+    .complete-project,
+    .skill-cloud,
+    .contact-links,
+    .hero-actions,
+    .reveal-actions {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .hero,
+    .section,
+    .card,
+    .hero-card,
+    .principle,
+    .timeline-item,
+    .contact-panel,
+    .reveal,
+    .complete-version {
+      position: relative;
+      clear: both;
+      isolation: isolate;
+    }
+
+    .card,
+    .hero-card,
+    .principle,
+    .timeline-item,
+    .contact-panel,
+    .reveal-stat,
+    .complete-project .intro-list p {
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
+
+    h1, h2, h3,
+    .hero-sub,
+    .section-lead,
+    .generated-description,
+    .stack,
+    .stat-value,
+    .reveal-stat-value,
+    .tag,
+    .skill-pill,
+    .button {
+      min-width: 0;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .card-title-row > *,
+    .contact-links > *,
+    .hero-actions > *,
+    .reveal-actions > *,
+    .skill-cloud > * {
+      min-width: 0;
+    }
+
+    .tag,
+    .skill-pill,
+    .button {
+      white-space: normal;
+      text-align: center;
+    }
+
+    .card::before,
+    .timeline-item::before,
+    .principle::before {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .reveal::before {
+      z-index: 0;
+    }
+
+    .reveal > * {
+      z-index: 1;
+    }
+
+    .fade-in {
+      transform: none;
+    }
+
+    @keyframes rise {
+      to { opacity: 1; transform: none; }
+    }
+
+    .button:hover,
+    .button:active {
+      transform: none;
+    }
+
+    @supports (overflow: clip) {
+      .card,
+      .hero-card,
+      .principle,
+      .timeline-item,
+      .contact-panel,
+      .reveal-stat,
+      .complete-project .intro-list p {
+        overflow: clip;
+      }
+    }
+
+    body.layout-single .site {
+      max-width: 960px;
+    }
+
+    @media (max-width: 860px) {
+      nav { display: none; }
+      .section { padding: 58px 0; }
+    }
+
+    @media (max-width: 520px) {
+      .site, .topbar-inner { width: min(100vw - 24px, 960px); }
+      .hero { padding-top: 54px; }
+      .card, .hero-card, .contact-panel { padding: 19px; }
+      .reveal-actions .button, .hero-actions .button { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="regenerating" id="regenerating" aria-hidden="true">
+    <div class="regen-box">
+      <div class="regen-line active">Destroying current version...</div>
+      <div class="regen-line">Re-shuffling identity fragments...</div>
+      <div class="regen-line">Rebuilding color / background / shape system...</div>
+      <div class="regen-line">Generating new Lin Stark...</div>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="Lin Stark home">
+        <span class="brand-mark">LS</span>
+        <span>Lin Stark</span>
+      </a>
+      <nav id="nav" aria-label="Primary navigation"></nav>
+    </div>
+  </header>
+
+  <div class="site" id="top">
+    <section class="hero" id="hero"></section>
+    <main id="main"></main>
+    <section class="reveal" id="reveal"></section>
+    <section class="complete-version" id="completeVersion" hidden></section>
+    <footer class="tiny-footer">
+      <span>© 2026 Lin Stark</span>
+      <span>Identity stable. Single-column interface randomized by seed.</span>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast">Copied.</div>
+
+  <script>
+    const DATA = {
+      identity: {
+        name: "Lin Stark",
+        stableLine: "Computer Science student at the University of New South Wales, building backend systems, AI-native workflows, and generated interfaces.",
+        education: {
+          school: "University of New South Wales",
+          degree: "Bachelor of Computer Science",
+          graduation: "Expected Dec 2026"
+        },
+        contact: {
+          email: "statk.lin@outlook.com",
+          github: "https://github.com/stark-lin"
+        }
+      },
+
+      heroKickers: [
+        "Computer Science · Backend Systems · Generated Interfaces",
+        "UNSW CS · Go Backends · Personal Data Infrastructure",
+        "Systems, Interfaces, and Structured Chaos",
+        "Backend Engineering with a Taste for Strange Interfaces",
+        "Personal Infrastructure · AI Workflows · Product Systems",
+        "Go Backends · Object Identity · Deployable Tools",
+        "Small Systems · Hard Boundaries · Useful Interfaces",
+        "Backend Infrastructure · GenAI Workflows · Product Shape",
+        "Computer Science · Personal Software · Runtime Constraints",
+        "APIs, Databases, and Interfaces with a Memory",
+        "UNSW Computer Science · Backend-Oriented Builder",
+        "Generated Homepage · Stable Identity · Random Surface",
+        "Self-Hosted Systems · Course Tools · Assessment Workflows",
+        "Modular Backends · Structured Records · Controlled AI",
+        "Software that Prefers Explicit Boundaries"
+      ],
+
+      heroHeadlines: [
+        "I build systems for ideas that need structure.",
+        "Backend systems, personal infrastructure, and generated interfaces.",
+        "Turning ambiguous workflows into usable software systems.",
+        "I design the boring parts carefully so the strange parts can work.",
+        "Software systems for people with too many ideas and not enough structure.",
+        "Personal tools, backend architecture, and interfaces that refuse to stay still.",
+        "I like software that can be inspected after it starts working.",
+        "I turn loose product ideas into constrained backend systems.",
+        "I build small systems with explicit rules and usable surfaces.",
+        "My work lives between data models, APIs, and product judgment.",
+        "I make personal infrastructure less vague and more accountable.",
+        "I care about the parts of software that survive maintenance.",
+        "Useful systems first. Strange interfaces only after the rules are clear.",
+        "I build tools that keep records, boundaries, and context visible.",
+        "Controlled chaos on the surface. Deterministic structure underneath.",
+        "The interface may change. The system should still make sense.",
+        "I build backends for workflows that should not disappear into apps.",
+        "A generated homepage for a builder of structured systems."
+      ],
+
+      heroSubheads: [
+        "Currently focused on modular personal data systems, AI-assisted development workflows, and small software products that keep complexity visible but controlled.",
+        "I work mostly in Go, databases, APIs, authentication, CI/CD, and backend architecture, with an interest in how software can organize personal knowledge, records, and decisions.",
+        "My work sits between backend engineering and product structure: define the boundaries first, then build the system until it becomes inspectable.",
+        "I care about systems that can be audited, reasoned about, deployed, and extended without turning into vague infrastructure fog.",
+        "I prefer projects where the hard part is not just writing code, but defining what the system is allowed to do.",
+        "The through-line is control: object identity, backend authorization, runtime boundaries, deployment paths, and interfaces that expose rather than hide the system.",
+        "This page is generated, but the underlying signal is stable: backend systems, product scoping, data structure, and AI workflows with guardrails.",
+        "I build with Go, SQL, Docker, GitHub Actions, and a bias toward systems that can be tested, shipped, and explained.",
+        "I am interested in software that treats records as first-class objects instead of scattered UI fragments.",
+        "The work below is intentionally compact: fewer claims, more systems, and enough randomness to make the page feel less like a brochure.",
+        "Some versions of this page are clean; some are stranger. The important parts stay readable, linked, and inspectable.",
+        "The goal is not to look universally polished. The goal is to show a stable builder through many controlled surfaces.",
+        "I use AI as an implementation accelerator only after requirements, module boundaries, and review paths are explicit.",
+        "The random surface is a filter. The projects are the evidence. The seed makes each version reproducible."
+      ],
+
+      projects: [
+        {
+          id: "saturn",
+          title: "Saturn",
+          subtitle: "Modular personal data backend system",
+          stack: "Go · net/http · PostgreSQL · Redis · Docker",
+          url: "https://github.com/stark-lin/saturn",
+          tags: ["Personal Infrastructure", "Backend Architecture", "AI Authorization"],
+          intros: [
+            "A self-hosted modular backend for personal data: notes, files, accounting records, calendar events, audit logs, object references, search, and backend-controlled LLM requests.",
+            "Saturn is a personal data infrastructure project: a modular backend that treats notes, files, finances, calendar entries, audit trails, and LLM context as connected objects rather than isolated features.",
+            "A backend-first attempt to make personal data addressable, auditable, searchable, and usable by LLM workflows without handing authorization decisions to the client side."
+          ],
+          bullets: [
+            "Built a self-hosted modular personal data backend covering notes, files, ledger records, calendar events, audit logs, object references, search, and LLM requests controlled by backend authorization.",
+            "Designed a specification-driven AI-assisted development workflow: define requirements, module boundaries, interface constraints, and dependency rules before using AI to help implement.",
+            "Added human review, execution-plan inspection, and code review steps so AI-assisted implementation remains verifiable and maintainable.",
+            "Designed a centralized RefCode / Object Registry system so every domain object has a globally unique, human-readable reference code.",
+            "Used the RefCode system to unify cross-module identity, search navigation, audit tracing, permission checks, and LLM context resolution.",
+            "Implemented the modular backend service in Go with PostgreSQL, REST APIs, authentication, Redis sessions, local file storage, and Docker Compose deployment.",
+            "Configured GitHub Actions CI/CD to run Go quality checks, tests, and architecture dependency checks.",
+            "Published multi-architecture linux/amd64 and linux/arm64 container images to GitHub Container Registry on main branch updates."
+          ]
+        },
+        {
+          id: "ojlite",
+          title: "OJLite",
+          subtitle: "Small online judge for teaching and LAN deployment",
+          stack: "Go · Gin · SQLite",
+          url: "https://github.com/stark-lin/oj-lite",
+          tags: ["Teaching Tools", "Single Binary", "Runtime Boundary"],
+          intros: [
+            "A sub-10 MB single-binary online judge system scoped for classroom teaching, local/LAN deployment, teacher-controlled courses, and student practice submissions.",
+            "OJLite narrows the traditional online judge into a classroom-first tool: small deployment surface, teacher-owned courses, constrained submissions, and prebuilt learning paths.",
+            "A deliberately small online judge built to reduce operational complexity while preserving the core loop: students submit, workers evaluate, teachers control the classroom context."
+          ],
+          bullets: [
+            "Designed and built a single-binary online judge under 10 MB by narrowing the scope to classroom teaching, local/LAN deployment, teacher-controlled courses, and student practice submissions.",
+            "Built the backend with Go/Gin, SQLite persistence, role-based APIs, asynchronous Lua judging, transactional submission claiming, and restricted worker concurrency.",
+            "Implemented explicit permission and runtime boundaries including teacher-owned classroom access control and student APIs restricted to the current course scope.",
+            "Created a fresh restricted Lua state for each evaluation with execution timeout and stdout output limits.",
+            "Designed a practice structure containing 12 lessons and 108 problems to reduce teacher initialization cost and give students an immediately usable learning path.",
+            "Configured GitHub Actions CI/CD for formatting checks, architecture dependency validation, go vet, and tests.",
+            "Built Windows, Linux, and macOS single-binary releases, uploaded artifacts automatically, and created GitHub Releases on main branch updates."
+          ]
+        }
+      ],
+
+      experienceProject: {
+        id: "genai-platform",
+        title: "University GenAI Assessment Platform",
+        subtitle: "Course project · Product and backend architecture lead",
+        stack: "Product workflow · Backend architecture · LLM evaluation · Rubrics",
+        tags: ["Course Project", "Assessment Design", "LLM Workflow"],
+        intros: [
+          "A classroom-oriented GenAI assessment platform that reframes AI career coaching into configurable, rubric-based university evaluation workflows.",
+          "A course project focused on turning individual AI coaching patterns into an auditable Student/Admin assessment flow for university-scale classroom use.",
+          "A product and backend architecture exercise around GenAI evaluation: configurable scenarios, structured rubric feedback, backend validation, and administrator review."
+        ],
+        bullets: [
+          "Led backend architecture and product workflow design for a classroom-oriented GenAI assessment platform.",
+          "Reworked a traditional individual AI career coaching concept into configurable, rubric-based university classroom assessment flows.",
+          "Researched existing AI career coaching and online assessment products, identifying gaps in classroom configuration, scoring consistency, rubric constraints, and teacher review.",
+          "Designed Student/Admin dual workflows: students complete specified AI workplace simulation tasks while administrators configure scenarios, rubrics, and assignments.",
+          "Designed an asynchronous LLM evaluation flow with structured rubric feedback, backend-side validation, and administrator review to improve consistency, auditability, and human supervision."
+        ]
+      },
+
+      principles: [
+        "Randomness is only useful when the identity underneath is stable.",
+        "A good interface should reduce the cost of judgment, not merely decorate the surface.",
+        "If a system cannot be audited, it should not be trusted with important context.",
+        "I prefer small, inspectable software over large systems that hide their failure modes.",
+        "Specifications are not paperwork; they are a way to keep implementation honest.",
+        "AI-assisted development needs boundaries: requirements, module contracts, dependency rules, and human review.",
+        "A personal homepage should be a filter, not a brochure.",
+        "The boring parts of backend work are where future maintenance either survives or fails.",
+        "Good product structure turns vague ambition into a navigable path.",
+        "I like controlled chaos: the system can be strange, but the rules must be legible.",
+        "A system should make its failure modes easier to find, not easier to ignore.",
+        "Small tools are serious tools when the scope is precise.",
+        "A backend is not just storage; it is a policy surface.",
+        "Generated interfaces are acceptable only when the underlying content remains reachable.",
+        "If the data model is vague, the product will eventually become vague too.",
+        "The best abstraction is the one that survives the next feature request.",
+        "Deployment is part of the product, not an afterthought.",
+        "LLM features should inherit permissions from the system, not invent their own trust model.",
+        "A readable constraint is better than a clever workaround.",
+        "I would rather ship a narrow system than explain a broad one that almost works.",
+        "Interfaces should expose structure without forcing users to read the source code.",
+        "The work should still make sense after the novelty wears off.",
+        "Good software leaves enough evidence for future debugging.",
+        "Randomness should create variation, not ambiguity."
+      ],
+
+      currentStates: [
+        {
+          title: "Current focus",
+          body: "Building personal data infrastructure, generated homepage interactions, and AI-native workflows that remain inspectable instead of becoming a black box."
+        },
+        {
+          title: "Current question",
+          body: "How can a personal homepage feel alive without becoming confusing, gimmicky, or hostile to people who just need the facts?"
+        },
+        {
+          title: "Current bias",
+          body: "More backend clarity, fewer decorative abstractions. More explicit constraints, fewer vague promises."
+        },
+        {
+          title: "Current build mode",
+          body: "Go services, deterministic generation, seed-based UI states, and personal software that treats records as objects with identity."
+        },
+        {
+          title: "Current constraint",
+          body: "Keep the page deployable as a single file while letting the surface change enough to be memorable."
+        },
+        {
+          title: "Current engineering taste",
+          body: "Explicit modules, predictable deployment, simple APIs, and enough testing to make later edits less dangerous."
+        },
+        {
+          title: "Current product instinct",
+          body: "Start with the workflow, then decide the data model, then allow the interface to become unusual."
+        },
+        {
+          title: "Current refusal",
+          body: "No random layout that breaks reading order. Variation should stay inside safe CSS boundaries."
+        },
+        {
+          title: "Current signal",
+          body: "A backend-oriented computer science student with a bias toward personal infrastructure and AI systems that stay reviewable."
+        },
+        {
+          title: "Current note",
+          body: "This homepage is deliberately not a résumé clone. It is a second surface for judgment, curiosity, and project texture."
+        }
+      ],
+
+      sectionLeads: {
+        work: [
+          "Selected projects, framed this time around the systems behind them rather than only the surface output.",
+          "A few builds that show backend architecture, product scoping, runtime boundaries, and specification-driven implementation.",
+          "Work samples from personal infrastructure, teaching tools, and GenAI assessment workflows.",
+          "Two compact systems: one for personal data infrastructure, one for classroom judging with strict runtime boundaries.",
+          "Projects chosen for architecture signal rather than visual polish: data identity, deployment, permissions, and scope control.",
+          "Small systems with concrete constraints: self-hosted data, single-binary deployment, and reviewable workflows.",
+          "Backend-oriented work where the interesting decisions are in boundaries, object models, and operational simplicity.",
+          "The project list is short on purpose. Each one is meant to expose a different engineering judgment."
+        ],
+        experience: [
+          "Product and architecture work where the main problem was not just implementation, but shaping the workflow itself.",
+          "A course project that became a design problem about rubrics, classroom configuration, and auditable AI feedback.",
+          "Experience centered on transforming a broad GenAI idea into a structured assessment system.",
+          "A university GenAI assessment workflow, treated less like a chatbot feature and more like a controlled evaluation system.",
+          "The relevant part here is product structure: roles, rubrics, scenarios, validation, and administrator review.",
+          "This experience sits at the boundary between product scoping and backend workflow design.",
+          "A structured assessment project where AI output had to fit inside a human-reviewable classroom process.",
+          "A reminder that GenAI work is often a governance problem before it is an interface problem."
+        ],
+        skills: [
+          "The working set: languages, backend systems, databases, deployment tools, and architecture habits.",
+          "Tools and technical areas I use to build small, inspectable backend systems.",
+          "A compact view of the stack behind the projects above.",
+          "The stack is intentionally practical: Go services, SQL databases, Redis, Docker, GitHub Actions, and API design.",
+          "Mostly backend fundamentals: request boundaries, persistence, authentication, concurrency, CI, and deployment.",
+          "Tools I use when the goal is to ship something explainable rather than merely impressive.",
+          "The technical base behind the page: service design, database work, runtime constraints, and delivery paths.",
+          "A working stack for narrow products, self-hosted systems, and classroom-scale tools."
+        ],
+        education: [
+          "Formal background, kept short because the project evidence should do most of the work.",
+          "The academic base under the systems work.",
+          "Computer science training, with the more interesting evidence shown in the projects.",
+          "UNSW computer science, paired with backend-heavy project work and generated interface experiments.",
+          "The degree gives the base; the projects show the current direction.",
+          "Academic context for a portfolio that is more interested in systems than slogans.",
+          "A short credential block, because this page is designed to avoid repeating the résumé too much.",
+          "Computer science background, currently expressed through Go backends, data systems, and product workflows."
+        ],
+        principles: [
+          "A few operating principles selected for this version of the homepage.",
+          "The parts of the page that are closer to judgment than résumé content.",
+          "Short fragments of how I think about systems, interfaces, AI-assisted work, and personal infrastructure.",
+          "Small statements about what I tend to value when building software.",
+          "Not philosophy for its own sake; mostly constraints I would want the implementation to respect.",
+          "Selected beliefs about systems work, product shape, randomness, and AI-assisted development.",
+          "A compact read on taste: inspectability, boundaries, deployment, and controlled variation.",
+          "The randomizer picks the principles, but the bias underneath is not random."
+        ],
+        now: [
+          "A current-state snapshot rather than a full biography.",
+          "What this version chooses to reveal about the current build mode.",
+          "A short status readout from the present tense.",
+          "A small live-state panel: not a timeline, just the current angle.",
+          "A present-tense note from the same builder behind the projects.",
+          "Current direction, sampled into one card.",
+          "Less biography, more immediate signal.",
+          "A compact status line for what I am thinking about and building around now."
+        ],
+        contact: [
+          "Reach out for backend systems, personal software, AI-native workflows, or strange but serious interface ideas.",
+          "Useful reasons to contact me: ambiguous software projects, backend architecture, generated interfaces, and personal infrastructure.",
+          "Best fit: projects where structure matters and the problem is not fully shaped yet.",
+          "Contact works best when the conversation is about systems, data, workflows, or software that needs clearer boundaries.",
+          "Good reasons to start a conversation: backend design, personal tools, AI workflow control, or product scoping.",
+          "If the problem involves unclear requirements and a need for structure, the fit is probably reasonable.",
+          "The shortest path: email for direct contact, GitHub for project evidence.",
+          "Use this page as context; use the links below for the actual next step."
+        ]
+      },
+
+      educationBodies: [
+        "Academic foundation in computer science, paired with project work in backend systems, databases, distributed service boundaries, AI-assisted implementation workflows, and generated interface design.",
+        "Computer science training at UNSW, with the practical direction currently expressed through Go services, data modeling, CI/CD, and inspectable backend systems.",
+        "Formal CS background, used here as the base layer for projects in personal data infrastructure, classroom tooling, and AI-assisted workflow design.",
+        "The credential is intentionally brief: the more useful evidence is in the systems, deployment choices, and project constraints above or below it.",
+        "UNSW provides the academic frame; the project work shows the current bias toward backend architecture and controlled software surfaces.",
+        "A computer science degree path, combined with a practical focus on APIs, persistence, runtime boundaries, and product-shaped engineering."
+      ],
+
+      contactCopies: [
+        {
+          headline: "Useful reasons to reach out: backend systems, AI-native workflows, personal infrastructure, or generated interfaces.",
+          body: "Best fit: ambiguous software projects where product structure and backend architecture both matter."
+        },
+        {
+          headline: "Contact me if the problem needs clearer boundaries before it needs more features.",
+          body: "I am most interested in backend-heavy tools, personal software, AI workflow control, and small systems with real constraints."
+        },
+        {
+          headline: "Good conversations usually start with a messy workflow and end with a sharper system model.",
+          body: "Email is direct. GitHub has the project evidence."
+        },
+        {
+          headline: "Reach out for systems that need structure, not just interface decoration.",
+          body: "Backend architecture, product scoping, data records, and generated interfaces are the strongest fit."
+        },
+        {
+          headline: "If the work involves APIs, data, permissions, deployment, or AI guardrails, it is probably relevant.",
+          body: "I prefer projects where the constraints are visible and the implementation can be inspected."
+        },
+        {
+          headline: "Use the seed if you want to reference this exact version of the page.",
+          body: "Use email if you want to talk about the systems behind it."
+        }
+      ],
+
+      revealCopies: [
+        {
+          kicker: "Generated profile instance complete",
+          headline: "You just judged one random version of me.",
+          body: "Bad roll? The public parameters are intentionally reduced to the seed only."
+        },
+        {
+          kicker: "Seeded interface complete",
+          headline: "This was one deterministic surface over the same profile.",
+          body: "The style changes. The projects, links, and underlying signal stay stable."
+        },
+        {
+          kicker: "Profile roll finished",
+          headline: "One seed, one version, same builder underneath.",
+          body: "You can reroll the presentation or reveal the unsampled version."
+        },
+        {
+          kicker: "Random surface, stable content",
+          headline: "The page changed shape; the evidence did not.",
+          body: "Only the seed is exposed here because the rest is meant to be experienced, not debugged."
+        },
+        {
+          kicker: "Generated homepage state",
+          headline: "This version is reproducible.",
+          body: "Copy the seed or the full URL if this roll is the one you want to keep."
+        },
+        {
+          kicker: "Instance locked",
+          headline: "A homepage should be a filter, not a brochure.",
+          body: "This filter happened to choose the current order, copy, style genome, and visual surface."
+        },
+        {
+          kicker: "One roll later",
+          headline: "The randomizer did its job. Now the projects have to do theirs.",
+          body: "Reroll for another surface, or open the complete version with no sampling."
+        },
+        {
+          kicker: "Surface generated",
+          headline: "The interface is unstable by design; the content is not.",
+          body: "The seed is enough to reconstruct this page state."
+        }
+      ],
+
+      layouts: ["single"],
+      colorThemes: ["archive", "terminal", "paper", "signal", "glitch", "ink", "blueprint", "clay", "noir", "amber", "crimson", "mint", "frost", "plum", "slate", "limewire", "cobalt", "sand"],
+      backgroundStyles: ["grid", "dots", "scanlines", "diagonal", "crosshatch", "clean", "halo", "corner-cut", "rings", "columns", "checker", "dashed", "pixels", "orbit", "fold", "split", "horizon", "circuit", "letterpress", "spotlight"],
+      surfaceStyles: ["soft", "sharp", "editorial", "terminalish", "filecard", "plain", "brutal", "ledger", "poster", "codeblock", "manifesto", "receipt", "glass", "indexed"],
+      shapeStyles: ["rounded", "soft-rounded", "right-angle", "small-radius", "pill-boxes", "no-boxes", "line-only", "ticket"],
+      motions: ["soft reveal", "staggered cards", "quiet snap", "terminal pacing", "editorial drift"],
+      tones: ["Direct", "Precise", "Systems-heavy", "Understated", "Sharper than necessary"],
+      biases: ["Work / Systems / Contradiction", "Backend / AI Workflow / Auditability", "Education / Projects / Principles", "Infrastructure / Product Scope / Runtime Boundaries", "Personal Systems / Generated Interfaces / Go"]
+    };
+
+    const PROJECT_DESCRIPTION_POOLS = {
+      saturn: [
+        "Saturn is not just a notes/files/accounts backend. In this version, it reads as an argument that personal data should be addressable, permissioned, searchable, and usable by LLM workflows without losing backend authority.",
+        "The sharpest part of Saturn is the RefCode / Object Registry layer: every domain object gets a human-readable global reference, so notes, files, ledger entries, calendar events, audit logs, permissions, search, and LLM context can point at the same reality.",
+        "This project treats AI-assisted development as something that needs rules before speed: module boundaries, interface constraints, dependency checks, execution-plan review, and human code review come before implementation convenience.",
+        "Saturn is backend infrastructure for a personal operating system: PostgreSQL for durable state, Redis for sessions, local storage for files, Docker for deployment, REST APIs for access, and backend-gated LLM requests for controlled intelligence.",
+        "The interesting decision in Saturn is refusing to let LLM access become a loose client-side feature. Requests are authorized and contextualized through the backend, so the model receives what the system permits, not whatever the interface feels like sending.",
+        "Saturn is built like a system that expects future modules. The point is not one feature; it is a modular object graph where new domains can be added without destroying identity, search, permissions, or auditability.",
+        "The CI/CD setup matters because the project is architecture-sensitive: Go checks, tests, dependency validation, and multi-arch container publishing make the system harder to accidentally rot.",
+        "This version frames Saturn as a response to personal-data sprawl: instead of scattering records across disconnected apps, it builds a backend substrate where objects can be referenced, audited, searched, and composed.",
+        "Saturn is strongest when viewed as a permissions problem: personal data becomes useful to software only when access, context, object identity, and auditability are handled by the backend.",
+        "The system is intentionally modular because personal records rarely stay inside one domain. Notes, files, finances, calendar events, and LLM context need shared references instead of separate silos.",
+        "Saturn treats search as a navigation layer over object identity, not just a text box over isolated tables.",
+        "A useful Saturn instance should answer a simple question: what object is this, who can access it, where did it come from, and how can another module refer to it?",
+        "The project is a practical argument for backend-owned context: LLM requests should be assembled through system rules rather than loose UI prompts.",
+        "The architecture is designed to make later modules boring to add: identity, permissions, audit, search, and deployment already have a place to live."
+      ],
+      ojlite: [
+        "OJLite is a deliberately narrowed online judge. It cuts away contest-platform ambition and optimizes for one environment: classroom teaching, local or LAN deployment, teacher-owned courses, and student practice submissions.",
+        "The project is small by design: under 10 MB, single binary, SQLite persistence, Go/Gin APIs, async Lua judging, transactional submission claiming, and worker concurrency limits. Less infrastructure, fewer excuses.",
+        "The strongest product decision in OJLite is scope control. Instead of pretending to be a full competitive programming platform, it chooses the classroom loop and makes that loop cheap to run.",
+        "OJLite treats runtime boundaries as part of the product: fresh restricted Lua state, execution timeout, stdout limits, teacher-owned classroom access, and student APIs constrained to the current course context.",
+        "The 12-lesson, 108-problem structure is not filler content. It reduces teacher setup cost and gives students a ready path, which is usually the difference between a tool being installable and a tool being usable.",
+        "The release pipeline turns the project into a deployable artifact rather than a repository demo: format checks, architecture validation, go vet, tests, cross-platform binaries, uploaded artifacts, and GitHub Releases.",
+        "This version frames OJLite as anti-bloat software: one constrained problem, one deployable binary, one classroom workflow, and enough guardrails to avoid turning teaching infrastructure into ops work.",
+        "OJLite is a small system with hard boundaries. That is the point: classroom tools should be easy to reason about before they are feature-rich.",
+        "OJLite is built around the idea that teaching infrastructure should not require a platform team before it becomes useful.",
+        "The single-binary shape matters: teachers should be able to run the system locally or on a LAN without inheriting unnecessary operations work.",
+        "The Lua execution boundary is a product decision as much as an engineering decision: student code needs to run, but not escape the classroom context.",
+        "The system narrows the judge problem until the operational surface is small enough for actual teaching use.",
+        "OJLite shows the same bias as the larger backend projects: simple deployment, constrained runtime behavior, and workflows that can be explained without magic.",
+        "The project avoids feature sprawl by treating classroom practice, not public competition, as the core unit of design."
+      ],
+      "genai-platform": [
+        "The GenAI assessment platform reframes AI career coaching from a personal advice product into a classroom assessment system with admin-configured scenarios, rubrics, student tasks, and reviewable outputs.",
+        "The key product move was identifying that existing AI coaching and online assessment tools were weak on classroom configuration, scoring consistency, rubric enforcement, teacher review, and auditability.",
+        "This project is less about adding AI to education and more about controlling the shape of AI use: students complete specified simulations, admins configure tasks and rubrics, and the backend validates the assessment flow.",
+        "The Student/Admin split matters because classroom GenAI evaluation is not just an interface problem. It needs assignment setup, structured scoring, repeatable workflows, and a place for human review to override or confirm AI output.",
+        "The asynchronous LLM evaluation flow was designed around consistency and supervision: structured rubric feedback, backend-side validation, administrator review, and an audit trail instead of one-shot model judgment.",
+        "This version frames the platform as a governance problem disguised as a product problem. The goal is not to make AI answer faster; it is to make AI-assisted assessment configurable, inspectable, and reviewable.",
+        "The useful constraint was the university classroom. That constraint forced the product away from generic coaching and toward rubric-bound evaluation, role-specific workflows, and teacher-controlled assessment design.",
+        "The architecture work focused on keeping GenAI inside a workflow that humans can configure and inspect, rather than letting the model become an unstructured black box at the center of assessment.",
+        "The platform idea becomes more interesting when the AI is not the product, but one controlled step inside a larger assessment pipeline.",
+        "The assessment flow needs deterministic structure around probabilistic output: configured tasks, bounded rubrics, validation, review, and records.",
+        "The design shifts responsibility back to the institution: administrators configure the assessment surface, students perform the task, and AI feedback remains reviewable.",
+        "The project treats consistency as a first-class requirement, because assessment tools cannot rely on one-off model judgment without oversight.",
+        "The useful part of the architecture is the separation between simulation, evaluation, validation, and human review.",
+        "GenAI is kept inside a workflow with gates, not left as an open-ended conversation pretending to be an assessment system."
+      ]
+    };
+
+
+    const STYLE_GENES = {
+      density: [
+        { variables: { "--style-site-width": "720px", "--style-card-padding": "16px", "--style-card-gap": "10px", "--style-section-padding-y": "42px", "--style-section-gap": "20px", "--style-hero-pad-top": "54px", "--style-hero-pad-bottom": "44px", "--style-hero-gap": "18px" } },
+        { variables: { "--style-site-width": "780px", "--style-card-padding": "18px", "--style-card-gap": "12px", "--style-section-padding-y": "50px", "--style-section-gap": "22px", "--style-hero-pad-top": "58px", "--style-hero-pad-bottom": "48px", "--style-hero-gap": "20px" } },
+        { variables: { "--style-site-width": "840px", "--style-card-padding": "20px", "--style-card-gap": "14px", "--style-section-padding-y": "58px", "--style-section-gap": "26px", "--style-hero-pad-top": "64px", "--style-hero-pad-bottom": "56px", "--style-hero-gap": "22px" } },
+        { variables: { "--style-site-width": "900px", "--style-card-padding": "22px", "--style-card-gap": "15px", "--style-section-padding-y": "66px", "--style-section-gap": "28px", "--style-hero-pad-top": "72px", "--style-hero-pad-bottom": "62px", "--style-hero-gap": "24px" } },
+        { variables: { "--style-site-width": "960px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "74px", "--style-section-gap": "32px", "--style-hero-pad-top": "82px", "--style-hero-pad-bottom": "72px", "--style-hero-gap": "28px" } },
+        { variables: { "--style-site-width": "1020px", "--style-card-padding": "26px", "--style-card-gap": "18px", "--style-section-padding-y": "82px", "--style-section-gap": "34px", "--style-hero-pad-top": "90px", "--style-hero-pad-bottom": "78px", "--style-hero-gap": "30px" } },
+        { variables: { "--style-site-width": "1080px", "--style-card-padding": "28px", "--style-card-gap": "20px", "--style-section-padding-y": "90px", "--style-section-gap": "38px", "--style-hero-pad-top": "98px", "--style-hero-pad-bottom": "84px", "--style-hero-gap": "34px" } },
+        { variables: { "--style-site-width": "940px", "--style-card-padding": "30px", "--style-card-gap": "22px", "--style-section-padding-y": "100px", "--style-section-gap": "42px", "--style-hero-pad-top": "110px", "--style-hero-pad-bottom": "92px", "--style-hero-gap": "38px" } },
+        { variables: { "--style-site-width": "860px", "--style-card-padding": "21px", "--style-card-gap": "26px", "--style-section-padding-y": "76px", "--style-section-gap": "46px", "--style-hero-pad-top": "86px", "--style-hero-pad-bottom": "66px", "--style-hero-gap": "42px" } },
+        { variables: { "--style-site-width": "1120px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "104px", "--style-section-gap": "48px", "--style-hero-pad-top": "116px", "--style-hero-pad-bottom": "96px", "--style-hero-gap": "40px" } }
+      ],
+      border: [
+        { variables: { "--style-border-width": "0px", "--style-border-style": "solid", "--style-section-border-width": "1px", "--style-section-border-style": "solid" } },
+        { variables: { "--style-border-width": "1px", "--style-border-style": "solid", "--style-section-border-width": "1px", "--style-section-border-style": "solid" } },
+        { variables: { "--style-border-width": "2px", "--style-border-style": "solid", "--style-section-border-width": "2px", "--style-section-border-style": "solid" } },
+        { variables: { "--style-border-width": "1px", "--style-border-style": "dashed", "--style-section-border-width": "1px", "--style-section-border-style": "dashed" } },
+        { variables: { "--style-border-width": "2px", "--style-border-style": "dashed", "--style-section-border-width": "1px", "--style-section-border-style": "solid" } },
+        { variables: { "--style-border-width": "1px", "--style-border-style": "dotted", "--style-section-border-width": "1px", "--style-section-border-style": "dotted" } },
+        { variables: { "--style-border-width": "3px", "--style-border-style": "double", "--style-section-border-width": "3px", "--style-section-border-style": "double" } },
+        { variables: { "--style-border-width": "1px", "--style-border-style": "solid", "--style-section-border-width": "0px", "--style-section-border-style": "solid" } }
+      ],
+      shadow: [
+        { variables: { "--style-card-shadow": "none", "--style-panel-shadow": "none", "--style-blur": "0px" } },
+        { variables: { "--style-card-shadow": "0 8px 22px rgba(0,0,0,.04)", "--style-panel-shadow": "0 18px 58px rgba(0,0,0,.07)", "--style-blur": "8px" } },
+        { variables: { "--style-card-shadow": "0 18px 60px rgba(0,0,0,.08)", "--style-panel-shadow": "0 26px 90px rgba(0,0,0,.10)", "--style-blur": "14px" } },
+        { variables: { "--style-card-shadow": "inset 0 1px 0 color-mix(in srgb, var(--fg), transparent 88%)", "--style-panel-shadow": "inset 0 1px 0 color-mix(in srgb, var(--fg), transparent 84%)", "--style-blur": "18px" } },
+        { variables: { "--style-card-shadow": "8px 8px 0 color-mix(in srgb, var(--accent), transparent 44%)", "--style-panel-shadow": "10px 10px 0 color-mix(in srgb, var(--accent), transparent 38%)", "--style-blur": "0px" } },
+        { variables: { "--style-card-shadow": "0 1px 0 color-mix(in srgb, var(--fg), transparent 80%)", "--style-panel-shadow": "0 1px 0 color-mix(in srgb, var(--fg), transparent 76%)", "--style-blur": "0px" } },
+        { variables: { "--style-card-shadow": "0 30px 90px rgba(0,0,0,.11)", "--style-panel-shadow": "0 42px 120px rgba(0,0,0,.15)", "--style-blur": "24px" } },
+        { variables: { "--style-card-shadow": "-6px 6px 0 color-mix(in srgb, var(--fg), transparent 90%)", "--style-panel-shadow": "-8px 8px 0 color-mix(in srgb, var(--fg), transparent 86%)", "--style-blur": "4px" } },
+        { variables: { "--style-card-shadow": "0 0 0 1px color-mix(in srgb, var(--accent), transparent 76%), 0 20px 70px rgba(0,0,0,.08)", "--style-panel-shadow": "0 0 0 1px color-mix(in srgb, var(--accent), transparent 70%), 0 34px 100px rgba(0,0,0,.11)", "--style-blur": "20px" } },
+        { variables: { "--style-card-shadow": "0 0 0 999px rgba(255,255,255,.015) inset", "--style-panel-shadow": "0 0 0 999px rgba(255,255,255,.025) inset", "--style-blur": "12px" } }
+      ],
+      type: [
+        { variables: { "--style-line-height": "1.42", "--style-h1-min": "44px", "--style-h1-fluid": "9vw", "--style-h1-max": "104px", "--style-h1-tracking": "-0.095em", "--style-h2-tracking": "-0.07em", "--style-h3-tracking": "-0.045em", "--style-desc-size": "18px", "--style-section-lead-size": "17px" } },
+        { variables: { "--style-line-height": "1.48", "--style-h1-min": "40px", "--style-h1-fluid": "7.5vw", "--style-h1-max": "86px", "--style-h1-tracking": "-0.065em", "--style-h2-tracking": "-0.05em", "--style-h3-tracking": "-0.03em", "--style-desc-size": "17px", "--style-section-lead-size": "16px" } },
+        { variables: { "--style-line-height": "1.6", "--style-h1-min": "42px", "--style-h1-fluid": "8vw", "--style-h1-max": "92px", "--style-h1-tracking": "-0.075em", "--style-h2-tracking": "-0.055em", "--style-h3-tracking": "-0.035em", "--style-desc-size": "18px", "--style-section-lead-size": "17px" } },
+        { variables: { "--style-line-height": "1.68", "--style-h1-min": "38px", "--style-h1-fluid": "6.8vw", "--style-h1-max": "78px", "--style-h1-tracking": "-0.04em", "--style-h2-tracking": "-0.035em", "--style-h3-tracking": "-0.018em", "--style-desc-size": "19px", "--style-section-lead-size": "18px" } },
+        { variables: { "--style-line-height": "1.52", "--style-h1-min": "46px", "--style-h1-fluid": "10vw", "--style-h1-max": "116px", "--style-h1-tracking": "-0.11em", "--style-h2-tracking": "-0.08em", "--style-h3-tracking": "-0.05em", "--style-desc-size": "17px", "--style-section-lead-size": "17px" } },
+        { variables: { "--style-line-height": "1.5", "--style-h1-min": "36px", "--style-h1-fluid": "6vw", "--style-h1-max": "70px", "--style-h1-tracking": "-0.025em", "--style-h2-tracking": "-0.02em", "--style-h3-tracking": "-0.012em", "--style-desc-size": "16px", "--style-section-lead-size": "15px" } },
+        { variables: { "--style-line-height": "1.74", "--style-h1-min": "42px", "--style-h1-fluid": "7vw", "--style-h1-max": "84px", "--style-h1-tracking": "-0.05em", "--style-h2-tracking": "-0.04em", "--style-h3-tracking": "-0.02em", "--style-desc-size": "20px", "--style-section-lead-size": "19px" } },
+        { variables: { "--style-line-height": "1.36", "--style-h1-min": "48px", "--style-h1-fluid": "9.5vw", "--style-h1-max": "108px", "--style-h1-tracking": "-0.085em", "--style-h2-tracking": "-0.065em", "--style-h3-tracking": "-0.04em", "--style-desc-size": "16px", "--style-section-lead-size": "16px" } },
+        { variables: { "--style-line-height": "1.58", "--style-h1-min": "41px", "--style-h1-fluid": "8.4vw", "--style-h1-max": "98px", "--style-h1-tracking": "-0.09em", "--style-h2-tracking": "-0.06em", "--style-h3-tracking": "-0.028em", "--style-desc-size": "19px", "--style-section-lead-size": "18px" } },
+        { variables: { "--style-line-height": "1.46", "--style-h1-min": "39px", "--style-h1-fluid": "7.8vw", "--style-h1-max": "88px", "--style-h1-tracking": "-0.055em", "--style-h2-tracking": "-0.042em", "--style-h3-tracking": "-0.024em", "--style-desc-size": "17px", "--style-section-lead-size": "18px" } }
+      ],
+      chrome: [
+        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
+        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-padding": "12px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
+        { variables: { "--style-title-rule-width": "2px", "--style-title-rule-padding": "14px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
+        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } },
+        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "dashed", "--style-title-rule-padding": "10px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } },
+        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } },
+        { variables: { "--style-title-rule-width": "3px", "--style-title-rule-style": "double", "--style-title-rule-padding": "16px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
+        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "solid", "--style-title-rule-padding": "18px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } }
+      ],
+      rhythm: [
+        { variables: { "--style-text-width": "620px", "--style-micro-opacity": ".72" } },
+        { variables: { "--style-text-width": "680px", "--style-micro-opacity": ".82" } },
+        { variables: { "--style-text-width": "720px", "--style-micro-opacity": ".9" } },
+        { variables: { "--style-text-width": "760px", "--style-micro-opacity": "1" } },
+        { variables: { "--style-text-width": "820px", "--style-micro-opacity": ".88" } },
+        { variables: { "--style-text-width": "900px", "--style-micro-opacity": ".76" } },
+        { variables: { "--style-text-width": "560px", "--style-micro-opacity": ".95" } },
+        { variables: { "--style-text-width": "100%", "--style-micro-opacity": ".68" } }
+      ],
+      controls: [
+        { variables: { "--style-button-y": "9px", "--style-button-x": "12px", "--style-button-size": "12px" } },
+        { variables: { "--style-button-y": "10px", "--style-button-x": "14px", "--style-button-size": "13px" } },
+        { variables: { "--style-button-y": "12px", "--style-button-x": "16px", "--style-button-size": "14px" } },
+        { variables: { "--style-button-y": "13px", "--style-button-x": "18px", "--style-button-size": "14px" } },
+        { variables: { "--style-button-y": "14px", "--style-button-x": "22px", "--style-button-size": "15px" } },
+        { variables: { "--style-button-y": "11px", "--style-button-x": "20px", "--style-button-size": "12px" } },
+        { variables: { "--style-button-y": "15px", "--style-button-x": "18px", "--style-button-size": "16px" } },
+        { variables: { "--style-button-y": "8px", "--style-button-x": "18px", "--style-button-size": "13px" } }
+      ],
+      index: [
+        { variables: { "--style-index-box-border-width": "0px", "--style-index-box-padding": "0px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".08em" } },
+        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "6px 8px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".1em" } },
+        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px 10px", "--style-meta-transform": "none", "--style-meta-spacing": ".02em" } },
+        { variables: { "--style-index-box-border-width": "2px", "--style-index-box-padding": "7px 9px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".14em" } },
+        { variables: { "--style-index-box-border-width": "0px", "--style-index-box-padding": "0px", "--style-meta-transform": "lowercase", "--style-meta-spacing": ".04em" } },
+        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "4px 12px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".18em" } },
+        { variables: { "--style-index-box-border-width": "0px", "--style-index-box-padding": "0px", "--style-meta-transform": "none", "--style-meta-spacing": "0" } },
+        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "10px 12px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".06em" } }
+      ]
+    };
+
+    function styleGeneSpace() {
+      return DATA.surfaceStyles.length * Object.values(STYLE_GENES).reduce((total, options) => total * options.length, 1);
+    }
+
+    function chooseGene(rng, options) {
+      const index = Math.floor(rng() * options.length);
+      return { index, option: options[index] };
+    }
+
+    function createStyleGenome(rng) {
+      const modeIndex = Math.floor(rng() * DATA.surfaceStyles.length);
+      const mode = DATA.surfaceStyles[modeIndex];
+      const variables = {};
+      const signature = [modeIndex];
+
+      Object.entries(STYLE_GENES).forEach(([name, options]) => {
+        const { index, option } = chooseGene(rng, options);
+        signature.push(index);
+        Object.assign(variables, option.variables);
+      });
+
+      return {
+        id: "SG-" + signature.map(value => value.toString(36).toUpperCase()).join(""),
+        mode,
+        variables,
+        space: styleGeneSpace()
+      };
+    }
+
+
+    function cyrb128(str) {
+      let h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
+      for (let i = 0; i < str.length; i++) {
+        const k = str.charCodeAt(i);
+        h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
+        h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
+        h3 = h4 ^ Math.imul(h3 ^ k, 951274213);
+        h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+      }
+      h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
+      h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
+      h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
+      h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
+      return [(h1 ^ h2 ^ h3 ^ h4) >>> 0, (h2 ^ h1) >>> 0, (h3 ^ h1) >>> 0, (h4 ^ h1) >>> 0];
+    }
+
+    function sfc32(a, b, c, d) {
+      return function() {
+        a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0;
+        let t = (a + b) | 0;
+        a = b ^ (b >>> 9);
+        b = (c + (c << 3)) | 0;
+        c = (c << 21) | (c >>> 11);
+        d = (d + 1) | 0;
+        t = (t + d) | 0;
+        c = (c + t) | 0;
+        return (t >>> 0) / 4294967296;
+      }
+    }
+
+    function createRandom(seed) {
+      const [a, b, c, d] = cyrb128(seed);
+      return sfc32(a, b, c, d);
+    }
+
+    function pick(rng, arr) {
+      return arr[Math.floor(rng() * arr.length)];
+    }
+
+    function shuffle(rng, arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function pickN(rng, arr, n) {
+      return shuffle(rng, arr).slice(0, n);
+    }
+
+    function createShortSeed() {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      const bytes = new Uint8Array(8);
+      crypto.getRandomValues(bytes);
+      let seed = "LS-";
+      for (const byte of bytes) seed += chars[byte % chars.length];
+      return seed;
+    }
+
+    function getSeed() {
+      const params = new URLSearchParams(window.location.search);
+      let seed = params.get("seed");
+      if (!seed) {
+        seed = createShortSeed();
+        const url = new URL(window.location.href);
+        url.searchParams.set("seed", seed);
+        window.history.replaceState(null, "", url);
+      }
+      return seed;
+    }
+
+    function generateConfig(seed) {
+      const rng = createRandom(seed);
+      const layout = "single";
+      const colorTheme = pick(rng, DATA.colorThemes);
+      const backgroundStyle = pick(rng, DATA.backgroundStyles);
+      const styleGenome = createStyleGenome(rng);
+      const surfaceStyle = styleGenome.mode;
+      const shapeStyle = pick(rng, DATA.shapeStyles);
+      const educationPlacement = pick(rng, ["hero", "section"]);
+      const sectionPool = ["work", "experience", "principles", "skills", "now"];
+      if (educationPlacement === "section") sectionPool.push("education");
+      const sections = shuffle(rng, sectionPool);
+      const projects = shuffle(rng, DATA.projects).map(project => {
+        const descriptionPool = PROJECT_DESCRIPTION_POOLS[project.id] || project.intros;
+        return {
+          ...project,
+          intro: pick(rng, project.intros),
+          description: pick(rng, descriptionPool),
+          descriptionMode: pick(rng, ["architecture slice", "constraint slice", "product slice", "systems slice", "execution slice", "edge slice", "deployment slice", "permission slice", "runtime slice", "workflow slice", "maintenance slice", "object-model slice"]),
+          tag: pick(rng, project.tags)
+        };
+      });
+
+      const experienceSource = DATA.experienceProject;
+      const experienceDescriptionPool = PROJECT_DESCRIPTION_POOLS[experienceSource.id] || experienceSource.intros;
+      const experienceProject = {
+        ...experienceSource,
+        intro: pick(rng, experienceSource.intros),
+        description: pick(rng, experienceDescriptionPool),
+        descriptionMode: pick(rng, ["architecture slice", "constraint slice", "product slice", "systems slice", "execution slice", "edge slice", "deployment slice", "permission slice", "runtime slice", "workflow slice", "maintenance slice", "object-model slice"]),
+        tag: pick(rng, experienceSource.tags)
+      };
+
+      return {
+        seed,
+        layout,
+        colorTheme,
+        backgroundStyle,
+        surfaceStyle,
+        styleGenome,
+        shapeStyle,
+        educationPlacement,
+        motion: pick(rng, DATA.motions),
+        tone: pick(rng, DATA.tones),
+        bias: pick(rng, DATA.biases),
+        rarity: pick(rng, ["Common", "Common", "Rare", "Rare", "Epic", "Glitch"]),
+        kicker: pick(rng, DATA.heroKickers),
+        headline: pick(rng, DATA.heroHeadlines),
+        subhead: pick(rng, DATA.heroSubheads),
+        sections,
+        projects,
+        experienceProject,
+        principles: pickN(rng, DATA.principles, 4),
+        currentState: pick(rng, DATA.currentStates),
+        educationBody: pick(rng, DATA.educationBodies),
+        contactCopy: pick(rng, DATA.contactCopies),
+        revealCopy: pick(rng, DATA.revealCopies),
+        leads: Object.fromEntries(Object.entries(DATA.sectionLeads).map(([key, values]) => [key, pick(rng, values)]))
+      };
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderNav(config) {
+      const labels = {
+        work: "Work",
+        experience: "Experience",
+        education: "Education",
+        principles: "Principles",
+        skills: "Skills",
+        now: "Now",
+        contact: "Contact"
+      };
+      const nav = document.getElementById("nav");
+      nav.innerHTML = [...config.sections, "contact"]
+        .map(id => `<a href="#${id}">${labels[id]}</a>`)
+        .join("");
+    }
+
+    function renderHero(config) {
+      const hero = document.getElementById("hero");
+      const shouldShowEducationSummary = config.educationPlacement === "hero";
+      const summaryCard = shouldShowEducationSummary ? `
+          <aside class="hero-card" aria-label="Profile summary">
+            <div class="stat-grid">
+              <div class="stat">
+                <div class="stat-label">Education</div>
+                <div class="stat-value">UNSW · Computer Science</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Graduation</div>
+                <div class="stat-value">Expected Dec 2026</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Working stack</div>
+                <div class="stat-value">Go · SQL · Docker · CI/CD</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Current angle</div>
+                <div class="stat-value">Backend systems + generated interfaces</div>
+              </div>
+            </div>
+          </aside>
+      ` : "";
+
+      hero.innerHTML = `
+        <div class="hero-grid fade-in">
+          <div>
+            <div class="kicker">${escapeHtml(config.kicker)}</div>
+            <h1>${escapeHtml(config.headline)}</h1>
+            <p class="hero-sub">${escapeHtml(config.subhead)}</p>
+            <div class="hero-actions">
+              <a class="button" href="#work">View work</a>
+              <a class="button secondary" href="#contact">Contact</a>
+            </div>
+          </div>
+          ${summaryCard}
+        </div>
+      `;
+    }
+
+    function sectionShell(index, id, title, lead, body) {
+      return `
+        <section class="section" id="${id}">
+          <div class="section-head">
+            <div class="section-index">${String(index).padStart(2, "0")} / ${escapeHtml(id)}</div>
+            <div>
+              <h2>${escapeHtml(title)}</h2>
+              <p class="section-lead">${escapeHtml(lead)}</p>
+            </div>
+          </div>
+          ${body}
+        </section>
+      `;
+    }
+
+    function renderWork(config, index) {
+      const cards = config.projects.map((project, i) => `
+        <article class="card ${i === 0 ? "full" : ""}">
+          <div class="card-title-row">
+            <div>
+              <h3>${escapeHtml(project.title)} — ${escapeHtml(project.subtitle)}</h3>
+              <div class="stack">${escapeHtml(project.stack)}</div>
+            </div>
+            <span class="tag">${escapeHtml(project.tag)}</span>
+          </div>
+          <div class="generated-desc-meta">Generated description · ${escapeHtml(project.descriptionMode)}</div>
+          <p class="generated-description">${escapeHtml(project.description)}</p>
+          ${project.url.startsWith("http") ? `<p style="margin-top:18px"><a href="${escapeHtml(project.url)}" target="_blank" rel="noreferrer">Open repository →</a></p>` : ""}
+        </article>
+      `).join("");
+
+      return sectionShell(index, "work", "Selected Work", config.leads.work, `<div class="cards">${cards}</div>`);
+    }
+
+    function renderExperience(config, index) {
+      const p = config.experienceProject;
+      const body = `
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="time-label">Course project</div>
+            <div>
+              <h3>University GenAI Assessment Platform</h3>
+              <div class="stack">Product and backend architecture lead</div>
+              <div class="generated-desc-meta">Generated description · ${escapeHtml(p.descriptionMode || "project slice")}</div>
+              <p class="generated-description">${escapeHtml(p.description || p.intros[0])}</p>
+            </div>
+          </article>
+        </div>
+      `;
+      return sectionShell(index, "experience", "Project Experience", config.leads.experience, body);
+    }
+
+    function renderEducation(config, index) {
+      const e = DATA.identity.education;
+      const body = `
+        <div class="cards">
+          <article class="card full">
+            <div class="card-title-row">
+              <div>
+                <h3>${escapeHtml(e.school)}</h3>
+                <div class="stack">${escapeHtml(e.degree)}</div>
+              </div>
+              <span class="tag">${escapeHtml(e.graduation)}</span>
+            </div>
+            <p>${escapeHtml(config.educationBody)}</p>
+          </article>
+        </div>
+      `;
+      return sectionShell(index, "education", "Education", config.leads.education, body);
+    }
+
+    function renderPrinciples(config, index) {
+      const body = `
+        <div class="principles">
+          ${config.principles.map((p, i) => `<div class="principle"><span class="tag">P${String(i + 1).padStart(2, "0")}</span><p style="margin-top:16px">${escapeHtml(p)}</p></div>`).join("")}
+        </div>
+      `;
+      return sectionShell(index, "principles", "Operating Principles", config.leads.principles, body);
+    }
+
+    function renderSkills(config, index) {
+      const groups = [
+        ["Languages", ["Go", "Java", "Python", "SQL"]],
+        ["Backend", ["REST API", "Authentication", "Concurrency", "Gin", "net/http"]],
+        ["Databases", ["PostgreSQL", "SQLite", "Redis"]],
+        ["Tools", ["Git", "Docker", "Linux", "CI/CD", "GitHub Actions"]]
+      ];
+      const body = `
+        <div class="cards">
+          ${groups.map(([title, skills]) => `
+            <article class="card third">
+              <h3>${escapeHtml(title)}</h3>
+              <div class="skill-cloud" style="margin-top:18px">
+                ${skills.map(s => `<span class="skill-pill">${escapeHtml(s)}</span>`).join("")}
+              </div>
+            </article>
+          `).join("")}
+        </div>
+      `;
+      return sectionShell(index, "skills", "Technical Skills", config.leads.skills, body);
+    }
+
+    function renderNow(config, index) {
+      const body = `
+        <div class="cards">
+          <article class="card full">
+            <div class="card-title-row">
+              <h3>${escapeHtml(config.currentState.title)}</h3>
+              <span class="tag">Now</span>
+            </div>
+            <p>${escapeHtml(config.currentState.body)}</p>
+          </article>
+        </div>
+      `;
+      return sectionShell(index, "now", "Current State", config.leads.now, body);
+    }
+
+    function renderContact(config, index) {
+      return sectionShell(index, "contact", "Contact", config.leads.contact, `
+        <div class="contact-panel">
+          <div>
+            <h2>${escapeHtml(config.contactCopy.headline)}</h2>
+            <p class="section-lead">${escapeHtml(config.contactCopy.body)}</p>
+          </div>
+          <div class="contact-links">
+            <a class="button" href="mailto:${escapeHtml(DATA.identity.contact.email)}">Email</a>
+            <a class="button secondary" href="${escapeHtml(DATA.identity.contact.github)}" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      `);
+    }
+
+    function renderCompleteVersion(config, forceShow = false) {
+      const params = new URLSearchParams(window.location.search);
+      const shouldShow = forceShow || params.get("complete") === "1";
+      const complete = document.getElementById("completeVersion");
+      complete.hidden = !shouldShow;
+
+      if (!shouldShow) return;
+
+      const projects = DATA.projects.map(project => `
+        <article class="card complete-project">
+          <div class="card-title-row">
+            <div>
+              <h3>${escapeHtml(project.title)} — ${escapeHtml(project.subtitle)}</h3>
+              <div class="stack">${escapeHtml(project.stack)}</div>
+            </div>
+            <span class="tag">Complete</span>
+          </div>
+          <div class="generated-desc-meta">All descriptions</div>
+          <div class="intro-list">
+            ${project.intros.map(intro => `<p>${escapeHtml(intro)}</p>`).join("")}
+            ${(PROJECT_DESCRIPTION_POOLS[project.id] || []).map(desc => `<p>${escapeHtml(desc)}</p>`).join("")}
+          </div>
+          <div class="generated-desc-meta" style="margin-top:22px">Full notes</div>
+          <ul>
+            ${project.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join("")}
+          </ul>
+          ${project.url.startsWith("http") ? `<p style="margin-top:16px"><a href="${escapeHtml(project.url)}" target="_blank" rel="noreferrer">Open repository →</a></p>` : ""}
+        </article>
+      `).join("");
+
+      const e = DATA.identity.education;
+      complete.innerHTML = `
+        <div class="complete-head">
+          <div class="section-index">Full / complete</div>
+          <div>
+            <h2>Complete version</h2>
+            <p class="section-lead">No sampling. No lucky roll. This is the full project material behind the generated profile instance.</p>
+          </div>
+        </div>
+        <div class="cards">
+          <article class="card full">
+            <div class="card-title-row">
+              <div>
+                <h3>${escapeHtml(e.school)}</h3>
+                <div class="stack">${escapeHtml(e.degree)}</div>
+              </div>
+              <span class="tag">${escapeHtml(e.graduation)}</span>
+            </div>
+            <p>${escapeHtml(DATA.identity.stableLine)}</p>
+          </article>
+          ${projects}
+        </div>
+      `;
+    }
+
+    function showCompleteVersion(config) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("complete", "1");
+      window.history.replaceState(null, "", url.toString());
+      renderCompleteVersion(config, true);
+      document.getElementById("completeVersion").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function renderMain(config) {
+      const renderers = {
+        work: renderWork,
+        experience: renderExperience,
+        education: renderEducation,
+        principles: renderPrinciples,
+        skills: renderSkills,
+        now: renderNow
+      };
+      const sections = config.sections.map((key, i) => renderers[key](config, i + 1)).join("");
+      document.getElementById("main").innerHTML = sections + renderContact(config, config.sections.length + 1);
+    }
+
+    function renderReveal(config) {
+      const reveal = document.getElementById("reveal");
+      reveal.innerHTML = `
+        <div class="kicker">${escapeHtml(config.revealCopy.kicker)}</div>
+        <h2>${escapeHtml(config.revealCopy.headline)}</h2>
+        <p style="margin-top:18px">${escapeHtml(config.revealCopy.body)}</p>
+        <div class="reveal-grid">
+          <div class="reveal-stat">
+            <div class="reveal-stat-label">Seed</div>
+            <div class="reveal-stat-value">${escapeHtml(config.seed)}</div>
+          </div>
+        </div>
+        <div class="reveal-actions">
+          <button class="button" id="rollAgain">Roll again</button>
+          <button class="button secondary" id="copyVersion">Copy this version</button>
+          <button class="button secondary" id="copySeed">Copy seed</button>
+          <button class="button secondary surrender" id="surrenderComplete">I give up — show me the complete version</button>
+        </div>
+      `;
+
+      document.getElementById("rollAgain").addEventListener("click", rollAgain);
+      document.getElementById("copyVersion").addEventListener("click", () => copyText(window.location.href, "Version link copied."));
+      document.getElementById("copySeed").addEventListener("click", () => copyText(config.seed, "Seed copied."));
+      document.getElementById("surrenderComplete").addEventListener("click", () => showCompleteVersion(config));
+    }
+
+    function copyText(text, message) {
+      navigator.clipboard.writeText(text).then(() => showToast(message)).catch(() => {
+        const input = document.createElement("input");
+        input.value = text;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        input.remove();
+        showToast(message);
+      });
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1400);
+    }
+
+    function rollAgain() {
+      const overlay = document.getElementById("regenerating");
+      overlay.classList.add("active");
+      const lines = [...overlay.querySelectorAll(".regen-line")];
+      lines.forEach((line, index) => {
+        setTimeout(() => line.classList.add("active"), index * 210);
+      });
+      setTimeout(() => {
+        const seed = createShortSeed();
+        const url = new URL(window.location.href);
+        url.searchParams.set("seed", seed);
+        window.location.href = url.toString();
+      }, 980);
+    }
+
+    function applyStyleGenome(styleGenome) {
+      Object.entries(styleGenome.variables).forEach(([property, value]) => {
+        document.body.style.setProperty(property, value);
+      });
+      document.documentElement.dataset.styleGenome = styleGenome.id;
+    }
+
+    function applyBodyClass(config) {
+      document.body.className = [
+        `theme-${config.colorTheme}`,
+        `bg-${config.backgroundStyle}`,
+        `style-${config.surfaceStyle}`,
+        `shape-${config.shapeStyle}`,
+        "style-generated",
+        "layout-single"
+      ].join(" ");
+      applyStyleGenome(config.styleGenome);
+    }
+
+    function init() {
+      const seed = getSeed();
+      const config = generateConfig(seed);
+      applyBodyClass(config);
+      renderNav(config);
+      renderHero(config);
+      renderMain(config);
+      renderReveal(config);
+      renderCompleteVersion(config);
+    }
+
+    init();
+  </script>
+</body>
+</html>
