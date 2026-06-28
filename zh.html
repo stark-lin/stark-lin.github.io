@@ -2150,7 +2150,7 @@
 
     function createShortSeed() {
       const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-      const bytes = new Uint8Array(8);
+      const bytes = new Uint8Array(16);
       crypto.getRandomValues(bytes);
       let seed = "LS-";
       for (const byte of bytes) seed += chars[byte % chars.length];
