@@ -411,7 +411,7 @@ window.PORTFOLIO_LOCALE = {
         }
       ],
 
-      backgroundStyles: ["grid", "dots", "scanlines", "diagonal", "crosshatch", "clean", "halo", "corner-cut", "rings", "columns", "checker", "dashed", "pixels", "orbit", "fold", "split", "horizon", "circuit", "letterpress", "spotlight", "topography", "matrix", "radar", "vignette", "zebra", "notebook", "window", "stage", "mesh", "blue-noise", "terminal-bars", "sunrise"],
+      backgroundStyles: ["grid", "dots", "scanlines", "diagonal", "crosshatch", "clean", "halo", "corner-cut", "rings", "columns", "checker", "dashed", "pixels", "orbit", "fold", "split", "horizon", "circuit", "letterpress", "spotlight", "topography", "matrix", "radar", "vignette", "zebra", "notebook", "window", "stage", "mesh", "blue-noise", "terminal-bars", "sunrise", "blueprint", "waves", "sunburst", "constellation", "isometric", "tartan", "graph-paper", "moire", "arches", "aurora", "confetti", "seismic", "aperture", "ribbons", "microdots", "frame"],
       surfaceStyles: ["soft", "sharp", "editorial", "terminalish", "filecard", "plain", "brutal", "ledger", "poster", "codeblock", "manifesto", "receipt", "glass", "indexed", "dossier", "lab", "zine", "spec", "luxury", "micro", "mega", "overprint", "labelmaker", "index-card", "thin", "heavy", "captioned"],
       shapeStyles: ["rounded", "soft-rounded", "right-angle", "small-radius", "pill-boxes", "no-boxes", "line-only", "ticket", "slab", "cut", "stamp", "folder", "postcard", "underline", "offset", "badge"]
     },
@@ -589,7 +589,7 @@ window.PORTFOLIO_LOCALE = {
       "completeTitle": "Full project record",
       "completeLead": "This opens the full supporting material behind the compact portfolio view.",
       "referenceCode": "Reference code",
-      "refreshView": "Refresh view",
+      "refreshView": "Bad roll? Roll again",
       "copyView": "Copy URL",
       "showComplete": "Show the full project record",
       "viewCopied": "View link copied."

@@ -443,7 +443,23 @@ window.PORTFOLIO_LOCALE = {
             "mesh",
             "blue-noise",
             "terminal-bars",
-            "sunrise"
+            "sunrise",
+            "blueprint",
+            "waves",
+            "sunburst",
+            "constellation",
+            "isometric",
+            "tartan",
+            "graph-paper",
+            "moire",
+            "arches",
+            "aurora",
+            "confetti",
+            "seismic",
+            "aperture",
+            "ribbons",
+            "microdots",
+            "frame"
       ],
       "surfaceStyles": [
             "soft",
@@ -667,7 +683,7 @@ window.PORTFOLIO_LOCALE = {
       "completeTitle": "完整版本",
       "completeLead": "不抽样，不装神秘。把项目材料一次性摊开。",
       "referenceCode": "参考码",
-      "refreshView": "换一版",
+      "refreshView": "手气不好？再来一次",
       "copyView": "复制 URL",
       "showComplete": "我投降，给我完整版本",
       "viewCopied": "视图链接复制好了。"

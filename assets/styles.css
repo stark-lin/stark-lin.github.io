@@ -63,8 +63,10 @@
       font-family: var(--sans);
       color: var(--fg);
       background: var(--page-background,
-        radial-gradient(circle at top left, var(--accent-soft), transparent 34rem),
-        radial-gradient(circle at top right, var(--accent-2-soft), transparent 30rem),
+        var(--random-halos,
+          radial-gradient(circle at top left, var(--accent-soft), transparent 34rem),
+          radial-gradient(circle at top right, var(--accent-2-soft), transparent 30rem)
+        ),
         var(--bg)
       );
       line-height: var(--style-line-height);
@@ -325,16 +327,18 @@
 
     body.bg-halo {
       --page-background:
-        radial-gradient(circle at 12% 10%, color-mix(in srgb, var(--accent), transparent 78%), transparent 28rem),
-        radial-gradient(circle at 88% 26%, color-mix(in srgb, var(--fg), transparent 90%), transparent 22rem),
-        radial-gradient(circle at 50% 100%, var(--accent-soft), transparent 32rem),
+        var(--random-halos,
+          radial-gradient(circle at 12% 10%, color-mix(in srgb, var(--accent), transparent 78%), transparent 28rem),
+          radial-gradient(circle at 88% 26%, color-mix(in srgb, var(--fg), transparent 90%), transparent 22rem),
+          radial-gradient(circle at 50% 100%, var(--accent-soft), transparent 32rem)
+        ),
         var(--bg);
     }
 
     body.bg-corner-cut {
       --page-background:
         linear-gradient(135deg, color-mix(in srgb, var(--accent), transparent 88%) 0 18%, transparent 18% 100%),
-        radial-gradient(circle at top right, var(--accent-soft), transparent 26rem),
+        var(--random-halos, radial-gradient(circle at top right, var(--accent-soft), transparent 26rem)),
         var(--bg);
     }
 
@@ -371,9 +375,11 @@
 
     body.bg-orbit {
       --page-background:
-        radial-gradient(circle at 20% 15%, var(--accent-soft), transparent 18rem),
-        radial-gradient(circle at 86% 18%, color-mix(in srgb, var(--accent), transparent 84%), transparent 16rem),
-        radial-gradient(circle at 58% 86%, color-mix(in srgb, var(--fg), transparent 92%), transparent 24rem),
+        var(--random-halos,
+          radial-gradient(circle at 20% 15%, var(--accent-soft), transparent 18rem),
+          radial-gradient(circle at 86% 18%, color-mix(in srgb, var(--accent), transparent 84%), transparent 16rem),
+          radial-gradient(circle at 58% 86%, color-mix(in srgb, var(--fg), transparent 92%), transparent 24rem)
+        ),
         var(--bg);
     }
     body.bg-orbit::before {
@@ -392,7 +398,7 @@
     body.bg-split {
       --page-background:
         linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 92%) 0 50%, transparent 50% 100%),
-        radial-gradient(circle at top left, var(--accent-soft), transparent 32rem),
+        var(--random-halos, radial-gradient(circle at top left, var(--accent-soft), transparent 32rem)),
         var(--bg);
     }
     body.bg-split::before { opacity: 0.16; }
@@ -400,7 +406,7 @@
     body.bg-horizon {
       --page-background:
         linear-gradient(to bottom, transparent 0 58%, color-mix(in srgb, var(--accent), transparent 91%) 58% 100%),
-        radial-gradient(circle at 50% 0%, var(--accent-soft), transparent 34rem),
+        var(--random-halos, radial-gradient(circle at 50% 0%, var(--accent-soft), transparent 34rem)),
         var(--bg);
     }
     body.bg-horizon::before { opacity: 0.14; }
@@ -420,8 +426,10 @@
 
     body.bg-spotlight {
       --page-background:
-        radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--accent), transparent 78%), transparent 24rem),
-        radial-gradient(circle at 50% 120%, color-mix(in srgb, var(--fg), transparent 94%), transparent 38rem),
+        var(--random-halos,
+          radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--accent), transparent 78%), transparent 24rem),
+          radial-gradient(circle at 50% 120%, color-mix(in srgb, var(--fg), transparent 94%), transparent 38rem)
+        ),
         var(--bg);
     }
     body.bg-spotlight::before { opacity: 0.08; }
@@ -1566,11 +1574,17 @@
       background-size: 46px 20px;
     }
     body.bg-radar {
-      --page-background: radial-gradient(circle at 70% 20%, color-mix(in srgb, var(--accent), transparent 76%), transparent 18rem), conic-gradient(from 120deg at 70% 20%, transparent 0deg, var(--accent-soft) 38deg, transparent 78deg), var(--bg);
+      --page-background:
+        var(--random-halos, radial-gradient(circle at 70% 20%, color-mix(in srgb, var(--accent), transparent 76%), transparent 18rem)),
+        conic-gradient(from 120deg at 70% 20%, transparent 0deg, var(--accent-soft) 38deg, transparent 78deg),
+        var(--bg);
     }
     body.bg-radar::before { opacity: 0.18; background-image: repeating-radial-gradient(circle at 70% 20%, var(--line) 0 1px, transparent 1px 44px); }
     body.bg-vignette {
-      --page-background: radial-gradient(circle at 50% 35%, transparent 0 24rem, color-mix(in srgb, var(--fg), transparent 93%) 52rem), radial-gradient(circle at 12% 10%, var(--accent-soft), transparent 28rem), var(--bg);
+      --page-background:
+        radial-gradient(circle at 50% 35%, transparent 0 24rem, color-mix(in srgb, var(--fg), transparent 93%) 52rem),
+        var(--random-halos, radial-gradient(circle at 12% 10%, var(--accent-soft), transparent 28rem)),
+        var(--bg);
     }
     body.bg-vignette::before { opacity: 0.12; }
     body.bg-zebra::before { opacity: 0.16; background-image: repeating-linear-gradient(100deg, var(--line) 0 2px, transparent 2px 26px); background-size: auto; }
@@ -1580,13 +1594,24 @@
       background-size: 76px 100%, 100% 32px; background-position: 64px 0, 0 0;
     }
     body.bg-window {
-      --page-background: linear-gradient(90deg, color-mix(in srgb, var(--fg), transparent 94%) 0 1px, transparent 1px 100%), linear-gradient(0deg, color-mix(in srgb, var(--fg), transparent 94%) 0 1px, transparent 1px 100%), radial-gradient(circle at top left, var(--accent-soft), transparent 30rem), var(--bg);
-      background-size: 180px 180px, 180px 180px, auto, auto;
+      --page-background:
+        linear-gradient(90deg, color-mix(in srgb, var(--fg), transparent 94%) 0 1px, transparent 1px 100%) 0 0 / 180px 180px,
+        linear-gradient(0deg, color-mix(in srgb, var(--fg), transparent 94%) 0 1px, transparent 1px 100%) 0 0 / 180px 180px,
+        var(--random-halos, radial-gradient(circle at top left, var(--accent-soft), transparent 30rem)),
+        var(--bg);
     }
     body.bg-window::before { opacity: 0; }
-    body.bg-stage { --page-background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--accent), transparent 72%), transparent 34rem), linear-gradient(to bottom, transparent 0 52%, color-mix(in srgb, var(--fg), transparent 95%) 52% 100%), var(--bg); }
+    body.bg-stage { --page-background: var(--random-halos, radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--accent), transparent 72%), transparent 34rem)), linear-gradient(to bottom, transparent 0 52%, color-mix(in srgb, var(--fg), transparent 95%) 52% 100%), var(--bg); }
     body.bg-stage::before { opacity: 0.08; }
-    body.bg-mesh { --page-background: radial-gradient(circle at 15% 20%, color-mix(in srgb, var(--accent), transparent 78%), transparent 24rem), radial-gradient(circle at 85% 18%, color-mix(in srgb, var(--fg), transparent 91%), transparent 22rem), radial-gradient(circle at 65% 95%, color-mix(in srgb, var(--accent), transparent 84%), transparent 30rem), var(--bg); }
+    body.bg-mesh {
+      --page-background:
+        var(--random-halos,
+          radial-gradient(circle at 15% 20%, color-mix(in srgb, var(--accent), transparent 78%), transparent 24rem),
+          radial-gradient(circle at 85% 18%, color-mix(in srgb, var(--fg), transparent 91%), transparent 22rem),
+          radial-gradient(circle at 65% 95%, color-mix(in srgb, var(--accent), transparent 84%), transparent 30rem)
+        ),
+        var(--bg);
+    }
     body.bg-mesh::before { opacity: 0.10; }
     body.bg-blue-noise::before {
       opacity: 0.24;
@@ -1598,8 +1623,136 @@
       background-image: linear-gradient(90deg, var(--line) 0 1px, transparent 1px 100%), repeating-linear-gradient(0deg, transparent 0 23px, var(--line) 23px 24px);
       background-size: 96px 100%, 100% 24px;
     }
-    body.bg-sunrise { --page-background: radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--accent), transparent 70%), transparent 18rem), linear-gradient(to bottom, transparent 0 48%, color-mix(in srgb, var(--accent), transparent 91%) 48% 100%), var(--bg); }
+    body.bg-sunrise { --page-background: var(--random-halos, radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--accent), transparent 70%), transparent 18rem)), linear-gradient(to bottom, transparent 0 48%, color-mix(in srgb, var(--accent), transparent 91%) 48% 100%), var(--bg); }
     body.bg-sunrise::before { opacity: 0.14; background-image: repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 36px); }
+
+    body.bg-blueprint::before {
+      opacity: 0.24;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px),
+        linear-gradient(color-mix(in srgb, var(--accent), transparent 58%) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 58%) 1px, transparent 1px);
+      background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+    }
+    body.bg-waves::before {
+      opacity: 0.19;
+      background-image:
+        repeating-radial-gradient(ellipse at 0 100%, transparent 0 20px, var(--line) 21px 22px, transparent 23px 42px),
+        repeating-radial-gradient(ellipse at 100% 0, transparent 0 28px, var(--line) 29px 30px, transparent 31px 52px);
+      background-size: 180px 90px, 220px 110px;
+    }
+    body.bg-sunburst {
+      --page-background:
+        conic-gradient(from 210deg at 14% 8%, transparent 0 9deg, color-mix(in srgb, var(--accent), transparent 92%) 9deg 18deg, transparent 18deg 36deg),
+        var(--random-halos, radial-gradient(circle at 14% 8%, color-mix(in srgb, var(--accent), transparent 70%), transparent 18rem)),
+        var(--bg);
+    }
+    body.bg-sunburst::before { opacity: 0.06; }
+    body.bg-constellation::before {
+      opacity: 0.28;
+      background-image:
+        radial-gradient(circle at 12px 18px, var(--line) 0 1.5px, transparent 1.8px),
+        radial-gradient(circle at 74px 48px, var(--line) 0 2px, transparent 2.3px),
+        radial-gradient(circle at 118px 14px, var(--line) 0 1px, transparent 1.3px),
+        linear-gradient(28deg, transparent 48.8%, var(--line) 49% 50%, transparent 50.2%);
+      background-size: 140px 96px;
+    }
+    body.bg-isometric::before {
+      opacity: 0.18;
+      background-image:
+        linear-gradient(30deg, var(--line) 12%, transparent 12.5%, transparent 87%, var(--line) 87.5%),
+        linear-gradient(150deg, var(--line) 12%, transparent 12.5%, transparent 87%, var(--line) 87.5%),
+        linear-gradient(30deg, var(--line) 12%, transparent 12.5%, transparent 87%, var(--line) 87.5%);
+      background-position: 0 0, 0 0, 32px 56px;
+      background-size: 64px 112px;
+    }
+    body.bg-tartan::before {
+      opacity: 0.16;
+      background-image:
+        repeating-linear-gradient(90deg, transparent 0 38px, var(--line) 38px 40px, transparent 40px 48px, color-mix(in srgb, var(--accent), transparent 65%) 48px 49px, transparent 49px 72px),
+        repeating-linear-gradient(0deg, transparent 0 38px, var(--line) 38px 40px, transparent 40px 48px, color-mix(in srgb, var(--accent), transparent 65%) 48px 49px, transparent 49px 72px);
+      background-size: 72px 72px;
+    }
+    body.bg-graph-paper::before {
+      opacity: 0.22;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px),
+        linear-gradient(color-mix(in srgb, var(--accent), transparent 62%) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 62%) 1px, transparent 1px);
+      background-size: 16px 16px, 16px 16px, 80px 80px, 80px 80px;
+    }
+    body.bg-moire::before {
+      opacity: 0.15;
+      background-image:
+        repeating-radial-gradient(circle at 20% 20%, transparent 0 9px, var(--line) 10px 11px),
+        repeating-radial-gradient(circle at 78% 26%, transparent 0 11px, var(--line) 12px 13px);
+      background-size: auto;
+    }
+    body.bg-arches::before {
+      opacity: 0.2;
+      background-image:
+        radial-gradient(ellipse at 50% 100%, transparent 0 22px, var(--line) 22px 23px, transparent 23px 34px, var(--line) 34px 35px, transparent 35px),
+        radial-gradient(ellipse at 50% 0, transparent 0 22px, var(--line) 22px 23px, transparent 23px 34px, var(--line) 34px 35px, transparent 35px);
+      background-position: 0 0, 36px 54px;
+      background-size: 72px 54px;
+    }
+    body.bg-aurora {
+      --page-background:
+        var(--random-halos,
+          radial-gradient(ellipse at 18% 4%, color-mix(in srgb, var(--accent), transparent 68%), transparent 34rem),
+          radial-gradient(ellipse at 74% 0%, color-mix(in srgb, var(--fg), transparent 89%), transparent 28rem),
+          radial-gradient(ellipse at 94% 42%, var(--accent-soft), transparent 30rem)
+        ),
+        var(--bg);
+    }
+    body.bg-aurora::before { opacity: 0.05; }
+    body.bg-confetti::before {
+      opacity: 0.26;
+      background-image:
+        radial-gradient(circle at 8px 12px, var(--line) 0 1.5px, transparent 1.8px),
+        radial-gradient(circle at 42px 36px, color-mix(in srgb, var(--accent), transparent 42%) 0 1.5px, transparent 1.8px),
+        linear-gradient(32deg, transparent 48%, var(--line) 49% 51%, transparent 52%);
+      background-position: 0 0, 0 0, 54px 16px;
+      background-size: 72px 64px, 88px 76px, 90px 84px;
+    }
+    body.bg-seismic::before {
+      opacity: 0.19;
+      background-image:
+        repeating-linear-gradient(4deg, transparent 0 18px, var(--line) 19px 20px, transparent 21px 38px),
+        repeating-linear-gradient(176deg, transparent 0 42px, color-mix(in srgb, var(--accent), transparent 64%) 43px 44px, transparent 45px 82px);
+      background-size: auto;
+    }
+    body.bg-aperture {
+      --page-background:
+        conic-gradient(from 12deg at 82% 18%, transparent 0 44deg, color-mix(in srgb, var(--accent), transparent 91%) 44deg 88deg, transparent 88deg 132deg, color-mix(in srgb, var(--fg), transparent 95%) 132deg 176deg, transparent 176deg 220deg, color-mix(in srgb, var(--accent), transparent 93%) 220deg 264deg, transparent 264deg),
+        var(--random-halos, radial-gradient(circle at 82% 18%, var(--accent-soft), transparent 24rem)),
+        var(--bg);
+    }
+    body.bg-aperture::before { opacity: 0.07; }
+    body.bg-ribbons {
+      --page-background:
+        linear-gradient(124deg, transparent 0 16%, color-mix(in srgb, var(--accent), transparent 91%) 16% 24%, transparent 24% 68%, color-mix(in srgb, var(--fg), transparent 95%) 68% 74%, transparent 74%),
+        linear-gradient(56deg, transparent 0 72%, var(--accent-soft) 72% 80%, transparent 80%),
+        var(--bg);
+    }
+    body.bg-ribbons::before { opacity: 0.08; }
+    body.bg-microdots::before {
+      opacity: 0.3;
+      background-image: radial-gradient(circle, var(--line) 0 0.7px, transparent 0.9px);
+      background-size: 9px 9px;
+    }
+    body.bg-frame {
+      --page-background:
+        linear-gradient(var(--accent-soft), var(--accent-soft)) top / 100% 18px no-repeat,
+        linear-gradient(var(--accent-soft), var(--accent-soft)) bottom / 100% 18px no-repeat,
+        linear-gradient(var(--accent-soft), var(--accent-soft)) left / 18px 100% no-repeat,
+        linear-gradient(var(--accent-soft), var(--accent-soft)) right / 18px 100% no-repeat,
+        var(--random-halos, radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--accent), transparent 84%), transparent 28rem)),
+        var(--bg);
+    }
+    body.bg-frame::before { opacity: 0.1; }
 
     /* Additional generated visual styles */
     body.style-dossier .card,

@@ -153,7 +153,7 @@
       },
       system: {
         seedPrefix: "SL-",
-        seedLength: 16,
+        seedLength: 32,
         seedCharacters: "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
       },
       copy: {
@@ -252,6 +252,30 @@
     function createRandom(seed) {
       const [a, b, c, d] = cyrb128(seed);
       return sfc32(a, b, c, d);
+    }
+
+    const BACKGROUNDS_WITHOUT_HALOS = new Set(["fold", "ribbons"]);
+
+    function createRandomHalos(seed) {
+      const rng = createRandom(`${seed}:halo`);
+      const colors = ["var(--accent)", "var(--accent-2)", "var(--fg)"];
+      const haloCount = 1 + Math.floor(rng() * 5);
+      const halos = Array.from({ length: haloCount }, () => {
+        const x = Math.round(-12 + rng() * 124);
+        const y = Math.round(-10 + rng() * 120);
+        const width = Math.round(22 + rng() * 34);
+        const height = Math.round(20 + rng() * 30);
+        const transparency = Math.round(91 + rng() * 6);
+        const shoulder = Math.round(28 + rng() * 24);
+        const color = colors[Math.floor(rng() * colors.length)];
+        const shape = rng() < 0.35
+          ? `circle ${Math.round((width + height) / 2)}rem`
+          : `ellipse ${width}rem ${height}rem`;
+
+        return `radial-gradient(${shape} at ${x}% ${y}%, color-mix(in srgb, ${color}, transparent ${transparency}%) 0% ${shoulder}%, transparent 100%)`;
+      });
+
+      return halos.join(", ");
     }
 
     function pick(rng, arr) {
@@ -357,6 +381,9 @@
       const backgroundStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.backgrounds);
       const colorTheme = colorThemeTrait.value;
       const backgroundStyle = backgroundStyleTrait.value;
+      const randomHalos = BACKGROUNDS_WITHOUT_HALOS.has(backgroundStyle)
+        ? null
+        : createRandomHalos(seed);
       const styleGenome = createStyleGenome(rng);
       const surfaceStyle = styleGenome.mode;
       const shapeStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.shapes);
@@ -387,6 +414,7 @@
         layout,
         colorTheme,
         backgroundStyle,
+        randomHalos,
         surfaceStyle,
         styleGenome,
         shapeStyle,
@@ -833,6 +861,11 @@
         "style-generated",
         "layout-single"
       ].filter(Boolean).join(" ");
+
+      document.body.style.removeProperty("--random-halos");
+      if (config.randomHalos) {
+        document.body.style.setProperty("--random-halos", config.randomHalos);
+      }
 
       if (palette) {
         const variables = {
