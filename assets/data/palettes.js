@@ -67,5 +67,79 @@ window.PORTFOLIO_PALETTES = [
   { id: "soft-prussian", bg: "#F2F5F7", surface: "#FFFFFF", text: "#17212B", muted: "#65717F", accent: "#355C7D", accent2: "#A67C52", border: "#D9E1E8" },
   { id: "muted-terracotta", bg: "#F8F0EA", surface: "#FFFFFF", text: "#2A211D", muted: "#75675F", accent: "#B66B4E", accent2: "#52796F", border: "#E7D4C9" },
   { id: "silver-green", bg: "#F1F5F2", surface: "#FFFFFF", text: "#1E2621", muted: "#68756D", accent: "#688F74", accent2: "#5A6F8C", border: "#D8E1DA" },
-  { id: "quiet-gold", bg: "#F8F5EC", surface: "#FFFFFF", text: "#24231E", muted: "#706D60", accent: "#A88635", accent2: "#496A81", border: "#E5DEC9" }
+  { id: "quiet-gold", bg: "#F8F5EC", surface: "#FFFFFF", text: "#24231E", muted: "#706D60", accent: "#A88635", accent2: "#496A81", border: "#E5DEC9" },
+
+  // Cyberpunk: high-voltage neons over dense, near-black city tones.
+  { id: "cyber-neon-grid", bg: "#070814", surface: "#10132A", text: "#F5F7FF", muted: "#A9B0CC", accent: "#00E5FF", accent2: "#FF3CAC", border: "#29305A" },
+  { id: "cyber-acid-rain", bg: "#0A100D", surface: "#111D18", text: "#F1FFF8", muted: "#9FC4B3", accent: "#B7FF3C", accent2: "#FF4FB8", border: "#294337" },
+  { id: "cyber-megacity-violet", bg: "#12091F", surface: "#211033", text: "#FFF4FF", muted: "#C5A8D1", accent: "#F05CFF", accent2: "#40F2D0", border: "#472359" },
+
+  // City pop: glossy night skies, warm sunsets, and cassette-era pastels.
+  { id: "citypop-tokyo-sunset", bg: "#171A37", surface: "#24284C", text: "#FFF6EE", muted: "#C7B9C5", accent: "#FF7A90", accent2: "#54D6CE", border: "#454A75" },
+  { id: "citypop-cassette-sky", bg: "#FFF2DD", surface: "#FFFAF2", text: "#24314F", muted: "#6F6F7D", accent: "#C63E70", accent2: "#167F89", border: "#E6CDB8" },
+  { id: "citypop-after-hours", bg: "#0B2447", surface: "#12345E", text: "#FFF7E8", muted: "#AFC6D9", accent: "#FFB85C", accent2: "#F25D9C", border: "#2C527C" },
+
+  // 1960s Miami: poolside aqua, flamingo pink, citrus, and motel signage.
+  { id: "miami-flamingo-motel", bg: "#FFF3E5", surface: "#FFFBF4", text: "#173B4F", muted: "#65747A", accent: "#B83268", accent2: "#087E82", border: "#E9CBBE" },
+  { id: "miami-biscayne-pool", bg: "#E7F6F3", surface: "#F8FFFD", text: "#173B3D", muted: "#5E7471", accent: "#006F72", accent2: "#E65260", border: "#BFDCD6" },
+  { id: "miami-citrus-club", bg: "#FFF2C8", surface: "#FFF9E5", text: "#3B2A23", muted: "#77665A", accent: "#A64036", accent2: "#0E7771", border: "#E7CC98" },
+
+  // Atompunk: optimistic space-age cream, reactor green, and rocket red.
+  { id: "atomic-worlds-fair", bg: "#F4EDDA", surface: "#FFF9E8", text: "#26322F", muted: "#6D746C", accent: "#A93D2B", accent2: "#0D756E", border: "#D7CAB0" },
+  { id: "atomic-uranium-console", bg: "#151C18", surface: "#222C24", text: "#F0F4D7", muted: "#ADB690", accent: "#D2E84A", accent2: "#F28C45", border: "#3D4A36" },
+  { id: "atomic-rocket-lab", bg: "#E8EEF0", surface: "#F8FBFA", text: "#243438", muted: "#627379", accent: "#9D322A", accent2: "#14666C", border: "#CBD6D6" },
+
+  // Regular dark: quieter bases with distinct, readable accent pairings.
+  { id: "midnight-copper", bg: "#0E1623", surface: "#182536", text: "#F2F6FA", muted: "#A8B4C3", accent: "#D88958", accent2: "#6FA8B8", border: "#304258" },
+  { id: "obsidian-coral", bg: "#101113", surface: "#1B1D21", text: "#F5F3F0", muted: "#B7B3AD", accent: "#E77768", accent2: "#78A6A3", border: "#34363B" },
+  { id: "forest-sky", bg: "#0C1814", surface: "#172620", text: "#EEF6F2", muted: "#A4B6AD", accent: "#68A47D", accent2: "#75A7D8", border: "#2E443A" },
+  { id: "aubergine-sage", bg: "#180F18", surface: "#271A27", text: "#F8F0F6", muted: "#C1ADBD", accent: "#C483B4", accent2: "#8FAF88", border: "#463245" },
+  { id: "graphite-cyan", bg: "#12181C", surface: "#1C272D", text: "#F0F6F8", muted: "#A7B6BC", accent: "#65C3D4", accent2: "#D3A866", border: "#33444C" },
+  { id: "walnut-lilac", bg: "#1B130F", surface: "#291E18", text: "#F6EEE8", muted: "#BFAEA2", accent: "#C09ADB", accent2: "#C58C5A", border: "#44342B" },
+  { id: "deep-teal-sand", bg: "#0A191B", surface: "#14282B", text: "#EFF8F7", muted: "#9DB8B8", accent: "#63B6AE", accent2: "#D5A868", border: "#2B4548" },
+  { id: "wine-powder", bg: "#1D0D13", surface: "#2B1820", text: "#F8EFF2", muted: "#C7AFB7", accent: "#D98A9C", accent2: "#8CB8C7", border: "#4A2E38" },
+  { id: "midnight-amber", bg: "#0D1420", surface: "#182233", text: "#F3F5F8", muted: "#AAB2C1", accent: "#E0AA55", accent2: "#7698D2", border: "#303E55" },
+  { id: "charcoal-coral", bg: "#151515", surface: "#222222", text: "#F5F4F1", muted: "#B8B5AE", accent: "#DD7864", accent2: "#86A78B", border: "#3B3A37" },
+  { id: "navy-mint", bg: "#0A1721", surface: "#142633", text: "#F0F7FA", muted: "#A4B7C1", accent: "#6FD1B4", accent2: "#D09C66", border: "#2B4555" },
+  { id: "plum-rose", bg: "#190F20", surface: "#281932", text: "#F8F0FA", muted: "#C1AEC8", accent: "#D985A7", accent2: "#82A9C4", border: "#47304F" },
+  { id: "dark-olive-sky", bg: "#17190F", surface: "#24281A", text: "#F3F5E9", muted: "#B6BAA3", accent: "#AFC06C", accent2: "#77A5C5", border: "#3E442F" },
+  { id: "espresso-pink", bg: "#1B100E", surface: "#281B18", text: "#F7EEEA", muted: "#C0AAA1", accent: "#D88C9C", accent2: "#8EABBF", border: "#44302B" },
+  { id: "storm-yellow", bg: "#11171E", surface: "#1D2832", text: "#F2F6F8", muted: "#A8B5BD", accent: "#E0C45B", accent2: "#70A7A4", border: "#354550" },
+  { id: "indigo-lime", bg: "#101126", surface: "#1B1D38", text: "#F5F5FF", muted: "#B6B8D1", accent: "#9CA7E8", accent2: "#B6D967", border: "#34375A" },
+  { id: "slate-orange", bg: "#15191F", surface: "#222933", text: "#F4F6F8", muted: "#AFB8C2", accent: "#D9905D", accent2: "#78A8BA", border: "#3A4654" },
+  { id: "pine-lavender", bg: "#0E1815", surface: "#192520", text: "#EFF6F2", muted: "#A7B5AD", accent: "#8FC4A0", accent2: "#B39BCB", border: "#32433B" },
+  { id: "oxblood-aqua", bg: "#1B0E10", surface: "#29191B", text: "#F8F0F0", muted: "#C4ACAE", accent: "#C66D72", accent2: "#72B9B3", border: "#472D30" },
+  { id: "ink-peach", bg: "#10151A", surface: "#1B242B", text: "#F2F6F8", muted: "#AAB7C0", accent: "#E2A17F", accent2: "#7A9FC8", border: "#34424D" },
+  { id: "carbon-mustard", bg: "#141414", surface: "#22221F", text: "#F4F3EC", muted: "#B7B4A6", accent: "#CAAA52", accent2: "#7E9E91", border: "#3B3A34" },
+  { id: "black-cherry-blue", bg: "#1A0D15", surface: "#291720", text: "#F8EFF4", muted: "#C6ACB9", accent: "#C5749A", accent2: "#77A7CF", border: "#482B3A" },
+
+  // High-energy and retro: bolder contrast, era-specific color stories.
+  { id: "synthwave-laser-night", bg: "#09061A", surface: "#17102E", text: "#FBF4FF", muted: "#BCAAD1", accent: "#FF4FD8", accent2: "#28E7F2", border: "#38265B" },
+  { id: "synthwave-sunset-drive", bg: "#21113A", surface: "#341D52", text: "#FFF2F4", muted: "#D2AEC0", accent: "#FF795E", accent2: "#65D6D0", border: "#58356F" },
+  { id: "synthwave-electric-dusk", bg: "#12153A", surface: "#20275A", text: "#F8F4FF", muted: "#B7BDE0", accent: "#F9D94C", accent2: "#E452FF", border: "#3C4680" },
+  { id: "vaporwave-mallsoft", bg: "#F4E7FA", surface: "#FFF8FF", text: "#302040", muted: "#6F5A7C", accent: "#C23FB5", accent2: "#168FA3", border: "#D9C2E2" },
+  { id: "vaporwave-poolroom", bg: "#DDF7F5", surface: "#F6FFFE", text: "#16383F", muted: "#4E6A70", accent: "#D34F9D", accent2: "#008E9A", border: "#B7DEDB" },
+  { id: "vaporwave-night-bus", bg: "#15112D", surface: "#241C46", text: "#F9F2FF", muted: "#BDAED4", accent: "#FF85C8", accent2: "#6EDBD4", border: "#43366A" },
+  { id: "bauhaus-primary-paper", bg: "#F5EBCF", surface: "#FFF9E7", text: "#211D18", muted: "#71695D", accent: "#C72C2C", accent2: "#145DA0", border: "#D9CBA9" },
+  { id: "bauhaus-ink-yellow", bg: "#111111", surface: "#222222", text: "#F8F1DB", muted: "#C0B8A2", accent: "#F3C623", accent2: "#D84635", border: "#3E3A30" },
+  { id: "bauhaus-blue-stage", bg: "#102C54", surface: "#1B3F73", text: "#FFF7E8", muted: "#B9CAE0", accent: "#F2BE3F", accent2: "#D44E3F", border: "#315B8F" },
+  { id: "seventies-avocado-kitchen", bg: "#EEE0B5", surface: "#FAF0CE", text: "#3B321F", muted: "#665C40", accent: "#6F7F32", accent2: "#B95336", border: "#D2C18C" },
+  { id: "seventies-burnt-orange", bg: "#2D1A10", surface: "#432719", text: "#F9EACF", muted: "#CEB895", accent: "#E4772C", accent2: "#8DAA55", border: "#65402A" },
+  { id: "seventies-disco-brown", bg: "#241318", surface: "#3A202A", text: "#FBEEDC", muted: "#CDB5AA", accent: "#E5A73F", accent2: "#C55C8A", border: "#5B3543" },
+  { id: "arcade-coin-op", bg: "#071329", surface: "#10264A", text: "#F3F8FF", muted: "#A5B9D8", accent: "#FFD23F", accent2: "#EF476F", border: "#274875" },
+  { id: "arcade-toxic-green", bg: "#06110A", surface: "#102219", text: "#F1FFF5", muted: "#9BC0A7", accent: "#7CFF4F", accent2: "#FF704D", border: "#294734" },
+  { id: "arcade-purple-coin", bg: "#180A26", surface: "#2B1543", text: "#FFF3FF", muted: "#C8A8D6", accent: "#FFB000", accent2: "#43D9B8", border: "#4F2A69" },
+  { id: "y2k-chrome-aqua", bg: "#E9F2F5", surface: "#FFFFFF", text: "#182A32", muted: "#536870", accent: "#007D93", accent2: "#A43E86", border: "#C7DADD" },
+  { id: "y2k-lime-plastic", bg: "#EFFFCA", surface: "#FAFFE9", text: "#293319", muted: "#68734B", accent: "#617F00", accent2: "#B52D78", border: "#CEE49A" },
+  { id: "y2k-midnight-silver", bg: "#0E1524", surface: "#1D293B", text: "#F7FAFF", muted: "#B5C0CF", accent: "#A9C6E8", accent2: "#F072AF", border: "#394A62" },
+  { id: "memphis-confetti", bg: "#FFF1DB", surface: "#FFFAF1", text: "#2A2430", muted: "#776B77", accent: "#D83F6B", accent2: "#147D85", border: "#E7CCB6" },
+  { id: "memphis-blueberry", bg: "#E9E3FF", surface: "#FAF8FF", text: "#271D4B", muted: "#625778", accent: "#6447C7", accent2: "#E25368", border: "#CBC1EA" },
+  { id: "memphis-night-party", bg: "#17152A", surface: "#282442", text: "#FFF6E9", muted: "#C7B9C8", accent: "#F3B53F", accent2: "#E45B9A", border: "#484264" },
+  { id: "riso-coral-blue", bg: "#FFF0E5", surface: "#FFF9F2", text: "#2B2522", muted: "#786A63", accent: "#D7443E", accent2: "#136E8A", border: "#E8CDBD" },
+  { id: "riso-violet-orange", bg: "#F4EBF6", surface: "#FFF9FF", text: "#302333", muted: "#6D5D70", accent: "#7546A8", accent2: "#D86D2F", border: "#DACBDE" },
+  { id: "riso-night-ink", bg: "#101927", surface: "#1D2B40", text: "#F8F2E7", muted: "#B7B7B4", accent: "#EF5B62", accent2: "#3AB8A0", border: "#394A62" },
+  { id: "brutalist-safety", bg: "#FFF275", surface: "#FFFBE0", text: "#171717", muted: "#5F5A2A", accent: "#B11D2A", accent2: "#005A8D", border: "#D8C94E" },
+  { id: "brutalist-screen-blue", bg: "#00438F", surface: "#0050A5", text: "#FFFFFF", muted: "#CFE4FF", accent: "#FFD500", accent2: "#FF6B35", border: "#2E70BD" },
+  { id: "spaceage-moonbase", bg: "#E6ECEC", surface: "#FAFFFF", text: "#1E2C2F", muted: "#566A6E", accent: "#C33A32", accent2: "#00777A", border: "#C3D0D0" },
+  { id: "spaceage-orbit-night", bg: "#081824", surface: "#112B3A", text: "#F3FAF8", muted: "#A8C0C5", accent: "#FF9F43", accent2: "#46D9C8", border: "#2B4D5D" }
 ];

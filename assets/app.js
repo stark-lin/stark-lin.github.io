@@ -254,8 +254,6 @@
       return sfc32(a, b, c, d);
     }
 
-    const BACKGROUNDS_WITHOUT_HALOS = new Set(["fold", "ribbons"]);
-
     function createRandomHalos(seed) {
       const rng = createRandom(`${seed}:halo`);
       const colors = ["var(--accent)", "var(--accent-2)", "var(--fg)"];
@@ -381,9 +379,8 @@
       const backgroundStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.backgrounds);
       const colorTheme = colorThemeTrait.value;
       const backgroundStyle = backgroundStyleTrait.value;
-      const randomHalos = BACKGROUNDS_WITHOUT_HALOS.has(backgroundStyle)
-        ? null
-        : createRandomHalos(seed);
+      // Glow is an independent seeded option, enabled for half of generated backgrounds.
+      const randomHalos = rng() < 0.5 ? createRandomHalos(seed) : "none";
       const styleGenome = createStyleGenome(rng);
       const surfaceStyle = styleGenome.mode;
       const shapeStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.shapes);

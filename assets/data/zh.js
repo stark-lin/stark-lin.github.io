@@ -459,7 +459,19 @@ window.PORTFOLIO_LOCALE = {
             "aperture",
             "ribbons",
             "microdots",
-            "frame"
+            "frame",
+            "hex",
+            "brick",
+            "diamonds",
+            "pinstripe",
+            "bubbles",
+            "chevrons",
+            "star-map",
+            "paper-fibers",
+            "eclipse",
+            "color-blocks",
+            "lattice",
+            "spot-grid"
       ],
       "surfaceStyles": [
             "soft",
@@ -488,7 +500,15 @@ window.PORTFOLIO_LOCALE = {
             "index-card",
             "thin",
             "heavy",
-            "captioned"
+            "captioned",
+            "solid",
+            "enamel",
+            "duotone-solid",
+            "paper-stack",
+            "accent-panel",
+            "banded-solid",
+            "inset-solid",
+            "sticker-solid"
       ],
       "shapeStyles": [
             "rounded",
