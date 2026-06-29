@@ -52,16 +52,16 @@
 
     const STYLE_GENES = {
       density: [
-        { variables: { "--style-site-width": "720px", "--style-card-padding": "16px", "--style-card-gap": "10px", "--style-section-padding-y": "42px", "--style-section-gap": "20px", "--style-hero-pad-top": "54px", "--style-hero-pad-bottom": "44px", "--style-hero-gap": "18px" } },
-        { variables: { "--style-site-width": "780px", "--style-card-padding": "18px", "--style-card-gap": "12px", "--style-section-padding-y": "50px", "--style-section-gap": "22px", "--style-hero-pad-top": "58px", "--style-hero-pad-bottom": "48px", "--style-hero-gap": "20px" } },
-        { variables: { "--style-site-width": "840px", "--style-card-padding": "20px", "--style-card-gap": "14px", "--style-section-padding-y": "58px", "--style-section-gap": "26px", "--style-hero-pad-top": "64px", "--style-hero-pad-bottom": "56px", "--style-hero-gap": "22px" } },
-        { variables: { "--style-site-width": "900px", "--style-card-padding": "22px", "--style-card-gap": "15px", "--style-section-padding-y": "66px", "--style-section-gap": "28px", "--style-hero-pad-top": "72px", "--style-hero-pad-bottom": "62px", "--style-hero-gap": "24px" } },
-        { variables: { "--style-site-width": "960px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "74px", "--style-section-gap": "32px", "--style-hero-pad-top": "82px", "--style-hero-pad-bottom": "72px", "--style-hero-gap": "28px" } },
-        { variables: { "--style-site-width": "1020px", "--style-card-padding": "26px", "--style-card-gap": "18px", "--style-section-padding-y": "82px", "--style-section-gap": "34px", "--style-hero-pad-top": "90px", "--style-hero-pad-bottom": "78px", "--style-hero-gap": "30px" } },
-        { variables: { "--style-site-width": "1080px", "--style-card-padding": "28px", "--style-card-gap": "20px", "--style-section-padding-y": "90px", "--style-section-gap": "38px", "--style-hero-pad-top": "98px", "--style-hero-pad-bottom": "84px", "--style-hero-gap": "34px" } },
-        { variables: { "--style-site-width": "940px", "--style-card-padding": "30px", "--style-card-gap": "22px", "--style-section-padding-y": "100px", "--style-section-gap": "42px", "--style-hero-pad-top": "110px", "--style-hero-pad-bottom": "92px", "--style-hero-gap": "38px" } },
-        { variables: { "--style-site-width": "860px", "--style-card-padding": "21px", "--style-card-gap": "26px", "--style-section-padding-y": "76px", "--style-section-gap": "46px", "--style-hero-pad-top": "86px", "--style-hero-pad-bottom": "66px", "--style-hero-gap": "42px" } },
-        { variables: { "--style-site-width": "1120px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "104px", "--style-section-gap": "48px", "--style-hero-pad-top": "116px", "--style-hero-pad-bottom": "96px", "--style-hero-gap": "40px" } }
+        { variables: { "--style-site-width": "720px", "--style-card-padding": "16px", "--style-card-gap": "8px", "--style-section-padding-y": "40px", "--style-section-gap": "24px", "--style-hero-pad-top": "56px", "--style-hero-pad-bottom": "48px", "--style-hero-gap": "16px" } },
+        { variables: { "--style-site-width": "784px", "--style-card-padding": "16px", "--style-card-gap": "16px", "--style-section-padding-y": "48px", "--style-section-gap": "24px", "--style-hero-pad-top": "56px", "--style-hero-pad-bottom": "48px", "--style-hero-gap": "24px" } },
+        { variables: { "--style-site-width": "840px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "56px", "--style-section-gap": "24px", "--style-hero-pad-top": "64px", "--style-hero-pad-bottom": "56px", "--style-hero-gap": "24px" } },
+        { variables: { "--style-site-width": "896px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "64px", "--style-section-gap": "32px", "--style-hero-pad-top": "72px", "--style-hero-pad-bottom": "64px", "--style-hero-gap": "24px" } },
+        { variables: { "--style-site-width": "960px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "72px", "--style-section-gap": "32px", "--style-hero-pad-top": "80px", "--style-hero-pad-bottom": "72px", "--style-hero-gap": "32px" } },
+        { variables: { "--style-site-width": "1024px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "80px", "--style-section-gap": "32px", "--style-hero-pad-top": "88px", "--style-hero-pad-bottom": "80px", "--style-hero-gap": "32px" } },
+        { variables: { "--style-site-width": "1080px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "88px", "--style-section-gap": "40px", "--style-hero-pad-top": "96px", "--style-hero-pad-bottom": "80px", "--style-hero-gap": "32px" } },
+        { variables: { "--style-site-width": "944px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "96px", "--style-section-gap": "40px", "--style-hero-pad-top": "112px", "--style-hero-pad-bottom": "96px", "--style-hero-gap": "40px" } },
+        { variables: { "--style-site-width": "864px", "--style-card-padding": "24px", "--style-card-gap": "24px", "--style-section-padding-y": "80px", "--style-section-gap": "48px", "--style-hero-pad-top": "88px", "--style-hero-pad-bottom": "64px", "--style-hero-gap": "40px" } },
+        { variables: { "--style-site-width": "1120px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "104px", "--style-section-gap": "48px", "--style-hero-pad-top": "120px", "--style-hero-pad-bottom": "96px", "--style-hero-gap": "40px" } }
       ],
       border: [
         { variables: { "--style-border-width": "0px", "--style-border-style": "solid", "--style-section-border-width": "1px", "--style-section-border-style": "solid" } },
@@ -99,43 +99,43 @@
       ],
       chrome: [
         { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
-        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-padding": "12px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
-        { variables: { "--style-title-rule-width": "2px", "--style-title-rule-padding": "14px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
+        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-padding": "8px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
+        { variables: { "--style-title-rule-width": "2px", "--style-title-rule-padding": "16px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
         { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } },
-        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "dashed", "--style-title-rule-padding": "10px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } },
+        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "dashed", "--style-title-rule-padding": "8px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } },
         { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } },
         { variables: { "--style-title-rule-width": "3px", "--style-title-rule-style": "double", "--style-title-rule-padding": "16px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
-        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "solid", "--style-title-rule-padding": "18px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } }
+        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "solid", "--style-title-rule-padding": "16px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } }
       ],
       rhythm: [
-        { variables: { "--style-text-width": "620px", "--style-micro-opacity": ".72" } },
+        { variables: { "--style-text-width": "624px", "--style-micro-opacity": ".72" } },
         { variables: { "--style-text-width": "680px", "--style-micro-opacity": ".82" } },
         { variables: { "--style-text-width": "720px", "--style-micro-opacity": ".9" } },
         { variables: { "--style-text-width": "760px", "--style-micro-opacity": "1" } },
-        { variables: { "--style-text-width": "820px", "--style-micro-opacity": ".88" } },
-        { variables: { "--style-text-width": "900px", "--style-micro-opacity": ".76" } },
+        { variables: { "--style-text-width": "816px", "--style-micro-opacity": ".88" } },
+        { variables: { "--style-text-width": "896px", "--style-micro-opacity": ".76" } },
         { variables: { "--style-text-width": "560px", "--style-micro-opacity": ".95" } },
         { variables: { "--style-text-width": "100%", "--style-micro-opacity": ".68" } }
       ],
       controls: [
-        { variables: { "--style-button-y": "9px", "--style-button-x": "12px", "--style-button-size": "12px" } },
-        { variables: { "--style-button-y": "10px", "--style-button-x": "14px", "--style-button-size": "13px" } },
-        { variables: { "--style-button-y": "12px", "--style-button-x": "16px", "--style-button-size": "14px" } },
-        { variables: { "--style-button-y": "13px", "--style-button-x": "18px", "--style-button-size": "14px" } },
-        { variables: { "--style-button-y": "14px", "--style-button-x": "22px", "--style-button-size": "15px" } },
-        { variables: { "--style-button-y": "11px", "--style-button-x": "20px", "--style-button-size": "12px" } },
-        { variables: { "--style-button-y": "15px", "--style-button-x": "18px", "--style-button-size": "16px" } },
-        { variables: { "--style-button-y": "8px", "--style-button-x": "18px", "--style-button-size": "13px" } }
+        { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "12px" } },
+        { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "13px" } },
+        { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "14px" } },
+        { variables: { "--style-button-y": "8px", "--style-button-x": "24px", "--style-button-size": "14px" } },
+        { variables: { "--style-button-y": "16px", "--style-button-x": "24px", "--style-button-size": "15px" } },
+        { variables: { "--style-button-y": "8px", "--style-button-x": "24px", "--style-button-size": "12px" } },
+        { variables: { "--style-button-y": "16px", "--style-button-x": "16px", "--style-button-size": "16px" } },
+        { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "13px" } }
       ],
       index: [
         { variables: { "--style-index-box-border-width": "0px", "--style-index-box-padding": "0px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".08em" } },
-        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "6px 8px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".1em" } },
-        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px 10px", "--style-meta-transform": "none", "--style-meta-spacing": ".02em" } },
-        { variables: { "--style-index-box-border-width": "2px", "--style-index-box-padding": "7px 9px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".14em" } },
+        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".1em" } },
+        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px 16px", "--style-meta-transform": "none", "--style-meta-spacing": ".02em" } },
+        { variables: { "--style-index-box-border-width": "2px", "--style-index-box-padding": "8px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".14em" } },
         { variables: { "--style-index-box-border-width": "0px", "--style-index-box-padding": "0px", "--style-meta-transform": "lowercase", "--style-meta-spacing": ".04em" } },
-        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "4px 12px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".18em" } },
+        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px 16px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".18em" } },
         { variables: { "--style-index-box-border-width": "0px", "--style-index-box-padding": "0px", "--style-meta-transform": "none", "--style-meta-spacing": "0" } },
-        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "10px 12px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".06em" } }
+        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px 16px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".06em" } }
       ]
     };
 
@@ -565,7 +565,7 @@
           </div>
           <div class="generated-desc-meta">${escapeHtml(UI.labels.projectNote)} · ${escapeHtml(project.descriptionMode)}</div>
           <p class="generated-description">${escapeHtml(project.description)}</p>
-          ${project.url.startsWith("http") ? `<p style="margin-top:18px"><a href="${escapeHtml(project.url)}" target="_blank" rel="noreferrer">${escapeHtml(UI.labels.openRepository)}</a></p>` : ""}
+          ${project.url.startsWith("http") ? `<p style="margin-top:16px"><a href="${escapeHtml(project.url)}" target="_blank" rel="noreferrer">${escapeHtml(UI.labels.openRepository)}</a></p>` : ""}
         </article>
       `).join("");
     
@@ -624,7 +624,7 @@
           ${config.skills.map(([title, skills]) => `
             <article class="card third">
               <h3>${escapeHtml(title)}</h3>
-              <div class="skill-cloud" style="margin-top:18px">
+              <div class="skill-cloud" style="margin-top:16px">
                 ${skills.map(skill => `<span class="skill-pill">${escapeHtml(skill)}</span>`).join("")}
               </div>
             </article>
@@ -684,7 +684,7 @@
           <div class="intro-list">
             <p>${escapeHtml(project.intros[0])}</p>
           </div>
-          <div class="generated-desc-meta" style="margin-top:22px">${escapeHtml(UI.labels.implementationNotes)}</div>
+          <div class="generated-desc-meta" style="margin-top:24px">${escapeHtml(UI.labels.implementationNotes)}</div>
           <ul>${project.bullets.map(bullet => `<li>${escapeHtml(bullet)}</li>`).join("")}</ul>
           ${project.url.startsWith("http") ? `<p style="margin-top:16px"><a href="${escapeHtml(project.url)}" target="_blank" rel="noreferrer">${escapeHtml(UI.labels.openRepository)}</a></p>` : ""}
         </article>
@@ -741,7 +741,7 @@
       reveal.innerHTML = `
         <div class="kicker">${escapeHtml(config.revealCopy.kicker)}</div>
         <h2>${escapeHtml(config.revealCopy.headline)}</h2>
-        <p style="margin-top:18px">${escapeHtml(config.revealCopy.body)}</p>
+        <p style="margin-top:16px">${escapeHtml(config.revealCopy.body)}</p>
         <div class="reveal-grid">
           <div class="reveal-stat">
             <div class="reveal-stat-section">
