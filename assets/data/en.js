@@ -588,7 +588,7 @@ window.PORTFOLIO_LOCALE = {
       "now": "Now",
       "email": "Email",
       "fullRecord": "Full record",
-      "projectSummaries": "Project summaries",
+      "projectIntroduction": "Project introduction",
       "implementationNotes": "Implementation notes",
       "completeIndex": "Full / records",
       "completeTitle": "Full project record",

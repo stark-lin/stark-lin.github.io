@@ -717,7 +717,7 @@ window.PORTFOLIO_LOCALE = {
       "now": "现在",
       "email": "发邮件",
       "fullRecord": "完整",
-      "projectSummaries": "全部说法",
+      "projectIntroduction": "项目介绍",
       "implementationNotes": "实现细节",
       "completeIndex": "完整 / 不抽样",
       "completeTitle": "完整版本",

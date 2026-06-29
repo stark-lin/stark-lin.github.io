@@ -310,7 +310,7 @@
       const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
       const bytes = new Uint8Array(16);
       crypto.getRandomValues(bytes);
-      let seed = "LS-";
+      let seed = "SL-";
       for (const byte of bytes) seed += chars[byte % chars.length];
       return seed;
     }
@@ -422,7 +422,7 @@
         <header class="topbar">
           <div class="topbar-inner">
             <a class="brand" href="#top" aria-label="${escapeHtml(shell.brandAria)}">
-              <span class="brand-mark">LS</span>
+              <span class="brand-mark">SL</span>
               <span>Stark Lin</span>
             </a>
             <nav id="nav" aria-label="${escapeHtml(shell.navAria)}"></nav>
@@ -624,10 +624,9 @@
             </div>
             <span class="tag">${escapeHtml(UI.labels.fullRecord)}</span>
           </div>
-          <div class="generated-desc-meta">${escapeHtml(UI.labels.projectSummaries)}</div>
+          <div class="generated-desc-meta">${escapeHtml(UI.labels.projectIntroduction)}</div>
           <div class="intro-list">
-            ${project.intros.map(intro => `<p>${escapeHtml(intro)}</p>`).join("")}
-            ${(PROJECT_DESCRIPTION_POOLS[project.id] || []).map(description => `<p>${escapeHtml(description)}</p>`).join("")}
+            <p>${escapeHtml(project.intros[0])}</p>
           </div>
           <div class="generated-desc-meta" style="margin-top:22px">${escapeHtml(UI.labels.implementationNotes)}</div>
           <ul>${project.bullets.map(bullet => `<li>${escapeHtml(bullet)}</li>`).join("")}</ul>
