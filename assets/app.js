@@ -5,6 +5,48 @@
   if (!locale) throw new Error("Portfolio locale data is missing.");
   const { data: DATA, descriptions: PROJECT_DESCRIPTION_POOLS, ui: UI } = locale;
 
+  const SAFE_BILINGUAL_QUIPS = [
+    { zh: "这页会变，但不是在逃避责任。", en: "This page changes, but it is not dodging responsibility." },
+    { zh: "随机的是外观，固定的是链接能点。", en: "The surface is random. The links are reliably clickable." },
+    { zh: "如果这版不好看，至少它诚实地不好看。", en: "If this version is not pretty, at least it is honestly not pretty." },
+    { zh: "主页负责变脸，项目负责站稳。", en: "The homepage changes faces. The projects hold their ground." },
+    { zh: "这不是模板失效，是模板没有被邀请。", en: "This is not template failure. The template was not invited." },
+    { zh: "风格可以抽签，工程不能靠抽签。", en: "Style can be drawn by lot. Engineering cannot." },
+    { zh: "刷新一下，看看 CSS 今天想做什么。", en: "Refresh and see what CSS wants to do today." },
+    { zh: "内容很认真，只是外壳不想穿正装。", en: "The content is serious. The shell just refuses formalwear." },
+    { zh: "这是一个会换衣服的主页，不是一个会换项目的人。", en: "This is a homepage that changes outfits, not a person changing projects." },
+    { zh: "如果你看到了奇怪边框，那是页面在热身。", en: "If you see a strange border, the page is warming up." },
+    { zh: "它不保证优雅，但保证不是默认配置。", en: "It does not guarantee elegance. It guarantees non-default settings." },
+    { zh: "项目是真的，皮肤是随机的。", en: "The projects are real. The skin is randomized." },
+    { zh: "这页没有迷路，只是在走一条不太常规的路。", en: "This page is not lost. It is taking a less conventional route." },
+    { zh: "页面风格可以冒险，信息结构不能失踪。", en: "The visual style may take risks. The information structure cannot disappear." },
+    { zh: "这不是花哨，是给刷新按钮一点工作。", en: "This is not decoration. It is giving the refresh button a job." },
+    { zh: "如果这版像实验记录，那说明实验还活着。", en: "If this version looks like a lab note, the experiment is still alive." },
+    { zh: "同一个作者，不同的 CSS 天气。", en: "Same author, different CSS weather." },
+    { zh: "随机页面，固定邮箱，基本职业道德。", en: "Random page, fixed email, basic professional discipline." },
+    { zh: "这页比较会变通，但不会把仓库地址变没。", en: "This page is flexible, but it will not hide the repository links." },
+    { zh: "简历负责直线叙事，这页负责旁边开一扇窗。", en: "The resume keeps the straight line. This page opens a side window." },
+    { zh: "视觉上可以有脾气，语义上必须讲道理。", en: "The visuals may have attitude. The semantics must make sense." },
+    { zh: "如果你觉得这页太安静，它可能还没抽到响亮配色。", en: "If this page feels too quiet, it may not have drawn a loud palette yet." },
+    { zh: "这不是个人品牌，是个人接口。", en: "This is not personal branding. It is a personal interface." },
+    { zh: "每次刷新都像小型改版，但不用开会。", en: "Every refresh feels like a tiny redesign, without a meeting." },
+    { zh: "它有时像档案，有时像便利贴墙，但都能点开项目。", en: "Sometimes it is a dossier, sometimes a wall of sticky notes. The projects still open." },
+    { zh: "这页不是为了显得完美，是为了显得有人在场。", en: "This page is not trying to look perfect. It is trying to show someone is present." },
+    { zh: "如果它看起来像草稿，那也是可部署草稿。", en: "If it looks like a draft, it is still a deployable draft." },
+    { zh: "主页在换装，后端在值班。", en: "The homepage is changing outfits. The backend is on duty." },
+    { zh: "我没有隐藏个性，只是给它加了版本号。", en: "I did not hide personality. I gave it a version number." },
+    { zh: "随机不是借口，是一种有 seed 的展示方式。", en: "Randomness is not an excuse. It is presentation with a seed." },
+    { zh: "这页没有端着，但也没有乱扔信息。", en: "This page is not stiff, but it does not throw information around." },
+    { zh: "外观在抽样，判断没有抽样。", en: "The appearance is sampled. The judgment is not." },
+    { zh: "如果这版很顺眼，那是算法今天比较客气。", en: "If this version looks pleasant, the algorithm is being polite today." },
+    { zh: "如果这版不顺眼，那也是一个可复现结论。", en: "If this version does not look pleasant, that is still a reproducible result." },
+    { zh: "项目列表很短，因为噪音不参与部署。", en: "The project list is short because noise does not get deployed." },
+    { zh: "这页在认真和不正经之间做负载均衡。", en: "This page load-balances between serious and unserious." },
+    { zh: "它不是完美主页，它是一个有证据的入口。", en: "It is not a perfect homepage. It is an entry point with evidence." },
+    { zh: "刷新按钮不是逃生门，是换镜头。", en: "The refresh button is not an escape hatch. It is a camera cut." },
+    { zh: "这页的目标不是赢设计奖，是让合适的人多看一眼。", en: "The goal is not to win a design award. It is to make the right person look twice." }
+  ];
+
     const STYLE_GENES = {
       density: [
         { variables: { "--style-site-width": "720px", "--style-card-padding": "16px", "--style-card-gap": "10px", "--style-section-padding-y": "42px", "--style-section-gap": "20px", "--style-hero-pad-top": "54px", "--style-hero-pad-bottom": "44px", "--style-hero-gap": "18px" } },
@@ -344,7 +386,8 @@
         educationBody: pick(rng, DATA.educationBodies),
         contactCopy: pick(rng, DATA.contactCopies),
         revealCopy: pick(rng, DATA.revealCopies),
-        leads: Object.fromEntries(Object.entries(DATA.sectionLeads).map(([key, values]) => [key, pick(rng, values)]))
+        leads: Object.fromEntries(Object.entries(DATA.sectionLeads).map(([key, values]) => [key, pick(rng, values)])),
+        footerQuip: pick(rng, SAFE_BILINGUAL_QUIPS)
       };
 
       config.rarity = calculateRarity([
@@ -366,8 +409,10 @@
         .replaceAll("'", "&#039;");
     }
 
-    function renderShell() {
+    function renderShell(config) {
       const { shell } = UI;
+      const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
+      const footerQuip = config.footerQuip?.[language] || shell.footer;
       document.body.innerHTML = `
         <div class="regenerating" id="regenerating" aria-hidden="true">
           <div class="regen-box">
@@ -390,7 +435,7 @@
           <section class="complete-version" id="completeVersion" hidden></section>
       <footer class="tiny-footer">
         <span>© 2026 Lin Stark</span>
-        <span>${escapeHtml(shell.footer)}</span>
+        <span>${escapeHtml(footerQuip)}</span>
         <span>
           <a href="https://github.com/stark-lin/stark-lin.github.io" target="_blank" rel="noreferrer">${escapeHtml(shell.sourceLabel)}</a>
           · <a href="./LICENSE">AGPL-3.0</a>
@@ -724,9 +769,9 @@
     }
 
     function init() {
-      renderShell();
       const seed = getSeed();
       const config = generateConfig(seed);
+      renderShell(config);
       applyBodyClass(config);
       renderNav(config);
       renderHero(config);
