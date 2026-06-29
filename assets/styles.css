@@ -699,11 +699,27 @@
       color: var(--accent);
     }
 
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 18px;
+      min-width: 0;
+    }
+
     nav {
       display: flex;
       gap: 18px;
       color: var(--muted);
       font-size: 13px;
+    }
+
+    .topbar .button.language-switch {
+      flex: 0 0 auto;
+      padding: 6px 9px;
+      font-size: 11px;
+      line-height: 1;
+      white-space: nowrap;
     }
 
     .hero {

@@ -387,7 +387,8 @@
         contactCopy: pick(rng, DATA.contactCopies),
         revealCopy: pick(rng, DATA.revealCopies),
         leads: Object.fromEntries(Object.entries(DATA.sectionLeads).map(([key, values]) => [key, pick(rng, values)])),
-        footerQuip: pick(rng, SAFE_BILINGUAL_QUIPS)
+        footerQuip: pick(rng, SAFE_BILINGUAL_QUIPS),
+        skills: shuffle(rng, UI.skills).map(([title, skills]) => [title, shuffle(rng, skills)])
       };
 
       config.rarity = calculateRarity([
@@ -409,10 +410,26 @@
         .replaceAll("'", "&#039;");
     }
 
+    function getLanguageSwitch() {
+      const isChinese = document.documentElement.lang.startsWith("zh");
+      const targetUrl = new URL(isChinese ? "./index.html" : "./zh.html", window.location.href);
+      targetUrl.search = window.location.search;
+      targetUrl.hash = window.location.hash;
+
+      return {
+        href: targetUrl.href,
+        hrefLang: isChinese ? "en" : "zh",
+        labelLang: isChinese ? "en" : "zh-CN",
+        label: isChinese ? "EN" : "中文",
+        ariaLabel: isChinese ? "切换到英文" : "Switch to Chinese"
+      };
+    }
+
     function renderShell(config) {
       const { shell } = UI;
       const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
       const footerQuip = config.footerQuip?.[language] || shell.footer;
+      const languageSwitch = getLanguageSwitch();
       document.body.innerHTML = `
         <div class="regenerating" id="regenerating" aria-hidden="true">
           <div class="regen-box">
@@ -425,7 +442,10 @@
               <span class="brand-mark">SL</span>
               <span>Stark Lin</span>
             </a>
-            <nav id="nav" aria-label="${escapeHtml(shell.navAria)}"></nav>
+            <div class="topbar-actions">
+              <nav id="nav" aria-label="${escapeHtml(shell.navAria)}"></nav>
+              <a class="button secondary language-switch" href="${escapeHtml(languageSwitch.href)}" hreflang="${languageSwitch.hrefLang}" lang="${languageSwitch.labelLang}" aria-label="${escapeHtml(languageSwitch.ariaLabel)}">${languageSwitch.label}</a>
+            </div>
           </div>
         </header>
         <div class="site" id="top">
@@ -565,7 +585,7 @@
     function renderSkills(config, index) {
       const body = `
         <div class="cards">
-          ${UI.skills.map(([title, skills]) => `
+          ${config.skills.map(([title, skills]) => `
             <article class="card third">
               <h3>${escapeHtml(title)}</h3>
               <div class="skill-cloud" style="margin-top:18px">
@@ -755,6 +775,42 @@
       document.documentElement.dataset.styleGenome = styleGenome.id;
     }
 
+    function clampTitleTracking(value, fontWeight, fontSizePx) {
+      let min = -0.045;
+
+      if (fontWeight >= 800) min = -0.035;
+      if (fontSizePx >= 96) min = Math.max(min, -0.03);
+      if (fontSizePx >= 120) min = Math.max(min, -0.025);
+
+      return Math.max(value, min);
+    }
+
+    function applyTitleTrackingLimits() {
+      document.querySelectorAll("h1, h2, h3").forEach(title => {
+        // Remove the previous clamp so responsive changes are always measured
+        // against the tracking requested by the current generated style.
+        title.style.removeProperty("letter-spacing");
+        const computedStyle = window.getComputedStyle(title);
+        const fontSizePx = Number.parseFloat(computedStyle.fontSize);
+        const fontWeight = Number.parseInt(computedStyle.fontWeight, 10);
+        const trackingPx = Number.parseFloat(computedStyle.letterSpacing);
+
+        if (![fontSizePx, fontWeight, trackingPx].every(Number.isFinite) || fontSizePx <= 0) return;
+
+        const tracking = trackingPx / fontSizePx;
+        const clampedTracking = clampTitleTracking(tracking, fontWeight, fontSizePx);
+        if (clampedTracking > tracking) {
+          title.style.letterSpacing = `${clampedTracking}em`;
+        }
+      });
+    }
+
+    let titleTrackingFrame;
+    function scheduleTitleTrackingLimits() {
+      cancelAnimationFrame(titleTrackingFrame);
+      titleTrackingFrame = requestAnimationFrame(applyTitleTrackingLimits);
+    }
+
     function applyBodyClass(config) {
       document.body.className = [
         `theme-${config.colorTheme}`,
@@ -777,6 +833,8 @@
       renderMain(config);
       renderReveal(config);
       renderCompleteVersion(config);
+      applyTitleTrackingLimits();
+      window.addEventListener("resize", scheduleTitleTrackingLimits, { passive: true });
     }
 
     init();
