@@ -1067,6 +1067,30 @@
       margin-bottom: 6px;
     }
     .reveal-stat-value { font-weight: 720; letter-spacing: -0.02em; }
+    .reveal-stat-section + .reveal-stat-section {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid color-mix(in srgb, var(--bg), transparent 82%);
+    }
+    .rarity-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .rarity-tier { font-size: 18px; text-transform: uppercase; }
+    .rarity-odds {
+      font-family: var(--mono);
+      font-size: 12px;
+      opacity: .72;
+    }
+    .rarity-comment {
+      margin-top: 7px;
+      color: color-mix(in srgb, var(--bg), transparent 32%);
+      font-size: 13px;
+      line-height: 1.45;
+    }
     .reveal-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
     .reveal .button {
       background: var(--bg);

@@ -99,26 +99,31 @@
     }
 
     function chooseGene(rng, options) {
-      const index = Math.floor(rng() * options.length);
-      return { index, option: options[index] };
+      const trait = weightedTrait(rng, options, 0.8);
+      return { index: trait.index, option: trait.value, probability: trait.probability };
     }
 
     function createStyleGenome(rng) {
-      const modeIndex = Math.floor(rng() * DATA.surfaceStyles.length);
-      const mode = DATA.surfaceStyles[modeIndex];
+      const modeTrait = weightedTrait(rng, DATA.surfaceStyles);
+      const modeIndex = modeTrait.index;
+      const mode = modeTrait.value;
       const variables = {};
       const signature = [modeIndex];
+      const rarityTraits = [{ dimension: "surface", value: mode, probability: modeTrait.probability }];
 
       Object.entries(STYLE_GENES).forEach(([name, options]) => {
-        const { index, option } = chooseGene(rng, options);
+        const { index, option, probability } = chooseGene(rng, options);
         signature.push(index);
         Object.assign(variables, option.variables);
+        rarityTraits.push({ dimension: `style.${name}`, value: index, probability });
       });
 
       return {
         id: "SG-" + signature.map(value => value.toString(36).toUpperCase()).join(""),
         mode,
         variables,
+        signature,
+        rarityTraits,
         space: styleGeneSpace()
       };
     }
@@ -163,6 +168,89 @@
       return arr[Math.floor(rng() * arr.length)];
     }
 
+    function weightedTrait(rng, options, decay = 0.86) {
+      const weights = options.map((_, index) => Math.max(1, Math.round(1000 * Math.pow(decay, index))));
+      const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+      let roll = rng() * totalWeight;
+
+      for (let index = 0; index < options.length; index++) {
+        roll -= weights[index];
+        if (roll <= 0) {
+          return { value: options[index], index, probability: weights[index] / totalWeight };
+        }
+      }
+
+      const index = options.length - 1;
+      return { value: options[index], index, probability: weights[index] / totalWeight };
+    }
+
+    const RARITY_INTERACTIONS = [
+      {
+        factor: 0.18,
+        when: config => ["limewire", "magma", "warning"].includes(config.colorTheme) &&
+          ["scanlines", "matrix", "terminal-bars", "blue-noise"].includes(config.backgroundStyle)
+      },
+      {
+        factor: 0.08,
+        when: config => ["manifesto", "zine", "mega", "overprint"].includes(config.surfaceStyle) &&
+          ["cut", "offset", "badge"].includes(config.shapeStyle)
+      },
+      {
+        factor: 0.24,
+        when: config => ["paper", "bone", "porcelain", "newsprint"].includes(config.colorTheme) &&
+          ["matrix", "radar", "zebra", "terminal-bars"].includes(config.backgroundStyle)
+      },
+      {
+        factor: 0.2,
+        when: config => ["receipt", "dossier", "spec", "labelmaker"].includes(config.surfaceStyle) &&
+          ["notebook", "window", "stage"].includes(config.backgroundStyle)
+      },
+      {
+        factor: 0.12,
+        when: config => config.styleGenome.signature.slice(1).filter(index => index >= 7).length >= 3
+      }
+    ];
+
+    function getRarityTier(log10Odds) {
+      if (log10Odds < 8) return { id: "common", severity: 1 };
+      if (log10Odds < 10) return { id: "uncommon", severity: 2 };
+      if (log10Odds < 13) return { id: "rare", severity: 3 };
+      if (log10Odds < 16) return { id: "ultraRare", severity: 4 };
+      if (log10Odds < 20) return { id: "mythic", severity: 5 };
+      if (log10Odds < 25) return { id: "cursed", severity: 6 };
+      if (log10Odds < 35) return { id: "statisticallyOffensive", severity: 7 };
+      return { id: "shouldNotExist", severity: 8 };
+    }
+
+    function formatRarityOdds(log10Odds) {
+      const exponent = Math.floor(log10Odds);
+      if (exponent < 15) {
+        return Math.round(Math.pow(10, log10Odds)).toLocaleString(document.documentElement.lang);
+      }
+      const mantissa = Math.pow(10, log10Odds - exponent);
+      return `${mantissa.toFixed(2)} × 10^${exponent}`;
+    }
+
+    function calculateRarity(traits, config) {
+      let log10Odds = traits.reduce((sum, trait) => sum - Math.log10(trait.probability), 0);
+      const activeInteractions = RARITY_INTERACTIONS.filter(rule => rule.when(config));
+      activeInteractions.forEach(rule => {
+        log10Odds -= Math.log10(rule.factor);
+      });
+
+      const tier = getRarityTier(log10Odds);
+      const comments = UI.rarity.comments[tier.id] || UI.rarity.comments.common;
+      const commentIndex = Math.floor(log10Odds * 100) % comments.length;
+
+      return {
+        log10Odds,
+        odds: formatRarityOdds(log10Odds),
+        tier,
+        comment: comments[commentIndex],
+        activeInteractions: activeInteractions.length
+      };
+    }
+
     function shuffle(rng, arr) {
       const copy = [...arr];
       for (let i = copy.length - 1; i > 0; i--) {
@@ -200,11 +288,14 @@
     function generateConfig(seed) {
       const rng = createRandom(seed);
       const layout = "single";
-      const colorTheme = pick(rng, DATA.colorThemes);
-      const backgroundStyle = pick(rng, DATA.backgroundStyles);
+      const colorThemeTrait = weightedTrait(rng, DATA.colorThemes);
+      const backgroundStyleTrait = weightedTrait(rng, DATA.backgroundStyles);
+      const colorTheme = colorThemeTrait.value;
+      const backgroundStyle = backgroundStyleTrait.value;
       const styleGenome = createStyleGenome(rng);
       const surfaceStyle = styleGenome.mode;
-      const shapeStyle = pick(rng, DATA.shapeStyles);
+      const shapeStyleTrait = weightedTrait(rng, DATA.shapeStyles);
+      const shapeStyle = shapeStyleTrait.value;
       const educationPlacement = pick(rng, ["hero", "section"]);
       const sectionPool = ["work", "experience", "principles", "skills", "now"];
       if (educationPlacement === "section") sectionPool.push("education");
@@ -230,7 +321,7 @@
         tag: pick(rng, experienceSource.tags)
       };
 
-      return {
+      const config = {
         seed,
         layout,
         colorTheme,
@@ -242,7 +333,6 @@
         motion: pick(rng, DATA.motions),
         tone: pick(rng, DATA.tones),
         bias: pick(rng, DATA.biases),
-        rarity: pick(rng, ["Common", "Common", "Rare", "Rare", "Epic", "Glitch"]),
         kicker: pick(rng, DATA.heroKickers),
         headline: pick(rng, DATA.heroHeadlines),
         subhead: pick(rng, DATA.heroSubheads),
@@ -256,6 +346,15 @@
         revealCopy: pick(rng, DATA.revealCopies),
         leads: Object.fromEntries(Object.entries(DATA.sectionLeads).map(([key, values]) => [key, pick(rng, values)]))
       };
+
+      config.rarity = calculateRarity([
+        { dimension: "palette", value: colorTheme, probability: colorThemeTrait.probability },
+        { dimension: "background", value: backgroundStyle, probability: backgroundStyleTrait.probability },
+        ...styleGenome.rarityTraits,
+        { dimension: "shape", value: shapeStyle, probability: shapeStyleTrait.probability }
+      ], config);
+
+      return config;
     }
 
     function escapeHtml(str) {
@@ -545,21 +644,29 @@
         <p style="margin-top:18px">${escapeHtml(config.revealCopy.body)}</p>
         <div class="reveal-grid">
           <div class="reveal-stat">
-            <div class="reveal-stat-label">${escapeHtml(UI.labels.referenceCode)}</div>
-            <div class="reveal-stat-value">${escapeHtml(config.seed)}</div>
+            <div class="reveal-stat-section">
+              <div class="reveal-stat-label">${escapeHtml(UI.labels.referenceCode)}</div>
+              <div class="reveal-stat-value">${escapeHtml(config.seed)}</div>
+            </div>
+            <div class="reveal-stat-section rarity-report" data-rarity-tier="${escapeHtml(config.rarity.tier.id)}">
+              <div class="reveal-stat-label">${escapeHtml(UI.rarity.label)}</div>
+              <div class="rarity-heading">
+                <div class="reveal-stat-value rarity-tier">${escapeHtml(UI.rarity.tiers[config.rarity.tier.id])}</div>
+                <div class="rarity-odds">${escapeHtml(UI.rarity.odds.replace("{odds}", config.rarity.odds))}</div>
+              </div>
+              <div class="rarity-comment">${escapeHtml(config.rarity.comment)}</div>
+            </div>
           </div>
         </div>
         <div class="reveal-actions">
           <button class="button" id="rollAgain">${escapeHtml(UI.labels.refreshView)}</button>
           <button class="button secondary" id="copyVersion">${escapeHtml(UI.labels.copyView)}</button>
-          <button class="button secondary" id="copySeed">${escapeHtml(UI.labels.copySeed)}</button>
           <button class="button secondary surrender" id="surrenderComplete">${escapeHtml(UI.labels.showComplete)}</button>
         </div>
       `;
     
       document.getElementById("rollAgain").addEventListener("click", rollAgain);
       document.getElementById("copyVersion").addEventListener("click", () => copyText(window.location.href, UI.labels.viewCopied));
-      document.getElementById("copySeed").addEventListener("click", () => copyText(config.seed, UI.labels.seedCopied));
       document.getElementById("surrenderComplete").addEventListener("click", () => showCompleteVersion(config));
     }
 

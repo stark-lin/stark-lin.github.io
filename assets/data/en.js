@@ -341,7 +341,7 @@ window.PORTFOLIO_LOCALE = {
         {
           kicker: "Portfolio view state",
           headline: "This view can be revisited.",
-          body: "Copy the reference code or full URL if this is the view you want to keep."
+          body: "Copy the URL if this is the view you want to keep."
         },
         {
           kicker: "Instance locked",
@@ -544,11 +544,33 @@ window.PORTFOLIO_LOCALE = {
       "completeLead": "This opens the full supporting material behind the compact portfolio view.",
       "referenceCode": "Reference code",
       "refreshView": "Refresh view",
-      "copyView": "Copy this view",
-      "copySeed": "Copy reference code",
+      "copyView": "Copy URL",
       "showComplete": "Show the full project record",
-      "viewCopied": "View link copied.",
-      "seedCopied": "Reference code copied."
+      "viewCopied": "View link copied."
+    },
+    rarity: {
+      label: "Combination rarity",
+      odds: "About 1 in {odds}",
+      tiers: {
+        common: "Common",
+        uncommon: "Uncommon",
+        rare: "Rare",
+        ultraRare: "Ultra rare",
+        mythic: "Mythic",
+        cursed: "Cursed",
+        statisticallyOffensive: "Statistically offensive",
+        shouldNotExist: "Should not exist"
+      },
+      comments: {
+        common: ["The algorithm was unusually restrained.", "A normal homepage accidentally occurred."],
+        uncommon: ["Slightly less normal than necessary.", "Not rare enough to brag about. Still suspicious."],
+        rare: ["This combination had options and declined them.", "Statistically noticeable. Aesthetically negotiable."],
+        ultraRare: ["These visual traits were not supposed to meet often.", "Rare enough to inspect. Value not guaranteed."],
+        mythic: ["Generated deterministically. Regretted immediately.", "This view is rarer than it deserves to be."],
+        cursed: ["Legally a homepage. Emotionally not.", "Not valuable. Just unlikely."],
+        statisticallyOffensive: ["A statistical event with poor social judgment.", "The probability is low. The consequences are visible."],
+        shouldNotExist: ["This should not exist, but the reference code disagreed.", "A deterministic accident with witnesses."]
+      }
     }
   }
 };
