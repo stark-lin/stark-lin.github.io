@@ -411,14 +411,9 @@ window.PORTFOLIO_LOCALE = {
         }
       ],
 
-      layouts: ["single"],
-      colorThemes: ["archive", "terminal", "paper", "signal", "glitch", "ink", "blueprint", "clay", "noir", "amber", "crimson", "mint", "frost", "plum", "slate", "limewire", "cobalt", "sand", "bone", "coffee", "ocean", "magma", "porcelain", "rosewater", "ultraviolet", "cyberpink", "olive", "newsprint", "petrol", "warning"],
       backgroundStyles: ["grid", "dots", "scanlines", "diagonal", "crosshatch", "clean", "halo", "corner-cut", "rings", "columns", "checker", "dashed", "pixels", "orbit", "fold", "split", "horizon", "circuit", "letterpress", "spotlight", "topography", "matrix", "radar", "vignette", "zebra", "notebook", "window", "stage", "mesh", "blue-noise", "terminal-bars", "sunrise"],
       surfaceStyles: ["soft", "sharp", "editorial", "terminalish", "filecard", "plain", "brutal", "ledger", "poster", "codeblock", "manifesto", "receipt", "glass", "indexed", "dossier", "lab", "zine", "spec", "luxury", "micro", "mega", "overprint", "labelmaker", "index-card", "thin", "heavy", "captioned"],
-      shapeStyles: ["rounded", "soft-rounded", "right-angle", "small-radius", "pill-boxes", "no-boxes", "line-only", "ticket", "slab", "cut", "stamp", "folder", "postcard", "underline", "offset", "badge"],
-      motions: ["soft reveal", "staggered cards", "quiet snap", "terminal pacing", "editorial drift"],
-      tones: ["Direct", "Precise", "Systems-heavy", "Understated", "Sharper than necessary"],
-      biases: ["Work / Systems / Contradiction", "Backend / AI Workflow / Auditability", "Education / Projects / Principles", "Infrastructure / Product Scope / Runtime Boundaries", "Personal Systems / Product Interfaces / Go"]
+      shapeStyles: ["rounded", "soft-rounded", "right-angle", "small-radius", "pill-boxes", "no-boxes", "line-only", "ticket", "slab", "cut", "stamp", "folder", "postcard", "underline", "offset", "badge"]
     },
   descriptions: {
       saturn: [

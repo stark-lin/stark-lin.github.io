@@ -4,6 +4,9 @@
   const locale = window.PORTFOLIO_LOCALE;
   if (!locale) throw new Error("Portfolio locale data is missing.");
   const { data: DATA, descriptions: PROJECT_DESCRIPTION_POOLS, ui: UI } = locale;
+  const CSS_PALETTE_IDS = window.PORTFOLIO_CSS_PALETTE_IDS || [];
+  const CUSTOM_PALETTES = window.PORTFOLIO_PALETTES || [];
+  const CUSTOM_PALETTES_BY_ID = new Map(CUSTOM_PALETTES.map(palette => [palette.id, palette]));
 
   const SAFE_BILINGUAL_QUIPS = [
     { zh: "这页会变，但不是在逃避责任。", en: "This page changes, but it is not dodging responsibility." },
@@ -136,28 +139,74 @@
       ]
     };
 
+    const RANDOM_POOLS = {
+      visual: {
+        palettes: [...CSS_PALETTE_IDS, ...CUSTOM_PALETTES.map(palette => palette.id)],
+        backgrounds: DATA.backgroundStyles,
+        surfaces: DATA.surfaceStyles,
+        shapes: DATA.shapeStyles,
+        styleGenes: STYLE_GENES
+      },
+      layout: {
+        educationPlacements: ["hero", "section"],
+        sections: ["work", "experience", "principles", "skills", "now"]
+      },
+      system: {
+        seedPrefix: "SL-",
+        seedLength: 16,
+        seedCharacters: "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+      },
+      copy: {
+        kickers: DATA.heroKickers,
+        headlines: DATA.heroHeadlines,
+        subheads: DATA.heroSubheads,
+        principles: DATA.principles,
+        currentStates: DATA.currentStates,
+        educationBodies: DATA.educationBodies,
+        contactCopies: DATA.contactCopies,
+        revealCopies: DATA.revealCopies,
+        sectionLeads: DATA.sectionLeads,
+        footerQuips: SAFE_BILINGUAL_QUIPS,
+        descriptionModes: UI.descriptionModes,
+        rarityComments: UI.rarity.comments,
+        projects: DATA.projects.map(project => ({
+          record: project,
+          descriptions: [...project.intros, ...(PROJECT_DESCRIPTION_POOLS[project.id] || [])],
+          tags: project.tags
+        })),
+        experienceProject: {
+          record: DATA.experienceProject,
+          descriptions: [
+            ...DATA.experienceProject.intros,
+            ...(PROJECT_DESCRIPTION_POOLS[DATA.experienceProject.id] || [])
+          ],
+          tags: DATA.experienceProject.tags
+        },
+        skills: UI.skills
+      }
+    };
+
     function styleGeneSpace() {
-      return DATA.surfaceStyles.length * Object.values(STYLE_GENES).reduce((total, options) => total * options.length, 1);
+      return RANDOM_POOLS.visual.surfaces.length * Object.values(RANDOM_POOLS.visual.styleGenes)
+        .reduce((total, options) => total * options.length, 1);
     }
 
     function chooseGene(rng, options) {
-      const trait = weightedTrait(rng, options, 0.8);
-      return { index: trait.index, option: trait.value, probability: trait.probability };
+      const trait = uniformTrait(rng, options);
+      return { index: trait.index, option: trait.value };
     }
 
     function createStyleGenome(rng) {
-      const modeTrait = weightedTrait(rng, DATA.surfaceStyles);
+      const modeTrait = uniformTrait(rng, RANDOM_POOLS.visual.surfaces);
       const modeIndex = modeTrait.index;
       const mode = modeTrait.value;
       const variables = {};
       const signature = [modeIndex];
-      const rarityTraits = [{ dimension: "surface", value: mode, probability: modeTrait.probability }];
 
-      Object.entries(STYLE_GENES).forEach(([name, options]) => {
-        const { index, option, probability } = chooseGene(rng, options);
+      Object.entries(RANDOM_POOLS.visual.styleGenes).forEach(([name, options]) => {
+        const { index, option } = chooseGene(rng, options);
         signature.push(index);
         Object.assign(variables, option.variables);
-        rarityTraits.push({ dimension: `style.${name}`, value: index, probability });
       });
 
       return {
@@ -165,7 +214,6 @@
         mode,
         variables,
         signature,
-        rarityTraits,
         space: styleGeneSpace()
       };
     }
@@ -207,89 +255,56 @@
     }
 
     function pick(rng, arr) {
-      return arr[Math.floor(rng() * arr.length)];
+      return uniformTrait(rng, arr).value;
     }
 
-    function weightedTrait(rng, options, decay = 0.86) {
-      const weights = options.map((_, index) => Math.max(1, Math.round(1000 * Math.pow(decay, index))));
-      const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
-      let roll = rng() * totalWeight;
-
-      for (let index = 0; index < options.length; index++) {
-        roll -= weights[index];
-        if (roll <= 0) {
-          return { value: options[index], index, probability: weights[index] / totalWeight };
-        }
-      }
-
-      const index = options.length - 1;
-      return { value: options[index], index, probability: weights[index] / totalWeight };
+    function uniformTrait(rng, options) {
+      if (!options.length) throw new Error("A random pool cannot be empty.");
+      const index = Math.floor(rng() * options.length);
+      return { value: options[index], index, probability: 1 / options.length };
     }
 
-    const RARITY_INTERACTIONS = [
-      {
-        factor: 0.18,
-        when: config => ["limewire", "magma", "warning"].includes(config.colorTheme) &&
-          ["scanlines", "matrix", "terminal-bars", "blue-noise"].includes(config.backgroundStyle)
-      },
-      {
-        factor: 0.08,
-        when: config => ["manifesto", "zine", "mega", "overprint"].includes(config.surfaceStyle) &&
-          ["cut", "offset", "badge"].includes(config.shapeStyle)
-      },
-      {
-        factor: 0.24,
-        when: config => ["paper", "bone", "porcelain", "newsprint"].includes(config.colorTheme) &&
-          ["matrix", "radar", "zebra", "terminal-bars"].includes(config.backgroundStyle)
-      },
-      {
-        factor: 0.2,
-        when: config => ["receipt", "dossier", "spec", "labelmaker"].includes(config.surfaceStyle) &&
-          ["notebook", "window", "stage"].includes(config.backgroundStyle)
-      },
-      {
-        factor: 0.12,
-        when: config => config.styleGenome.signature.slice(1).filter(index => index >= 7).length >= 3
-      }
+    const RARITY_TIERS = [
+      "common",
+      "uncommon",
+      "rare",
+      "ultraRare",
+      "mythic",
+      "cursed",
+      "statisticallyOffensive",
+      "shouldNotExist"
     ];
 
-    function getRarityTier(log10Odds) {
-      if (log10Odds < 8) return { id: "common", severity: 1 };
-      if (log10Odds < 10) return { id: "uncommon", severity: 2 };
-      if (log10Odds < 13) return { id: "rare", severity: 3 };
-      if (log10Odds < 16) return { id: "ultraRare", severity: 4 };
-      if (log10Odds < 20) return { id: "mythic", severity: 5 };
-      if (log10Odds < 25) return { id: "cursed", severity: 6 };
-      if (log10Odds < 35) return { id: "statisticallyOffensive", severity: 7 };
-      return { id: "shouldNotExist", severity: 8 };
+    function getRarityTier(depth) {
+      const tierIndex = Math.min(depth, RARITY_TIERS.length - 1);
+      return { id: RARITY_TIERS[tierIndex], severity: tierIndex + 1 };
     }
 
-    function formatRarityOdds(log10Odds) {
+    function formatRarityOdds(odds) {
+      const log10Odds = Math.log10(odds);
       const exponent = Math.floor(log10Odds);
       if (exponent < 15) {
-        return Math.round(Math.pow(10, log10Odds)).toLocaleString(document.documentElement.lang);
+        return Math.max(1, Math.round(odds)).toLocaleString(document.documentElement.lang);
       }
       const mantissa = Math.pow(10, log10Odds - exponent);
       return `${mantissa.toFixed(2)} × 10^${exponent}`;
     }
 
-    function calculateRarity(traits, config) {
-      let log10Odds = traits.reduce((sum, trait) => sum - Math.log10(trait.probability), 0);
-      const activeInteractions = RARITY_INTERACTIONS.filter(rule => rule.when(config));
-      activeInteractions.forEach(rule => {
-        log10Odds -= Math.log10(rule.factor);
-      });
+    function calculateRarity(rng) {
+      let depth = 0;
+      while (rng() < 0.5) depth++;
 
-      const tier = getRarityTier(log10Odds);
-      const comments = UI.rarity.comments[tier.id] || UI.rarity.comments.common;
-      const commentIndex = Math.floor(log10Odds * 100) % comments.length;
+      const odds = 2 ** (depth + 1);
+      const log10Odds = Math.log10(odds);
+      const tier = getRarityTier(depth);
+      const comments = RANDOM_POOLS.copy.rarityComments[tier.id] || RANDOM_POOLS.copy.rarityComments.common;
 
       return {
+        depth,
         log10Odds,
-        odds: formatRarityOdds(log10Odds),
+        odds: formatRarityOdds(odds),
         tier,
-        comment: comments[commentIndex],
-        activeInteractions: activeInteractions.length
+        comment: pick(rng, comments)
       };
     }
 
@@ -307,11 +322,19 @@
     }
 
     function createShortSeed() {
-      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-      const bytes = new Uint8Array(16);
-      crypto.getRandomValues(bytes);
-      let seed = "SL-";
-      for (const byte of bytes) seed += chars[byte % chars.length];
+      const { seedPrefix, seedLength, seedCharacters } = RANDOM_POOLS.system;
+      const bytes = new Uint8Array(seedLength);
+      const unbiasedLimit = 256 - (256 % seedCharacters.length);
+      let seed = seedPrefix;
+
+      while (seed.length < seedPrefix.length + seedLength) {
+        crypto.getRandomValues(bytes);
+        for (const byte of bytes) {
+          if (byte >= unbiasedLimit) continue;
+          seed += seedCharacters[byte % seedCharacters.length];
+          if (seed.length === seedPrefix.length + seedLength) break;
+        }
+      }
       return seed;
     }
 
@@ -330,36 +353,32 @@
     function generateConfig(seed) {
       const rng = createRandom(seed);
       const layout = "single";
-      const colorThemeTrait = weightedTrait(rng, DATA.colorThemes);
-      const backgroundStyleTrait = weightedTrait(rng, DATA.backgroundStyles);
+      const colorThemeTrait = uniformTrait(rng, RANDOM_POOLS.visual.palettes);
+      const backgroundStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.backgrounds);
       const colorTheme = colorThemeTrait.value;
       const backgroundStyle = backgroundStyleTrait.value;
       const styleGenome = createStyleGenome(rng);
       const surfaceStyle = styleGenome.mode;
-      const shapeStyleTrait = weightedTrait(rng, DATA.shapeStyles);
+      const shapeStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.shapes);
       const shapeStyle = shapeStyleTrait.value;
-      const educationPlacement = pick(rng, ["hero", "section"]);
-      const sectionPool = ["work", "experience", "principles", "skills", "now"];
+      const educationPlacement = pick(rng, RANDOM_POOLS.layout.educationPlacements);
+      const sectionPool = [...RANDOM_POOLS.layout.sections];
       if (educationPlacement === "section") sectionPool.push("education");
       const sections = shuffle(rng, sectionPool);
-      const projects = shuffle(rng, DATA.projects).map(project => {
-        const descriptionPool = PROJECT_DESCRIPTION_POOLS[project.id] || project.intros;
+      const projects = shuffle(rng, RANDOM_POOLS.copy.projects).map(source => {
         return {
-          ...project,
-          intro: pick(rng, project.intros),
-          description: pick(rng, descriptionPool),
-          descriptionMode: pick(rng, UI.descriptionModes),
-          tag: pick(rng, project.tags)
+          ...source.record,
+          description: pick(rng, source.descriptions),
+          descriptionMode: pick(rng, RANDOM_POOLS.copy.descriptionModes),
+          tag: pick(rng, source.tags)
         };
       });
 
-      const experienceSource = DATA.experienceProject;
-      const experienceDescriptionPool = PROJECT_DESCRIPTION_POOLS[experienceSource.id] || experienceSource.intros;
+      const experienceSource = RANDOM_POOLS.copy.experienceProject;
       const experienceProject = {
-        ...experienceSource,
-        intro: pick(rng, experienceSource.intros),
-        description: pick(rng, experienceDescriptionPool),
-        descriptionMode: pick(rng, UI.descriptionModes),
+        ...experienceSource.record,
+        description: pick(rng, experienceSource.descriptions),
+        descriptionMode: pick(rng, RANDOM_POOLS.copy.descriptionModes),
         tag: pick(rng, experienceSource.tags)
       };
 
@@ -372,31 +391,23 @@
         styleGenome,
         shapeStyle,
         educationPlacement,
-        motion: pick(rng, DATA.motions),
-        tone: pick(rng, DATA.tones),
-        bias: pick(rng, DATA.biases),
-        kicker: pick(rng, DATA.heroKickers),
-        headline: pick(rng, DATA.heroHeadlines),
-        subhead: pick(rng, DATA.heroSubheads),
+        kicker: pick(rng, RANDOM_POOLS.copy.kickers),
+        headline: pick(rng, RANDOM_POOLS.copy.headlines),
+        subhead: pick(rng, RANDOM_POOLS.copy.subheads),
         sections,
         projects,
         experienceProject,
-        principles: pickN(rng, DATA.principles, 4),
-        currentState: pick(rng, DATA.currentStates),
-        educationBody: pick(rng, DATA.educationBodies),
-        contactCopy: pick(rng, DATA.contactCopies),
-        revealCopy: pick(rng, DATA.revealCopies),
-        leads: Object.fromEntries(Object.entries(DATA.sectionLeads).map(([key, values]) => [key, pick(rng, values)])),
-        footerQuip: pick(rng, SAFE_BILINGUAL_QUIPS),
-        skills: shuffle(rng, UI.skills).map(([title, skills]) => [title, shuffle(rng, skills)])
+        principles: pickN(rng, RANDOM_POOLS.copy.principles, 4),
+        currentState: pick(rng, RANDOM_POOLS.copy.currentStates),
+        educationBody: pick(rng, RANDOM_POOLS.copy.educationBodies),
+        contactCopy: pick(rng, RANDOM_POOLS.copy.contactCopies),
+        revealCopy: pick(rng, RANDOM_POOLS.copy.revealCopies),
+        leads: Object.fromEntries(Object.entries(RANDOM_POOLS.copy.sectionLeads).map(([key, values]) => [key, pick(rng, values)])),
+        footerQuip: pick(rng, RANDOM_POOLS.copy.footerQuips),
+        skills: shuffle(rng, RANDOM_POOLS.copy.skills).map(([title, skills]) => [title, shuffle(rng, skills)])
       };
 
-      config.rarity = calculateRarity([
-        { dimension: "palette", value: colorTheme, probability: colorThemeTrait.probability },
-        { dimension: "background", value: backgroundStyle, probability: backgroundStyleTrait.probability },
-        ...styleGenome.rarityTraits,
-        { dimension: "shape", value: shapeStyle, probability: shapeStyleTrait.probability }
-      ], config);
+      config.rarity = calculateRarity(rng);
 
       return config;
     }
@@ -812,14 +823,33 @@
     }
 
     function applyBodyClass(config) {
+      const palette = CUSTOM_PALETTES_BY_ID.get(config.colorTheme);
       document.body.className = [
         `theme-${config.colorTheme}`,
+        palette ? "palette-safe" : "",
         `bg-${config.backgroundStyle}`,
         `style-${config.surfaceStyle}`,
         `shape-${config.shapeStyle}`,
         "style-generated",
         "layout-single"
-      ].join(" ");
+      ].filter(Boolean).join(" ");
+
+      if (palette) {
+        const variables = {
+          "--bg": palette.bg,
+          "--fg": palette.text,
+          "--muted": palette.muted,
+          "--line": palette.border,
+          "--card": palette.surface,
+          "--card-strong": palette.surface,
+          "--accent": palette.accent,
+          "--accent-2": palette.accent2,
+          "--accent-soft": `color-mix(in srgb, ${palette.accent}, transparent 89%)`,
+          "--accent-2-soft": `color-mix(in srgb, ${palette.accent2}, transparent 90%)`
+        };
+        Object.entries(variables).forEach(([name, value]) => document.body.style.setProperty(name, value));
+      }
+
       applyStyleGenome(config.styleGenome);
     }
 

@@ -411,41 +411,6 @@ window.PORTFOLIO_LOCALE = {
                   "body": "参考码足够重建这一次页面状态。"
             }
       ],
-      "layouts": [
-            "single"
-      ],
-      "colorThemes": [
-            "archive",
-            "terminal",
-            "paper",
-            "signal",
-            "glitch",
-            "ink",
-            "blueprint",
-            "clay",
-            "noir",
-            "amber",
-            "crimson",
-            "mint",
-            "frost",
-            "plum",
-            "slate",
-            "limewire",
-            "cobalt",
-            "sand",
-            "bone",
-            "coffee",
-            "ocean",
-            "magma",
-            "porcelain",
-            "rosewater",
-            "ultraviolet",
-            "cyberpink",
-            "olive",
-            "newsprint",
-            "petrol",
-            "warning"
-      ],
       "backgroundStyles": [
             "grid",
             "dots",
@@ -526,27 +491,6 @@ window.PORTFOLIO_LOCALE = {
             "underline",
             "offset",
             "badge"
-      ],
-      "motions": [
-            "轻微进入",
-            "卡片错位",
-            "安静切换",
-            "终端节奏",
-            "编辑部漂移"
-      ],
-      "tones": [
-            "直接",
-            "精确",
-            "系统味重",
-            "克制",
-            "有点锋利"
-      ],
-      "biases": [
-            "项目 / 系统 / 反差",
-            "后端 / AI 工作流 / 可审计",
-            "教育 / 项目 / 原则",
-            "基础设施 / 产品范围 / 运行时边界",
-            "个人系统 / 界面实验 / Go"
       ]
 },
   descriptions: {

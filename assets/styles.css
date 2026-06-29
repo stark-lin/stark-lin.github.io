@@ -7,6 +7,8 @@
       --card-strong: rgba(255, 255, 255, 0.86);
       --accent: #111111;
       --accent-soft: rgba(17, 17, 17, 0.08);
+      --accent-2: var(--accent);
+      --accent-2-soft: var(--accent-soft);
       --danger: #111111;
       --shadow: 0 24px 80px rgba(0, 0, 0, 0.08);
       --radius: 24px;
@@ -62,7 +64,7 @@
       color: var(--fg);
       background: var(--page-background,
         radial-gradient(circle at top left, var(--accent-soft), transparent 34rem),
-        linear-gradient(135deg, rgba(255,255,255,0.42), transparent 30rem),
+        radial-gradient(circle at top right, var(--accent-2-soft), transparent 30rem),
         var(--bg)
       );
       line-height: var(--style-line-height);
@@ -908,6 +910,11 @@
       white-space: nowrap;
       font-family: var(--mono);
       background: color-mix(in srgb, var(--card-strong), transparent 20%);
+    }
+
+    body.palette-safe .tag {
+      border-color: color-mix(in srgb, var(--accent-2), var(--line) 68%);
+      background: linear-gradient(var(--accent-2-soft), var(--accent-2-soft)), var(--card-strong);
     }
 
     .stack {
