@@ -1,0 +1,554 @@
+window.PORTFOLIO_LOCALE = {
+  data: {
+      identity: {
+        name: "Lin Stark",
+        stableLine: "Computer Science student at the University of New South Wales, building backend systems, AI-native workflows, and product interfaces.",
+        education: {
+          school: "University of New South Wales",
+          degree: "Bachelor of Computer Science",
+          graduation: "Expected Dec 2026"
+        },
+        contact: {
+          email: "stark.lin@outlook.com",
+          github: "https://github.com/stark-lin"
+        }
+      },
+
+      heroKickers: [
+        "Computer Science · Backend Systems · Product Interfaces",
+        "UNSW CS · Go Backends · Personal Data Infrastructure",
+        "Systems, Interfaces, and Explicit Boundaries",
+        "Backend Engineering with Product Judgment",
+        "Personal Infrastructure · AI Workflows · Product Systems",
+        "Go Backends · Object Identity · Deployable Tools",
+        "Small Systems · Hard Boundaries · Useful Products",
+        "Backend Infrastructure · GenAI Workflows · Product Shape",
+        "Computer Science · Personal Software · Runtime Constraints",
+        "APIs, Databases, and Durable Records",
+        "UNSW Computer Science · Backend-Oriented Builder",
+        "Backend Portfolio · Stable Systems · Product Judgment",
+        "Self-Hosted Systems · Course Tools · Assessment Workflows",
+        "Modular Backends · Structured Records · Reviewable AI",
+        "Software that Prefers Explicit Boundaries"
+      ],
+
+      heroHeadlines: [
+        "I build systems for ideas that need structure.",
+        "Backend systems, personal infrastructure, and product interfaces.",
+        "Turning ambiguous workflows into usable software systems.",
+        "I design the boring parts carefully so the strange parts can work.",
+        "Software systems for people with too many ideas and not enough structure.",
+        "Personal tools, backend architecture, and interfaces that expose system structure.",
+        "I like software that can be inspected after it starts working.",
+        "I turn loose product ideas into constrained backend systems.",
+        "I build small systems with explicit rules and usable product surfaces.",
+        "My work lives between data models, APIs, and product judgment.",
+        "I make personal infrastructure less vague and more accountable.",
+        "I care about the parts of software that survive maintenance.",
+        "Useful systems first. Interface decisions only after the rules are clear.",
+        "I build tools that keep records, boundaries, and context visible.",
+        "Clear product surface. Explicit system structure underneath.",
+        "The interface can evolve. The system should still make sense.",
+        "I build backends for workflows that should not disappear into apps.",
+        "A compact portfolio for a builder of structured systems."
+      ],
+
+      heroSubheads: [
+        "Currently focused on modular personal data systems, AI-assisted development workflows, and small software products that keep complexity visible but controlled.",
+        "I work mostly in Go, databases, APIs, authentication, CI/CD, and backend architecture, with an interest in how software can organize personal knowledge, records, and decisions.",
+        "My work sits between backend engineering and product structure: define the boundaries first, then build the system until it becomes inspectable.",
+        "I care about systems that can be audited, reasoned about, deployed, and extended without turning into vague infrastructure fog.",
+        "I prefer projects where the hard part is not just writing code, but defining what the system is allowed to do.",
+        "The through-line is control: object identity, backend authorization, runtime boundaries, deployment paths, and interfaces that expose rather than hide the system.",
+        "The work below keeps one consistent signal: backend systems, product scoping, data structure, and AI workflows with guardrails.",
+        "I build with Go, SQL, Docker, GitHub Actions, and a bias toward systems that can be tested, shipped, and explained.",
+        "I am interested in software that treats records as first-class objects instead of scattered UI fragments.",
+        "The work below is intentionally compact: fewer claims, more systems, and enough project texture to avoid becoming a résumé clone.",
+        "The important parts are kept readable, linked, and inspectable: what was built, why it exists, and how the system is constrained.",
+        "The goal is not generic polish. The goal is to show a builder who can define scope, ship systems, and keep tradeoffs visible.",
+        "I use AI as an implementation accelerator only after requirements, module boundaries, and review paths are explicit.",
+        "The page is a filter. The projects are the evidence. The useful signal should survive first impressions."
+      ],
+
+      projects: [
+        {
+          id: "saturn",
+          title: "Saturn",
+          subtitle: "Modular personal data backend system",
+          stack: "Go · net/http · PostgreSQL · Redis · Docker",
+          url: "https://github.com/stark-lin/saturn",
+          tags: ["Personal Infrastructure", "Backend Architecture", "AI Authorization"],
+          intros: [
+            "A self-hosted modular backend for personal data: notes, files, accounting records, calendar events, audit logs, object references, search, and backend-controlled LLM requests.",
+            "Saturn is a personal data infrastructure project: a modular backend that treats notes, files, finances, calendar entries, audit trails, and LLM context as connected objects rather than isolated features.",
+            "A backend-first attempt to make personal data addressable, auditable, searchable, and usable by LLM workflows without handing authorization decisions to the client side."
+          ],
+          bullets: [
+            "Built a self-hosted modular personal data backend covering notes, files, ledger records, calendar events, audit logs, object references, search, and LLM requests controlled by backend authorization.",
+            "Designed a specification-driven AI-assisted development workflow: define requirements, module boundaries, interface constraints, and dependency rules before using AI to help implement.",
+            "Added human review, execution-plan inspection, and code review steps so AI-assisted implementation remains verifiable and maintainable.",
+            "Designed a centralized RefCode / Object Registry system so every domain object has a globally unique, human-readable reference code.",
+            "Used the RefCode system to unify cross-module identity, search navigation, audit tracing, permission checks, and LLM context resolution.",
+            "Implemented the modular backend service in Go with PostgreSQL, REST APIs, authentication, Redis sessions, local file storage, and Docker Compose deployment.",
+            "Configured GitHub Actions CI/CD to run Go quality checks, tests, and architecture dependency checks.",
+            "Published multi-architecture linux/amd64 and linux/arm64 container images to GitHub Container Registry on main branch updates."
+          ]
+        },
+        {
+          id: "ojlite",
+          title: "OJLite",
+          subtitle: "Small online judge for teaching and LAN deployment",
+          stack: "Go · Gin · SQLite",
+          url: "https://github.com/stark-lin/oj-lite",
+          tags: ["Teaching Tools", "Single Binary", "Runtime Boundary"],
+          intros: [
+            "A sub-10 MB single-binary online judge system scoped for classroom teaching, local/LAN deployment, teacher-controlled courses, and student practice submissions.",
+            "OJLite narrows the traditional online judge into a classroom-first tool: small deployment surface, teacher-owned courses, constrained submissions, and prebuilt learning paths.",
+            "A deliberately small online judge built to reduce operational complexity while preserving the core loop: students submit, workers evaluate, teachers control the classroom context."
+          ],
+          bullets: [
+            "Designed and built a single-binary online judge under 10 MB by narrowing the scope to classroom teaching, local/LAN deployment, teacher-controlled courses, and student practice submissions.",
+            "Built the backend with Go/Gin, SQLite persistence, role-based APIs, asynchronous Lua judging, transactional submission claiming, and restricted worker concurrency.",
+            "Implemented explicit permission and runtime boundaries including teacher-owned classroom access control and student APIs restricted to the current course scope.",
+            "Created a fresh restricted Lua state for each evaluation with execution timeout and stdout output limits.",
+            "Designed a practice structure containing 12 lessons and 108 problems to reduce teacher initialization cost and give students an immediately usable learning path.",
+            "Configured GitHub Actions CI/CD for formatting checks, architecture dependency validation, go vet, and tests.",
+            "Built Windows, Linux, and macOS single-binary releases, uploaded artifacts automatically, and created GitHub Releases on main branch updates."
+          ]
+        }
+      ],
+
+      experienceProject: {
+        id: "genai-platform",
+        title: "University GenAI Assessment Platform",
+        subtitle: "Course project · Product and backend architecture lead",
+        stack: "Product workflow · Backend architecture · LLM evaluation · Rubrics",
+        tags: ["Course Project", "Assessment Design", "LLM Workflow"],
+        intros: [
+          "A classroom-oriented GenAI assessment platform that reframes AI career coaching into configurable, rubric-based university evaluation workflows.",
+          "A course project focused on turning individual AI coaching patterns into an auditable Student/Admin assessment flow for university-scale classroom use.",
+          "A product and backend architecture exercise around GenAI evaluation: configurable scenarios, structured rubric feedback, backend validation, and administrator review."
+        ],
+        bullets: [
+          "Led backend architecture and product workflow design for a classroom-oriented GenAI assessment platform.",
+          "Reworked a traditional individual AI career coaching concept into configurable, rubric-based university classroom assessment flows.",
+          "Researched existing AI career coaching and online assessment products, identifying gaps in classroom configuration, scoring consistency, rubric constraints, and teacher review.",
+          "Designed Student/Admin dual workflows: students complete specified AI workplace simulation tasks while administrators configure scenarios, rubrics, and assignments.",
+          "Designed an asynchronous LLM evaluation flow with structured rubric feedback, backend-side validation, and administrator review to improve consistency, auditability, and human supervision."
+        ]
+      },
+
+      principles: [
+        "Variation is only useful when the underlying system remains legible.",
+        "A good interface should reduce the cost of judgment, not merely decorate the product.",
+        "If a system cannot be audited, it should not be trusted with important context.",
+        "I prefer small, inspectable software over large systems that hide their failure modes.",
+        "Specifications are not paperwork; they are a way to keep implementation honest.",
+        "AI-assisted development needs boundaries: requirements, module contracts, dependency rules, and human review.",
+        "A portfolio should be a filter, not a brochure.",
+        "The boring parts of backend work are where future maintenance either survives or fails.",
+        "Good product structure turns vague ambition into a navigable path.",
+        "I like ambitious product shapes only when the rules remain legible.",
+        "A system should make its failure modes easier to find, not easier to ignore.",
+        "Small tools are serious tools when the scope is precise.",
+        "A backend is not just storage; it is a policy boundary.",
+        "Interface variation is acceptable only when the underlying content remains reachable.",
+        "If the data model is vague, the product will eventually become vague too.",
+        "The best abstraction is the one that survives the next feature request.",
+        "Deployment is part of the product, not an afterthought.",
+        "LLM features should inherit permissions from the system, not invent their own trust model.",
+        "A readable constraint is better than a clever workaround.",
+        "I would rather ship a narrow system than explain a broad one that almost works.",
+        "Interfaces should expose structure without forcing users to inspect implementation details.",
+        "The work should still make sense after the novelty wears off.",
+        "Good software leaves enough evidence for future debugging.",
+        "Variation should create texture, not ambiguity."
+      ],
+
+      currentStates: [
+        {
+          title: "Current focus",
+          body: "Building personal data infrastructure, portfolio-grade product interactions, and AI-native workflows that remain inspectable instead of becoming a black box."
+        },
+        {
+          title: "Current question",
+          body: "How can a portfolio feel alive without becoming confusing, gimmicky, or hostile to people who just need the facts?"
+        },
+        {
+          title: "Current bias",
+          body: "More backend clarity, fewer decorative abstractions. More explicit constraints, fewer vague promises."
+        },
+        {
+          title: "Current build mode",
+          body: "Go services, structured product flows, deployable single-file interfaces, and personal software that treats records as objects with identity."
+        },
+        {
+          title: "Current constraint",
+          body: "Keep the portfolio deployable as a single file while making the interaction memorable and low-friction."
+        },
+        {
+          title: "Current engineering taste",
+          body: "Explicit modules, predictable deployment, simple APIs, and enough testing to make later edits less dangerous."
+        },
+        {
+          title: "Current product instinct",
+          body: "Start with the workflow, then decide the data model, then make interface choices that support the system."
+        },
+        {
+          title: "Current refusal",
+          body: "No layout choice should break reading order. Visual variation must stay inside safe CSS boundaries."
+        },
+        {
+          title: "Current signal",
+          body: "A backend-oriented computer science student with a bias toward personal infrastructure and AI systems that stay reviewable."
+        },
+        {
+          title: "Current note",
+          body: "This portfolio is deliberately not a résumé clone. It is a second layer for judgment, curiosity, and project texture."
+        }
+      ],
+
+      sectionLeads: {
+        work: [
+          "Selected projects, framed around the systems behind them rather than only the visible output.",
+          "A few builds that show backend architecture, product scoping, runtime boundaries, and specification-driven implementation.",
+          "Work samples from personal infrastructure, teaching tools, and GenAI assessment workflows.",
+          "Two compact systems: one for personal data infrastructure, one for classroom judging with strict runtime boundaries.",
+          "Projects chosen for architecture signal: data identity, deployment, permissions, and scope control.",
+          "Small systems with concrete constraints: self-hosted data, single-binary deployment, and reviewable workflows.",
+          "Backend-oriented work where the interesting decisions are in boundaries, object models, and operational simplicity.",
+          "The project list is short on purpose. Each one is meant to expose a different engineering judgment."
+        ],
+        experience: [
+          "Product and architecture work where the main problem was not just implementation, but shaping the workflow itself.",
+          "A course project that became a design problem about rubrics, classroom configuration, and auditable AI feedback.",
+          "Experience centered on transforming a broad GenAI idea into a structured assessment system.",
+          "A university GenAI assessment workflow, treated less like a chatbot feature and more like a controlled evaluation system.",
+          "The relevant part here is product structure: roles, rubrics, scenarios, validation, and administrator review.",
+          "This experience sits at the boundary between product scoping and backend workflow design.",
+          "A structured assessment project where AI output had to fit inside a human-reviewable classroom process.",
+          "A reminder that GenAI work is often a governance problem before it is an interface problem."
+        ],
+        skills: [
+          "The working set: languages, backend systems, databases, deployment tools, and architecture habits.",
+          "Tools and technical areas I use to build small, inspectable backend systems.",
+          "A compact view of the stack behind the projects above.",
+          "The stack is intentionally practical: Go services, SQL databases, Redis, Docker, GitHub Actions, and API design.",
+          "Mostly backend fundamentals: request boundaries, persistence, authentication, concurrency, CI, and deployment.",
+          "Tools I use when the goal is to ship something explainable rather than merely impressive.",
+          "The technical base behind the page: service design, database work, runtime constraints, and delivery paths.",
+          "A working stack for narrow products, self-hosted systems, and classroom-scale tools."
+        ],
+        education: [
+          "Formal background, kept short because the project evidence should do most of the work.",
+          "The academic base under the systems work.",
+          "Computer science training, with the more interesting evidence shown in the projects.",
+          "UNSW computer science, paired with backend-heavy project work and product interface experiments.",
+          "The degree gives the base; the projects show the current direction.",
+          "Academic context for a portfolio that is more interested in systems than slogans.",
+          "A short credential block, because this page is designed to avoid repeating the résumé too much.",
+          "Computer science background, currently expressed through Go backends, data systems, and product workflows."
+        ],
+        principles: [
+          "A few operating principles behind the project work.",
+          "The parts of the page that are closer to judgment than résumé content.",
+          "Short fragments of how I think about systems, product surfaces, AI-assisted work, and personal infrastructure.",
+          "Small statements about what I tend to value when building software.",
+          "Not philosophy for its own sake; mostly constraints I would want the implementation to respect.",
+          "Selected beliefs about systems work, product shape, constraints, and AI-assisted development.",
+          "A compact read on taste: inspectability, boundaries, deployment, and maintainable product shape.",
+          "The principles vary by emphasis, but the engineering bias is stable: explicit boundaries and inspectable systems."
+        ],
+        now: [
+          "A current-state snapshot rather than a full biography.",
+          "A present-tense view of the current build mode.",
+          "A short status readout from the present tense.",
+          "A small live-state panel: not a timeline, just the current angle.",
+          "A present-tense note from the same builder behind the projects.",
+          "Current direction, sampled into one card.",
+          "Less biography, more immediate signal.",
+          "A compact status line for what I am thinking about and building around now."
+        ],
+        contact: [
+          "Reach out for backend systems, personal software, AI-native workflows, or strange but serious interface ideas.",
+          "Useful reasons to contact me: ambiguous software projects, backend architecture, product interfaces, and personal infrastructure.",
+          "Best fit: projects where structure matters and the problem is not fully shaped yet.",
+          "Contact works best when the conversation is about systems, data, workflows, or software that needs clearer boundaries.",
+          "Good reasons to start a conversation: backend design, personal tools, AI workflow control, or product scoping.",
+          "If the problem involves unclear requirements and a need for structure, the fit is probably reasonable.",
+          "The shortest path: email for direct contact, GitHub for project evidence.",
+          "Use this page as context; use the links below for the actual next step."
+        ]
+      },
+
+      educationBodies: [
+        "Academic foundation in computer science, paired with project work in backend systems, databases, distributed service boundaries, AI-assisted implementation workflows, and product interface design.",
+        "Computer science training at UNSW, with the practical direction currently expressed through Go services, data modeling, CI/CD, and inspectable backend systems.",
+        "Formal CS background, used here as the base layer for projects in personal data infrastructure, classroom tooling, and AI-assisted workflow design.",
+        "The credential is intentionally brief: the more useful evidence is in the systems, deployment choices, and project constraints above or below it.",
+        "UNSW provides the academic frame; the project work shows the current bias toward backend architecture and controlled software interfaces.",
+        "A computer science degree path, combined with a practical focus on APIs, persistence, runtime boundaries, and product-shaped engineering."
+      ],
+
+      contactCopies: [
+        {
+          headline: "Useful reasons to reach out: backend systems, AI-native workflows, personal infrastructure, or product interfaces.",
+          body: "Best fit: ambiguous software projects where product structure and backend architecture both matter."
+        },
+        {
+          headline: "Contact me if the problem needs clearer boundaries before it needs more features.",
+          body: "I am most interested in backend-heavy tools, personal software, AI workflow control, and small systems with real constraints."
+        },
+        {
+          headline: "Good conversations usually start with a messy workflow and end with a sharper system model.",
+          body: "Email is direct. GitHub has the project evidence."
+        },
+        {
+          headline: "Reach out for systems that need structure, not just interface decoration.",
+          body: "Backend architecture, product scoping, data records, and product interfaces are the strongest fit."
+        },
+        {
+          headline: "If the work involves APIs, data, permissions, deployment, or AI guardrails, it is probably relevant.",
+          body: "I prefer projects where the constraints are visible and the implementation can be inspected."
+        },
+        {
+          headline: "Use email if you want to discuss the systems behind the page.",
+          body: "Use GitHub for project evidence and email for direct context."
+        }
+      ],
+
+      revealCopies: [
+        {
+          kicker: "Portfolio checkpoint reached",
+          headline: "You reached the end of the compact view.",
+          body: "The short view is intentionally selective; the full version exposes the supporting material."
+        },
+        {
+          kicker: "Compact profile complete",
+          headline: "This was a compact path through the same project material.",
+          body: "The presentation can change; the projects, links, and underlying signal stay stable."
+        },
+        {
+          kicker: "Profile view complete",
+          headline: "Same builder, fuller record available below.",
+          body: "You can refresh the presentation or open the full project record."
+        },
+        {
+          kicker: "Compact surface, stable content",
+          headline: "The presentation changed shape; the evidence did not.",
+          body: "The reference code is available here for sharing or returning to this exact view."
+        },
+        {
+          kicker: "Portfolio view state",
+          headline: "This view can be revisited.",
+          body: "Copy the reference code or full URL if this is the view you want to keep."
+        },
+        {
+          kicker: "Instance locked",
+          headline: "A portfolio should be a filter, not a brochure.",
+          body: "This page is a compact filter over the same project evidence."
+        },
+        {
+          kicker: "One pass later",
+          headline: "The presentation did its job. Now the projects have to do theirs.",
+          body: "Refresh for another presentation, or open the full project record with supporting notes."
+        },
+        {
+          kicker: "Portfolio record checkpoint",
+          headline: "The presentation can move; the content should still hold.",
+          body: "The reference code is enough to return to this page state."
+        }
+      ],
+
+      layouts: ["single"],
+      colorThemes: ["archive", "terminal", "paper", "signal", "glitch", "ink", "blueprint", "clay", "noir", "amber", "crimson", "mint", "frost", "plum", "slate", "limewire", "cobalt", "sand"],
+      backgroundStyles: ["grid", "dots", "scanlines", "diagonal", "crosshatch", "clean", "halo", "corner-cut", "rings", "columns", "checker", "dashed", "pixels", "orbit", "fold", "split", "horizon", "circuit", "letterpress", "spotlight"],
+      surfaceStyles: ["soft", "sharp", "editorial", "terminalish", "filecard", "plain", "brutal", "ledger", "poster", "codeblock", "manifesto", "receipt", "glass", "indexed"],
+      shapeStyles: ["rounded", "soft-rounded", "right-angle", "small-radius", "pill-boxes", "no-boxes", "line-only", "ticket"],
+      motions: ["soft reveal", "staggered cards", "quiet snap", "terminal pacing", "editorial drift"],
+      tones: ["Direct", "Precise", "Systems-heavy", "Understated", "Sharper than necessary"],
+      biases: ["Work / Systems / Contradiction", "Backend / AI Workflow / Auditability", "Education / Projects / Principles", "Infrastructure / Product Scope / Runtime Boundaries", "Personal Systems / Product Interfaces / Go"]
+    },
+  descriptions: {
+      saturn: [
+        "Saturn is not just a notes/files/accounts backend. It reads as an argument that personal data should be addressable, permissioned, searchable, and usable by LLM workflows without losing backend authority.",
+        "The sharpest part of Saturn is the RefCode / Object Registry layer: every domain object gets a human-readable global reference, so notes, files, ledger entries, calendar events, audit logs, permissions, search, and LLM context can point at the same reality.",
+        "This project treats AI-assisted development as something that needs rules before speed: module boundaries, interface constraints, dependency checks, execution-plan review, and human code review come before implementation convenience.",
+        "Saturn is backend infrastructure for a personal operating system: PostgreSQL for durable state, Redis for sessions, local storage for files, Docker for deployment, REST APIs for access, and backend-gated LLM requests for controlled intelligence.",
+        "The interesting decision in Saturn is refusing to let LLM access become a loose client-side feature. Requests are authorized and contextualized through the backend, so the model receives what the system permits, not whatever the interface feels like sending.",
+        "Saturn is built like a system that expects future modules. The point is not one feature; it is a modular object graph where new domains can be added without destroying identity, search, permissions, or auditability.",
+        "The CI/CD setup matters because the project is architecture-sensitive: Go checks, tests, dependency validation, and multi-arch container publishing make the system harder to accidentally rot.",
+        "This framing treats Saturn as a response to personal-data sprawl: instead of scattering records across disconnected apps, it builds a backend substrate where objects can be referenced, audited, searched, and composed.",
+        "Saturn is strongest when viewed as a permissions problem: personal data becomes useful to software only when access, context, object identity, and auditability are handled by the backend.",
+        "The system is intentionally modular because personal records rarely stay inside one domain. Notes, files, finances, calendar events, and LLM context need shared references instead of separate silos.",
+        "Saturn treats search as a navigation layer over object identity, not just a text box over isolated tables.",
+        "A useful Saturn instance should answer a simple question: what object is this, who can access it, where did it come from, and how can another module refer to it?",
+        "The project is a practical argument for backend-owned context: LLM requests should be assembled through system rules rather than loose UI prompts.",
+        "The architecture is designed to make later modules boring to add: identity, permissions, audit, search, and deployment already have a place to live."
+      ],
+      ojlite: [
+        "OJLite is a deliberately narrowed online judge. It cuts away contest-platform ambition and optimizes for one environment: classroom teaching, local or LAN deployment, teacher-owned courses, and student practice submissions.",
+        "The project is small by design: under 10 MB, single binary, SQLite persistence, Go/Gin APIs, async Lua judging, transactional submission claiming, and worker concurrency limits. Less infrastructure, fewer excuses.",
+        "The strongest product decision in OJLite is scope control. Instead of pretending to be a full competitive programming platform, it chooses the classroom loop and makes that loop cheap to run.",
+        "OJLite treats runtime boundaries as part of the product: fresh restricted Lua state, execution timeout, stdout limits, teacher-owned classroom access, and student APIs constrained to the current course context.",
+        "The 12-lesson, 108-problem structure is not filler content. It reduces teacher setup cost and gives students a ready path, which is usually the difference between a tool being installable and a tool being usable.",
+        "The release pipeline turns the project into a deployable artifact rather than a repository demo: format checks, architecture validation, go vet, tests, cross-platform binaries, uploaded artifacts, and GitHub Releases.",
+        "This framing treats OJLite as anti-bloat software: one constrained problem, one deployable binary, one classroom workflow, and enough guardrails to avoid turning teaching infrastructure into ops work.",
+        "OJLite is a small system with hard boundaries. That is the point: classroom tools should be easy to reason about before they are feature-rich.",
+        "OJLite is built around the idea that teaching infrastructure should not require a platform team before it becomes useful.",
+        "The single-binary shape matters: teachers should be able to run the system locally or on a LAN without inheriting unnecessary operations work.",
+        "The Lua execution boundary is a product decision as much as an engineering decision: student code needs to run, but not escape the classroom context.",
+        "The system narrows the judge problem until the operational surface is small enough for actual teaching use.",
+        "OJLite shows the same bias as the larger backend projects: simple deployment, constrained runtime behavior, and workflows that can be explained without magic.",
+        "The project avoids feature sprawl by treating classroom practice, not public competition, as the core unit of design."
+      ],
+      "genai-platform": [
+        "The GenAI assessment platform reframes AI career coaching from a personal advice product into a classroom assessment system with admin-configured scenarios, rubrics, student tasks, and reviewable outputs.",
+        "The key product move was identifying that existing AI coaching and online assessment tools were weak on classroom configuration, scoring consistency, rubric enforcement, teacher review, and auditability.",
+        "This project is less about adding AI to education and more about controlling the shape of AI use: students complete specified simulations, admins configure tasks and rubrics, and the backend validates the assessment flow.",
+        "The Student/Admin split matters because classroom GenAI evaluation is not just an interface problem. It needs assignment setup, structured scoring, repeatable workflows, and a place for human review to override or confirm AI output.",
+        "The asynchronous LLM evaluation flow was designed around consistency and supervision: structured rubric feedback, backend-side validation, administrator review, and an audit trail instead of one-shot model judgment.",
+        "This framing treats the platform as a governance problem disguised as a product problem. The goal is not to make AI answer faster; it is to make AI-assisted assessment configurable, inspectable, and reviewable.",
+        "The useful constraint was the university classroom. That constraint forced the product away from generic coaching and toward rubric-bound evaluation, role-specific workflows, and teacher-controlled assessment design.",
+        "The architecture work focused on keeping GenAI inside a workflow that humans can configure and inspect, rather than letting the model become an unstructured black box at the center of assessment.",
+        "The platform idea becomes more interesting when the AI is not the product, but one controlled step inside a larger assessment pipeline.",
+        "The assessment flow needs deterministic structure around probabilistic output: configured tasks, bounded rubrics, validation, review, and records.",
+        "The design shifts responsibility back to the institution: administrators configure the assessment surface, students perform the task, and AI feedback remains reviewable.",
+        "The project treats consistency as a first-class requirement, because assessment tools cannot rely on one-off model judgment without oversight.",
+        "The useful part of the architecture is the separation between simulation, evaluation, validation, and human review.",
+        "GenAI is kept inside a workflow with gates, not left as an open-ended conversation pretending to be an assessment system."
+      ]
+    },
+  ui: {
+    "shell": {
+      "regenerating": [
+        "Preparing a fresh profile view...",
+        "Reordering project evidence...",
+        "Refreshing visual treatment...",
+        "Loading the next view..."
+      ],
+      "brandAria": "Lin Stark home",
+      "navAria": "Primary navigation",
+      "footer": "Backend systems · Product workflows · Personal infrastructure.",
+      "sourceLabel": "Source",
+      "copied": "Copied."
+    },
+    "nav": {
+      "work": "Work",
+      "experience": "Experience",
+      "education": "Education",
+      "principles": "Principles",
+      "skills": "Skills",
+      "now": "Now",
+      "contact": "Contact"
+    },
+    "profileSummary": {
+      "ariaLabel": "Profile summary",
+      "items": [
+        [
+          "Education",
+          "UNSW · Computer Science"
+        ],
+        [
+          "Graduation",
+          "Expected Dec 2026"
+        ],
+        [
+          "Working stack",
+          "Go · SQL · Docker · CI/CD"
+        ],
+        [
+          "Current angle",
+          "Backend systems + product interfaces"
+        ]
+      ]
+    },
+    "heroActions": {
+      "work": "View work",
+      "contact": "Contact"
+    },
+    "sectionTitles": {
+      "work": "Selected Work",
+      "experience": "Project Experience",
+      "education": "Education",
+      "principles": "Operating Principles",
+      "skills": "Technical Skills",
+      "now": "Current State",
+      "contact": "Contact"
+    },
+    "skills": [
+      [
+        "Languages",
+        [
+          "Go",
+          "Java",
+          "Python",
+          "SQL"
+        ]
+      ],
+      [
+        "Backend",
+        [
+          "REST API",
+          "Authentication",
+          "Concurrency",
+          "Gin",
+          "net/http"
+        ]
+      ],
+      [
+        "Databases",
+        [
+          "PostgreSQL",
+          "SQLite",
+          "Redis"
+        ]
+      ],
+      [
+        "Tools",
+        [
+          "Git",
+          "Docker",
+          "Linux",
+          "CI/CD",
+          "GitHub Actions"
+        ]
+      ]
+    ],
+    "descriptionModes": [
+      "architecture slice",
+      "constraint slice",
+      "product slice",
+      "systems slice",
+      "execution slice",
+      "edge slice",
+      "deployment slice",
+      "permission slice",
+      "runtime slice",
+      "workflow slice",
+      "maintenance slice",
+      "object-model slice"
+    ],
+    "labels": {
+      "projectNote": "Project note",
+      "openRepository": "Open repository →",
+      "courseProject": "Course project",
+      "defaultProjectSlice": "project slice",
+      "now": "Now",
+      "email": "Email",
+      "fullRecord": "Full record",
+      "projectSummaries": "Project summaries",
+      "implementationNotes": "Implementation notes",
+      "completeIndex": "Full / records",
+      "completeTitle": "Full project record",
+      "completeLead": "This opens the full supporting material behind the compact portfolio view.",
+      "referenceCode": "Reference code",
+      "refreshView": "Refresh view",
+      "copyView": "Copy this view",
+      "copySeed": "Copy reference code",
+      "showComplete": "Show the full project record",
+      "viewCopied": "View link copied.",
+      "seedCopied": "Reference code copied."
+    }
+  }
+};
