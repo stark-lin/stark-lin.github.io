@@ -1,7 +1,7 @@
 window.PORTFOLIO_LOCALE = {
   data: {
       "identity": {
-            "name": "Lin Stark",
+            "name": "Stark Lin",
             "stableLine": "UNSW 计算机科学学生。主要写后端、个人数据系统和一点不太安分的界面。",
             "education": {
                   "school": "新南威尔士大学",
@@ -607,7 +607,7 @@ window.PORTFOLIO_LOCALE = {
         "正在换一层皮...",
         "正在把下一版推上来..."
       ],
-      "brandAria": "Lin Stark 主页",
+      "brandAria": "Stark Lin 主页",
       "navAria": "主导航",
       "footer": "不是简历副本。简历负责稳，这里负责露出脾气。",
       "sourceLabel": "源代码",

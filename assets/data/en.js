@@ -1,7 +1,7 @@
 window.PORTFOLIO_LOCALE = {
   data: {
       identity: {
-        name: "Lin Stark",
+        name: "Stark Lin",
         stableLine: "Computer Science student at the University of New South Wales, building backend systems, AI-native workflows, and product interfaces.",
         education: {
           school: "University of New South Wales",
@@ -478,7 +478,7 @@ window.PORTFOLIO_LOCALE = {
         "Refreshing visual treatment...",
         "Loading the next view..."
       ],
-      "brandAria": "Lin Stark home",
+      "brandAria": "Stark Lin home",
       "navAria": "Primary navigation",
       "footer": "Backend systems · Product workflows · Personal infrastructure.",
       "sourceLabel": "Source",

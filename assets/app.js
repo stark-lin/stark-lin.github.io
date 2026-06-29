@@ -423,7 +423,7 @@
           <div class="topbar-inner">
             <a class="brand" href="#top" aria-label="${escapeHtml(shell.brandAria)}">
               <span class="brand-mark">LS</span>
-              <span>Lin Stark</span>
+              <span>Stark Lin</span>
             </a>
             <nav id="nav" aria-label="${escapeHtml(shell.navAria)}"></nav>
           </div>
@@ -434,7 +434,7 @@
           <section class="reveal" id="reveal"></section>
           <section class="complete-version" id="completeVersion" hidden></section>
       <footer class="tiny-footer">
-        <span>© 2026 Lin Stark</span>
+        <span>© 2026 Stark Lin</span>
         <span>${escapeHtml(footerQuip)}</span>
         <span>
           <a href="https://github.com/stark-lin/stark-lin.github.io" target="_blank" rel="noreferrer">${escapeHtml(shell.sourceLabel)}</a>
