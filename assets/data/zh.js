@@ -381,7 +381,19 @@ window.PORTFOLIO_LOCALE = {
             "slate",
             "limewire",
             "cobalt",
-            "sand"
+            "sand",
+            "bone",
+            "coffee",
+            "ocean",
+            "magma",
+            "porcelain",
+            "rosewater",
+            "ultraviolet",
+            "cyberpink",
+            "olive",
+            "newsprint",
+            "petrol",
+            "warning"
       ],
       "backgroundStyles": [
             "grid",
@@ -403,7 +415,19 @@ window.PORTFOLIO_LOCALE = {
             "horizon",
             "circuit",
             "letterpress",
-            "spotlight"
+            "spotlight",
+            "topography",
+            "matrix",
+            "radar",
+            "vignette",
+            "zebra",
+            "notebook",
+            "window",
+            "stage",
+            "mesh",
+            "blue-noise",
+            "terminal-bars",
+            "sunrise"
       ],
       "surfaceStyles": [
             "soft",
@@ -419,7 +443,20 @@ window.PORTFOLIO_LOCALE = {
             "manifesto",
             "receipt",
             "glass",
-            "indexed"
+            "indexed",
+            "dossier",
+            "lab",
+            "zine",
+            "spec",
+            "luxury",
+            "micro",
+            "mega",
+            "overprint",
+            "labelmaker",
+            "index-card",
+            "thin",
+            "heavy",
+            "captioned"
       ],
       "shapeStyles": [
             "rounded",
@@ -429,7 +466,15 @@ window.PORTFOLIO_LOCALE = {
             "pill-boxes",
             "no-boxes",
             "line-only",
-            "ticket"
+            "ticket",
+            "slab",
+            "cut",
+            "stamp",
+            "folder",
+            "postcard",
+            "underline",
+            "offset",
+            "badge"
       ],
       "motions": [
             "轻微进入",
