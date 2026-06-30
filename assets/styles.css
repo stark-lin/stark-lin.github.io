@@ -37,6 +37,20 @@
       --style-button-y: 8px;
       --style-button-x: 16px;
       --style-button-size: 14px;
+      --style-button-radius: 999px;
+      --style-button-border-width: 1px;
+      --style-button-bg: var(--fg);
+      --style-button-color: var(--bg);
+      --style-button-border-color: var(--fg);
+      --style-button-secondary-bg: transparent;
+      --style-button-secondary-color: var(--fg);
+      --style-button-secondary-border-color: var(--fg);
+      --style-button-shadow: none;
+      --style-button-font: inherit;
+      --style-button-weight: inherit;
+      --style-button-tracking: normal;
+      --style-button-text-transform: none;
+      --style-button-backdrop: none;
       --style-meta-transform: uppercase;
       --style-meta-spacing: 0.08em;
       --style-title-rule-width: 0px;
@@ -490,7 +504,8 @@
     }
     body.style-editorial .card,
     body.style-editorial .principle,
-    body.style-editorial .timeline-item {
+    body.style-editorial .timeline-item,
+    body.style-editorial .reveal {
       background: color-mix(in srgb, var(--card-strong), transparent 18%);
     }
 
@@ -506,7 +521,8 @@
     body.style-filecard .card,
     body.style-filecard .hero-card,
     body.style-filecard .principle,
-    body.style-filecard .timeline-item {
+    body.style-filecard .timeline-item,
+    body.style-filecard .reveal {
       box-shadow: inset 0 1px 0 color-mix(in srgb, var(--fg), transparent 86%);
     }
     body.style-filecard .card::before,
@@ -536,7 +552,8 @@
     body.style-plain .hero-card,
     body.style-plain .principle,
     body.style-plain .timeline-item,
-    body.style-plain .contact-panel {
+    body.style-plain .contact-panel,
+    body.style-plain .reveal {
       background: transparent;
       backdrop-filter: none;
     }
@@ -562,7 +579,8 @@
     }
     body.style-ledger .card,
     body.style-ledger .timeline-item,
-    body.style-ledger .principle {
+    body.style-ledger .principle,
+    body.style-ledger .reveal {
       background-image: linear-gradient(to bottom, transparent calc(100% - 1px), color-mix(in srgb, var(--line), transparent 20%) calc(100% - 1px));
       background-size: 100% 34px;
     }
@@ -593,7 +611,8 @@
     body.style-codeblock .card,
     body.style-codeblock .hero-card,
     body.style-codeblock .timeline-item,
-    body.style-codeblock .principle {
+    body.style-codeblock .principle,
+    body.style-codeblock .reveal {
       border-color: color-mix(in srgb, var(--accent), var(--line) 72%);
     }
     body.style-codeblock .generated-description::before { content: "// "; color: var(--accent); }
@@ -601,7 +620,8 @@
     body.style-manifesto .card,
     body.style-manifesto .hero-card,
     body.style-manifesto .principle,
-    body.style-manifesto .timeline-item {
+    body.style-manifesto .timeline-item,
+    body.style-manifesto .reveal {
       border-color: color-mix(in srgb, var(--accent), var(--line) 64%);
     }
     body.style-manifesto .section-lead,
@@ -623,7 +643,8 @@
     body.style-receipt .hero-card,
     body.style-receipt .timeline-item,
     body.style-receipt .principle,
-    body.style-receipt .contact-panel {
+    body.style-receipt .contact-panel,
+    body.style-receipt .reveal {
       box-shadow: none;
       border-left: 0;
       border-right: 0;
@@ -633,7 +654,8 @@
     body.style-glass .hero-card,
     body.style-glass .principle,
     body.style-glass .timeline-item,
-    body.style-glass .contact-panel {
+    body.style-glass .contact-panel,
+    body.style-glass .reveal {
       background: color-mix(in srgb, var(--card), transparent 18%);
       backdrop-filter: blur(28px) saturate(1.25);
       box-shadow: inset 0 1px 0 color-mix(in srgb, var(--fg), transparent 88%), var(--shadow);
@@ -667,6 +689,11 @@
       outline-offset: 0;
     }
 
+    body.style-generated {
+      --readable-muted: color-mix(in srgb, var(--fg) 76%, var(--bg));
+      --readable-accent: color-mix(in srgb, var(--accent) 35%, var(--fg));
+    }
+
     body.style-generated .section-index {
       opacity: var(--style-micro-opacity);
       border: var(--style-index-box-border-width) solid var(--line);
@@ -683,6 +710,14 @@
     body.style-generated .hero-sub,
     body.style-generated .section-lead {
       max-width: var(--style-text-width, 760px);
+    }
+
+    body.style-generated :is(.hero-sub, .section-lead, ul, .tag, .stat-label, .rarity-comment, .rarity-odds, .reveal p, .reveal-stat-label) {
+      color: var(--readable-muted);
+    }
+
+    body.style-generated :is(.kicker, .section-index, .stack, .generated-desc-meta, .time-label) {
+      color: var(--readable-accent);
     }
 
     a { color: inherit; text-decoration: none; }
@@ -804,23 +839,30 @@
 
     .button {
       appearance: none;
-      border: 1px solid var(--fg);
-      background: var(--fg);
-      color: var(--bg);
+      border: var(--style-button-border-width) solid var(--style-button-border-color);
+      background: var(--style-button-bg);
+      color: var(--style-button-color);
       padding: var(--style-button-y) var(--style-button-x);
-      border-radius: 999px;
-      font: inherit;
+      border-radius: var(--style-button-radius);
+      font-family: var(--style-button-font);
+      font-weight: var(--style-button-weight);
       font-size: var(--style-button-size);
+      line-height: 1.2;
+      letter-spacing: var(--style-button-tracking);
+      text-transform: var(--style-button-text-transform);
+      box-shadow: var(--style-button-shadow);
+      backdrop-filter: var(--style-button-backdrop);
       cursor: pointer;
-      transition: transform .16s ease, opacity .16s ease, background .16s ease, color .16s ease;
+      transition: transform .16s ease, opacity .16s ease, background .16s ease, color .16s ease, box-shadow .16s ease;
       display: inline-flex;
       align-items: center;
       gap: 8px;
     }
 
     .button.secondary {
-      background: transparent;
-      color: var(--fg);
+      background: var(--style-button-secondary-bg);
+      color: var(--style-button-secondary-color);
+      border-color: var(--style-button-secondary-border-color);
     }
 
     .button:hover { transform: translateY(-1px); text-decoration: none; }
@@ -1073,31 +1115,26 @@
     .reveal {
       margin: 80px 0 56px;
       border: var(--style-border-width) var(--style-border-style) var(--line);
-      background: var(--fg);
-      color: var(--bg);
-      border-radius: calc(var(--radius) + 16px);
-      padding: calc(var(--style-card-padding) + 16px);
+      background: var(--card-strong);
+      color: var(--fg);
+      border-radius: calc(var(--radius) + 8px);
+      padding: calc(var(--style-card-padding) + 8px);
       position: relative;
       overflow: hidden;
-      box-shadow: var(--shadow);
+      box-shadow: var(--style-panel-shadow);
+      backdrop-filter: blur(var(--style-blur));
     }
 
     .reveal::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      opacity: .14;
-      background-image: linear-gradient(rgba(255,255,255,.22) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.22) 1px, transparent 1px);
-      background-size: 42px 42px;
+      content: none;
     }
 
     .reveal > * { position: relative; }
-    .reveal .kicker { color: var(--bg); opacity: .78; }
     .reveal h2 {
-      font-size: clamp(38px, 6vw, 76px);
+      font-size: clamp(32px, 5vw, 58px);
       max-width: 952px;
     }
-    .reveal p { color: color-mix(in srgb, var(--bg), transparent 24%); max-width: 720px; font-size: 18px; }
+    .reveal p { max-width: 720px; font-size: 18px; }
     .reveal-grid {
       margin-top: 32px;
       display: grid;
@@ -1106,10 +1143,11 @@
       max-width: 416px;
     }
     .reveal-stat {
-      border: 1px solid color-mix(in srgb, var(--bg), transparent 76%);
+      border: 1px solid var(--line);
       border-radius: 16px;
       padding: 16px;
-      background: rgba(255,255,255,.05);
+      background: var(--card);
+      color: var(--fg);
       min-height: auto;
       overflow-wrap: anywhere;
     }
@@ -1125,7 +1163,7 @@
     .reveal-stat-section + .reveal-stat-section {
       margin-top: 16px;
       padding-top: 16px;
-      border-top: 1px solid color-mix(in srgb, var(--bg), transparent 82%);
+      border-top: 1px solid var(--line);
     }
     .rarity-heading {
       display: flex;
@@ -1142,26 +1180,14 @@
     }
     .rarity-comment {
       margin-top: 8px;
-      color: color-mix(in srgb, var(--bg), transparent 32%);
       font-size: 13px;
       line-height: 1.45;
     }
     .reveal-actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; }
-    .reveal .button {
-      background: var(--bg);
-      color: var(--fg);
-      border-color: var(--bg);
-    }
-    .reveal .button.secondary {
-      background: transparent;
-      color: var(--bg);
-      border-color: color-mix(in srgb, var(--bg), transparent 62%);
-    }
     .reveal .button.surrender {
       width: 100%;
       justify-content: center;
       margin-top: 8px;
-      border-style: dashed;
     }
 
     .complete-version[hidden] { display: none; }
@@ -1312,6 +1338,7 @@
     body.shape-no-boxes .principle,
     body.shape-no-boxes .timeline-item,
     body.shape-no-boxes .contact-panel,
+    body.shape-no-boxes .reveal,
     body.shape-no-boxes .reveal-stat,
     body.shape-no-boxes .complete-project .intro-list p {
       border-left: 0;
@@ -1320,10 +1347,6 @@
       background: transparent;
       box-shadow: none;
       backdrop-filter: none;
-    }
-    body.shape-no-boxes .reveal {
-      border-radius: 0 !important;
-      box-shadow: none;
     }
     body.shape-no-boxes .button,
     body.shape-no-boxes .tag,
@@ -1343,7 +1366,8 @@
     body.shape-line-only .hero-card,
     body.shape-line-only .principle,
     body.shape-line-only .timeline-item,
-    body.shape-line-only .contact-panel {
+    body.shape-line-only .contact-panel,
+    body.shape-line-only .reveal {
       border-left: 0;
       border-right: 0;
       border-radius: 0 !important;
@@ -1880,7 +1904,8 @@
     body.style-dossier .hero-card,
     body.style-dossier .principle,
     body.style-dossier .timeline-item,
-    body.style-dossier .contact-panel { border-top-width: 8px; border-top-color: var(--accent); }
+    body.style-dossier .contact-panel,
+    body.style-dossier .reveal { border-top-width: 8px; border-top-color: var(--accent); }
     body.style-dossier .card-title-row h3::before { content: "CASE "; color: var(--accent); font-family: var(--mono); font-size: 12px; letter-spacing: .12em; }
     body.style-lab h1,
     body.style-lab h2,
@@ -1890,7 +1915,8 @@
     body.style-lab .card,
     body.style-lab .hero-card,
     body.style-lab .principle,
-    body.style-lab .timeline-item {
+    body.style-lab .timeline-item,
+    body.style-lab .reveal {
       background-image: linear-gradient(to right, color-mix(in srgb, var(--line), transparent 30%) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--line), transparent 30%) 1px, transparent 1px);
       background-size: 16px 16px;
     }
@@ -1899,7 +1925,8 @@
     body.style-zine .hero-card,
     body.style-zine .principle,
     body.style-zine .timeline-item,
-    body.style-zine .contact-panel { transform: rotate(-0.35deg); border-width: 2px; box-shadow: 6px 6px 0 color-mix(in srgb, var(--fg), transparent 82%); }
+    body.style-zine .contact-panel,
+    body.style-zine .reveal { transform: rotate(-0.35deg); border-width: 2px; box-shadow: 6px 6px 0 color-mix(in srgb, var(--fg), transparent 82%); }
     body.style-zine .card:nth-child(even),
     body.style-zine .principle:nth-child(even),
     body.style-zine .timeline-item:nth-child(even) { transform: rotate(0.35deg); }
@@ -1914,14 +1941,16 @@
     body.style-luxury .card,
     body.style-luxury .hero-card,
     body.style-luxury .principle,
-    body.style-luxury .timeline-item { border-color: color-mix(in srgb, var(--accent), transparent 54%); background: color-mix(in srgb, var(--card-strong), transparent 24%); }
+    body.style-luxury .timeline-item,
+    body.style-luxury .reveal { border-color: color-mix(in srgb, var(--accent), transparent 54%); background: color-mix(in srgb, var(--card-strong), transparent 24%); }
     body.style-micro { --style-site-width: 720px; --style-h1-min: 36px; --style-h1-max: 72px; --style-section-padding-y: 48px; --style-card-padding: 16px; --style-desc-size: 16px; }
     body.style-mega { --style-site-width: 1120px; --style-h1-max: 132px; --style-h1-fluid: 11vw; --style-section-padding-y: 96px; --style-card-padding: 32px; }
     body.style-mega h1 { text-transform: uppercase; }
     body.style-overprint .card,
     body.style-overprint .hero-card,
     body.style-overprint .principle,
-    body.style-overprint .timeline-item {
+    body.style-overprint .timeline-item,
+    body.style-overprint .reveal {
       background-image: linear-gradient(135deg, color-mix(in srgb, var(--accent), transparent 92%), transparent 42%);
     }
     body.style-overprint h1,
@@ -1938,14 +1967,16 @@
     body.style-index-card .card,
     body.style-index-card .hero-card,
     body.style-index-card .principle,
-    body.style-index-card .timeline-item { border-top: 16px solid color-mix(in srgb, var(--accent), transparent 72%); box-shadow: 0 1px 0 var(--line); }
+    body.style-index-card .timeline-item,
+    body.style-index-card .reveal { border-top: 16px solid color-mix(in srgb, var(--accent), transparent 72%); box-shadow: 0 1px 0 var(--line); }
     body.style-index-card .generated-desc-meta { border-top: 1px dashed var(--line); padding-top: 16px; }
     body.style-thin { --style-border-width: 1px; --style-card-shadow: none; --style-panel-shadow: none; --style-blur: 0px; }
     body.style-thin .card,
     body.style-thin .hero-card,
     body.style-thin .principle,
     body.style-thin .timeline-item,
-    body.style-thin .contact-panel { background: transparent; }
+    body.style-thin .contact-panel,
+    body.style-thin .reveal { background: transparent; }
     body.style-heavy { --style-border-width: 3px; --style-section-border-width: 3px; --style-card-shadow: 10px 10px 0 color-mix(in srgb, var(--accent), transparent 42%); }
     body.style-heavy h1, body.style-heavy h2 { font-weight: 900; text-transform: uppercase; }
     body.style-captioned .card::after,
@@ -1974,16 +2005,19 @@
     body.shape-stamp .hero-card,
     body.shape-stamp .principle,
     body.shape-stamp .timeline-item,
-    body.shape-stamp .contact-panel { border-style: dashed; border-width: 2px; }
+    body.shape-stamp .contact-panel,
+    body.shape-stamp .reveal { border-style: dashed; border-width: 2px; }
     body.shape-folder .card,
     body.shape-folder .hero-card,
     body.shape-folder .principle,
-    body.shape-folder .timeline-item { border-radius: 8px 24px 24px 24px; border-top-width: 8px; border-top-color: color-mix(in srgb, var(--accent), transparent 60%); }
+    body.shape-folder .timeline-item,
+    body.shape-folder .reveal { border-radius: 8px 24px 24px 24px; border-top-width: 8px; border-top-color: color-mix(in srgb, var(--accent), transparent 60%); }
     body.shape-postcard .card,
     body.shape-postcard .hero-card,
     body.shape-postcard .principle,
     body.shape-postcard .timeline-item,
-    body.shape-postcard .contact-panel {
+    body.shape-postcard .contact-panel,
+    body.shape-postcard .reveal {
       border-style: solid;
       border-width: max(2px, var(--style-border-width));
     }
@@ -1991,19 +2025,22 @@
     body.shape-underline .hero-card,
     body.shape-underline .principle,
     body.shape-underline .timeline-item,
-    body.shape-underline .contact-panel { border-left: 0; border-right: 0; border-top: 0; border-radius: 0 !important; background: transparent; box-shadow: none; }
+    body.shape-underline .contact-panel,
+    body.shape-underline .reveal { border-left: 0; border-right: 0; border-top: 0; border-radius: 0 !important; background: transparent; box-shadow: none; }
     body.shape-offset .card,
     body.shape-offset .hero-card,
     body.shape-offset .principle,
     body.shape-offset .timeline-item,
-    body.shape-offset .contact-panel { box-shadow: 8px 8px 0 color-mix(in srgb, var(--accent), transparent 74%); }
+    body.shape-offset .contact-panel,
+    body.shape-offset .reveal { box-shadow: 8px 8px 0 color-mix(in srgb, var(--accent), transparent 74%); }
     body.shape-badge .tag,
     body.shape-badge .skill-pill,
     body.shape-badge .button { border-radius: 8px 999px 999px 8px; }
     body.shape-badge .card,
     body.shape-badge .hero-card,
     body.shape-badge .principle,
-    body.shape-badge .timeline-item { border-radius: 16px 32px 32px 16px; }
+    body.shape-badge .timeline-item,
+    body.shape-badge .reveal { border-radius: 16px 32px 32px 16px; }
 
     /* Opaque component surfaces. Kept last so transparent shape variants cannot erase them. */
     body.style-solid { --opaque-surface: var(--bg); }
@@ -2019,7 +2056,7 @@
     body.style-sticker-solid { --opaque-surface: color-mix(in srgb, var(--bg) 90%, var(--accent) 10%); }
 
     body:is(.style-solid, .style-enamel, .style-duotone-solid, .style-paper-stack, .style-accent-panel, .style-banded-solid, .style-inset-solid, .style-sticker-solid)
-    :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .skill-pill, .tag) {
+    :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .skill-pill, .tag) {
       background: var(--opaque-surface);
       backdrop-filter: none;
     }
@@ -2031,22 +2068,161 @@
     body.style-duotone-solid :is(.card:nth-child(even), .principle:nth-child(even), .timeline-item:nth-child(even)) {
       background: var(--opaque-surface-alt);
     }
-    body.style-paper-stack :is(.card, .hero-card, .principle, .timeline-item, .contact-panel) {
+    body.style-paper-stack :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       box-shadow: 5px 5px 0 var(--bg), 7px 7px 0 var(--line);
     }
-    body.style-accent-panel :is(.card, .hero-card, .principle, .timeline-item, .contact-panel) {
+    body.style-accent-panel :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       border-color: color-mix(in srgb, var(--accent), var(--line) 40%);
     }
-    body.style-banded-solid :is(.card, .hero-card, .principle, .timeline-item, .contact-panel) {
+    body.style-banded-solid :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       background: linear-gradient(180deg, color-mix(in srgb, var(--accent), transparent 91%), transparent 48%), var(--opaque-surface);
     }
-    body.style-banded-solid.shape-line-only :is(.card, .hero-card, .principle, .timeline-item, .contact-panel) {
+    body.style-banded-solid.shape-line-only :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       padding-inline: var(--style-card-padding);
     }
-    body.style-inset-solid :is(.card, .hero-card, .principle, .timeline-item, .contact-panel) {
+    body.style-inset-solid :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       box-shadow: inset 0 12px 28px color-mix(in srgb, var(--fg), transparent 94%);
     }
-    body.style-sticker-solid :is(.card, .hero-card, .principle, .timeline-item, .contact-panel) {
+    body.style-sticker-solid :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       border-width: 2px;
       box-shadow: 4px 4px 0 var(--fg);
+    }
+
+    /* Extended generated backgrounds */
+    body.bg-axis {
+      --page-background:
+        var(--random-halos, radial-gradient(circle at 50% 18%, var(--accent-soft), transparent 28rem)),
+        var(--bg);
+    }
+    body.bg-axis::before {
+      opacity: 0.2;
+      background-image:
+        linear-gradient(90deg, transparent calc(50% - .5px), var(--line) calc(50% - .5px) calc(50% + .5px), transparent calc(50% + .5px)),
+        linear-gradient(0deg, transparent calc(42% - .5px), var(--line) calc(42% - .5px) calc(42% + .5px), transparent calc(42% + .5px)),
+        radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 48%) 0 1px, transparent 1.3px);
+      background-size: 100% 100%, 100% 100%, 32px 32px;
+      mask-image: radial-gradient(circle at 50% 42%, black, transparent 76%);
+    }
+    body.bg-radial-grid::before {
+      opacity: 0.2;
+      background-image:
+        repeating-radial-gradient(circle at 50% 24%, transparent 0 31px, var(--line) 31px 32px, transparent 32px 64px),
+        radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 54%) 0 1px, transparent 1.4px);
+      background-size: auto, 24px 24px;
+    }
+    body.bg-offset-grid::before {
+      opacity: 0.18;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px),
+        linear-gradient(color-mix(in srgb, var(--accent), transparent 58%) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 58%) 1px, transparent 1px);
+      background-position: 0 0, 0 0, 16px 16px, 16px 16px;
+      background-size: 64px 64px, 64px 64px, 64px 64px, 64px 64px;
+    }
+    body.bg-corner-orbits {
+      --page-background:
+        var(--random-halos,
+          radial-gradient(circle at 0 0, color-mix(in srgb, var(--accent), transparent 78%), transparent 25rem),
+          radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--accent-2), transparent 84%), transparent 30rem)
+        ),
+        var(--bg);
+    }
+    body.bg-corner-orbits::before {
+      opacity: 0.22;
+      background-image:
+        repeating-radial-gradient(circle at 0 0, transparent 0 38px, var(--line) 38px 39px, transparent 39px 76px),
+        repeating-radial-gradient(circle at 100% 100%, transparent 0 52px, var(--line) 52px 53px, transparent 53px 104px);
+      background-size: auto;
+    }
+    body.bg-soft-check::before {
+      opacity: 0.12;
+      background-image:
+        linear-gradient(45deg, var(--line) 25%, transparent 25%, transparent 75%, var(--line) 75%),
+        linear-gradient(45deg, var(--line) 25%, transparent 25%, transparent 75%, var(--line) 75%);
+      background-position: 0 0, 48px 48px;
+      background-size: 96px 96px;
+    }
+    body.bg-data-rain::before {
+      opacity: 0.24;
+      background-image:
+        radial-gradient(ellipse at 10px 8px, var(--line) 0 1px, transparent 1.4px),
+        radial-gradient(ellipse at 34px 28px, color-mix(in srgb, var(--accent), transparent 48%) 0 1px, transparent 1.4px),
+        radial-gradient(ellipse at 58px 52px, var(--line) 0 1.5px, transparent 1.8px);
+      background-position: 0 0, 0 12px, 0 28px;
+      background-size: 72px 32px, 72px 46px, 72px 64px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+    }
+    body.bg-gradient-wash {
+      --page-background:
+        linear-gradient(145deg, color-mix(in srgb, var(--accent), transparent 90%), transparent 38%),
+        linear-gradient(315deg, color-mix(in srgb, var(--accent-2), transparent 92%), transparent 44%),
+        var(--random-halos, radial-gradient(circle at 52% 14%, color-mix(in srgb, var(--fg), transparent 95%), transparent 30rem)),
+        var(--bg);
+    }
+    body.bg-gradient-wash::before { opacity: 0.04; }
+    body.bg-steps::before {
+      opacity: 0.18;
+      background-image:
+        conic-gradient(from 90deg at 1px 1px, transparent 0 25%, var(--line) 25% 50%, transparent 50% 100%);
+      background-position: 0 0;
+      background-size: 48px 48px;
+      mask-image: linear-gradient(135deg, black, transparent 82%);
+    }
+
+    /* Extended generated component surfaces */
+    body.style-tonal :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
+      background: linear-gradient(var(--accent-soft), var(--accent-soft)), var(--card-strong);
+      border-color: color-mix(in srgb, var(--accent), var(--line) 76%);
+      backdrop-filter: none;
+    }
+    body.style-quiet-depth :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
+      background: color-mix(in srgb, var(--card-strong), var(--bg) 20%);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, .08);
+      backdrop-filter: none;
+    }
+    body.style-grid-surface :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
+      background-image:
+        linear-gradient(color-mix(in srgb, var(--line), transparent 48%) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--line), transparent 48%) 1px, transparent 1px);
+      background-color: var(--card);
+      background-size: 22px 22px;
+    }
+    body.style-header-rule :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
+      background: color-mix(in srgb, var(--card-strong), transparent 10%);
+    }
+    body.style-header-rule .card-title-row {
+      border-bottom: 1px solid color-mix(in srgb, var(--accent), var(--line) 76%);
+      padding-bottom: 16px;
+    }
+    body.style-soft-relief :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
+      background: linear-gradient(145deg, color-mix(in srgb, var(--card-strong), white 4%), color-mix(in srgb, var(--card), var(--bg) 12%));
+      border-color: color-mix(in srgb, var(--line), transparent 22%);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .07);
+    }
+    body.style-wash-panel :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
+      background:
+        radial-gradient(circle at 14% 0, color-mix(in srgb, var(--accent), transparent 86%), transparent 52%),
+        var(--card-strong);
+      backdrop-filter: none;
+    }
+    body.style-mono-surface :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
+      background: color-mix(in srgb, var(--bg), var(--fg) 5%);
+      border-color: color-mix(in srgb, var(--fg), transparent 84%);
+      backdrop-filter: none;
+    }
+    body.style-mono-surface :is(h1, h2, h3, .kicker, .section-index, .generated-desc-meta) {
+      font-family: var(--mono);
+    }
+    body.style-highlight-surface :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--accent), transparent 89%), transparent 34%),
+        var(--card);
+      border-color: color-mix(in srgb, var(--accent), var(--line) 82%);
+    }
+    body:is(.shape-no-boxes, .shape-line-only):is(.style-tonal, .style-quiet-depth, .style-grid-surface, .style-header-rule, .style-soft-relief, .style-wash-panel, .style-mono-surface, .style-highlight-surface)
+    :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
     }

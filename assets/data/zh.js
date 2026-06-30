@@ -465,7 +465,15 @@ window.PORTFOLIO_LOCALE = {
             "eclipse",
             "color-blocks",
             "lattice",
-            "spot-grid"
+            "spot-grid",
+            "axis",
+            "radial-grid",
+            "offset-grid",
+            "corner-orbits",
+            "soft-check",
+            "data-rain",
+            "gradient-wash",
+            "steps"
       ],
       "surfaceStyles": [
             "soft",
@@ -502,7 +510,15 @@ window.PORTFOLIO_LOCALE = {
             "accent-panel",
             "banded-solid",
             "inset-solid",
-            "sticker-solid"
+            "sticker-solid",
+            "tonal",
+            "quiet-depth",
+            "grid-surface",
+            "header-rule",
+            "soft-relief",
+            "wash-panel",
+            "mono-surface",
+            "highlight-surface"
       ],
       "shapeStyles": [
             "rounded",
