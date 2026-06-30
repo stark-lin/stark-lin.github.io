@@ -362,9 +362,9 @@
 
     function getId() {
       const params = new URLSearchParams(window.location.search);
-      let id = params.get("id");
-      if (!id) {
-        id = createShortId();
+      const id = params.get("id") || createShortId();
+
+      if (!params.has("id") ) {
         const url = new URL(window.location.href);
         url.searchParams.set("id", id);
         window.history.replaceState(null, "", url);
