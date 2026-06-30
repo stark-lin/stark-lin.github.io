@@ -38,7 +38,7 @@
     { zh: "如果它看起来像草稿，那也是可部署草稿。", en: "If it looks like a draft, it is still a deployable draft." },
     { zh: "主页在换装，后端在值班。", en: "The homepage is changing outfits. The backend is on duty." },
     { zh: "我没有隐藏个性，只是给它加了版本号。", en: "I did not hide personality. I gave it a version number." },
-    { zh: "随机不是借口，是一种有 seed 的展示方式。", en: "Randomness is not an excuse. It is presentation with a seed." },
+    { zh: "随机不是借口，是一种有 ID 的展示方式。", en: "Randomness is not an excuse. It is presentation with an ID." },
     { zh: "这页没有端着，但也没有乱扔信息。", en: "This page is not stiff, but it does not throw information around." },
     { zh: "外观在抽样，判断没有抽样。", en: "The appearance is sampled. The judgment is not." },
     { zh: "如果这版很顺眼，那是算法今天比较客气。", en: "If this version looks pleasant, the algorithm is being polite today." },
@@ -152,9 +152,9 @@
         sections: ["work", "experience", "principles", "skills", "now"]
       },
       system: {
-        seedPrefix: "SL-",
-        seedLength: 32,
-        seedCharacters: "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+        idPrefix: "SL-",
+        idLength: 32,
+        idCharacters: "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
       },
       copy: {
         kickers: DATA.heroKickers,
@@ -249,13 +249,13 @@
       }
     }
 
-    function createRandom(seed) {
-      const [a, b, c, d] = cyrb128(seed);
+    function createRandom(id) {
+      const [a, b, c, d] = cyrb128(id);
       return sfc32(a, b, c, d);
     }
 
-    function createRandomHalos(seed) {
-      const rng = createRandom(`${seed}:halo`);
+    function createRandomHalos(id) {
+      const rng = createRandom(`${id}:halo`);
       const colors = ["var(--accent)", "var(--accent-2)", "var(--fg)"];
       const haloCount = 1 + Math.floor(rng() * 5);
       const halos = Array.from({ length: haloCount }, () => {
@@ -343,44 +343,44 @@
       return shuffle(rng, arr).slice(0, n);
     }
 
-    function createShortSeed() {
-      const { seedPrefix, seedLength, seedCharacters } = RANDOM_POOLS.system;
-      const bytes = new Uint8Array(seedLength);
-      const unbiasedLimit = 256 - (256 % seedCharacters.length);
-      let seed = seedPrefix;
+    function createShortId() {
+      const { idPrefix, idLength, idCharacters } = RANDOM_POOLS.system;
+      const bytes = new Uint8Array(idLength);
+      const unbiasedLimit = 256 - (256 % idCharacters.length);
+      let id = idPrefix;
 
-      while (seed.length < seedPrefix.length + seedLength) {
+      while (id.length < idPrefix.length + idLength) {
         crypto.getRandomValues(bytes);
         for (const byte of bytes) {
           if (byte >= unbiasedLimit) continue;
-          seed += seedCharacters[byte % seedCharacters.length];
-          if (seed.length === seedPrefix.length + seedLength) break;
+          id += idCharacters[byte % idCharacters.length];
+          if (id.length === idPrefix.length + idLength) break;
         }
       }
-      return seed;
+      return id;
     }
 
-    function getSeed() {
+    function getId() {
       const params = new URLSearchParams(window.location.search);
-      let seed = params.get("seed");
-      if (!seed) {
-        seed = createShortSeed();
+      let id = params.get("id");
+      if (!id) {
+        id = createShortId();
         const url = new URL(window.location.href);
-        url.searchParams.set("seed", seed);
+        url.searchParams.set("id", id);
         window.history.replaceState(null, "", url);
       }
-      return seed;
+      return id;
     }
 
-    function generateConfig(seed) {
-      const rng = createRandom(seed);
+    function generateConfig(id) {
+      const rng = createRandom(id);
       const layout = "single";
       const colorThemeTrait = uniformTrait(rng, RANDOM_POOLS.visual.palettes);
       const backgroundStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.backgrounds);
       const colorTheme = colorThemeTrait.value;
       const backgroundStyle = backgroundStyleTrait.value;
-      // Glow is an independent seeded option, enabled for half of generated backgrounds.
-      const randomHalos = rng() < 0.5 ? createRandomHalos(seed) : "none";
+      // Glow is derived independently from the ID and enabled for half of generated backgrounds.
+      const randomHalos = rng() < 0.5 ? createRandomHalos(id) : "none";
       const styleGenome = createStyleGenome(rng);
       const surfaceStyle = styleGenome.mode;
       const shapeStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.shapes);
@@ -407,7 +407,7 @@
       };
 
       const config = {
-        seed,
+        id,
         layout,
         colorTheme,
         backgroundStyle,
@@ -746,7 +746,7 @@
           <div class="reveal-stat">
             <div class="reveal-stat-section">
               <div class="reveal-stat-label">${escapeHtml(UI.labels.referenceCode)}</div>
-              <div class="reveal-stat-value">${escapeHtml(config.seed)}</div>
+              <div class="reveal-stat-value">${escapeHtml(config.id)}</div>
             </div>
             <div class="reveal-stat-section rarity-report" data-rarity-tier="${escapeHtml(config.rarity.tier.id)}">
               <div class="reveal-stat-label">${escapeHtml(UI.rarity.label)}</div>
@@ -797,9 +797,9 @@
         setTimeout(() => line.classList.add("active"), index * 210);
       });
       setTimeout(() => {
-        const seed = createShortSeed();
+        const id = createShortId();
         const url = new URL(window.location.href);
-        url.searchParams.set("seed", seed);
+        url.searchParams.set("id", id);
         window.location.href = url.toString();
       }, 980);
     }
@@ -884,8 +884,8 @@
     }
 
     function init() {
-      const seed = getSeed();
-      const config = generateConfig(seed);
+      const id = getId();
+      const config = generateConfig(id);
       renderShell(config);
       applyBodyClass(config);
       renderNav(config);

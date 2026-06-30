@@ -591,7 +591,7 @@ window.PORTFOLIO_LOCALE = {
       "referenceCode": "Reference code",
       "refreshView": "Bad roll? Roll again",
       "copyView": "Copy URL",
-      "showComplete": "Show the full project record",
+      "showComplete": "I surrender. Show me the full version.",
       "viewCopied": "View link copied."
     },
     rarity: {
