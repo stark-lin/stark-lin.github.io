@@ -3,7 +3,7 @@
 
   const locale = window.PORTFOLIO_LOCALE;
   if (!locale) throw new Error("Portfolio locale data is missing.");
-  const { data: DATA, descriptions: PROJECT_DESCRIPTION_POOLS, ui: UI } = locale;
+  const { data: DATA, descriptions: PROJECT_DESCRIPTION_POOLS, titlePhrases: TITLE_PHRASES = {}, ui: UI } = locale;
   const CSS_PALETTE_IDS = window.PORTFOLIO_CSS_PALETTE_IDS || [];
   const CUSTOM_PALETTES = window.PORTFOLIO_PALETTES || [];
   const CUSTOM_PALETTES_BY_ID = new Map(CUSTOM_PALETTES.map(palette => [palette.id, palette]));
@@ -196,6 +196,17 @@
         skills: UI.skills
       }
     };
+
+    function assertPowerOfTwoVisualPools() {
+      ["backgrounds", "surfaces", "shapes"].forEach(poolName => {
+        const size = RANDOM_POOLS.visual[poolName].length;
+        if (size < 1 || (size & (size - 1)) !== 0) {
+          throw new Error(`Visual pool "${poolName}" must contain a power-of-two number of entries; received ${size}.`);
+        }
+      });
+    }
+
+    assertPowerOfTwoVisualPools();
 
     function styleGeneSpace() {
       return RANDOM_POOLS.visual.surfaces.length * Object.values(RANDOM_POOLS.visual.styleGenes)
@@ -458,9 +469,11 @@
     }
 
     function segmentChineseText(root = document.body) {
-      if (!document.documentElement.lang.startsWith("zh") || !Intl.Segmenter) return;
+      if (!document.documentElement.lang.startsWith("zh")) return;
 
-      const segmenter = new Intl.Segmenter("zh-CN", { granularity: "word" });
+      const segmenter = Intl.Segmenter
+        ? new Intl.Segmenter("zh-CN", { granularity: "word" })
+        : null;
       const textNodes = [];
 
       root.querySelectorAll("h1, h2, h3").forEach(title => {
@@ -475,23 +488,31 @@
 
       textNodes.forEach(node => {
         const fragment = document.createDocumentFragment();
-        let clause = document.createElement("span");
-        clause.className = "zh-clause";
+        const titleText = node.data.replace(/。$/u, "");
+        const phrases = TITLE_PHRASES[titleText];
 
-        for (const part of segmenter.segment(node.data)) {
+        if (phrases) {
+          node.parentElement.closest("h1, h2, h3")?.setAttribute("aria-label", titleText);
+          phrases.forEach((phrase, index) => {
+            if (index > 0) fragment.appendChild(document.createElement("wbr"));
+            const span = document.createElement("span");
+            span.className = "zh-segment zh-word";
+            span.textContent = phrase;
+            fragment.appendChild(span);
+          });
+          node.replaceWith(fragment);
+          return;
+        }
+
+        const parts = segmenter
+          ? segmenter.segment(titleText)
+          : [{ segment: titleText, isWordLike: true }];
+        for (const part of parts) {
           const span = document.createElement("span");
           span.className = part.isWordLike ? "zh-segment zh-word" : "zh-segment";
           span.textContent = part.segment;
-          clause.appendChild(span);
-
-          if (/[，,。.]$/u.test(part.segment)) {
-            fragment.appendChild(clause);
-            clause = document.createElement("span");
-            clause.className = "zh-clause";
-          }
+          fragment.appendChild(span);
         }
-
-        if (clause.hasChildNodes()) fragment.appendChild(clause);
 
         node.replaceWith(fragment);
       });
@@ -773,7 +794,6 @@
       renderCompleteVersion(config, true);
       segmentChineseText(document.getElementById("completeVersion"));
       applyTitleTrackingLimits();
-      applyChineseClauseWrapping();
       document.getElementById("completeVersion").scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
@@ -899,24 +919,11 @@
       });
     }
 
-    function applyChineseClauseWrapping() {
-      if (!document.documentElement.lang.startsWith("zh")) return;
-
-      document.querySelectorAll("h1, h2, h3").forEach(title => {
-        const clauses = title.querySelectorAll(".zh-clause");
-        clauses.forEach(clause => clause.classList.remove("allow-wrap"));
-        clauses.forEach(clause => {
-          if (clause.scrollWidth > title.clientWidth) clause.classList.add("allow-wrap");
-        });
-      });
-    }
-
     let titleTrackingFrame;
     function scheduleTitleTrackingLimits() {
       cancelAnimationFrame(titleTrackingFrame);
       titleTrackingFrame = requestAnimationFrame(() => {
         applyTitleTrackingLimits();
-        applyChineseClauseWrapping();
       });
     }
 
@@ -968,7 +975,6 @@
       renderCompleteVersion(config);
       segmentChineseText();
       applyTitleTrackingLimits();
-      applyChineseClauseWrapping();
       window.addEventListener("resize", scheduleTitleTrackingLimits, { passive: true });
     }
 
