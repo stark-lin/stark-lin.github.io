@@ -73,6 +73,31 @@
       overflow-x: hidden;
     }
 
+    html[lang^="zh"] body {
+      line-break: strict;
+      text-spacing-trim: trim-start;
+    }
+
+    html[lang^="zh"] :is(h1, h2, h3) .zh-word {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    html[lang^="zh"] :is(h1, h2, h3) .zh-clause {
+      display: inline-block;
+      max-width: 100%;
+      vertical-align: baseline;
+      white-space: nowrap;
+    }
+
+    html[lang^="zh"] :is(h1, h2, h3) .zh-clause.allow-wrap {
+      white-space: normal;
+    }
+
+    html[lang^="zh"] :is(h1, h2, h3) .zh-word + .zh-word {
+      margin-inline-start: 0.12em;
+    }
+
     body::before {
       content: "";
       position: fixed;
@@ -569,7 +594,7 @@
     body.style-codeblock .hero-card,
     body.style-codeblock .timeline-item,
     body.style-codeblock .principle {
-      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent), transparent 80%);
+      border-color: color-mix(in srgb, var(--accent), var(--line) 72%);
     }
     body.style-codeblock .generated-description::before { content: "// "; color: var(--accent); }
 
@@ -577,8 +602,7 @@
     body.style-manifesto .hero-card,
     body.style-manifesto .principle,
     body.style-manifesto .timeline-item {
-      border-left-width: 8px;
-      border-left-color: var(--accent);
+      border-color: color-mix(in srgb, var(--accent), var(--line) 64%);
     }
     body.style-manifesto .section-lead,
     body.style-manifesto .generated-description,
@@ -1897,7 +1921,9 @@
     body.style-overprint .card,
     body.style-overprint .hero-card,
     body.style-overprint .principle,
-    body.style-overprint .timeline-item { box-shadow: 6px 0 0 color-mix(in srgb, var(--accent), transparent 80%), -6px 0 0 color-mix(in srgb, var(--fg), transparent 88%); }
+    body.style-overprint .timeline-item {
+      background-image: linear-gradient(135deg, color-mix(in srgb, var(--accent), transparent 92%), transparent 42%);
+    }
     body.style-overprint h1,
     body.style-overprint h2 { text-shadow: 1.5px 0 color-mix(in srgb, var(--accent), transparent 52%), -1.5px 0 color-mix(in srgb, var(--fg), transparent 78%); }
     body.style-labelmaker h1,
@@ -1957,7 +1983,10 @@
     body.shape-postcard .hero-card,
     body.shape-postcard .principle,
     body.shape-postcard .timeline-item,
-    body.shape-postcard .contact-panel { border-style: solid; box-shadow: inset 0 0 0 6px color-mix(in srgb, var(--line), transparent 25%); }
+    body.shape-postcard .contact-panel {
+      border-style: solid;
+      border-width: max(2px, var(--style-border-width));
+    }
     body.shape-underline .card,
     body.shape-underline .hero-card,
     body.shape-underline .principle,
@@ -2006,17 +2035,16 @@
       box-shadow: 5px 5px 0 var(--bg), 7px 7px 0 var(--line);
     }
     body.style-accent-panel :is(.card, .hero-card, .principle, .timeline-item, .contact-panel) {
-      border-color: var(--accent);
-      border-left-width: 8px;
+      border-color: color-mix(in srgb, var(--accent), var(--line) 40%);
     }
     body.style-banded-solid :is(.card, .hero-card, .principle, .timeline-item, .contact-panel) {
-      background: linear-gradient(90deg, var(--accent) 0 8px, transparent 8px), var(--opaque-surface);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--accent), transparent 91%), transparent 48%), var(--opaque-surface);
     }
     body.style-banded-solid.shape-line-only :is(.card, .hero-card, .principle, .timeline-item, .contact-panel) {
       padding-inline: var(--style-card-padding);
     }
     body.style-inset-solid :is(.card, .hero-card, .principle, .timeline-item, .contact-panel) {
-      box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--line);
+      box-shadow: inset 0 12px 28px color-mix(in srgb, var(--fg), transparent 94%);
     }
     body.style-sticker-solid :is(.card, .hero-card, .principle, .timeline-item, .contact-panel) {
       border-width: 2px;

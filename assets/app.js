@@ -82,7 +82,7 @@
         { variables: { "--style-card-shadow": "0 1px 0 color-mix(in srgb, var(--fg), transparent 80%)", "--style-panel-shadow": "0 1px 0 color-mix(in srgb, var(--fg), transparent 76%)", "--style-blur": "0px" } },
         { variables: { "--style-card-shadow": "0 30px 90px rgba(0,0,0,.11)", "--style-panel-shadow": "0 42px 120px rgba(0,0,0,.15)", "--style-blur": "24px" } },
         { variables: { "--style-card-shadow": "-6px 6px 0 color-mix(in srgb, var(--fg), transparent 90%)", "--style-panel-shadow": "-8px 8px 0 color-mix(in srgb, var(--fg), transparent 86%)", "--style-blur": "4px" } },
-        { variables: { "--style-card-shadow": "0 0 0 1px color-mix(in srgb, var(--accent), transparent 76%), 0 20px 70px rgba(0,0,0,.08)", "--style-panel-shadow": "0 0 0 1px color-mix(in srgb, var(--accent), transparent 70%), 0 34px 100px rgba(0,0,0,.11)", "--style-blur": "20px" } },
+        { variables: { "--style-card-shadow": "0 20px 70px rgba(0,0,0,.08)", "--style-panel-shadow": "0 34px 100px rgba(0,0,0,.11)", "--style-blur": "20px" } },
         { variables: { "--style-card-shadow": "0 0 0 999px rgba(255,255,255,.015) inset", "--style-panel-shadow": "0 0 0 999px rgba(255,255,255,.025) inset", "--style-blur": "12px" } }
       ],
       type: [
@@ -446,6 +446,46 @@
         .replaceAll("'", "&#039;");
     }
 
+    function segmentChineseText(root = document.body) {
+      if (!document.documentElement.lang.startsWith("zh") || !Intl.Segmenter) return;
+
+      const segmenter = new Intl.Segmenter("zh-CN", { granularity: "word" });
+      const textNodes = [];
+
+      root.querySelectorAll("h1, h2, h3").forEach(title => {
+        const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT);
+        while (walker.nextNode()) {
+          const node = walker.currentNode;
+          if (!node.parentElement.closest(".zh-segment") && /\p{Script=Han}/u.test(node.data)) {
+            textNodes.push(node);
+          }
+        }
+      });
+
+      textNodes.forEach(node => {
+        const fragment = document.createDocumentFragment();
+        let clause = document.createElement("span");
+        clause.className = "zh-clause";
+
+        for (const part of segmenter.segment(node.data)) {
+          const span = document.createElement("span");
+          span.className = part.isWordLike ? "zh-segment zh-word" : "zh-segment";
+          span.textContent = part.segment;
+          clause.appendChild(span);
+
+          if (/[，,。.]$/u.test(part.segment)) {
+            fragment.appendChild(clause);
+            clause = document.createElement("span");
+            clause.className = "zh-clause";
+          }
+        }
+
+        if (clause.hasChildNodes()) fragment.appendChild(clause);
+
+        node.replaceWith(fragment);
+      });
+    }
+
     function getLanguageSwitch() {
       const isChinese = document.documentElement.lang.startsWith("zh");
       const targetUrl = new URL(isChinese ? "./index.html" : "./zh.html", window.location.href);
@@ -720,6 +760,9 @@
       url.searchParams.set("complete", "1");
       window.history.replaceState(null, "", url.toString());
       renderCompleteVersion(config, true);
+      segmentChineseText(document.getElementById("completeVersion"));
+      applyTitleTrackingLimits();
+      applyChineseClauseWrapping();
       document.getElementById("completeVersion").scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
@@ -822,6 +865,8 @@
     }
 
     function applyTitleTrackingLimits() {
+      const isChinese = document.documentElement.lang.startsWith("zh");
+
       document.querySelectorAll("h1, h2, h3").forEach(title => {
         // Remove the previous clamp so responsive changes are always measured
         // against the tracking requested by the current generated style.
@@ -834,17 +879,34 @@
         if (![fontSizePx, fontWeight, trackingPx].every(Number.isFinite) || fontSizePx <= 0) return;
 
         const tracking = trackingPx / fontSizePx;
-        const clampedTracking = clampTitleTracking(tracking, fontWeight, fontSizePx);
+        const clampedTracking = isChinese
+          ? Math.max(tracking, 0.01)
+          : clampTitleTracking(tracking, fontWeight, fontSizePx);
         if (clampedTracking > tracking) {
           title.style.letterSpacing = `${clampedTracking}em`;
         }
       });
     }
 
+    function applyChineseClauseWrapping() {
+      if (!document.documentElement.lang.startsWith("zh")) return;
+
+      document.querySelectorAll("h1, h2, h3").forEach(title => {
+        const clauses = title.querySelectorAll(".zh-clause");
+        clauses.forEach(clause => clause.classList.remove("allow-wrap"));
+        clauses.forEach(clause => {
+          if (clause.scrollWidth > title.clientWidth) clause.classList.add("allow-wrap");
+        });
+      });
+    }
+
     let titleTrackingFrame;
     function scheduleTitleTrackingLimits() {
       cancelAnimationFrame(titleTrackingFrame);
-      titleTrackingFrame = requestAnimationFrame(applyTitleTrackingLimits);
+      titleTrackingFrame = requestAnimationFrame(() => {
+        applyTitleTrackingLimits();
+        applyChineseClauseWrapping();
+      });
     }
 
     function applyBodyClass(config) {
@@ -893,7 +955,9 @@
       renderMain(config);
       renderReveal(config);
       renderCompleteVersion(config);
+      segmentChineseText();
       applyTitleTrackingLimits();
+      applyChineseClauseWrapping();
       window.addEventListener("resize", scheduleTitleTrackingLimits, { passive: true });
     }
 
