@@ -21,6 +21,7 @@
       --style-section-gap: 32px;
       --style-card-padding: 24px;
       --style-card-gap: 16px;
+      --style-safe-gap: 8px;
       --style-border-width: 1px;
       --style-border-style: solid;
       --style-card-shadow: none;
@@ -677,6 +678,7 @@
     body.style-generated {
       --readable-muted: color-mix(in srgb, var(--fg) 76%, var(--bg));
       --readable-accent: color-mix(in srgb, var(--accent) 35%, var(--fg));
+      --style-visible-border: color-mix(in srgb, var(--fg) 64%, var(--bg));
     }
 
     body.style-generated .section-index {
@@ -1040,7 +1042,7 @@
 
     .skill-cloud {
       display: flex;
-      gap: calc(var(--style-card-gap) * .62);
+      gap: var(--style-card-gap);
       flex-wrap: wrap;
     }
 
@@ -2938,6 +2940,36 @@
       box-shadow: none;
       backdrop-filter: none;
       transform: none;
+    }
+
+    /* Forced 8px integer safe gap for every generated line-only combination. */
+    body.style-generated.shape-line-only
+    :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
+      padding-inline: var(--style-safe-gap);
+    }
+
+    /* Force a visible background difference while preserving each shape's border geometry. */
+    body.style-generated :is(
+      .topbar,
+      .brand-mark,
+      .section,
+      .hero-card,
+      .stat,
+      .card,
+      .card-title-row,
+      .tag,
+      .skill-pill,
+      .principle,
+      .timeline-item,
+      .contact-panel,
+      .button.secondary,
+      .reveal,
+      .reveal-stat,
+      .reveal-stat-section,
+      .complete-version,
+      .complete-project .intro-list p
+    ) {
+      border-color: var(--style-visible-border);
     }
 
     /* Final contrast guardrails. Generated metadata controls should never fall

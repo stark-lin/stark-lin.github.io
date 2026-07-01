@@ -7,6 +7,21 @@
   const CSS_PALETTE_IDS = window.PORTFOLIO_CSS_PALETTE_IDS || [];
   const CUSTOM_PALETTES = window.PORTFOLIO_PALETTES || [];
   const CUSTOM_PALETTES_BY_ID = new Map(CUSTOM_PALETTES.map(palette => [palette.id, palette]));
+  const SAFE_SPACING_STEP_PX = 8;
+  const SAFE_BORDER_WIDTH_PX = 1;
+  const SAFE_SPACING_VARIABLES = new Set([
+    "--style-card-padding",
+    "--style-card-gap",
+    "--style-section-padding-y",
+    "--style-section-gap",
+    "--style-hero-pad-top",
+    "--style-hero-pad-bottom",
+    "--style-hero-gap"
+  ]);
+  const SAFE_BORDER_WIDTH_VARIABLES = new Set([
+    "--style-border-width",
+    "--style-section-border-width"
+  ]);
 
   const SAFE_BILINGUAL_QUIPS = [
     { zh: "这页会变，但不是在逃避责任。", en: "This page changes, but it is not dodging responsibility." },
@@ -880,7 +895,17 @@
 
     function applyStyleGenome(styleGenome) {
       Object.entries(styleGenome.variables).forEach(([property, value]) => {
-        document.body.style.setProperty(property, value);
+        let safeValue = value;
+        if (SAFE_SPACING_VARIABLES.has(property)) {
+          const pixels = Number.parseFloat(value);
+          if (Number.isFinite(pixels)) {
+            safeValue = `${Math.max(SAFE_SPACING_STEP_PX, Math.ceil(pixels / SAFE_SPACING_STEP_PX) * SAFE_SPACING_STEP_PX)}px`;
+          }
+        } else if (SAFE_BORDER_WIDTH_VARIABLES.has(property)) {
+          const pixels = Number.parseFloat(value);
+          if (Number.isFinite(pixels)) safeValue = `${Math.max(SAFE_BORDER_WIDTH_PX, pixels)}px`;
+        }
+        document.body.style.setProperty(property, safeValue);
       });
       document.documentElement.dataset.styleGenome = styleGenome.id;
     }
