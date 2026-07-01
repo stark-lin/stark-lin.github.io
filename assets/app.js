@@ -562,13 +562,10 @@
         <header class="topbar">
           <div class="topbar-inner">
             <a class="brand" href="#top" aria-label="${escapeHtml(shell.brandAria)}">
-              <span class="brand-mark">SL</span>
               <span>Stark Lin</span>
             </a>
-            <div class="topbar-actions">
-              <nav id="nav" aria-label="${escapeHtml(shell.navAria)}"></nav>
-              <a class="button secondary language-switch" href="${escapeHtml(languageSwitch.href)}" hreflang="${languageSwitch.hrefLang}" lang="${languageSwitch.labelLang}" aria-label="${escapeHtml(languageSwitch.ariaLabel)}">${languageSwitch.label}</a>
-            </div>
+            <nav id="nav" aria-label="${escapeHtml(shell.navAria)}"></nav>
+            <a class="button secondary language-switch" href="${escapeHtml(languageSwitch.href)}" hreflang="${languageSwitch.hrefLang}" lang="${languageSwitch.labelLang}" aria-label="${escapeHtml(languageSwitch.ariaLabel)}">${languageSwitch.label}</a>
           </div>
         </header>
         <div class="site" id="top">

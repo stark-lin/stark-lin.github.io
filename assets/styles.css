@@ -617,8 +617,7 @@
       line-height: 1.38;
     }
 
-    body.style-receipt .site,
-    body.style-receipt .topbar-inner {
+    body.style-receipt .site {
       max-width: 760px;
     }
     body.style-receipt h1, body.style-receipt h2, body.style-receipt h3 {
@@ -725,52 +724,36 @@
     }
 
     .topbar-inner {
-      width: min(var(--style-site-width), calc(100vw - 32px));
-      margin: 0 auto;
-      display: flex;
+      width: 100%;
+      margin: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
       align-items: center;
-      justify-content: space-between;
-      padding: 16px 0;
-      gap: 16px;
+      padding: 8px;
+      gap: 8px;
     }
 
     .brand {
       display: flex;
       align-items: center;
+      justify-self: start;
       gap: 8px;
       font-weight: 760;
       letter-spacing: -0.03em;
     }
 
-    .brand-mark {
-      width: 32px;
-      height: 32px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      display: grid;
-      place-items: center;
-      background: var(--card-strong);
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--accent);
-    }
-
-    .topbar-actions {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 16px;
-      min-width: 0;
-    }
-
     nav {
+      grid-column: 2;
       display: flex;
+      justify-self: center;
       gap: 16px;
       color: var(--muted);
       font-size: 13px;
     }
 
     .topbar .button.language-switch {
+      grid-column: 3;
+      justify-self: end;
       flex: 0 0 auto;
       padding: 8px;
       font-size: 11px;
@@ -1283,7 +1266,6 @@
     body.shape-right-angle .timeline-item,
     body.shape-right-angle .contact-panel,
     body.shape-right-angle .reveal,
-    body.shape-right-angle .brand-mark,
     body.shape-right-angle .button,
     body.shape-right-angle .tag,
     body.shape-right-angle .skill-pill,
@@ -1299,7 +1281,6 @@
     body.shape-small-radius .button,
     body.shape-small-radius .tag,
     body.shape-small-radius .skill-pill,
-    body.shape-small-radius .brand-mark,
     body.shape-small-radius .toast { border-radius: 8px; }
 
     body.shape-pill-boxes {
@@ -1338,7 +1319,6 @@
     body.shape-no-boxes .button,
     body.shape-no-boxes .tag,
     body.shape-no-boxes .skill-pill,
-    body.shape-no-boxes .brand-mark,
     body.shape-no-boxes .toast {
       border-radius: 0 !important;
       background: transparent;
@@ -1517,7 +1497,7 @@
     }
 
     @media (max-width: 520px) {
-      .site, .topbar-inner { width: min(100vw - 24px, 960px); }
+      .site { width: min(100vw - 24px, 960px); }
       .hero { padding-top: 56px; }
       .card, .hero-card, .contact-panel { padding: 24px; }
       .reveal-actions .button, .hero-actions .button { width: 100%; justify-content: center; }
@@ -1978,8 +1958,7 @@
     body.shape-slab { --radius: 8px; }
     body.shape-slab .button,
     body.shape-slab .tag,
-    body.shape-slab .skill-pill,
-    body.shape-slab .brand-mark { border-radius: 8px; }
+    body.shape-slab .skill-pill { border-radius: 8px; }
     body.shape-cut { --radius: 16px; }
     body.shape-cut .card,
     body.shape-cut .hero-card,
@@ -2034,12 +2013,12 @@
       border-radius: 16px;
       corner-shape: bevel;
     }
-    body.shape-chamfered :is(.button, .tag, .skill-pill, .brand-mark) {
+    body.shape-chamfered :is(.button, .tag, .skill-pill) {
       border-radius: 7px;
       corner-shape: bevel;
     }
     body.shape-asymmetric :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat, .complete-project .intro-list p) { border-radius: 40px 8px 40px 8px; }
-    body.shape-asymmetric :is(.button, .tag, .skill-pill, .brand-mark) { border-radius: 18px 4px 18px 4px; }
+    body.shape-asymmetric :is(.button, .tag, .skill-pill) { border-radius: 18px 4px 18px 4px; }
     body.shape-tabbed :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       border-radius: 6px 28px 12px 12px;
       border-top-width: 10px;
@@ -2063,7 +2042,7 @@
       corner-shape: squircle;
       padding-inline: max(32px, var(--style-card-padding));
     }
-    body.shape-capsule-cards :is(.button, .tag, .skill-pill, .brand-mark) { border-radius: 999px; }
+    body.shape-capsule-cards :is(.button, .tag, .skill-pill) { border-radius: 999px; }
     body.shape-top-accent :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) {
       border-radius: 28px 28px 8px 8px;
       border-top-width: 4px;
@@ -2130,7 +2109,7 @@
       border-radius: 10px 4px;
     }
     body.shape-squircle :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat, .complete-project .intro-list p) { border-radius: 36px / 28px; }
-    body.shape-squircle :is(.button, .tag, .skill-pill, .brand-mark) { border-radius: 14px / 11px; }
+    body.shape-squircle :is(.button, .tag, .skill-pill) { border-radius: 14px / 11px; }
 
     /* Curved content surfaces get enough inline clearance to keep text out of
        their corner geometry. Single-line controls may keep pill radii. */
@@ -2951,7 +2930,6 @@
     /* Force a visible background difference while preserving each shape's border geometry. */
     body.style-generated :is(
       .topbar,
-      .brand-mark,
       .section,
       .hero-card,
       .stat,
