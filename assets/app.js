@@ -8,7 +8,6 @@
   const CUSTOM_PALETTES = window.PORTFOLIO_PALETTES || [];
   const CUSTOM_PALETTES_BY_ID = new Map(CUSTOM_PALETTES.map(palette => [palette.id, palette]));
   const SAFE_SPACING_STEP_PX = 8;
-  const SAFE_BORDER_WIDTH_PX = 1;
   const SAFE_SPACING_VARIABLES = new Set([
     "--style-card-padding",
     "--style-card-gap",
@@ -17,10 +16,6 @@
     "--style-hero-pad-top",
     "--style-hero-pad-bottom",
     "--style-hero-gap"
-  ]);
-  const SAFE_BORDER_WIDTH_VARIABLES = new Set([
-    "--style-border-width",
-    "--style-section-border-width"
   ]);
   const SAFE_BILINGUAL_QUIPS = [
     { zh: "这页会变，但不是在逃避责任。", en: "This page changes, but it is not dodging responsibility." },
@@ -78,14 +73,12 @@
         { variables: { "--style-site-width": "1120px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "104px", "--style-section-gap": "48px", "--style-hero-pad-top": "120px", "--style-hero-pad-bottom": "96px", "--style-hero-gap": "40px" } }
       ],
       border: [
-        { variables: { "--style-border-width": "0px", "--style-border-style": "solid", "--style-section-border-width": "1px", "--style-section-border-style": "solid" } },
-        { variables: { "--style-border-width": "1px", "--style-border-style": "solid", "--style-section-border-width": "1px", "--style-section-border-style": "solid" } },
-        { variables: { "--style-border-width": "2px", "--style-border-style": "solid", "--style-section-border-width": "2px", "--style-section-border-style": "solid" } },
-        { variables: { "--style-border-width": "1px", "--style-border-style": "dashed", "--style-section-border-width": "1px", "--style-section-border-style": "dashed" } },
-        { variables: { "--style-border-width": "2px", "--style-border-style": "dashed", "--style-section-border-width": "1px", "--style-section-border-style": "solid" } },
-        { variables: { "--style-border-width": "1px", "--style-border-style": "dotted", "--style-section-border-width": "1px", "--style-section-border-style": "dotted" } },
-        { variables: { "--style-border-width": "3px", "--style-border-style": "solid", "--style-section-border-width": "3px", "--style-section-border-style": "solid" } },
-        { variables: { "--style-border-width": "1px", "--style-border-style": "solid", "--style-section-border-width": "0px", "--style-section-border-style": "solid" } }
+        { variables: { "--style-component-frame": "none" } },
+        { variables: { "--style-component-frame": "1px dashed var(--style-visible-border)" } },
+        { variables: { "--style-component-frame": "2px dashed var(--style-visible-border)" } },
+        { variables: { "--style-component-frame": "1px solid var(--style-visible-border)" } },
+        { variables: { "--style-component-frame": "2px solid var(--style-visible-border)" } },
+        { variables: { "--style-component-frame": "4px double var(--style-visible-border)" } }
       ],
       shadow: [
         { variables: { "--style-card-shadow": "none", "--style-panel-shadow": "none", "--style-blur": "0px" } },
@@ -95,7 +88,7 @@
         { variables: { "--style-card-shadow": "8px 8px 0 color-mix(in srgb, var(--accent), transparent 44%)", "--style-panel-shadow": "10px 10px 0 color-mix(in srgb, var(--accent), transparent 38%)", "--style-blur": "0px" } },
         { variables: { "--style-card-shadow": "0 1px 0 color-mix(in srgb, var(--fg), transparent 80%)", "--style-panel-shadow": "0 1px 0 color-mix(in srgb, var(--fg), transparent 76%)", "--style-blur": "0px" } },
         { variables: { "--style-card-shadow": "0 30px 90px rgba(0,0,0,.11)", "--style-panel-shadow": "0 42px 120px rgba(0,0,0,.15)", "--style-blur": "24px" } },
-        { variables: { "--style-card-shadow": "-6px 6px 0 color-mix(in srgb, var(--fg), transparent 90%)", "--style-panel-shadow": "-8px 8px 0 color-mix(in srgb, var(--fg), transparent 86%)", "--style-blur": "4px" } },
+        { variables: { "--style-card-shadow": "6px 6px 0 color-mix(in srgb, var(--fg), transparent 90%)", "--style-panel-shadow": "8px 8px 0 color-mix(in srgb, var(--fg), transparent 86%)", "--style-blur": "4px" } },
         { variables: { "--style-card-shadow": "0 20px 70px rgba(0,0,0,.08)", "--style-panel-shadow": "0 34px 100px rgba(0,0,0,.11)", "--style-blur": "20px" } },
         { variables: { "--style-card-shadow": "0 0 0 999px rgba(255,255,255,.015) inset", "--style-panel-shadow": "0 0 0 999px rgba(255,255,255,.025) inset", "--style-blur": "12px" } }
       ],
@@ -921,9 +914,6 @@
           if (Number.isFinite(pixels)) {
             safeValue = `${Math.max(SAFE_SPACING_STEP_PX, Math.ceil(pixels / SAFE_SPACING_STEP_PX) * SAFE_SPACING_STEP_PX)}px`;
           }
-        } else if (SAFE_BORDER_WIDTH_VARIABLES.has(property)) {
-          const pixels = Number.parseFloat(value);
-          if (Number.isFinite(pixels)) safeValue = `${Math.max(SAFE_BORDER_WIDTH_PX, pixels)}px`;
         }
         document.body.style.setProperty(property, safeValue);
       });

@@ -22,8 +22,7 @@
       --style-card-padding: 24px;
       --style-card-gap: 16px;
       --style-safe-gap: 8px;
-      --style-border-width: 1px;
-      --style-border-style: solid;
+      --style-component-frame: 1px solid var(--line);
       --style-card-shadow: none;
       --style-panel-shadow: var(--shadow);
       --style-blur: 16px;
@@ -59,8 +58,6 @@
       --style-title-rule-padding: 0px;
       --style-index-box-padding: 0px;
       --style-index-box-border-width: 0px;
-      --style-section-border-width: 1px;
-      --style-section-border-style: solid;
       --style-micro-opacity: 1;
       --style-text-width: 760px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -471,7 +468,6 @@
     body.style-sharp .timeline-item,
     body.style-sharp .contact-panel,
     body.style-sharp .reveal {
-      border-width: 2px;
       backdrop-filter: none;
     }
     body.style-sharp .button, body.style-sharp .tag, body.style-sharp .skill-pill { border-radius: 8px; }
@@ -552,13 +548,7 @@
     body.style-brutal .timeline-item,
     body.style-brutal .contact-panel,
     body.style-brutal .reveal {
-      border-width: 2px;
       backdrop-filter: none;
-    }
-
-    body.style-ledger .section {
-      border-top-style: double;
-      border-top-width: 3px;
     }
     body.style-ledger .card,
     body.style-ledger .timeline-item,
@@ -591,22 +581,7 @@
     body.style-codeblock .kicker {
       font-family: var(--mono);
     }
-    body.style-codeblock .card,
-    body.style-codeblock .hero-card,
-    body.style-codeblock .timeline-item,
-    body.style-codeblock .principle,
-    body.style-codeblock .reveal {
-      border-color: color-mix(in srgb, var(--accent), var(--line) 72%);
-    }
     body.style-codeblock .generated-description::before { content: "// "; color: var(--accent); }
-
-    body.style-manifesto .card,
-    body.style-manifesto .hero-card,
-    body.style-manifesto .principle,
-    body.style-manifesto .timeline-item,
-    body.style-manifesto .reveal {
-      border-color: color-mix(in srgb, var(--accent), var(--line) 64%);
-    }
     body.style-manifesto .section-lead,
     body.style-manifesto .generated-description,
     body.style-manifesto .hero-sub {
@@ -628,8 +603,6 @@
     body.style-receipt .contact-panel,
     body.style-receipt .reveal {
       box-shadow: none;
-      border-left: 0;
-      border-right: 0;
     }
 
     body.style-glass .card,
@@ -671,12 +644,6 @@
       border: var(--style-index-box-border-width) solid var(--line);
       padding: var(--style-index-box-padding);
       width: fit-content;
-    }
-
-    body.style-generated .tag,
-    body.style-generated .skill-pill {
-      border-width: var(--style-border-width);
-      border-style: var(--style-border-style);
     }
 
     body.style-generated .hero-sub,
@@ -851,7 +818,7 @@
 
     .hero-card {
       background: var(--card);
-      border: 1px solid var(--line);
+      border: var(--style-component-frame);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: var(--style-card-padding);
@@ -883,7 +850,7 @@
     }
 
     .section {
-      border-top: var(--style-section-border-width) var(--style-section-border-style) var(--line);
+      border-top: 1px solid var(--line);
       padding: var(--style-section-padding-y) 0;
     }
 
@@ -925,7 +892,7 @@
     .card {
       grid-column: 1 / -1;
       padding: var(--style-card-padding);
-      border: var(--style-border-width) var(--style-border-style) var(--line);
+      border: var(--style-component-frame);
       background: var(--card);
       border-radius: var(--radius);
       backdrop-filter: blur(var(--style-blur));
@@ -1026,7 +993,7 @@
 
     .principle {
       padding: var(--style-card-padding);
-      border: var(--style-border-width) var(--style-border-style) var(--line);
+      border: var(--style-component-frame);
       border-radius: var(--radius);
       background: var(--card);
       font-size: 19px;
@@ -1058,7 +1025,7 @@
       grid-template-columns: minmax(0, 1fr);
       gap: 16px;
       padding: var(--style-card-padding);
-      border: var(--style-border-width) var(--style-border-style) var(--line);
+      border: var(--style-component-frame);
       border-radius: var(--radius);
       background: var(--card);
       box-shadow: var(--style-card-shadow);
@@ -1078,7 +1045,7 @@
       align-items: start;
       gap: 24px;
       padding: calc(var(--style-card-padding) + 8px);
-      border: var(--style-border-width) var(--style-border-style) var(--line);
+      border: var(--style-component-frame);
       border-radius: calc(var(--radius) + 8px);
       background: var(--card-strong);
       box-shadow: var(--style-panel-shadow);
@@ -1095,7 +1062,7 @@
 
     .reveal {
       margin: 80px 0 56px;
-      border: var(--style-border-width) var(--style-border-style) var(--line);
+      border: var(--style-component-frame);
       background: var(--card-strong);
       color: var(--fg);
       border-radius: calc(var(--radius) + 8px);
@@ -1320,8 +1287,6 @@
     body.shape-no-boxes .reveal,
     body.shape-no-boxes .reveal-stat,
     body.shape-no-boxes .complete-project .intro-list p {
-      border-left: 0;
-      border-right: 0;
       border-radius: 0 !important;
       background: transparent;
       box-shadow: none;
@@ -1346,9 +1311,6 @@
     body.shape-line-only .timeline-item,
     body.shape-line-only .contact-panel,
     body.shape-line-only .reveal {
-      border-left: 0;
-      border-right: 0;
-      border-bottom: 0;
       border-radius: 0 !important;
       background: transparent;
       box-shadow: none;
@@ -1879,12 +1841,6 @@
     }
 
     /* Additional generated visual styles */
-    body.style-dossier .card,
-    body.style-dossier .hero-card,
-    body.style-dossier .principle,
-    body.style-dossier .timeline-item,
-    body.style-dossier .contact-panel,
-    body.style-dossier .reveal { border-top-width: 8px; border-top-color: var(--accent); }
     body.style-dossier .card-title-row h3::before { content: "CASE "; color: var(--accent); font-family: var(--mono); font-size: 12px; letter-spacing: .12em; }
     body.style-lab h1,
     body.style-lab h2,
@@ -1905,7 +1861,7 @@
     body.style-zine .principle,
     body.style-zine .timeline-item,
     body.style-zine .contact-panel,
-    body.style-zine .reveal { transform: rotate(-0.35deg); border-width: 2px; box-shadow: 6px 6px 0 color-mix(in srgb, var(--fg), transparent 82%); }
+    body.style-zine .reveal { transform: rotate(-0.35deg); box-shadow: 6px 6px 0 color-mix(in srgb, var(--fg), transparent 82%); }
     body.style-zine .card:nth-child(even),
     body.style-zine .principle:nth-child(even),
     body.style-zine .timeline-item:nth-child(even) { transform: rotate(0.35deg); }
@@ -1921,7 +1877,7 @@
     body.style-luxury .hero-card,
     body.style-luxury .principle,
     body.style-luxury .timeline-item,
-    body.style-luxury .reveal { border-color: color-mix(in srgb, var(--accent), transparent 54%); background: color-mix(in srgb, var(--card-strong), transparent 24%); }
+    body.style-luxury .reveal { background: color-mix(in srgb, var(--card-strong), transparent 24%); }
     body.style-micro { --style-site-width: 720px; --style-h1-min: 36px; --style-h1-max: 72px; --style-section-padding-y: 48px; --style-card-padding: 16px; --style-desc-size: 16px; }
     body.style-mega { --style-site-width: 1120px; --style-h1-max: 132px; --style-h1-fluid: 11vw; --style-section-padding-y: 96px; --style-card-padding: 32px; }
     body.style-mega h1 { text-transform: uppercase; }
@@ -1947,16 +1903,16 @@
     body.style-index-card .hero-card,
     body.style-index-card .principle,
     body.style-index-card .timeline-item,
-    body.style-index-card .reveal { border-top: 16px solid color-mix(in srgb, var(--accent), transparent 72%); box-shadow: 0 1px 0 var(--line); }
+    body.style-index-card .reveal { box-shadow: 0 1px 0 var(--line); }
     body.style-index-card .generated-desc-meta { border-top: 1px dashed var(--line); padding-top: 16px; }
-    body.style-thin { --style-border-width: 1px; --style-card-shadow: none; --style-panel-shadow: none; --style-blur: 0px; }
+    body.style-thin { --style-card-shadow: none; --style-panel-shadow: none; --style-blur: 0px; }
     body.style-thin .card,
     body.style-thin .hero-card,
     body.style-thin .principle,
     body.style-thin .timeline-item,
     body.style-thin .contact-panel,
     body.style-thin .reveal { background: transparent; }
-    body.style-heavy { --style-border-width: 3px; --style-section-border-width: 3px; --style-card-shadow: 10px 10px 0 color-mix(in srgb, var(--accent), transparent 42%); }
+    body.style-heavy { --style-card-shadow: 10px 10px 0 color-mix(in srgb, var(--accent), transparent 42%); }
     body.style-heavy h1, body.style-heavy h2 { font-weight: 900; text-transform: uppercase; }
     body.style-captioned .card::after,
     body.style-captioned .hero-card::after,
@@ -1979,32 +1935,17 @@
     body.shape-cut .contact-panel,
     body.shape-cut .reveal-stat { border-radius: 16px 0 16px 0; }
     body.shape-cut .reveal { border-radius: 32px 0 32px 0; }
-    body.shape-stamp .card,
-    body.shape-stamp .hero-card,
-    body.shape-stamp .principle,
-    body.shape-stamp .timeline-item,
-    body.shape-stamp .contact-panel,
-    body.shape-stamp .reveal { border-style: dashed; border-width: 2px; }
     body.shape-folder .card,
     body.shape-folder .hero-card,
     body.shape-folder .principle,
     body.shape-folder .timeline-item,
-    body.shape-folder .reveal { border-radius: 8px 24px 24px 24px; border-top-width: 8px; border-top-color: color-mix(in srgb, var(--accent), transparent 60%); }
-    body.shape-postcard .card,
-    body.shape-postcard .hero-card,
-    body.shape-postcard .principle,
-    body.shape-postcard .timeline-item,
-    body.shape-postcard .contact-panel,
-    body.shape-postcard .reveal {
-      border-style: solid;
-      border-width: max(2px, var(--style-border-width));
-    }
+    body.shape-folder .reveal { border-radius: 8px 24px 24px 24px; }
     body.shape-underline .card,
     body.shape-underline .hero-card,
     body.shape-underline .principle,
     body.shape-underline .timeline-item,
     body.shape-underline .contact-panel,
-    body.shape-underline .reveal { border-left: 0; border-right: 0; border-top: 0; border-radius: 0 !important; background: transparent; box-shadow: none; }
+    body.shape-underline .reveal { border-radius: 0 !important; background: transparent; box-shadow: none; }
     body.shape-offset .card,
     body.shape-offset .hero-card,
     body.shape-offset .principle,
@@ -2033,13 +1974,9 @@
     body.shape-asymmetric :is(.button, .tag, .skill-pill) { border-radius: 18px 4px 18px 4px; }
     body.shape-tabbed :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       border-radius: 6px 28px 12px 12px;
-      border-top-width: 10px;
-      border-top-color: color-mix(in srgb, var(--accent), transparent 50%);
     }
     body.shape-tabbed :is(.button, .tag, .skill-pill) { border-radius: 4px 14px 4px 4px; }
     body.shape-inset-edge :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat, .complete-project .intro-list p) {
-      border-left-width: 6px;
-      border-left-color: color-mix(in srgb, var(--accent), var(--line) 52%);
       border-radius: 12px 20px 20px 12px;
     }
     body.shape-inset-edge :is(.button, .tag, .skill-pill) {
@@ -2057,37 +1994,24 @@
     body.shape-capsule-cards :is(.button, .tag, .skill-pill) { border-radius: 999px; }
     body.shape-top-accent :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) {
       border-radius: 28px 28px 8px 8px;
-      border-top-width: 4px;
-      border-top-color: color-mix(in srgb, var(--accent), var(--line) 56%);
     }
     body.shape-top-accent :is(.button, .tag, .skill-pill) { border-radius: 14px 14px 6px 6px; }
     body.shape-bottom-accent :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) {
       border-radius: 8px 8px 28px 28px;
-      border-bottom-width: 4px;
-      border-bottom-color: color-mix(in srgb, var(--accent), var(--line) 56%);
     }
     body.shape-bottom-accent :is(.button, .tag, .skill-pill) { border-radius: 6px 6px 14px 14px; }
     body.shape-speech :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) { border-radius: 28px 28px 28px 4px; }
     body.shape-speech :is(.button, .tag, .skill-pill) { border-radius: 16px 16px 16px 3px; }
     body.shape-bracketed :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) {
-      border-left-width: 5px;
-      border-right-width: 5px;
-      border-top-color: transparent;
-      border-bottom-color: transparent;
       border-radius: 18px 0 18px 0;
     }
     body.shape-bracketed :is(.button, .tag, .skill-pill) { border-left-width: 3px; border-right-width: 3px; border-radius: 8px 0; }
     body:is(.shape-framed, .shape-framed-outline) :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) {
-      border: 2px solid color-mix(in srgb, var(--fg), transparent 62%);
       border-radius: 18px;
     }
     body:is(.shape-framed, .shape-framed-outline) :is(.button, .tag, .skill-pill) {
       border: 2px solid currentColor;
       border-radius: 10px;
-    }
-    body.shape-framed-outline :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) {
-      outline: 1px solid var(--line);
-      outline-offset: 5px;
     }
     body.shape-framed-outline :is(.button, .tag, .skill-pill) {
       outline: 1px solid var(--line);
@@ -2099,10 +2023,6 @@
     body.shape-leaf :is(.button, .tag, .skill-pill) { border-radius: 22px 3px 22px 3px; }
     body.shape-edge-accent :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat, .complete-project .intro-list p) {
       border-radius: 18px;
-      border-left-width: 4px;
-      border-right-width: 4px;
-      border-left-color: color-mix(in srgb, var(--accent), var(--line) 56%);
-      border-right-color: color-mix(in srgb, var(--accent), var(--line) 56%);
     }
     body.shape-edge-accent :is(.button, .tag, .skill-pill) {
       border-radius: 10px;
@@ -2159,9 +2079,6 @@
     body.style-paper-stack :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       box-shadow: 5px 5px 0 var(--bg), 7px 7px 0 var(--line);
     }
-    body.style-accent-panel :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
-      border-color: color-mix(in srgb, var(--accent), var(--line) 40%);
-    }
     body.style-banded-solid :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       background: linear-gradient(180deg, color-mix(in srgb, var(--accent), transparent 91%), transparent 48%), var(--opaque-surface);
     }
@@ -2172,7 +2089,6 @@
       box-shadow: inset 0 12px 28px color-mix(in srgb, var(--fg), transparent 94%);
     }
     body.style-sticker-solid :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
-      border-width: 2px;
       box-shadow: 4px 4px 0 var(--fg);
     }
 
@@ -2261,7 +2177,6 @@
     /* Extended generated component surfaces */
     body.style-tonal :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
       background: linear-gradient(var(--accent-soft), var(--accent-soft)), var(--card-strong);
-      border-color: color-mix(in srgb, var(--accent), var(--line) 76%);
       backdrop-filter: none;
     }
     body.style-quiet-depth :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
@@ -2285,7 +2200,6 @@
     }
     body.style-soft-relief :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
       background: linear-gradient(145deg, color-mix(in srgb, var(--card-strong), white 4%), color-mix(in srgb, var(--card), var(--bg) 12%));
-      border-color: color-mix(in srgb, var(--line), transparent 22%);
       box-shadow: 0 14px 38px rgba(0, 0, 0, .07);
     }
     body.style-wash-panel :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
@@ -2296,7 +2210,6 @@
     }
     body.style-mono-surface :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
       background: color-mix(in srgb, var(--bg), var(--fg) 5%);
-      border-color: color-mix(in srgb, var(--fg), transparent 84%);
       backdrop-filter: none;
     }
     body.style-mono-surface :is(h1, h2, h3, .kicker, .section-index, .generated-desc-meta) {
@@ -2306,7 +2219,6 @@
       background:
         linear-gradient(180deg, color-mix(in srgb, var(--accent), transparent 89%), transparent 34%),
         var(--card);
-      border-color: color-mix(in srgb, var(--accent), var(--line) 82%);
     }
     body:is(.shape-no-boxes, .shape-line-only):is(.style-tonal, .style-quiet-depth, .style-grid-surface, .style-header-rule, .style-soft-relief, .style-wash-panel, .style-mono-surface, .style-highlight-surface)
     :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
@@ -2756,34 +2668,28 @@
 
     /* Power-of-two component expansion: 43 -> 64. */
     body.style-window-chrome :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
-      border-top-width: 28px;
-      border-top-color: color-mix(in srgb, var(--fg), transparent 88%);
       background: var(--card-strong);
-      box-shadow: inset 0 1px 0 var(--line);
+      box-shadow: inset 0 28px 0 color-mix(in srgb, var(--fg), transparent 88%), inset 0 29px 0 var(--line);
     }
     body.style-window-chrome :is(.card, .hero-card, .timeline-item)::before {
       content: "•••";
       display: block;
       height: 0;
       position: relative;
-      top: calc(-1 * var(--style-card-padding) - 24px);
+      top: calc(-1 * var(--style-card-padding) + 4px);
       color: var(--accent);
       font: 800 14px/1 var(--mono);
       letter-spacing: .2em;
     }
     body.style-side-rail :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
-      border-left: 12px solid var(--accent);
       background: color-mix(in srgb, var(--card-strong), transparent 8%);
-      box-shadow: none;
+      box-shadow: 8px 8px 0 color-mix(in srgb, var(--accent), transparent 74%);
     }
     body.style-split-tone :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
       background: linear-gradient(110deg, color-mix(in srgb, var(--accent), transparent 88%) 0 36%, var(--card-strong) 36% 100%);
-      border-color: color-mix(in srgb, var(--accent), var(--line) 72%);
     }
     body.style-beveled :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
       background: linear-gradient(145deg, color-mix(in srgb, var(--card-strong), white 7%), color-mix(in srgb, var(--card), black 5%));
-      border-width: 2px;
-      border-color: color-mix(in srgb, var(--fg), transparent 82%);
       box-shadow: inset 3px 3px 0 color-mix(in srgb, white, transparent 85%), inset -3px -3px 0 color-mix(in srgb, black, transparent 88%);
     }
     body.style-perforated :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
@@ -2791,23 +2697,19 @@
         radial-gradient(circle at 0 12px, var(--bg) 0 4px, transparent 4.5px) 0 0 / 100% 24px repeat-y,
         radial-gradient(circle at 100% 12px, var(--bg) 0 4px, transparent 4.5px) 0 0 / 100% 24px repeat-y,
         var(--card-strong);
-      border-style: dashed;
     }
     body.style-ruled :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
       background:
         repeating-linear-gradient(to bottom, transparent 0 31px, color-mix(in srgb, var(--line), transparent 20%) 31px 32px),
         var(--card-strong);
-      border-left: 4px double color-mix(in srgb, var(--accent), var(--line) 40%);
     }
     body.style-neon :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       background: color-mix(in srgb, var(--bg), transparent 8%);
-      border-color: var(--accent);
       box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent), transparent 55%), 0 0 24px color-mix(in srgb, var(--accent), transparent 72%), inset 0 0 20px color-mix(in srgb, var(--accent), transparent 90%);
     }
     body.style-neon :is(h1, h2, h3) { text-shadow: 0 0 18px color-mix(in srgb, var(--accent), transparent 55%); }
     body.style-museum :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       background: color-mix(in srgb, var(--bg), var(--fg) 3%);
-      border: 8px double color-mix(in srgb, var(--fg), transparent 74%);
       box-shadow: inset 0 0 0 10px var(--bg), inset 0 0 0 11px var(--line);
     }
     body.style-museum :is(h1, h2, h3) { font-family: var(--serif); font-weight: 520; }
@@ -2815,16 +2717,11 @@
       background:
         radial-gradient(circle, color-mix(in srgb, var(--fg), transparent 88%) 0 1px, transparent 1.3px) 0 0 / 9px 9px,
         var(--card-strong);
-      border: 3px solid var(--fg);
       box-shadow: 7px 7px 0 var(--accent);
     }
     body.style-comic :is(h1, h2, h3) { text-transform: uppercase; font-weight: 900; }
     body.style-newspaper :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       background: color-mix(in srgb, var(--bg), white 4%);
-      border-left: 0;
-      border-right: 0;
-      border-top: 4px double var(--fg);
-      border-bottom: 1px solid var(--fg);
       border-radius: 0;
       box-shadow: none;
     }
@@ -2835,13 +2732,11 @@
         linear-gradient(90deg, var(--accent) 0 5px, transparent 5px),
         linear-gradient(180deg, color-mix(in srgb, var(--fg), transparent 94%) 0 38px, transparent 38px),
         var(--card-strong);
-      border-color: color-mix(in srgb, var(--fg), transparent 80%);
       box-shadow: 0 12px 28px rgba(0,0,0,.08);
     }
     body.style-dashboard :is(.section-index, .kicker, .generated-desc-meta) { font-family: var(--mono); }
     body.style-taped :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       background: var(--card-strong);
-      border-color: transparent;
       box-shadow: 0 18px 34px rgba(0,0,0,.1);
       transform: rotate(-.25deg);
     }
@@ -2857,13 +2752,11 @@
       transform: rotate(1.5deg);
     }
     body.style-gradient-frame :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
-      border: 2px solid transparent;
-      background: linear-gradient(var(--card-strong), var(--card-strong)) padding-box, linear-gradient(135deg, var(--accent), transparent 52%, var(--accent-2)) border-box;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent), transparent 90%), transparent 52%, color-mix(in srgb, var(--accent-2), transparent 90%)), var(--card-strong);
       box-shadow: none;
     }
     body.style-frosted :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       background: color-mix(in srgb, var(--card-strong), transparent 34%);
-      border-color: color-mix(in srgb, white, transparent 72%);
       backdrop-filter: blur(28px) saturate(1.35);
       box-shadow: inset 0 1px 0 color-mix(in srgb, white, transparent 64%), 0 24px 64px rgba(0,0,0,.1);
     }
@@ -2873,13 +2766,11 @@
         linear-gradient(45deg, color-mix(in srgb, var(--fg), transparent 94%) 25%, var(--card-strong) 25% 75%, color-mix(in srgb, var(--fg), transparent 94%) 75%);
       background-size: 12px 12px;
       background-position: 0 0, 6px 6px;
-      border-color: color-mix(in srgb, var(--fg), transparent 76%);
     }
     body.style-warning-stripe :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       background:
         repeating-linear-gradient(135deg, var(--accent-soft) 0 12px, transparent 12px 24px) top / 100% 12px no-repeat,
         var(--card-strong);
-      border-top: 0;
       box-shadow: inset 0 12px 0 color-mix(in srgb, var(--accent), transparent 78%);
     }
     body.style-blueprint-plate :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
@@ -2888,33 +2779,26 @@
         linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 90%) 1px, transparent 1px),
         color-mix(in srgb, var(--bg), var(--accent) 8%);
       background-size: 16px 16px;
-      border-color: color-mix(in srgb, var(--accent), transparent 42%);
     }
     body.style-blueprint-plate :is(h1, h2, h3, .kicker, .section-index) { font-family: var(--mono); }
     body.style-floating :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       background: var(--card-strong);
-      border-color: transparent;
       box-shadow: 0 1px 0 color-mix(in srgb, white, transparent 75%) inset, 0 26px 72px rgba(0,0,0,.14);
       transform: translateY(-4px);
     }
     body.style-terminal-panel :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       background: color-mix(in srgb, var(--bg), black 7%);
-      border: 1px solid color-mix(in srgb, var(--accent), transparent 58%);
       box-shadow: inset 0 0 0 4px color-mix(in srgb, var(--accent), transparent 95%);
     }
     body.style-terminal-panel :is(h1, h2, h3, p, .button, .tag, .skill-pill) { font-family: var(--mono); }
     body.style-terminal-panel .generated-description::before { content: "> "; color: var(--accent); }
     body.style-soft-outline :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       background: transparent;
-      border: 1px solid color-mix(in srgb, var(--fg), transparent 78%);
-      outline: 8px solid color-mix(in srgb, var(--accent), transparent 95%);
-      outline-offset: -9px;
       box-shadow: none;
       backdrop-filter: none;
     }
     body.style-wireframe :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal) {
       background: transparent;
-      border: 1px solid var(--accent);
       border-radius: 0;
       box-shadow: inset 0 0 0 5px var(--bg), inset 0 0 0 6px color-mix(in srgb, var(--accent), transparent 55%);
       backdrop-filter: none;
@@ -2930,14 +2814,6 @@
       transform: none;
     }
 
-    /* Horizontal-rule treatments keep only their top rule. */
-    body.style-generated:is(.shape-no-boxes, .shape-line-only, .style-receipt, .style-newspaper)
-    :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
-      border-right-width: 0;
-      border-bottom-width: 0;
-      border-left-width: 0;
-    }
-
     /* Forced 8px integer safe gap for every generated line-only combination. */
     body.style-generated.shape-line-only
     :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
@@ -2948,17 +2824,11 @@
     body.style-generated :is(
       .topbar,
       .section,
-      .hero-card,
       .stat,
-      .card,
       .card-title-row,
       .tag,
       .skill-pill,
-      .principle,
-      .timeline-item,
-      .contact-panel,
       .button.secondary,
-      .reveal,
       .reveal-stat,
       .reveal-stat-section,
       .complete-version,
@@ -2976,4 +2846,11 @@
       background: var(--fg);
       color: var(--bg);
       border-color: var(--fg);
+    }
+
+    /* Component shell contract: generated surfaces and shapes may change
+       geometry, fill and shadow, but only the frame gene owns the outer line. */
+    body.style-generated :is(.hero-card, .card, .principle, .timeline-item, .contact-panel, .reveal) {
+      border: var(--style-component-frame);
+      outline: none;
     }
