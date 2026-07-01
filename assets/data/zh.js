@@ -683,12 +683,12 @@ window.PORTFOLIO_LOCALE = {
             "bottom-accent",
             "speech",
             "bracketed",
-            "double-frame",
+            "framed",
             "split-radius",
             "leaf",
             "edge-accent",
             "diamond-cut",
-            "corner-stripe",
+            "framed-outline",
             "squircle"
       ]
 },

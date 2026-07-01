@@ -59,9 +59,6 @@
       --style-title-rule-padding: 0px;
       --style-index-box-padding: 0px;
       --style-index-box-border-width: 0px;
-      --style-outline-width: 0px;
-      --style-outline-style: solid;
-      --style-outline-offset: 0px;
       --style-section-border-width: 1px;
       --style-section-border-style: solid;
       --style-micro-opacity: 1;
@@ -661,17 +658,6 @@
       font-family: var(--mono);
       font-size: 28px;
       line-height: 1;
-    }
-
-    body.style-generated .hero-card,
-    body.style-generated .card,
-    body.style-generated .principle,
-    body.style-generated .timeline-item,
-    body.style-generated .contact-panel,
-    body.style-generated .reveal {
-      /* No outer outlines: keeps generated chrome without creating wrapper/dashed overlap artifacts. */
-      outline: 0;
-      outline-offset: 0;
     }
 
     body.style-generated {
@@ -2091,13 +2077,22 @@
       border-radius: 18px 0 18px 0;
     }
     body.shape-bracketed :is(.button, .tag, .skill-pill) { border-left-width: 3px; border-right-width: 3px; border-radius: 8px 0; }
-    body.shape-double-frame :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) {
-      border: 4px double color-mix(in srgb, var(--fg), transparent 62%);
+    body:is(.shape-framed, .shape-framed-outline) :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) {
+      border: 2px solid color-mix(in srgb, var(--fg), transparent 62%);
       border-radius: 18px;
+    }
+    body:is(.shape-framed, .shape-framed-outline) :is(.button, .tag, .skill-pill) {
+      border: 2px solid currentColor;
+      border-radius: 10px;
+    }
+    body.shape-framed-outline :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) {
       outline: 1px solid var(--line);
       outline-offset: 5px;
     }
-    body.shape-double-frame :is(.button, .tag, .skill-pill) { border: 3px double currentColor; border-radius: 10px; }
+    body.shape-framed-outline :is(.button, .tag, .skill-pill) {
+      outline: 1px solid var(--line);
+      outline-offset: 2px;
+    }
     body.shape-split-radius :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) { border-radius: 44px 4px 4px 44px; }
     body.shape-split-radius :is(.button, .tag, .skill-pill) { border-radius: 999px 6px 6px 999px; }
     body.shape-leaf :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) { border-radius: 56px 6px 56px 6px / 40px 6px 40px 6px; }
@@ -2121,18 +2116,6 @@
     body.shape-diamond-cut :is(.button, .tag, .skill-pill) {
       border-radius: 14px;
       corner-shape: bevel;
-    }
-    body.shape-corner-stripe :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat, .complete-project .intro-list p) {
-      border-left-width: 4px;
-      border-bottom-width: 4px;
-      border-left-color: color-mix(in srgb, var(--accent), var(--line) 58%);
-      border-bottom-color: color-mix(in srgb, var(--accent), var(--line) 72%);
-      border-radius: 18px 6px;
-    }
-    body.shape-corner-stripe :is(.button, .tag, .skill-pill) {
-      border-left-width: 3px;
-      border-bottom-width: 3px;
-      border-radius: 10px 4px;
     }
     body.shape-squircle :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat, .complete-project .intro-list p) { border-radius: 36px / 28px; }
     body.shape-squircle :is(.button, .tag, .skill-pill) { border-radius: 14px / 11px; }

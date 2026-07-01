@@ -22,7 +22,6 @@
     "--style-border-width",
     "--style-section-border-width"
   ]);
-
   const SAFE_BILINGUAL_QUIPS = [
     { zh: "这页会变，但不是在逃避责任。", en: "This page changes, but it is not dodging responsibility." },
     { zh: "随机的是外观，固定的是链接能点。", en: "The surface is random. The links are reliably clickable." },
@@ -85,7 +84,7 @@
         { variables: { "--style-border-width": "1px", "--style-border-style": "dashed", "--style-section-border-width": "1px", "--style-section-border-style": "dashed" } },
         { variables: { "--style-border-width": "2px", "--style-border-style": "dashed", "--style-section-border-width": "1px", "--style-section-border-style": "solid" } },
         { variables: { "--style-border-width": "1px", "--style-border-style": "dotted", "--style-section-border-width": "1px", "--style-section-border-style": "dotted" } },
-        { variables: { "--style-border-width": "3px", "--style-border-style": "double", "--style-section-border-width": "3px", "--style-section-border-style": "double" } },
+        { variables: { "--style-border-width": "3px", "--style-border-style": "solid", "--style-section-border-width": "3px", "--style-section-border-style": "solid" } },
         { variables: { "--style-border-width": "1px", "--style-border-style": "solid", "--style-section-border-width": "0px", "--style-section-border-style": "solid" } }
       ],
       shadow: [
@@ -113,14 +112,14 @@
         { variables: { "--style-line-height": "1.46", "--style-h1-min": "39px", "--style-h1-fluid": "7.8vw", "--style-h1-max": "88px", "--style-h1-tracking": "-0.055em", "--style-h2-tracking": "-0.042em", "--style-h3-tracking": "-0.024em", "--style-desc-size": "17px", "--style-section-lead-size": "18px" } }
       ],
       chrome: [
-        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
-        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-padding": "8px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
-        { variables: { "--style-title-rule-width": "2px", "--style-title-rule-padding": "16px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
-        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } },
-        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "dashed", "--style-title-rule-padding": "8px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } },
-        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } },
-        { variables: { "--style-title-rule-width": "3px", "--style-title-rule-style": "double", "--style-title-rule-padding": "16px", "--style-outline-width": "0px", "--style-outline-offset": "0px" } },
-        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "solid", "--style-title-rule-padding": "16px", "--style-outline-width": "0px", "--style-outline-style": "solid", "--style-outline-offset": "0px" } }
+        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px" } },
+        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-padding": "8px" } },
+        { variables: { "--style-title-rule-width": "2px", "--style-title-rule-padding": "16px" } },
+        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px" } },
+        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "dashed", "--style-title-rule-padding": "8px" } },
+        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px" } },
+        { variables: { "--style-title-rule-width": "3px", "--style-title-rule-style": "double", "--style-title-rule-padding": "16px" } },
+        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "solid", "--style-title-rule-padding": "16px" } }
       ],
       rhythm: [
         { variables: { "--style-text-width": "624px", "--style-micro-opacity": ".72" } },
