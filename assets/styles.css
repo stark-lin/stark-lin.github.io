@@ -21,8 +21,8 @@
       --style-section-gap: 32px;
       --style-card-padding: 24px;
       --style-card-gap: 16px;
-      --style-safe-gap: 8px;
-      --style-component-frame: 1px solid var(--line);
+      --style-safe-gap: 16px;
+      --style-component-outline: 1px solid var(--line);
       --style-card-shadow: none;
       --style-panel-shadow: var(--shadow);
       --style-blur: 16px;
@@ -818,7 +818,9 @@
 
     .hero-card {
       background: var(--card);
-      border: var(--style-component-frame);
+      border: 0;
+      outline: var(--style-component-outline);
+      outline-offset: 0;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: var(--style-card-padding);
@@ -892,7 +894,9 @@
     .card {
       grid-column: 1 / -1;
       padding: var(--style-card-padding);
-      border: var(--style-component-frame);
+      border: 0;
+      outline: var(--style-component-outline);
+      outline-offset: 0;
       background: var(--card);
       border-radius: var(--radius);
       backdrop-filter: blur(var(--style-blur));
@@ -993,7 +997,9 @@
 
     .principle {
       padding: var(--style-card-padding);
-      border: var(--style-component-frame);
+      border: 0;
+      outline: var(--style-component-outline);
+      outline-offset: 0;
       border-radius: var(--radius);
       background: var(--card);
       font-size: 19px;
@@ -1025,7 +1031,9 @@
       grid-template-columns: minmax(0, 1fr);
       gap: 16px;
       padding: var(--style-card-padding);
-      border: var(--style-component-frame);
+      border: 0;
+      outline: var(--style-component-outline);
+      outline-offset: 0;
       border-radius: var(--radius);
       background: var(--card);
       box-shadow: var(--style-card-shadow);
@@ -1045,7 +1053,9 @@
       align-items: start;
       gap: 24px;
       padding: calc(var(--style-card-padding) + 8px);
-      border: var(--style-component-frame);
+      border: 0;
+      outline: var(--style-component-outline);
+      outline-offset: 0;
       border-radius: calc(var(--radius) + 8px);
       background: var(--card-strong);
       box-shadow: var(--style-panel-shadow);
@@ -1062,7 +1072,9 @@
 
     .reveal {
       margin: 80px 0 56px;
-      border: var(--style-component-frame);
+      border: 0;
+      outline: var(--style-component-outline);
+      outline-offset: 0;
       background: var(--card-strong);
       color: var(--fg);
       border-radius: calc(var(--radius) + 8px);
@@ -1980,8 +1992,6 @@
       border-radius: 12px 20px 20px 12px;
     }
     body.shape-inset-edge :is(.button, .tag, .skill-pill) {
-      border-left-width: 3px;
-      border-left-color: color-mix(in srgb, var(--accent), var(--line) 52%);
       border-radius: 7px 12px 12px 7px;
     }
     /* Content-bearing cards cannot use an unbounded pill radius: overflow
@@ -2005,17 +2015,12 @@
     body.shape-bracketed :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) {
       border-radius: 18px 0 18px 0;
     }
-    body.shape-bracketed :is(.button, .tag, .skill-pill) { border-left-width: 3px; border-right-width: 3px; border-radius: 8px 0; }
+    body.shape-bracketed :is(.button, .tag, .skill-pill) { border-radius: 8px 0; }
     body:is(.shape-framed, .shape-framed-outline) :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) {
       border-radius: 18px;
     }
     body:is(.shape-framed, .shape-framed-outline) :is(.button, .tag, .skill-pill) {
-      border: 2px solid currentColor;
       border-radius: 10px;
-    }
-    body.shape-framed-outline :is(.button, .tag, .skill-pill) {
-      outline: 1px solid var(--line);
-      outline-offset: 2px;
     }
     body.shape-split-radius :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat) { border-radius: 44px 4px 4px 44px; }
     body.shape-split-radius :is(.button, .tag, .skill-pill) { border-radius: 999px 6px 6px 999px; }
@@ -2026,8 +2031,6 @@
     }
     body.shape-edge-accent :is(.button, .tag, .skill-pill) {
       border-radius: 10px;
-      border-left-width: 3px;
-      border-right-width: 3px;
     }
     body.shape-diamond-cut :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .reveal-stat, .complete-project .intro-list p) {
       border-radius: 28px;
@@ -2814,7 +2817,7 @@
       transform: none;
     }
 
-    /* Forced 8px integer safe gap for every generated line-only combination. */
+    /* Generated line-only combinations retain the 16px component-safe minimum. */
     body.style-generated.shape-line-only
     :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
       padding-inline: var(--style-safe-gap);
@@ -2848,9 +2851,20 @@
       border-color: var(--fg);
     }
 
-    /* Component shell contract: generated surfaces and shapes may change
-       geometry, fill and shadow, but only the frame gene owns the outer line. */
+    /* Component shell contract: the generated line is a strict outer wrap.
+       It does not consume component space or expand to include the shadow. */
     body.style-generated :is(.hero-card, .card, .principle, .timeline-item, .contact-panel, .reveal) {
-      border: var(--style-component-frame);
+      border: 0;
+      outline: var(--style-component-outline);
+      outline-offset: 0;
+    }
+
+    /* Button shell contract: shape variants own geometry only; the button gene
+       owns the complete border so zero-width buttons cannot gain side rails. */
+    body.style-generated .button {
+      border: var(--style-button-border-width) solid var(--style-button-border-color);
       outline: none;
+    }
+    body.style-generated .button.secondary {
+      border-color: var(--style-button-secondary-border-color);
     }

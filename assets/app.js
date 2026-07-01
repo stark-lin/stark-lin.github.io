@@ -8,6 +8,7 @@
   const CUSTOM_PALETTES = window.PORTFOLIO_PALETTES || [];
   const CUSTOM_PALETTES_BY_ID = new Map(CUSTOM_PALETTES.map(palette => [palette.id, palette]));
   const SAFE_SPACING_STEP_PX = 8;
+  const SAFE_SPACING_MIN_PX = 16;
   const SAFE_SPACING_VARIABLES = new Set([
     "--style-card-padding",
     "--style-card-gap",
@@ -72,13 +73,13 @@
         { variables: { "--style-site-width": "864px", "--style-card-padding": "24px", "--style-card-gap": "24px", "--style-section-padding-y": "80px", "--style-section-gap": "48px", "--style-hero-pad-top": "88px", "--style-hero-pad-bottom": "64px", "--style-hero-gap": "40px" } },
         { variables: { "--style-site-width": "1120px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "104px", "--style-section-gap": "48px", "--style-hero-pad-top": "120px", "--style-hero-pad-bottom": "96px", "--style-hero-gap": "40px" } }
       ],
-      border: [
-        { variables: { "--style-component-frame": "none" } },
-        { variables: { "--style-component-frame": "1px dashed var(--style-visible-border)" } },
-        { variables: { "--style-component-frame": "2px dashed var(--style-visible-border)" } },
-        { variables: { "--style-component-frame": "1px solid var(--style-visible-border)" } },
-        { variables: { "--style-component-frame": "2px solid var(--style-visible-border)" } },
-        { variables: { "--style-component-frame": "4px double var(--style-visible-border)" } }
+      frame: [
+        { variables: { "--style-component-outline": "none" } },
+        { variables: { "--style-component-outline": "1px dashed var(--style-visible-border)" } },
+        { variables: { "--style-component-outline": "2px dashed var(--style-visible-border)" } },
+        { variables: { "--style-component-outline": "1px solid var(--style-visible-border)" } },
+        { variables: { "--style-component-outline": "2px solid var(--style-visible-border)" } },
+        { variables: { "--style-component-outline": "4px double var(--style-visible-border)" } }
       ],
       shadow: [
         { variables: { "--style-card-shadow": "none", "--style-panel-shadow": "none", "--style-blur": "0px" } },
@@ -134,6 +135,8 @@
         { variables: { "--style-button-y": "16px", "--style-button-x": "16px", "--style-button-size": "16px" } },
         { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "13px" } }
       ],
+      // Secondary buttons must separate from the page through either a visible
+      // border or an opaque foreground/background contrast fill.
       buttons: [
         { variables: { "--style-button-radius": "999px", "--style-button-border-width": "1px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "transparent", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--fg)", "--style-button-shadow": "none", "--style-button-font": "inherit", "--style-button-weight": "inherit", "--style-button-tracking": "normal", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
         { variables: { "--style-button-radius": "14px", "--style-button-border-width": "1px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "var(--card-strong)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--line)", "--style-button-shadow": "0 8px 18px rgba(0,0,0,.10)", "--style-button-font": "var(--sans)", "--style-button-weight": "700", "--style-button-tracking": ".01em", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
@@ -141,7 +144,7 @@
         { variables: { "--style-button-radius": "8px", "--style-button-border-width": "2px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "var(--bg)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--fg)", "--style-button-shadow": "3px 3px 0 var(--accent)", "--style-button-font": "var(--sans)", "--style-button-weight": "760", "--style-button-tracking": ".01em", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
         { variables: { "--style-button-radius": "10px", "--style-button-border-width": "1px", "--style-button-bg": "transparent", "--style-button-color": "var(--fg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "var(--accent-soft)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--line)", "--style-button-shadow": "none", "--style-button-font": "inherit", "--style-button-weight": "680", "--style-button-tracking": ".02em", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
         { variables: { "--style-button-radius": "18px", "--style-button-border-width": "1px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "transparent", "--style-button-secondary-bg": "var(--accent-soft)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "color-mix(in srgb, var(--accent), var(--line) 72%)", "--style-button-shadow": "0 10px 26px color-mix(in srgb, var(--accent), transparent 82%)", "--style-button-font": "var(--sans)", "--style-button-weight": "720", "--style-button-tracking": ".01em", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
-        { variables: { "--style-button-radius": "999px", "--style-button-border-width": "0px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "transparent", "--style-button-secondary-bg": "color-mix(in srgb, var(--card-strong), transparent 12%)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "transparent", "--style-button-shadow": "none", "--style-button-font": "inherit", "--style-button-weight": "700", "--style-button-tracking": "normal", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
+        { variables: { "--style-button-radius": "999px", "--style-button-border-width": "0px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "transparent", "--style-button-secondary-bg": "color-mix(in srgb, var(--bg) 82%, var(--fg) 18%)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "transparent", "--style-button-shadow": "none", "--style-button-font": "inherit", "--style-button-weight": "700", "--style-button-tracking": "normal", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
         { variables: { "--style-button-radius": "18px", "--style-button-border-width": "1px", "--style-button-bg": "color-mix(in srgb, var(--fg), transparent 8%)", "--style-button-color": "var(--bg)", "--style-button-border-color": "color-mix(in srgb, var(--fg), transparent 18%)", "--style-button-secondary-bg": "color-mix(in srgb, var(--card-strong), transparent 20%)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--line)", "--style-button-shadow": "0 10px 28px rgba(0,0,0,.10)", "--style-button-font": "inherit", "--style-button-weight": "680", "--style-button-tracking": ".01em", "--style-button-text-transform": "none", "--style-button-backdrop": "blur(14px) saturate(1.2)" } },
         { variables: { "--style-button-radius": "0px", "--style-button-border-width": "3px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "transparent", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--fg)", "--style-button-shadow": "none", "--style-button-font": "var(--sans)", "--style-button-weight": "850", "--style-button-tracking": ".04em", "--style-button-text-transform": "uppercase", "--style-button-backdrop": "none" } }
       ],
@@ -912,7 +915,7 @@
         if (SAFE_SPACING_VARIABLES.has(property)) {
           const pixels = Number.parseFloat(value);
           if (Number.isFinite(pixels)) {
-            safeValue = `${Math.max(SAFE_SPACING_STEP_PX, Math.ceil(pixels / SAFE_SPACING_STEP_PX) * SAFE_SPACING_STEP_PX)}px`;
+            safeValue = `${Math.max(SAFE_SPACING_MIN_PX, Math.ceil(pixels / SAFE_SPACING_STEP_PX) * SAFE_SPACING_STEP_PX)}px`;
           }
         }
         document.body.style.setProperty(property, safeValue);
