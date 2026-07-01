@@ -751,6 +751,31 @@
       font-size: 13px;
     }
 
+    nav a {
+      margin: -3px -5px;
+      padding: 3px 5px;
+      transition: color .16s ease;
+    }
+
+    nav a.current {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    nav a.current:hover,
+    nav a.current:focus-visible {
+      color: var(--fg);
+      text-decoration: underline;
+    }
+
     .topbar .button.language-switch {
       grid-column: 3;
       justify-self: end;
@@ -1337,6 +1362,7 @@
     body.shape-line-only .reveal {
       border-left: 0;
       border-right: 0;
+      border-bottom: 0;
       border-radius: 0 !important;
       background: transparent;
       box-shadow: none;
@@ -2919,6 +2945,14 @@
       box-shadow: none;
       backdrop-filter: none;
       transform: none;
+    }
+
+    /* Horizontal-rule treatments keep only their top rule. */
+    body.style-generated:is(.shape-no-boxes, .shape-line-only, .style-receipt, .style-newspaper)
+    :is(.card, .hero-card, .principle, .timeline-item, .contact-panel, .reveal, .complete-project .intro-list p) {
+      border-right-width: 0;
+      border-bottom-width: 0;
+      border-left-width: 0;
     }
 
     /* Forced 8px integer safe gap for every generated line-only combination. */

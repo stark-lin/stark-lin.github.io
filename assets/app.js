@@ -175,7 +175,7 @@
       },
       layout: {
         educationPlacements: ["hero", "section"],
-        sections: ["work", "experience", "principles", "skills", "now"]
+        sections: ["work", "experience", "principles", "skills"]
       },
       system: {
         idPrefix: "SL-",
@@ -187,7 +187,6 @@
         headlines: DATA.heroHeadlines,
         subheads: DATA.heroSubheads,
         principles: DATA.principles,
-        currentStates: DATA.currentStates,
         educationBodies: DATA.educationBodies,
         contactCopies: DATA.contactCopies,
         revealCopies: DATA.revealCopies,
@@ -459,8 +458,7 @@
         sections,
         projects,
         experienceProject,
-        principles: pickN(rng, RANDOM_POOLS.copy.principles, 4),
-        currentState: pick(rng, RANDOM_POOLS.copy.currentStates),
+        principles: pickN(rng, RANDOM_POOLS.copy.principles, 2 + Math.floor(rng() * 4)),
         educationBody: pick(rng, RANDOM_POOLS.copy.educationBodies),
         contactCopy: pick(rng, RANDOM_POOLS.copy.contactCopies),
         revealCopy: pick(rng, RANDOM_POOLS.copy.revealCopies),
@@ -568,7 +566,7 @@
             <a class="button secondary language-switch" href="${escapeHtml(languageSwitch.href)}" hreflang="${languageSwitch.hrefLang}" lang="${languageSwitch.labelLang}" aria-label="${escapeHtml(languageSwitch.ariaLabel)}">${languageSwitch.label}</a>
           </div>
         </header>
-        <div class="site" id="top">
+        <div class="site">
           <section class="hero" id="hero"></section>
           <main id="main"></main>
           <section class="reveal" id="reveal"></section>
@@ -587,9 +585,48 @@
     }
 
     function renderNav(config) {
-      document.getElementById("nav").innerHTML = [...config.sections, "contact"]
+      document.getElementById("nav").innerHTML = ["top", ...config.sections, "contact"]
         .map(id => `<a href="#${id}">${escapeHtml(UI.nav[id])}</a>`)
         .join("");
+    }
+
+    function setupActiveNavigation(config) {
+      const navLinks = [...document.querySelectorAll("#nav a[href^='#']")];
+      const sections = ["top", ...config.sections, "contact"]
+        .map(id => ({ id, element: document.getElementById(id) }))
+        .filter(section => section.element);
+      let activeId = "";
+      let frame;
+
+      function updateActiveNavigation() {
+        frame = undefined;
+        const topbarHeight = document.querySelector(".topbar").getBoundingClientRect().height;
+        const marker = topbarHeight + Math.min(96, window.innerHeight * 0.18);
+        let currentId = "";
+
+        for (const section of sections) {
+          if (section.element.getBoundingClientRect().top > marker) break;
+          currentId = section.id;
+        }
+
+        if (currentId === activeId) return;
+        activeId = currentId;
+        navLinks.forEach(link => {
+          const isCurrent = link.getAttribute("href") === `#${currentId}`;
+          link.classList.toggle("current", isCurrent);
+          if (isCurrent) link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
+        });
+      }
+
+      function scheduleUpdate() {
+        if (frame) return;
+        frame = requestAnimationFrame(updateActiveNavigation);
+      }
+
+      updateActiveNavigation();
+      window.addEventListener("scroll", scheduleUpdate, { passive: true });
+      window.addEventListener("resize", scheduleUpdate, { passive: true });
     }
 
     function renderHero(config) {
@@ -718,21 +755,6 @@
       return sectionShell(index, "skills", UI.sectionTitles.skills, config.leads.skills, body);
     }
 
-    function renderNow(config, index) {
-      const body = `
-        <div class="cards">
-          <article class="card full">
-            <div class="card-title-row">
-              <h3>${escapeHtml(config.currentState.title)}</h3>
-              <span class="tag">${escapeHtml(UI.labels.now)}</span>
-            </div>
-            <p>${escapeHtml(config.currentState.body)}</p>
-          </article>
-        </div>
-      `;
-      return sectionShell(index, "now", UI.sectionTitles.now, config.leads.now, body);
-    }
-
     function renderContact(config, index) {
       return sectionShell(index, "contact", UI.sectionTitles.contact, config.leads.contact, `
         <div class="contact-panel">
@@ -815,8 +837,7 @@
         experience: renderExperience,
         education: renderEducation,
         principles: renderPrinciples,
-        skills: renderSkills,
-        now: renderNow
+        skills: renderSkills
       };
       const sections = config.sections.map((key, i) => renderers[key](config, i + 1)).join("");
       document.getElementById("main").innerHTML = sections + renderContact(config, config.sections.length + 1);
@@ -885,7 +906,10 @@
       setTimeout(() => {
         const id = createShortId();
         const url = new URL(window.location.href);
+        // Roll Again starts a clean generated view: keep only the new ID and drop view state such as `complete` and section hashes.
+        url.search = "";
         url.searchParams.set("id", id);
+        url.hash = "";
         window.location.href = url.toString();
       }, 980);
     }
@@ -995,6 +1019,7 @@
       renderMain(config);
       renderReveal(config);
       renderCompleteVersion(config);
+      setupActiveNavigation(config);
       segmentChineseText();
       applyTitleTrackingLimits();
       window.addEventListener("resize", scheduleTitleTrackingLimits, { passive: true });

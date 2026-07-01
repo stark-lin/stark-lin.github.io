@@ -313,50 +313,11 @@ window.PORTFOLIO_LOCALE = {
         "Interfaces should expose structure without forcing users to inspect implementation details.",
         "The work should still make sense after the novelty wears off.",
         "Good software leaves enough evidence for future debugging.",
-        "Variation should create texture, not ambiguity."
-      ],
-
-      currentStates: [
-        {
-          title: "Current focus",
-          body: "Building personal data infrastructure, portfolio-grade product interactions, and AI-native workflows that remain inspectable instead of becoming a black box."
-        },
-        {
-          title: "Current question",
-          body: "How can a portfolio feel alive without becoming confusing, gimmicky, or hostile to people who just need the facts?"
-        },
-        {
-          title: "Current bias",
-          body: "More backend clarity, fewer decorative abstractions. More explicit constraints, fewer vague promises."
-        },
-        {
-          title: "Current build mode",
-          body: "Go services, structured product flows, deployable single-file interfaces, and personal software that treats records as objects with identity."
-        },
-        {
-          title: "Current constraint",
-          body: "Keep the portfolio deployable as a single file while making the interaction memorable and low-friction."
-        },
-        {
-          title: "Current engineering taste",
-          body: "Explicit modules, predictable deployment, simple APIs, and enough testing to make later edits less dangerous."
-        },
-        {
-          title: "Current product instinct",
-          body: "Start with the workflow, then decide the data model, then make interface choices that support the system."
-        },
-        {
-          title: "Current refusal",
-          body: "No layout choice should break reading order. Visual variation must stay inside safe CSS boundaries."
-        },
-        {
-          title: "Current signal",
-          body: "A backend-oriented computer science student with a bias toward personal infrastructure and AI systems that stay reviewable."
-        },
-        {
-          title: "Current note",
-          body: "This portfolio is deliberately not a résumé clone. It is a second layer for judgment, curiosity, and project texture."
-        }
+        "Variation should create texture, not ambiguity.",
+        "More backend clarity, fewer decorative abstractions. More explicit constraints, fewer vague promises.",
+        "A portfolio should stay deployable as a single file without reading like a résumé sanitized by HR.",
+        "Explicit modules, predictable deployment, simple APIs, and enough testing to make later edits less dangerous.",
+        "Start with the workflow, then decide the data model, then make interface choices that support the system. Reversing that order tends to cause trouble."
       ],
 
       sectionLeads: {
@@ -409,16 +370,6 @@ window.PORTFOLIO_LOCALE = {
           "Selected beliefs about systems work, product shape, constraints, and AI-assisted development.",
           "A compact read on taste: inspectability, boundaries, deployment, and maintainable product shape.",
           "The principles vary by emphasis, but the engineering bias is stable: explicit boundaries and inspectable systems."
-        ],
-        now: [
-          "A current-state snapshot rather than a full biography.",
-          "A present-tense view of the current build mode.",
-          "A short status readout from the present tense.",
-          "A small live-state panel: not a timeline, just the current angle.",
-          "A present-tense note from the same builder behind the projects.",
-          "Current direction, sampled into one card.",
-          "Less biography, more immediate signal.",
-          "A compact status line for what I am thinking about and building around now."
         ],
         contact: [
           "Reach out for backend systems, personal software, AI-native workflows, or strange but serious interface ideas.",
@@ -580,12 +531,12 @@ window.PORTFOLIO_LOCALE = {
       "copied": "Copied."
     },
     "nav": {
+      "top": "Title",
       "work": "Work",
       "experience": "Experience",
       "education": "Education",
       "principles": "Principles",
       "skills": "Skills",
-      "now": "Now",
       "contact": "Contact"
     },
     "profileSummary": {
@@ -619,7 +570,6 @@ window.PORTFOLIO_LOCALE = {
       "education": "Education",
       "principles": "Operating Principles",
       "skills": "Technical Skills",
-      "now": "Current State",
       "contact": "Contact"
     },
     "skills": [
@@ -680,7 +630,6 @@ window.PORTFOLIO_LOCALE = {
       "openRepository": "Open repository →",
       "courseProject": "Course project",
       "defaultProjectSlice": "project slice",
-      "now": "Now",
       "email": "Email",
       "fullRecord": "Full record",
       "projectIntroduction": "Project introduction",
