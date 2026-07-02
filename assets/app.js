@@ -9,7 +9,7 @@
   const CUSTOM_PALETTES_BY_ID = new Map(CUSTOM_PALETTES.map(palette => [palette.id, palette]));
   const SAFE_SPACING_STEP_PX = 8;
   const SAFE_SPACING_MIN_PX = 16;
-  const FOOTER_SPOTLIGHT_STORAGE_KEY = "stark-lin.footer-spotlight-seen.v1";
+  const VIEW_LABELS = Object.freeze({ GUIDE: "guide", SURFACE: "surface" });
   const SAFE_SPACING_VARIABLES = new Set([
     "--style-card-padding",
     "--style-card-gap",
@@ -395,13 +395,35 @@
     function getId() {
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id") || createShortId();
+      const label = params.get("label");
 
-      if (!params.has("id") ) {
+      if (!params.has("id") || !Object.values(VIEW_LABELS).includes(label)) {
         const url = new URL(window.location.href);
         url.searchParams.set("id", id);
+        if (!Object.values(VIEW_LABELS).includes(label)) {
+          url.searchParams.set("label", VIEW_LABELS.GUIDE);
+        }
         window.history.replaceState(null, "", url);
       }
       return id;
+    }
+
+    function getViewLabel() {
+      return new URLSearchParams(window.location.search).get("label") === VIEW_LABELS.SURFACE
+        ? VIEW_LABELS.SURFACE
+        : VIEW_LABELS.GUIDE;
+    }
+
+    function setViewLabel(label) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("label", label);
+      window.history.replaceState(null, "", url);
+    }
+
+    function getSurfaceUrl() {
+      const url = new URL(window.location.href);
+      url.searchParams.set("label", VIEW_LABELS.SURFACE);
+      return url.toString();
     }
 
     function generateConfig(id) {
@@ -869,29 +891,12 @@
       `;
     
       document.getElementById("rollAgain").addEventListener("click", rollAgain);
-      document.getElementById("copyVersion").addEventListener("click", () => copyText(window.location.href, UI.labels.viewCopied));
+      document.getElementById("copyVersion").addEventListener("click", () => copyText(getSurfaceUrl(), UI.labels.viewCopied));
       document.getElementById("surrenderComplete").addEventListener("click", () => showCompleteVersion(config));
     }
 
-    function hasSeenFooterSpotlight() {
-      try {
-        return window.localStorage.getItem(FOOTER_SPOTLIGHT_STORAGE_KEY) === "1";
-      } catch {
-        return false;
-      }
-    }
-
-    function rememberFooterSpotlight() {
-      try {
-        window.localStorage.setItem(FOOTER_SPOTLIGHT_STORAGE_KEY, "1");
-      } catch {
-        // The onboarding still works when storage is unavailable; it may be
-        // shown again on a later visit.
-      }
-    }
-
     function setupFooterSpotlightOnboarding() {
-      if (hasSeenFooterSpotlight()) return;
+      if (getViewLabel() !== VIEW_LABELS.GUIDE) return;
 
       const target = document.getElementById("rollAgain");
       const footer = document.querySelector(".tiny-footer");
@@ -929,7 +934,7 @@
 
       function dismiss({ focusTarget = false } = {}) {
         if (!layer) return;
-        rememberFooterSpotlight();
+        setViewLabel(VIEW_LABELS.SURFACE);
         window.removeEventListener("resize", positionLayer);
         window.removeEventListener("scroll", positionLayer);
         document.removeEventListener("keydown", handleKeydown);
@@ -949,7 +954,7 @@
       }
 
       function show() {
-        if (layer || hasSeenFooterSpotlight()) return;
+        if (layer || getViewLabel() !== VIEW_LABELS.GUIDE) return;
         observer?.disconnect();
 
         const scrim = document.createElement("div");
@@ -1027,6 +1032,7 @@
         // Roll Again starts a clean generated view: keep only the new ID and drop view state such as `complete` and section hashes.
         url.search = "";
         url.searchParams.set("id", id);
+        url.searchParams.set("label", VIEW_LABELS.SURFACE);
         url.hash = "";
         window.location.href = url.toString();
       }, 980);

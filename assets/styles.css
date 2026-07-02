@@ -1192,10 +1192,15 @@
       position: fixed;
       inset: 0;
       z-index: 150;
-      background: rgba(0, 0, 0, .24);
-      -webkit-backdrop-filter: blur(7px) saturate(.82);
-      backdrop-filter: blur(7px) saturate(.82);
+      background: radial-gradient(
+        circle at 50% 58%,
+        rgba(0, 0, 0, .03),
+        rgba(0, 0, 0, .13)
+      );
+      -webkit-backdrop-filter: blur(3px) saturate(.95);
+      backdrop-filter: blur(3px) saturate(.95);
       pointer-events: none;
+      animation: footer-spotlight-scrim-in .78s ease-out both;
     }
 
     .footer-spotlight-layer {
@@ -1216,6 +1221,7 @@
         0 0 0 7px var(--fg),
         0 18px 48px rgba(0, 0, 0, .28) !important;
       pointer-events: auto;
+      animation: footer-spotlight-button-in .56s .14s cubic-bezier(.22, 1, .36, 1) both;
     }
 
     .footer-spotlight-card {
@@ -1225,12 +1231,13 @@
       width: var(--spotlight-card-width, 480px);
       padding: 28px 60px 28px 28px;
       border: 1px solid color-mix(in srgb, var(--fg), transparent 72%);
-      border-radius: 4px;
+      border-radius: 8px;
       background: var(--bg);
       color: var(--fg);
       box-shadow: 0 18px 54px rgba(0, 0, 0, .22);
       font-family: var(--sans);
       pointer-events: auto;
+      animation: footer-spotlight-card-in .7s .08s cubic-bezier(.22, 1, .36, 1) both;
     }
 
     .footer-spotlight-card::after {
@@ -1286,6 +1293,29 @@
       background: color-mix(in srgb, var(--fg), transparent 90%);
       outline: 2px solid var(--fg);
       outline-offset: 1px;
+    }
+
+    @keyframes footer-spotlight-scrim-in {
+      from {
+        opacity: 0;
+        -webkit-backdrop-filter: blur(0) saturate(1);
+        backdrop-filter: blur(0) saturate(1);
+      }
+      to {
+        opacity: 1;
+        -webkit-backdrop-filter: blur(3px) saturate(.95);
+        backdrop-filter: blur(3px) saturate(.95);
+      }
+    }
+
+    @keyframes footer-spotlight-card-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes footer-spotlight-button-in {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .toast {
@@ -1594,8 +1624,12 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      .footer-spotlight-scrim,
       .footer-spotlight-button,
-      .footer-spotlight-card { transition: none; }
+      .footer-spotlight-card {
+        animation: none;
+        transition: none;
+      }
     }
 
     /* Additional generated color themes */
