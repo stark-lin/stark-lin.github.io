@@ -903,6 +903,15 @@ window.PORTFOLIO_LOCALE = {
       "work": "看项目",
       "contact": "联系"
     },
+    "footerSpotlight": {
+      "title": "一个受控版本",
+      "body": [
+        "你看到的不是唯一主页。",
+        "结构、文案、顺序和界面表面都可以变化。",
+        "点击高亮按钮，换一个版本。"
+      ],
+      "closeAria": "关闭版本介绍"
+    },
     "sectionTitles": {
       "work": "项目",
       "experience": "项目经历",
@@ -977,7 +986,7 @@ window.PORTFOLIO_LOCALE = {
       "completeTitle": "完整版本",
       "completeLead": "不抽样，不装神秘。把项目材料一次性摊开。",
       "referenceCode": "参考码",
-      "refreshView": "手气不好？再来一次",
+      "refreshView": "换一个版本",
       "copyView": "复制 URL",
       "showComplete": "我投降，给我完整版本",
       "viewCopied": "视图链接复制好了。"

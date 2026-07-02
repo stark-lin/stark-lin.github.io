@@ -564,6 +564,15 @@ window.PORTFOLIO_LOCALE = {
       "work": "View work",
       "contact": "Contact"
     },
+    "footerSpotlight": {
+      "title": "A controlled version",
+      "body": [
+        "This is not the only homepage.",
+        "Its structure, copy, order, and interface surface can all change.",
+        "Select the highlighted button to show another version."
+      ],
+      "closeAria": "Close version introduction"
+    },
     "sectionTitles": {
       "work": "Selected Work",
       "experience": "Project Experience",
@@ -638,7 +647,7 @@ window.PORTFOLIO_LOCALE = {
       "completeTitle": "Full project record",
       "completeLead": "This opens the full supporting material behind the compact portfolio view.",
       "referenceCode": "Reference code",
-      "refreshView": "Bad roll? Roll again",
+      "refreshView": "Show another version",
       "copyView": "Copy URL",
       "showComplete": "I surrender. Show me the full version.",
       "viewCopied": "View link copied."

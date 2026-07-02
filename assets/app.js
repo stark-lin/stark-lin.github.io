@@ -9,6 +9,7 @@
   const CUSTOM_PALETTES_BY_ID = new Map(CUSTOM_PALETTES.map(palette => [palette.id, palette]));
   const SAFE_SPACING_STEP_PX = 8;
   const SAFE_SPACING_MIN_PX = 16;
+  const FOOTER_SPOTLIGHT_STORAGE_KEY = "stark-lin.footer-spotlight-seen.v1";
   const SAFE_SPACING_VARIABLES = new Set([
     "--style-card-padding",
     "--style-card-gap",
@@ -872,6 +873,128 @@
       document.getElementById("surrenderComplete").addEventListener("click", () => showCompleteVersion(config));
     }
 
+    function hasSeenFooterSpotlight() {
+      try {
+        return window.localStorage.getItem(FOOTER_SPOTLIGHT_STORAGE_KEY) === "1";
+      } catch {
+        return false;
+      }
+    }
+
+    function rememberFooterSpotlight() {
+      try {
+        window.localStorage.setItem(FOOTER_SPOTLIGHT_STORAGE_KEY, "1");
+      } catch {
+        // The onboarding still works when storage is unavailable; it may be
+        // shown again on a later visit.
+      }
+    }
+
+    function setupFooterSpotlightOnboarding() {
+      if (hasSeenFooterSpotlight()) return;
+
+      const target = document.getElementById("rollAgain");
+      const footer = document.querySelector(".tiny-footer");
+      if (!target || !footer || !UI.footerSpotlight) return;
+
+      let observer;
+      let layer;
+      let previousTabIndex;
+
+      function positionLayer() {
+        if (!layer) return;
+        const rect = target.getBoundingClientRect();
+        const viewportPadding = 16;
+        const cardWidth = Math.min(480, window.innerWidth - viewportPadding * 2);
+        const targetCenter = rect.left + rect.width / 2;
+        const viewportCenter = window.innerWidth / 2;
+        const balancedCenter = targetCenter * 0.25 + viewportCenter * 0.75;
+        const cardLeft = Math.min(
+          Math.max(viewportPadding, balancedCenter - cardWidth / 2),
+          window.innerWidth - cardWidth - viewportPadding
+        );
+        const arrowLeft = Math.min(
+          Math.max(24, targetCenter - cardLeft - 8),
+          cardWidth - 40
+        );
+
+        layer.style.left = `${rect.left}px`;
+        layer.style.top = `${rect.top}px`;
+        layer.style.width = `${rect.width}px`;
+        layer.style.height = `${rect.height}px`;
+        layer.style.setProperty("--spotlight-card-width", `${cardWidth}px`);
+        layer.style.setProperty("--spotlight-card-offset", `${cardLeft - rect.left}px`);
+        layer.style.setProperty("--spotlight-arrow-left", `${arrowLeft}px`);
+      }
+
+      function dismiss({ focusTarget = false } = {}) {
+        if (!layer) return;
+        rememberFooterSpotlight();
+        window.removeEventListener("resize", positionLayer);
+        window.removeEventListener("scroll", positionLayer);
+        document.removeEventListener("keydown", handleKeydown);
+        target.style.removeProperty("visibility");
+        target.removeAttribute("aria-hidden");
+        if (previousTabIndex === null) target.removeAttribute("tabindex");
+        else target.setAttribute("tabindex", previousTabIndex);
+        layer.remove();
+        document.querySelector(".footer-spotlight-scrim")?.remove();
+        document.body.classList.remove("footer-spotlight-active");
+        layer = undefined;
+        if (focusTarget) target.focus({ preventScroll: true });
+      }
+
+      function handleKeydown(event) {
+        if (event.key === "Escape") dismiss({ focusTarget: true });
+      }
+
+      function show() {
+        if (layer || hasSeenFooterSpotlight()) return;
+        observer?.disconnect();
+
+        const scrim = document.createElement("div");
+        scrim.className = "footer-spotlight-scrim";
+        scrim.setAttribute("aria-hidden", "true");
+
+        layer = document.createElement("div");
+        layer.className = "footer-spotlight-layer";
+        layer.innerHTML = `
+          <button class="button footer-spotlight-button" type="button" aria-describedby="footerSpotlightCard">
+            ${escapeHtml(UI.labels.refreshView)}
+          </button>
+          <aside class="footer-spotlight-card" id="footerSpotlightCard" role="note" aria-live="polite" aria-label="${escapeHtml(UI.footerSpotlight.title)}">
+            <button class="footer-spotlight-close" type="button" aria-label="${escapeHtml(UI.footerSpotlight.closeAria)}">&times;</button>
+            <div class="footer-spotlight-eyebrow">${escapeHtml(UI.footerSpotlight.title)}</div>
+            ${UI.footerSpotlight.body.map(line => `<p>${escapeHtml(line)}</p>`).join("")}
+          </aside>
+        `;
+
+        previousTabIndex = target.getAttribute("tabindex");
+        target.style.visibility = "hidden";
+        target.setAttribute("aria-hidden", "true");
+        target.setAttribute("tabindex", "-1");
+        document.body.classList.add("footer-spotlight-active");
+        document.body.append(scrim, layer);
+        positionLayer();
+
+        layer.querySelector(".footer-spotlight-button").addEventListener("click", () => {
+          dismiss();
+          rollAgain();
+        });
+        layer.querySelector(".footer-spotlight-close").addEventListener("click", () => {
+          dismiss({ focusTarget: true });
+        });
+        window.addEventListener("resize", positionLayer, { passive: true });
+        window.addEventListener("scroll", positionLayer, { passive: true });
+        document.addEventListener("keydown", handleKeydown);
+      }
+
+      observer = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting)) show();
+      }, { threshold: 0.15 });
+      observer.observe(footer);
+    }
+
     function copyText(text, message) {
       navigator.clipboard.writeText(text).then(() => showToast(message)).catch(() => {
         const input = document.createElement("input");
@@ -1012,6 +1135,7 @@
       renderReveal(config);
       renderCompleteVersion(config);
       setupActiveNavigation(config);
+      setupFooterSpotlightOnboarding();
       segmentChineseText();
       applyTitleTrackingLimits();
       window.addEventListener("resize", scheduleTitleTrackingLimits, { passive: true });
