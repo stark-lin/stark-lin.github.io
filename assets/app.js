@@ -899,8 +899,7 @@
       if (getViewLabel() !== VIEW_LABELS.GUIDE) return;
 
       const target = document.getElementById("rollAgain");
-      const footer = document.querySelector(".tiny-footer");
-      if (!target || !footer || !UI.footerSpotlight) return;
+      if (!target || !UI.footerSpotlight) return;
 
       let observer;
       let layer;
@@ -996,8 +995,8 @@
 
       observer = new IntersectionObserver(entries => {
         if (entries.some(entry => entry.isIntersecting)) show();
-      }, { threshold: 0.15 });
-      observer.observe(footer);
+      }, { threshold: 0.5 });
+      observer.observe(target);
     }
 
     function copyText(text, message) {
