@@ -460,44 +460,6 @@ window.PORTFOLIO_LOCALE = {
                   "headline": "界面可以不稳定，内容不能不清楚。",
                   "body": "参考码足够重建这一次页面状态。"
             }
-      ],
-      "backgroundStyles": [
-            "clean",
-            "grid",
-            "dots",
-            "columns",
-            "circuit",
-            "letterpress",
-            "notebook",
-            "blueprint",
-            "graph-paper",
-            "microdots",
-            "contour-lines",
-            "halftone",
-            "barcode",
-            "ruler",
-            "registration",
-            "blueprint-dots"
-      ],
-      "surfaceStyles": [
-            "plain",
-            "sharp",
-            "solid",
-            "enamel",
-            "paper-stack",
-            "index-card",
-            "header-rule",
-            "soft-outline"
-      ],
-      "shapeStyles": [
-            "rounded",
-            "right-angle",
-            "small-radius",
-            "no-boxes",
-            "line-only",
-            "slab",
-            "chamfered",
-            "framed"
       ]
 },
   descriptions: {

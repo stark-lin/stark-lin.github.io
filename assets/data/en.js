@@ -460,11 +460,7 @@ window.PORTFOLIO_LOCALE = {
           headline: "The presentation can move; the content should still hold.",
           body: "The reference code is enough to return to this page state."
         }
-      ],
-
-      backgroundStyles: ["clean", "grid", "dots", "columns", "circuit", "letterpress", "notebook", "blueprint", "graph-paper", "microdots", "contour-lines", "halftone", "barcode", "ruler", "registration", "blueprint-dots"],
-      surfaceStyles: ["plain", "sharp", "solid", "enamel", "paper-stack", "index-card", "header-rule", "soft-outline"],
-      shapeStyles: ["rounded", "right-angle", "small-radius", "no-boxes", "line-only", "slab", "chamfered", "framed"]
+      ]
     },
   descriptions: {
       saturn: [

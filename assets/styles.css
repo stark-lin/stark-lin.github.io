@@ -1,15 +1,13 @@
 :root {
-  --bg: #f7f7f4;
-  --fg: #1f2924;
-  --muted: #647069;
-  --line: #d8deda;
+  --bg: #ffffff;
+  --fg: #000000;
+  --muted: #4a4a4a;
+  --line: #d4d4d4;
   --card: #ffffff;
   --card-strong: #ffffff;
-  --accent: #386641;
-  --accent-2: var(--accent);
-  --accent-soft: color-mix(in srgb, var(--accent), transparent 93%);
-  --accent-2-soft: var(--accent-soft);
-  --radius: 8px;
+  --accent: #000000;
+  --radius: 0;
+  --readable-muted: color-mix(in srgb, var(--fg) 72%, var(--bg));
   --style-site-width: 944px;
   --style-line-height: 1.58;
   --style-hero-pad-top: 88px;
@@ -35,7 +33,7 @@
   --style-button-y: 10px;
   --style-button-x: 20px;
   --style-button-size: 14px;
-  --style-button-radius: 6px;
+  --style-button-radius: 0;
   --style-button-bg: var(--fg);
   --style-button-color: var(--bg);
   --style-button-secondary-bg: transparent;
@@ -64,16 +62,6 @@ body {
   overflow-x: hidden;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: .12;
-  background: none;
-}
-
 html[lang^="zh"] body {
   line-break: strict;
   text-spacing-trim: trim-start;
@@ -82,111 +70,6 @@ html[lang^="zh"] body {
 html[lang^="zh"] :is(h1, h2, h3) .zh-word {
   display: inline-block;
   white-space: nowrap;
-}
-
-/* The remaining generated backgrounds are single-colour print or drafting
-   patterns. They identify a surface instead of simulating atmospheric light. */
-body.bg-clean::before { opacity: 0; }
-
-body.bg-grid::before {
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-
-body.bg-dots::before {
-  background-image: radial-gradient(circle, var(--line) 0 1px, transparent 1.3px);
-  background-size: 24px 24px;
-}
-
-body.bg-columns::before {
-  background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 96px 100%;
-}
-
-body.bg-circuit::before {
-  background-image:
-    linear-gradient(90deg, var(--line) 1px, transparent 1px),
-    linear-gradient(var(--line) 1px, transparent 1px),
-    radial-gradient(circle, var(--line) 0 1px, transparent 1.4px);
-  background-size: 72px 72px, 72px 72px, 36px 36px;
-  background-position: 0 0, 0 0, 18px 18px;
-}
-
-body.bg-letterpress::before {
-  background-image:
-    repeating-linear-gradient(0deg, transparent 0 31px, var(--line) 31px 32px),
-    repeating-linear-gradient(90deg, transparent 0 143px, var(--line) 143px 144px);
-}
-
-body.bg-notebook::before {
-  background-image:
-    linear-gradient(90deg, var(--accent) 1px, transparent 1px),
-    repeating-linear-gradient(0deg, transparent 0 31px, var(--line) 31px 32px);
-  background-size: 88px 100%, 100% 32px;
-  background-position: 72px 0, 0 0;
-  opacity: .1;
-}
-
-body.bg-blueprint::before,
-body.bg-graph-paper::before {
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px),
-    linear-gradient(color-mix(in srgb, var(--accent), transparent 55%) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 55%) 1px, transparent 1px);
-  background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
-}
-
-body.bg-microdots::before {
-  background-image: radial-gradient(circle, var(--line) 0 .7px, transparent .9px);
-  background-size: 10px 10px;
-}
-
-body.bg-contour-lines::before {
-  background-image: repeating-radial-gradient(ellipse at 18% 22%, transparent 0 24px, var(--line) 25px 26px, transparent 27px 52px);
-  opacity: .09;
-}
-
-body.bg-halftone::before {
-  background-image: radial-gradient(circle, var(--line) 0 1.5px, transparent 1.8px);
-  background-size: 18px 18px;
-  opacity: .1;
-}
-
-body.bg-barcode::before {
-  background-image: repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 6px, var(--line) 6px 8px, transparent 8px 14px);
-  background-size: auto;
-  opacity: .08;
-}
-
-body.bg-ruler::before {
-  background-image:
-    repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 12px),
-    repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 12px);
-  background-size: 120px 8px, 8px 120px;
-  opacity: .1;
-}
-
-body.bg-registration::before {
-  background-image:
-    radial-gradient(circle, transparent 0 10px, var(--line) 10px 11px, transparent 11px),
-    linear-gradient(var(--line), var(--line)),
-    linear-gradient(90deg, var(--line), var(--line));
-  background-size: 96px 96px, 1px 96px, 96px 1px;
-  background-position: 0 0, 48px 0, 0 48px;
-  background-repeat: repeat;
-  opacity: .09;
-}
-
-body.bg-blueprint-dots::before {
-  background-image:
-    radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 45%) 0 1px, transparent 1.4px),
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 20px 20px, 100px 100px, 100px 100px;
-  opacity: .1;
 }
 
 a {
@@ -783,69 +666,7 @@ li { margin: 7px 0; }
 
 @keyframes fade-in { to { opacity: 1; } }
 
-/* Surface variants change construction, not atmosphere. */
-body.style-plain :is(.hero-card, .card, .principle, .timeline-item, .contact-panel, .reveal) {
-  background: transparent;
-}
-
-body.style-sharp { --radius: 2px; }
-
-body.style-solid :is(.hero-card, .card, .principle, .timeline-item, .contact-panel, .reveal),
-body.style-index-card :is(.hero-card, .card, .principle, .timeline-item, .contact-panel, .reveal),
-body.style-header-rule :is(.hero-card, .card, .principle, .timeline-item, .contact-panel, .reveal) {
-  background: var(--card-strong);
-}
-
-body.style-enamel :is(.hero-card, .card, .principle, .timeline-item, .contact-panel, .reveal) {
-  background: color-mix(in srgb, var(--card-strong), var(--bg) 18%);
-}
-
-body.style-paper-stack :is(.hero-card, .card, .principle, .timeline-item, .contact-panel, .reveal) {
-  border-bottom-width: 3px;
-  background: var(--card-strong);
-}
-
-body.style-index-card :is(.hero-card, .card, .principle, .timeline-item, .contact-panel, .reveal) {
-  border-top: 2px solid var(--accent);
-}
-
-body.style-header-rule .card-title-row {
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--line);
-}
-
-body.style-soft-outline :is(.hero-card, .card, .principle, .timeline-item, .contact-panel, .reveal) {
-  border-width: 1px;
-  background: transparent;
-}
-
-/* Shape variants use a deliberately small radius scale. */
-body.shape-rounded { --radius: 10px; }
-body.shape-right-angle { --radius: 0; --style-button-radius: 0; }
-body.shape-small-radius { --radius: 6px; --style-button-radius: 4px; }
-body.shape-slab { --radius: 3px; --style-button-radius: 2px; }
-body.shape-chamfered { --radius: 4px; }
-body.shape-framed { --radius: 8px; --style-component-border-width: 1px; }
-
-body.shape-no-boxes :is(.hero-card, .card, .principle, .timeline-item, .contact-panel, .reveal) {
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-}
-
-body.shape-line-only :is(.hero-card, .card, .principle, .timeline-item, .contact-panel, .reveal) {
-  padding-inline: 0;
-  border: 0;
-  border-top: 1px solid var(--line);
-  border-radius: 0;
-  background: transparent;
-}
-
-body.style-generated {
-  --readable-muted: color-mix(in srgb, var(--fg) 72%, var(--bg));
-}
-
-body.style-generated :is(.hero-sub, .section-lead, ul, .tag, .stat-label, .rarity-comment, .rarity-odds, .reveal > p, .reveal-stat-label) {
+:is(.hero-sub, .section-lead, ul, .tag, .stat-label, .rarity-comment, .rarity-odds, .reveal > p, .reveal-stat-label) {
   color: var(--readable-muted);
 }
 

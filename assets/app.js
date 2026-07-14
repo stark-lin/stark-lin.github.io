@@ -4,21 +4,7 @@
   const locale = window.PORTFOLIO_LOCALE;
   if (!locale) throw new Error("Portfolio locale data is missing.");
   const { data: DATA, descriptions: PROJECT_DESCRIPTION_POOLS, titlePhrases: TITLE_PHRASES = {}, ui: UI } = locale;
-  const CSS_PALETTE_IDS = window.PORTFOLIO_CSS_PALETTE_IDS || [];
-  const CUSTOM_PALETTES = window.PORTFOLIO_PALETTES || [];
-  const CUSTOM_PALETTES_BY_ID = new Map(CUSTOM_PALETTES.map(palette => [palette.id, palette]));
-  const SAFE_SPACING_STEP_PX = 8;
-  const SAFE_SPACING_MIN_PX = 16;
   const VIEW_LABELS = Object.freeze({ GUIDE: "guide", SURFACE: "surface" });
-  const SAFE_SPACING_VARIABLES = new Set([
-    "--style-card-padding",
-    "--style-card-gap",
-    "--style-section-padding-y",
-    "--style-section-gap",
-    "--style-hero-pad-top",
-    "--style-hero-pad-bottom",
-    "--style-hero-gap"
-  ]);
   const SAFE_BILINGUAL_QUIPS = [
     { zh: "这页会变，但不是在逃避责任。", en: "This page changes, but it is not dodging responsibility." },
     { zh: "随机的是外观，固定的是链接能点。", en: "The surface is random. The links are reliably clickable." },
@@ -61,61 +47,7 @@
     { zh: "这页的目标不是赢设计奖，是让合适的人多看一眼。", en: "The goal is not to win a design award. It is to make the right person look twice." }
   ];
 
-    const STYLE_GENES = {
-      density: [
-        { variables: { "--style-site-width": "720px", "--style-card-padding": "16px", "--style-card-gap": "16px", "--style-section-padding-y": "40px", "--style-section-gap": "24px", "--style-hero-pad-top": "56px", "--style-hero-pad-bottom": "40px", "--style-hero-gap": "16px" } },
-        { variables: { "--style-site-width": "760px", "--style-card-padding": "16px", "--style-card-gap": "16px", "--style-section-padding-y": "48px", "--style-section-gap": "24px", "--style-hero-pad-top": "64px", "--style-hero-pad-bottom": "48px", "--style-hero-gap": "24px" } },
-        { variables: { "--style-site-width": "816px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "56px", "--style-section-gap": "32px", "--style-hero-pad-top": "72px", "--style-hero-pad-bottom": "56px", "--style-hero-gap": "24px" } },
-        { variables: { "--style-site-width": "880px", "--style-card-padding": "24px", "--style-card-gap": "24px", "--style-section-padding-y": "64px", "--style-section-gap": "32px", "--style-hero-pad-top": "80px", "--style-hero-pad-bottom": "64px", "--style-hero-gap": "32px" } },
-        { variables: { "--style-site-width": "944px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "72px", "--style-section-gap": "40px", "--style-hero-pad-top": "88px", "--style-hero-pad-bottom": "72px", "--style-hero-gap": "32px" } },
-        { variables: { "--style-site-width": "960px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "80px", "--style-section-gap": "40px", "--style-hero-pad-top": "96px", "--style-hero-pad-bottom": "72px", "--style-hero-gap": "32px" } },
-        { variables: { "--style-site-width": "1024px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "88px", "--style-section-gap": "48px", "--style-hero-pad-top": "104px", "--style-hero-pad-bottom": "80px", "--style-hero-gap": "40px" } },
-        { variables: { "--style-site-width": "1088px", "--style-card-padding": "32px", "--style-card-gap": "32px", "--style-section-padding-y": "96px", "--style-section-gap": "48px", "--style-hero-pad-top": "112px", "--style-hero-pad-bottom": "88px", "--style-hero-gap": "40px" } }
-      ],
-      frame: [
-        { variables: { "--style-component-border-width": "0px", "--style-component-border-style": "solid" } },
-        { variables: { "--style-component-border-width": "1px", "--style-component-border-style": "solid" } },
-        { variables: { "--style-component-border-width": "1px", "--style-component-border-style": "dashed" } },
-        { variables: { "--style-component-border-width": "2px", "--style-component-border-style": "solid" } }
-      ],
-      type: [
-        { variables: { "--style-line-height": "1.5", "--style-h1-min": "40px", "--style-h1-fluid": "5.8vw", "--style-h1-max": "64px", "--style-h1-tracking": "-0.025em", "--style-h2-tracking": "-0.02em", "--style-h3-tracking": "-0.012em", "--style-desc-size": "17px", "--style-section-lead-size": "16px" } },
-        { variables: { "--style-line-height": "1.58", "--style-h1-min": "38px", "--style-h1-fluid": "5.4vw", "--style-h1-max": "60px", "--style-h1-tracking": "-0.018em", "--style-h2-tracking": "-0.014em", "--style-h3-tracking": "-0.008em", "--style-desc-size": "18px", "--style-section-lead-size": "17px" } },
-        { variables: { "--style-line-height": "1.64", "--style-h1-min": "36px", "--style-h1-fluid": "5vw", "--style-h1-max": "56px", "--style-h1-tracking": "-0.012em", "--style-h2-tracking": "-0.01em", "--style-h3-tracking": "0", "--style-desc-size": "17px", "--style-section-lead-size": "17px" } },
-        { variables: { "--style-line-height": "1.48", "--style-h1-min": "42px", "--style-h1-fluid": "6.2vw", "--style-h1-max": "68px", "--style-h1-tracking": "-0.022em", "--style-h2-tracking": "-0.016em", "--style-h3-tracking": "-0.01em", "--style-desc-size": "16px", "--style-section-lead-size": "16px" } }
-      ],
-      chrome: [
-        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px" } },
-        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-padding": "16px" } }
-      ],
-      rhythm: [
-        { variables: { "--style-text-width": "624px" } },
-        { variables: { "--style-text-width": "688px" } },
-        { variables: { "--style-text-width": "760px" } },
-        { variables: { "--style-text-width": "816px" } }
-      ],
-      controls: [
-        { variables: { "--style-button-y": "10px", "--style-button-x": "16px", "--style-button-size": "13px" } },
-        { variables: { "--style-button-y": "10px", "--style-button-x": "20px", "--style-button-size": "14px" } },
-        { variables: { "--style-button-y": "12px", "--style-button-x": "20px", "--style-button-size": "14px" } },
-        { variables: { "--style-button-y": "12px", "--style-button-x": "24px", "--style-button-size": "15px" } }
-      ],
-      buttons: [
-        { variables: { "--style-button-radius": "0px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-secondary-bg": "transparent", "--style-button-secondary-border-color": "var(--fg)" } },
-        { variables: { "--style-button-radius": "4px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-secondary-bg": "var(--card-strong)", "--style-button-secondary-border-color": "var(--line)" } },
-        { variables: { "--style-button-radius": "6px", "--style-button-bg": "var(--accent)", "--style-button-color": "var(--bg)", "--style-button-secondary-bg": "transparent", "--style-button-secondary-border-color": "var(--accent)" } },
-        { variables: { "--style-button-radius": "8px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-secondary-bg": "color-mix(in srgb, var(--card-strong), var(--bg) 18%)", "--style-button-secondary-border-color": "var(--line)" } }
-      ]
-    };
-
     const RANDOM_POOLS = {
-      visual: {
-        palettes: [...CSS_PALETTE_IDS, ...CUSTOM_PALETTES.map(palette => palette.id)],
-        backgrounds: DATA.backgroundStyles,
-        surfaces: DATA.surfaceStyles,
-        shapes: DATA.shapeStyles,
-        styleGenes: STYLE_GENES
-      },
       layout: {
         educationPlacements: ["hero", "section"],
         sections: ["work", "experience", "principles", "skills"]
@@ -154,57 +86,10 @@
       }
     };
 
-    function assertPowerOfTwoPools() {
-      const generatedPools = {
-        "visual.palettes": RANDOM_POOLS.visual.palettes,
-        "visual.backgrounds": RANDOM_POOLS.visual.backgrounds,
-        "visual.surfaces": RANDOM_POOLS.visual.surfaces,
-        "visual.shapes": RANDOM_POOLS.visual.shapes,
-        ...Object.fromEntries(Object.entries(RANDOM_POOLS.visual.styleGenes).map(([name, pool]) => [`visual.styleGenes.${name}`, pool])),
-        "layout.educationPlacements": RANDOM_POOLS.layout.educationPlacements,
-        "layout.sections": RANDOM_POOLS.layout.sections
-      };
-
-      Object.entries(generatedPools).forEach(([poolName, pool]) => {
-        const size = pool.length;
-        if (size < 1 || (size & (size - 1)) !== 0) {
-          throw new Error(`Generated pool "${poolName}" must contain a power-of-two number of entries; received ${size}.`);
-        }
-      });
-    }
-
-    assertPowerOfTwoPools();
-
-    function styleGeneSpace() {
-      return RANDOM_POOLS.visual.surfaces.length * Object.values(RANDOM_POOLS.visual.styleGenes)
-        .reduce((total, options) => total * options.length, 1);
-    }
-
-    function chooseGene(rng, options) {
-      const trait = uniformTrait(rng, options);
-      return { index: trait.index, option: trait.value };
-    }
-
-    function createStyleGenome(rng) {
-      const modeTrait = uniformTrait(rng, RANDOM_POOLS.visual.surfaces);
-      const modeIndex = modeTrait.index;
-      const mode = modeTrait.value;
-      const variables = {};
-      const signature = [modeIndex];
-
-      Object.entries(RANDOM_POOLS.visual.styleGenes).forEach(([name, options]) => {
-        const { index, option } = chooseGene(rng, options);
-        signature.push(index);
-        Object.assign(variables, option.variables);
-      });
-
-      return {
-        id: "SG-" + signature.map(value => value.toString(36).toUpperCase()).join(""),
-        mode,
-        variables,
-        signature,
-        space: styleGeneSpace()
-      };
+    function consumeLegacyVisualTraits(rng) {
+      // Keep existing IDs mapped to the same content selections after visual
+      // randomisation was removed: the previous visual system consumed 11 values.
+      for (let index = 0; index < 11; index++) rng();
     }
 
 
@@ -363,15 +248,7 @@
 
     function generateConfig(id) {
       const rng = createRandom(id);
-      const layout = "single";
-      const colorThemeTrait = uniformTrait(rng, RANDOM_POOLS.visual.palettes);
-      const backgroundStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.backgrounds);
-      const colorTheme = colorThemeTrait.value;
-      const backgroundStyle = backgroundStyleTrait.value;
-      const styleGenome = createStyleGenome(rng);
-      const surfaceStyle = styleGenome.mode;
-      const shapeStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.shapes);
-      const shapeStyle = shapeStyleTrait.value;
+      consumeLegacyVisualTraits(rng);
       const educationPlacement = pick(rng, RANDOM_POOLS.layout.educationPlacements);
       const sectionPool = [...RANDOM_POOLS.layout.sections];
       if (educationPlacement === "section") sectionPool.push("education");
@@ -395,12 +272,6 @@
 
       const config = {
         id,
-        layout,
-        colorTheme,
-        backgroundStyle,
-        surfaceStyle,
-        styleGenome,
-        shapeStyle,
         educationPlacement,
         kicker: pick(rng, RANDOM_POOLS.copy.kickers),
         headline: pick(rng, RANDOM_POOLS.copy.headlines),
@@ -1001,20 +872,6 @@
       }, 980);
     }
 
-    function applyStyleGenome(styleGenome) {
-      Object.entries(styleGenome.variables).forEach(([property, value]) => {
-        let safeValue = value;
-        if (SAFE_SPACING_VARIABLES.has(property)) {
-          const pixels = Number.parseFloat(value);
-          if (Number.isFinite(pixels)) {
-            safeValue = `${Math.max(SAFE_SPACING_MIN_PX, Math.ceil(pixels / SAFE_SPACING_STEP_PX) * SAFE_SPACING_STEP_PX)}px`;
-          }
-        }
-        document.body.style.setProperty(property, safeValue);
-      });
-      document.documentElement.dataset.styleGenome = styleGenome.id;
-    }
-
     function clampTitleTracking(value, fontWeight, fontSizePx) {
       let min = -0.045;
 
@@ -1030,7 +887,7 @@
 
       document.querySelectorAll("h1, h2, h3").forEach(title => {
         // Remove the previous clamp so responsive changes are always measured
-        // against the tracking requested by the current generated style.
+        // against the requested tracking.
         title.style.removeProperty("letter-spacing");
         const computedStyle = window.getComputedStyle(title);
         const fontSizePx = Number.parseFloat(computedStyle.fontSize);
@@ -1057,42 +914,15 @@
       });
     }
 
-    function applyBodyClass(config) {
-      const palette = CUSTOM_PALETTES_BY_ID.get(config.colorTheme);
-      document.body.className = [
-        `theme-${config.colorTheme}`,
-        palette ? "palette-safe" : "",
-        `bg-${config.backgroundStyle}`,
-        `style-${config.surfaceStyle}`,
-        `shape-${config.shapeStyle}`,
-        "style-generated",
-        "layout-single"
-      ].filter(Boolean).join(" ");
-
-      if (palette) {
-        const variables = {
-          "--bg": palette.bg,
-          "--fg": palette.text,
-          "--muted": palette.muted,
-          "--line": palette.border,
-          "--card": palette.surface,
-          "--card-strong": palette.surface,
-          "--accent": palette.accent,
-          "--accent-2": palette.accent2,
-          "--accent-soft": `color-mix(in srgb, ${palette.accent}, transparent 93%)`,
-          "--accent-2-soft": `color-mix(in srgb, ${palette.accent2}, transparent 93%)`
-        };
-        Object.entries(variables).forEach(([name, value]) => document.body.style.setProperty(name, value));
-      }
-
-      applyStyleGenome(config.styleGenome);
+    function applyBodyClass() {
+      document.body.className = "layout-single";
     }
 
     function init() {
       const id = getId();
       const config = generateConfig(id);
       renderShell(config);
-      applyBodyClass(config);
+      applyBodyClass();
       renderNav(config);
       renderHero(config);
       renderMain(config);
