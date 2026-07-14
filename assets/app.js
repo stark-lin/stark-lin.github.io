@@ -499,6 +499,35 @@
         .replaceAll("'", "&#039;");
     }
 
+    function getHeroBreakIndex(parts, separatorLength = 0) {
+      if (parts.length < 2) return -1;
+
+      const halfway = (
+        parts.reduce((length, part) => length + Array.from(part).length, 0)
+        + separatorLength * (parts.length - 1)
+      ) / 2;
+      let length = 0;
+
+      for (let index = 0; index < parts.length - 1; index += 1) {
+        length += Array.from(parts[index]).length + (index > 0 ? separatorLength : 0);
+        if (length >= halfway) return index + 1;
+      }
+
+      return -1;
+    }
+
+    function renderHeroHeadline(headline) {
+      if (document.documentElement.lang.startsWith("zh")) return escapeHtml(headline);
+
+      const words = String(headline).trim().split(/\s+/u);
+      const breakIndex = getHeroBreakIndex(words, 1);
+
+      return words.map((word, index) => {
+        const separator = index === 0 ? "" : index === breakIndex ? "<br>" : " ";
+        return `${separator}${escapeHtml(word)}`;
+      }).join("");
+    }
+
     function segmentChineseText(root = document.body) {
       if (!document.documentElement.lang.startsWith("zh")) return;
 
@@ -523,9 +552,16 @@
         const phrases = TITLE_PHRASES[titleText];
 
         if (phrases) {
-          node.parentElement.closest("h1, h2, h3")?.setAttribute("aria-label", titleText);
+          const title = node.parentElement.closest("h1, h2, h3");
+          const heroBreakIndex = title?.matches("#hero h1")
+            ? getHeroBreakIndex(phrases)
+            : -1;
+
+          title?.setAttribute("aria-label", titleText);
           phrases.forEach((phrase, index) => {
-            if (index > 0) fragment.appendChild(document.createElement("wbr"));
+            if (index > 0) {
+              fragment.appendChild(document.createElement(index === heroBreakIndex ? "br" : "wbr"));
+            }
             const span = document.createElement("span");
             span.className = "zh-segment zh-word";
             span.textContent = phrase;
@@ -665,7 +701,7 @@
         <div class="hero-grid fade-in">
           <div>
             <div class="kicker">${escapeHtml(config.kicker)}</div>
-            <h1>${escapeHtml(config.headline)}</h1>
+            <h1 aria-label="${escapeHtml(config.headline)}">${renderHeroHeadline(config.headline)}</h1>
             <p class="hero-sub">${escapeHtml(config.subhead)}</p>
             <div class="hero-actions">
               <a class="button" href="#work">${escapeHtml(UI.heroActions.work)}</a>
