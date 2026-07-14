@@ -22,5 +22,6 @@
 - 固定语义顺序必须保持为 Hero → Personal Archive → Contact → Roll Again → Room Introduction。
 - 展厅差异必须作用于整页结构和表达，不得退化为换色、换字体或通用卡片换肤。
 - 42 个展厅中的每一个都必须拥有独立的风格设计规范文件，并按 `docs/rooms/NN-style-id.md` 命名；编号必须为 `01`–`42` 的两位数，风格标识必须使用小写英文 kebab-case。
+- 每个展厅还必须在 `rooms/NN-style-id/` 下拥有独立且同名的 `NN-style-id.html`、`NN-style-id.css` 和 `NN-style-id.js`；展厅专属结构、样式和行为不得集中到全局文件。
 - 任何实现都必须同时考虑中英文、移动端、键盘、屏幕阅读器和 Reduced Motion。
 - 新功能、重构和验收应逐项对照规范第 26 节的验收标准。

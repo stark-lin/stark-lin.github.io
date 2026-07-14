@@ -1630,9 +1630,21 @@ Canvas 必须：
   state.js
   url.js
 
+/docs
+  /rooms
+    01-purism.md
+    02-constructivism.md
+    ...
+
 /rooms
-  purism.js
-  constructivism.js
+  /01-purism
+    01-purism.html
+    01-purism.css
+    01-purism.js
+  /02-constructivism
+    02-constructivism.html
+    02-constructivism.css
+    02-constructivism.js
   ...
 ~~~
 
@@ -1741,6 +1753,67 @@ docs/rooms/02-构成主义.md
 * 去色测试与静态测试标准。
 
 Agent 在实现或修改某个展厅前，必须先读取对应的风格设计规范文件。若风格文件与本通用规范冲突，以本通用规范为准。
+
+---
+
+## 22.5 风格 HTML、CSS 与 JavaScript 独立文件
+
+42 个展厅中的每一个都必须拥有独立的 HTML、CSS 和 JavaScript 文件。三个实现文件必须使用与风格设计规范相同的编号和 style-id，并放入该展厅的独立目录。
+
+目录与文件格式：
+
+~~~text
+/rooms/NN-style-id/
+  NN-style-id.html
+  NN-style-id.css
+  NN-style-id.js
+~~~
+
+一个完整展厅必须形成以下一一对应的四文件集合：
+
+~~~text
+/docs/rooms/NN-style-id.md
+/rooms/NN-style-id/NN-style-id.html
+/rooms/NN-style-id/NN-style-id.css
+/rooms/NN-style-id/NN-style-id.js
+~~~
+
+正确示例：
+
+~~~text
+/docs/rooms/02-constructivism.md
+/rooms/02-constructivism/02-constructivism.html
+/rooms/02-constructivism/02-constructivism.css
+/rooms/02-constructivism/02-constructivism.js
+~~~
+
+文件职责：
+
+* HTML：定义该展厅对统一语义骨架的结构转译、语义槽位和展厅专属构图，不复制或写死个人内容；
+* CSS：定义该展厅的排版、构图、色彩关系、装饰、响应式和 Reduced Motion 规则，并通过通用设计令牌取值；
+* JavaScript：实现统一 Room 接口、展厅专属布局参数、交互、装饰和动效行为，不决定文案内容或个人事实；
+* Markdown：定义该展厅的设计依据、必需特征、禁止特征、整页规则和验收标准。
+
+独立性要求：
+
+* 每个展厅必须同时拥有 HTML、CSS 和 JavaScript 文件，不得缺少其中任何一个；
+* 三个实现文件必须具有相同 basename，不得使用 index.html、style.css、script.js 等无法独立识别展厅的通用文件名；
+* 展厅专属 HTML 模板不得全部集中在根入口文件或单个全局模板文件；
+* 展厅专属 CSS 不得全部集中在 assets/styles.css 或其他全局样式文件；
+* 展厅专属 JavaScript 不得全部集中在 assets/app.js 或其他全局脚本文件；
+* 页面生成时应只加载或激活当前展厅所需的专属实现，避免同时执行 42 个展厅的行为代码；
+* 修改一个展厅时，不应要求修改另一个展厅的专属实现文件；
+* 空文件、仅含注释的占位文件或没有实际职责的代理文件不视为满足独立文件要求。
+
+允许共享：
+
+* 真实个人内容和中英文数据；
+* seed、派生随机流、状态与 URL 核心；
+* 通用设计令牌、reset 和基础可访问性样式；
+* 统一 Room 接口与加载器；
+* 所有展厅都必须遵守且没有风格偏向的基础工具函数。
+
+共享文件不得包含只服务于某一个展厅的结构、选择器、参数或行为。若一段代码只有一个展厅使用，它必须保留在该展厅的独立 HTML、CSS 或 JavaScript 文件中。
 
 ---
 
