@@ -4,6 +4,8 @@
 
 [English](#english) · [中文](#中文) · [Live site](https://stark-lin.github.io/) · [License](LICENSE)
 
+> **Design authority:** Product and implementation work must follow the [Generative Personal Homepage Design Specification](docs/GENERATIVE_PORTFOLIO_DESIGN_SPEC.md). Agent instructions enter through [AGENTS.md](AGENTS.md). If existing documentation or implementation conflicts with the specification, the specification takes precedence.
+
 <a id="english"></a>
 
 ## English
@@ -76,6 +78,10 @@ As long as the content pools and generation algorithm remain unchanged, the same
 │       ├── en.js           # English content and UI copy
 │       ├── zh.js           # Chinese content and UI copy
 │       └── palettes.js     # Theme IDs and data-driven palettes
+├── docs/
+│   └── GENERATIVE_PORTFOLIO_DESIGN_SPEC.md
+│                             # Authoritative product and design specification
+├── AGENTS.md                # Agent entry point and specification precedence
 ├── LICENSE                 # AGPL-3.0-only
 └── README.md
 ```
@@ -187,6 +193,8 @@ Copyright © 2026 Stark Lin. This project is licensed under the [GNU Affero Gene
 <a id="中文"></a>
 
 ## 中文翻译
+
+> **设计依据：** 产品与实现工作必须遵循[《生成式个人主页通用设计规范》](docs/GENERATIVE_PORTFOLIO_DESIGN_SPEC.md)，agent 从 [AGENTS.md](AGENTS.md) 进入。若现有文档或实现与规范冲突，以规范为准。
 
 这是一个零构建依赖、由原生 HTML、CSS 和 JavaScript 实现的双语个人作品集。每次访问都会获得一个参考代码，并据此确定性地组合页面文案、项目顺序、配色、背景、卡片表面、形状与排版特征。你可以随时生成新版本，也可以分享原链接以复现同一页面。
 
