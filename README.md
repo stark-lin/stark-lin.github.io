@@ -1,6 +1,9 @@
 <a id="top"></a>
 
-# Stark Lin Portfolio
+# Molybdenum
+
+> A reproducible portfolio in 42 visual languages.<br>
+> 一个以 42 种视觉语言呈现、可以被准确复现的个人作品集。
 
 [English](#english) · [中文](#中文) · [42 filters](docs/42-filters.md) · [42 种滤镜](docs/42-filters-zh.md) · [Live site](https://stark-lin.github.io/) · [License](LICENSE)
 
@@ -8,7 +11,21 @@
 
 ## English
 
-A bilingual, build-free personal portfolio written in vanilla HTML, CSS, and JavaScript. Each visit receives a reference code that deterministically composes the portfolio view and selects exactly one implemented style from a [42-filter catalog of art, design, and visual culture](docs/42-filters.md). The selected filter changes only the visual language, never the copy, content structure, or interaction logic. Generate another version when you want one, or share the original URL to reproduce the same view.
+Molybdenum is a bilingual, build-free personal portfolio written in vanilla HTML, CSS, and JavaScript. It treats a portfolio as a reproducible visual system rather than a single fixed page: each visit receives a reference code that deterministically composes the content view and selects exactly one style from a [42-filter catalog of art, design, and visual culture](docs/42-filters.md).
+
+The reference code acts as the identity of a generated view. Reusing the same `id` restores the same content configuration and visual filter, while **Roll Again** creates a new version. A filter can change typography, color, surfaces, decoration, and motion tone, but it never rewrites the copy, changes the information architecture, or replaces the interaction logic. The result is varied enough to feel like a new exhibition room and stable enough to share, inspect, and test.
+
+### At a glance
+
+| Item | Description |
+| --- | --- |
+| Project type | Generative bilingual personal portfolio |
+| Languages | English and Simplified Chinese |
+| Technology | Vanilla HTML, CSS, and JavaScript |
+| Visual systems | 42 equally weighted filters in five historical acts |
+| State model | Deterministic, shareable, URL-based reference codes |
+| Tooling | No runtime dependencies, package manager, or build step |
+| Hosting | GitHub Pages or any static file host |
 
 ### Highlights
 
@@ -194,9 +211,23 @@ Copyright © 2026 Stark Lin. This project is licensed under the [GNU Affero Gene
 
 <a id="中文"></a>
 
-## 中文翻译
+## 中文
 
-这是一个零构建依赖、由原生 HTML、CSS 和 JavaScript 实现的双语个人作品集。每次访问都会获得一个参考代码，并据此确定性地生成作品集视图，同时从[《42 种艺术、设计与视觉文化滤镜》](docs/42-filters-zh.md)中当前已经实现的样式里选择且只选择一种。被选中的滤镜只改变视觉语言，不修改文案、内容结构或交互逻辑。你可以随时生成另一个版本，也可以分享原链接以复现同一页面。
+Molybdenum 是一个零构建依赖、由原生 HTML、CSS 和 JavaScript 实现的双语个人作品集。它不把作品集视为一个固定页面，而是把它设计成一套可复现的视觉系统：每次访问都会获得一个参考代码，并据此确定性地组合内容视图，同时从[《42 种艺术、设计与视觉文化滤镜》](docs/42-filters-zh.md)中选择且只选择一种样式。
+
+参考代码相当于生成页面的身份标识。再次使用相同的 `id`，就能恢复相同的内容配置与视觉滤镜；点击 **Roll Again** 则会创建一个新版本。滤镜可以改变字体、颜色、表面、装饰与动效语气，但不会重写文案、改变信息架构或替换交互逻辑。因此，每次生成都像进入一个新的展厅，同时仍然可以被分享、检查和测试。
+
+### 项目概览
+
+| 项目 | 说明 |
+| --- | --- |
+| 项目类型 | 生成式双语个人作品集 |
+| 支持语言 | 英文、简体中文 |
+| 技术栈 | 原生 HTML、CSS、JavaScript |
+| 视觉系统 | 分为五个历史章节的 42 种等权重滤镜 |
+| 状态模型 | 基于 URL 参考代码、可确定性复现与分享 |
+| 工具依赖 | 无运行时依赖、无包管理器、无构建步骤 |
+| 部署方式 | GitHub Pages 或任意静态文件托管服务 |
 
 ### 功能亮点
 
