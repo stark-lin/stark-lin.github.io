@@ -1,31 +1,121 @@
+/* Abstract Expressionism: a legible portfolio painted as an energetic canvas. */
 body.theme-abstract-expressionism {
-  background:
-    radial-gradient(ellipse at 7% 18%, rgba(139, 47, 36, .22) 0 3%, transparent 3.4%),
-    radial-gradient(ellipse at 92% 39%, rgba(27, 25, 22, .18) 0 5%, transparent 5.6%),
-    linear-gradient(102deg, transparent 0 18%, rgba(244, 240, 231, .28) 18% 62%, transparent 62%),
-    var(--bg);
+  --ae-paper: #eee7d8;
+  --ae-ink: #171714;
+  --ae-red: #b23a2b;
+  --ae-blue: #31596a;
+  --ae-ochre: #c58a35;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 9% 7%, rgba(23, 23, 20, .12) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 91% 16%, rgba(178, 58, 43, .16) 0 2px, transparent 2.8px),
+    linear-gradient(112deg, transparent 0 17%, rgba(255, 255, 255, .24) 17.2% 17.6%, transparent 17.8% 100%),
+    linear-gradient(78deg, transparent 0 71%, rgba(23, 23, 20, .06) 71.2% 71.6%, transparent 71.8% 100%);
+  background-size: 19px 23px, 37px 31px, 100% 100%, 100% 100%;
   overflow-x: clip;
 }
 
+.theme-abstract-expressionism ::selection {
+  background: var(--ae-red);
+  color: #fffaf0;
+}
+
 .theme-abstract-expressionism .topbar {
-  border-bottom: 3px solid var(--line);
-  background: color-mix(in srgb, var(--card), transparent 9%);
+  border: 0;
+  border-bottom: 4px solid var(--ae-ink);
+  background: color-mix(in srgb, var(--ae-paper), transparent 8%);
+  box-shadow: 0 2px 0 rgba(178, 58, 43, .72);
+}
+
+.theme-abstract-expressionism .topbar-inner {
+  padding-block: 10px;
+}
+
+.theme-abstract-expressionism .brand {
+  gap: 11px;
+  letter-spacing: -.045em;
+  transform: rotate(-.7deg);
 }
 
 .theme-abstract-expressionism .brand::before {
   content: "";
-  width: 34px;
-  height: 8px;
-  background: var(--accent);
-  clip-path: polygon(0 38%, 100% 0, 91% 100%, 7% 74%);
+  width: 38px;
+  height: 13px;
+  flex: 0 0 auto;
+  background: var(--ae-red);
+  clip-path: polygon(0 44%, 11% 23%, 42% 29%, 67% 0, 100% 18%, 92% 75%, 62% 66%, 30% 100%, 5% 76%);
+  transform: rotate(-7deg);
+}
+
+.theme-abstract-expressionism nav {
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+.theme-abstract-expressionism nav a.current {
+  text-decoration-color: var(--ae-red);
+  text-decoration-thickness: 4px;
+  text-underline-offset: 6px;
+}
+
+.theme-abstract-expressionism .site {
+  position: relative;
+}
+
+.theme-abstract-expressionism .site::before,
+.theme-abstract-expressionism .site::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.theme-abstract-expressionism .site::before {
+  top: 5.5rem;
+  right: -22vw;
+  width: 42vw;
+  height: 11px;
+  background: var(--ae-ink);
+  box-shadow: 0 12px 0 -4px var(--ae-red);
+  transform: rotate(-13deg);
+}
+
+.theme-abstract-expressionism .site::after {
+  top: 38rem;
+  left: -31vw;
+  width: 36vw;
+  height: 86px;
+  background: rgba(49, 89, 106, .42);
+  clip-path: polygon(0 23%, 17% 5%, 53% 26%, 77% 0, 100% 33%, 88% 79%, 62% 61%, 37% 100%, 10% 74%);
+  transform: rotate(8deg);
 }
 
 .theme-abstract-expressionism .hero {
-  min-height: min(780px, 88vh);
-  padding-inline: clamp(20px, 5vw, 64px);
-  background: color-mix(in srgb, var(--card), transparent 7%);
-  border: 2px solid var(--line);
-  clip-path: polygon(1% 0, 99% 1%, 100% 96%, 97% 99%, 2% 98%, 0 92%, 1% 52%, 0 8%);
+  min-height: min(820px, 88vh);
+  margin-top: clamp(18px, 4vw, 48px);
+  padding: clamp(64px, 10vw, 112px) clamp(24px, 6vw, 72px) clamp(56px, 9vw, 96px);
+  border: 4px solid var(--ae-ink);
+  background:
+    linear-gradient(101deg, transparent 0 55%, rgba(197, 138, 53, .2) 55.2% 78%, transparent 78.2%),
+    linear-gradient(173deg, rgba(255, 255, 255, .28), transparent 46%),
+    var(--card);
+  box-shadow:
+    12px 14px 0 var(--ae-ink),
+    20px 23px 0 rgba(178, 58, 43, .82);
+  clip-path: polygon(.7% 0, 98.8% .8%, 100% 7%, 99.2% 93%, 96.4% 100%, 2% 98.7%, 0 92%, .5% 42%);
+}
+
+.theme-abstract-expressionism .hero-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(190px, .31fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: end;
+}
+
+.theme-abstract-expressionism .hero-grid > div:first-child {
+  position: relative;
+  z-index: 2;
 }
 
 .theme-abstract-expressionism .hero::before,
@@ -36,110 +126,590 @@ body.theme-abstract-expressionism {
 }
 
 .theme-abstract-expressionism .hero::before {
-  z-index: -1;
-  width: 72%;
-  height: 36%;
-  right: -12%;
-  top: 12%;
-  background: var(--accent);
-  opacity: .22;
-  clip-path: polygon(0 46%, 8% 28%, 24% 40%, 39% 9%, 55% 34%, 70% 0, 100% 34%, 88% 61%, 99% 87%, 63% 72%, 43% 100%, 25% 66%, 4% 78%);
-  transform: rotate(-8deg);
+  z-index: 0;
+  top: 7%;
+  right: -4%;
+  width: 42%;
+  height: 57%;
+  background: var(--ae-blue);
+  opacity: .94;
+  clip-path: polygon(4% 4%, 29% 13%, 46% 0, 71% 9%, 94% 2%, 88% 27%, 100% 48%, 88% 68%, 96% 93%, 72% 86%, 54% 100%, 34% 87%, 5% 95%, 13% 67%, 0 48%, 11% 28%);
+  transform: rotate(7deg);
 }
 
 .theme-abstract-expressionism .hero::after {
-  width: 44%;
-  height: 18px;
-  left: 8%;
-  bottom: 13%;
-  background: var(--fg);
-  clip-path: polygon(0 36%, 22% 8%, 53% 42%, 78% 0, 100% 64%, 72% 78%, 34% 58%, 6% 100%);
-  opacity: .72;
+  z-index: 1;
+  right: -8%;
+  bottom: 18%;
+  width: 73%;
+  height: 42px;
+  background: var(--ae-red);
+  box-shadow: 0 17px 0 -13px var(--ae-ink);
+  clip-path: polygon(0 39%, 9% 12%, 27% 31%, 43% 0, 65% 27%, 82% 8%, 100% 40%, 91% 71%, 74% 55%, 53% 100%, 31% 65%, 12% 90%);
+  transform: rotate(-7deg);
+}
+
+.theme-abstract-expressionism .kicker,
+.theme-abstract-expressionism .section-index,
+.theme-abstract-expressionism .generated-desc-meta,
+.theme-abstract-expressionism .time-label {
+  font-weight: 800;
+}
+
+.theme-abstract-expressionism .kicker {
+  display: inline-block;
+  margin-bottom: 22px;
+  padding: 5px 9px;
+  background: var(--ae-ink);
+  color: #fffaf0;
+  letter-spacing: .16em;
+  transform: rotate(-2deg);
 }
 
 .theme-abstract-expressionism h1 {
-  font-weight: 860;
+  max-width: 720px;
+  color: var(--ae-ink);
+  font-weight: 900;
+  line-height: .84;
+  letter-spacing: -.075em;
+  text-wrap: balance;
+  transform: rotate(-1.2deg);
+}
+
+.theme-abstract-expressionism h1::after {
+  content: "";
+  display: block;
+  width: min(84%, 560px);
+  height: 16px;
+  margin: 17px 0 0 3%;
+  background: var(--ae-red);
+  clip-path: polygon(0 42%, 18% 6%, 45% 37%, 70% 0, 100% 43%, 79% 74%, 53% 54%, 27% 100%, 5% 71%);
   transform: rotate(-1deg);
 }
 
 .theme-abstract-expressionism .hero-sub {
-  max-width: 620px;
-  padding: 16px 20px;
-  background: var(--card);
-  border-left: 8px solid var(--accent);
+  position: relative;
+  z-index: 2;
+  max-width: 590px;
+  margin-top: 26px;
+  padding: 18px 21px 17px 25px;
+  border-left: 9px solid var(--ae-ink);
+  background: color-mix(in srgb, var(--ae-paper), transparent 5%);
+  color: #36332d;
+  box-shadow: 7px 7px 0 rgba(197, 138, 53, .48);
+  transform: rotate(.65deg);
+}
+
+.theme-abstract-expressionism .hero-actions {
+  position: relative;
+  z-index: 2;
+}
+
+.theme-abstract-expressionism .button {
+  border-width: 3px;
+  font-family: var(--mono);
+  font-weight: 800;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+  box-shadow: 5px 5px 0 var(--ae-red);
+}
+
+.theme-abstract-expressionism .button.secondary {
+  box-shadow: 5px 5px 0 rgba(49, 89, 106, .72);
+}
+
+.theme-abstract-expressionism .button:hover,
+.theme-abstract-expressionism .button:focus-visible {
+  box-shadow: 2px 2px 0 var(--ae-red);
+  translate: 3px 3px;
+}
+
+.theme-abstract-expressionism .button.secondary:hover,
+.theme-abstract-expressionism .button.secondary:focus-visible {
+  box-shadow: 2px 2px 0 rgba(49, 89, 106, .72);
+}
+
+.theme-abstract-expressionism :is(a, button):focus-visible {
+  outline: 4px solid var(--ae-ochre);
+  outline-offset: 4px;
+}
+
+.theme-abstract-expressionism .hero-card {
+  z-index: 2;
+  align-self: end;
+  border: 3px solid var(--ae-ink);
+  background: #f7f0df;
+  box-shadow: 9px 10px 0 var(--ae-ink);
+  clip-path: polygon(1% 2%, 98% 0, 100% 96%, 94% 100%, 0 98%);
+  transform: rotate(2.2deg);
+}
+
+.theme-abstract-expressionism .hero-card .stat {
+  border-bottom-width: 3px;
+}
+
+.theme-abstract-expressionism .hero-card .stat-label {
+  color: var(--ae-red);
+  font-weight: 800;
+}
+
+.theme-abstract-expressionism main {
+  position: relative;
+  padding-top: clamp(54px, 9vw, 104px);
 }
 
 .theme-abstract-expressionism .section {
+  padding-block: clamp(76px, 11vw, 128px);
   border-top: 0;
-  overflow: clip;
+  overflow: visible;
 }
 
-.theme-abstract-expressionism .section::before {
+.theme-abstract-expressionism .section::before,
+.theme-abstract-expressionism .section::after {
   content: "";
   position: absolute;
   z-index: -1;
-  top: 56px;
-  left: -5%;
-  width: 24%;
+  pointer-events: none;
+}
+
+.theme-abstract-expressionism .section::before {
+  top: 12%;
+  left: -22vw;
+  width: 43vw;
   height: 12px;
-  background: var(--accent);
-  clip-path: polygon(0 38%, 100% 0, 86% 100%, 6% 70%);
-  opacity: .7;
+  background: var(--ae-red);
+  box-shadow: 0 14px 0 -8px var(--ae-ink);
+  transform: rotate(-5deg);
+}
+
+.theme-abstract-expressionism .section::after {
+  right: -17vw;
+  bottom: 9%;
+  width: 24vw;
+  height: 72px;
+  background: rgba(197, 138, 53, .34);
+  clip-path: polygon(0 28%, 23% 4%, 49% 23%, 77% 0, 100% 44%, 79% 76%, 46% 61%, 17% 100%);
+  transform: rotate(11deg);
 }
 
 .theme-abstract-expressionism .section:nth-child(even)::before {
   left: auto;
-  right: -3%;
-  width: 34%;
-  background: var(--fg);
-  transform: rotate(2deg);
+  right: -24vw;
+  width: 48vw;
+  background: var(--ae-blue);
+  transform: rotate(7deg);
+}
+
+.theme-abstract-expressionism .section:nth-child(even)::after {
+  right: auto;
+  left: -18vw;
+  background: rgba(178, 58, 43, .26);
+  transform: rotate(-9deg);
 }
 
 .theme-abstract-expressionism .section-head {
-  border-top: 3px solid var(--line);
+  grid-template-columns: minmax(92px, .18fr) minmax(0, 1fr);
+  gap: clamp(22px, 4vw, 54px);
+  margin-bottom: clamp(34px, 6vw, 64px);
   padding-top: 24px;
+  border-top: 7px solid var(--ae-ink);
 }
 
-.theme-abstract-expressionism :is(.card, .hero-card, .timeline-item, .principle) {
-  box-shadow: 5px 6px 0 color-mix(in srgb, var(--fg), transparent 78%);
+.theme-abstract-expressionism .section-index {
+  width: fit-content;
+  padding: 4px 8px;
+  background: var(--ae-red);
+  color: #fffaf0;
+  transform: rotate(-3deg);
 }
 
-.theme-abstract-expressionism .cards .card:nth-child(3n + 2),
+.theme-abstract-expressionism .section:nth-child(even) .section-index {
+  background: var(--ae-blue);
+  transform: rotate(2deg);
+}
+
+.theme-abstract-expressionism h2 {
+  max-width: 820px;
+  font-weight: 900;
+  line-height: .88;
+  letter-spacing: -.06em;
+}
+
+.theme-abstract-expressionism .section-lead {
+  max-width: 650px;
+  line-height: 1.55;
+}
+
+.theme-abstract-expressionism .cards,
+.theme-abstract-expressionism .principles,
+.theme-abstract-expressionism .timeline {
+  gap: clamp(26px, 4vw, 42px);
+}
+
+.theme-abstract-expressionism :is(.card, .timeline-item, .principle) {
+  border: 3px solid var(--ae-ink);
+  background: #f7f0df;
+  box-shadow: 9px 10px 0 var(--ae-ink);
+}
+
+.theme-abstract-expressionism :is(.card, .timeline-item, .principle)::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 7%;
+  width: 36%;
+  height: 18px;
+  background: var(--ae-red);
+  clip-path: polygon(0 37%, 21% 4%, 49% 31%, 77% 0, 100% 43%, 83% 70%, 54% 55%, 24% 100%, 4% 73%);
+  transform: rotate(-2deg);
+}
+
+.theme-abstract-expressionism :is(.card, .timeline-item, .principle) > * {
+  position: relative;
+  z-index: 1;
+}
+
+.theme-abstract-expressionism .cards .card:nth-child(even),
 .theme-abstract-expressionism .principle:nth-child(even) {
-  clip-path: polygon(0 2%, 98% 0, 100% 96%, 97% 100%, 1% 98%);
+  box-shadow: -9px 10px 0 var(--ae-blue);
+  transform: rotate(.45deg);
+}
+
+.theme-abstract-expressionism .cards .card:nth-child(even)::before,
+.theme-abstract-expressionism .principle:nth-child(even)::before {
+  right: 7%;
+  left: auto;
+  background: var(--ae-blue);
+  transform: rotate(2deg);
+}
+
+.theme-abstract-expressionism .cards .card:nth-child(3n),
+.theme-abstract-expressionism .principle:nth-child(3n) {
+  box-shadow: 9px 10px 0 var(--ae-ochre);
+  transform: rotate(-.35deg);
+}
+
+.theme-abstract-expressionism .cards .card:nth-child(3n)::before,
+.theme-abstract-expressionism .principle:nth-child(3n)::before {
+  background: var(--ae-ochre);
+}
+
+.theme-abstract-expressionism .card-title-row {
+  padding-bottom: 18px;
+  border-bottom: 4px solid var(--ae-ink);
+}
+
+.theme-abstract-expressionism h3 {
+  font-size: clamp(23px, 3vw, 31px);
+  font-weight: 850;
+}
+
+.theme-abstract-expressionism .stack,
+.theme-abstract-expressionism .generated-desc-meta,
+.theme-abstract-expressionism .time-label {
+  color: var(--ae-red);
 }
 
 .theme-abstract-expressionism .tag,
 .theme-abstract-expressionism .skill-pill {
-  border-radius: 3px;
-  border-width: 2px;
+  border: 2px solid var(--ae-ink);
+  border-radius: 1px;
+  background: transparent;
+  color: var(--ae-ink);
+  font-weight: 700;
+  transform: rotate(-1deg);
 }
 
-.theme-abstract-expressionism .contact-panel,
+.theme-abstract-expressionism .skill-pill:nth-child(even) {
+  border-color: var(--ae-red);
+  color: #7c291f;
+  transform: rotate(1.5deg);
+}
+
+.theme-abstract-expressionism .skill-pill:nth-child(3n) {
+  border-color: var(--ae-blue);
+  color: #274b5a;
+  transform: rotate(-2deg);
+}
+
+.theme-abstract-expressionism .project-card {
+  padding-block: clamp(30px, 5vw, 52px);
+}
+
+.theme-abstract-expressionism .project-card .generated-description {
+  max-width: 760px;
+  font-size: clamp(18px, 2.3vw, 22px);
+}
+
+.theme-abstract-expressionism .project-card a:not(.button) {
+  font-family: var(--mono);
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-color: var(--ae-red);
+  text-decoration-thickness: 4px;
+  text-underline-offset: 5px;
+}
+
+.theme-abstract-expressionism .timeline-item {
+  grid-template-columns: minmax(130px, .24fr) minmax(0, 1fr);
+  background: var(--ae-ink);
+  color: #f7f0df;
+  box-shadow: 10px 12px 0 var(--ae-red);
+}
+
+.theme-abstract-expressionism .timeline-item::before {
+  z-index: 0;
+  background: var(--ae-blue);
+}
+
+.theme-abstract-expressionism .timeline-item > * {
+  position: relative;
+  z-index: 1;
+}
+
+.theme-abstract-expressionism .timeline-item .generated-description {
+  color: #f7f0df;
+}
+
+.theme-abstract-expressionism .timeline-item .stack,
+.theme-abstract-expressionism .timeline-item .generated-desc-meta,
+.theme-abstract-expressionism .timeline-item .time-label {
+  color: #e7b968;
+}
+
+.theme-abstract-expressionism .principles {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.theme-abstract-expressionism .principle {
+  min-height: 190px;
+  font-size: clamp(19px, 2.5vw, 24px);
+  font-weight: 650;
+}
+
+.theme-abstract-expressionism .principle:nth-child(4n + 2) {
+  background: var(--ae-red);
+  color: #fffaf0;
+}
+
+.theme-abstract-expressionism .principle:nth-child(4n + 2) .tag {
+  border-color: currentColor;
+  color: inherit;
+}
+
+.theme-abstract-expressionism .principle:nth-child(4n) {
+  background: var(--ae-blue);
+  color: #fffaf0;
+}
+
+.theme-abstract-expressionism .principle:nth-child(4n) .tag {
+  border-color: currentColor;
+  color: inherit;
+}
+
+.theme-abstract-expressionism .contact-panel {
+  gap: clamp(32px, 6vw, 72px);
+  padding: clamp(34px, 7vw, 72px);
+  border: 4px solid var(--ae-ink);
+  background:
+    linear-gradient(104deg, transparent 0 67%, rgba(197, 138, 53, .28) 67.3% 100%),
+    #f7f0df;
+  box-shadow: 12px 14px 0 var(--ae-blue);
+  clip-path: polygon(0 1%, 98% 0, 100% 7%, 99% 94%, 96% 100%, 1% 98%);
+}
+
+.theme-abstract-expressionism .contact-panel::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -6%;
+  bottom: 17%;
+  width: 48%;
+  height: 24px;
+  background: var(--ae-red);
+  clip-path: polygon(0 38%, 18% 0, 47% 32%, 72% 5%, 100% 48%, 75% 78%, 45% 58%, 12% 100%);
+  transform: rotate(-7deg);
+}
+
 .theme-abstract-expressionism .reveal {
-  border: 3px solid var(--line);
-  background: var(--card);
-  clip-path: polygon(0 1%, 99% 0, 100% 94%, 96% 100%, 1% 98%);
+  margin-top: clamp(92px, 13vw, 150px);
+  padding: clamp(36px, 7vw, 72px);
+  border: 4px solid var(--ae-ink);
+  background: var(--ae-ink);
+  color: #f7f0df;
+  box-shadow: 13px 15px 0 var(--ae-red);
+  clip-path: polygon(.5% 0, 99% 1%, 100% 94%, 96% 100%, 1% 98%, 0 8%);
 }
 
 .theme-abstract-expressionism .reveal::before {
   content: "";
-  inset: auto -4% 8% auto;
-  width: 52%;
-  height: 34%;
-  background: var(--accent);
-  opacity: .15;
-  clip-path: polygon(0 26%, 17% 2%, 43% 33%, 68% 0, 100% 41%, 82% 92%, 51% 69%, 23% 100%);
+  inset: auto -8% 7% auto;
+  width: 63%;
+  height: 42%;
+  background: var(--ae-blue);
+  opacity: .88;
+  clip-path: polygon(0 30%, 18% 2%, 42% 27%, 69% 0, 100% 40%, 84% 89%, 55% 67%, 26% 100%);
+  transform: rotate(-4deg);
 }
 
-@media (max-width: 720px) {
+.theme-abstract-expressionism .reveal .kicker {
+  background: #f7f0df;
+  color: var(--ae-ink);
+}
+
+.theme-abstract-expressionism .reveal :is(h2, p) {
+  color: #f7f0df;
+}
+
+.theme-abstract-expressionism .reveal-stat {
+  border: 3px solid #f7f0df;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--ae-ink), transparent 8%);
+  color: #f7f0df;
+}
+
+.theme-abstract-expressionism .reveal .style-introduction {
+  color: #ded5c6;
+}
+
+.theme-abstract-expressionism .reveal-stat-section + .reveal-stat-section {
+  border-top-color: rgba(247, 240, 223, .45);
+}
+
+.theme-abstract-expressionism .reveal .button {
+  --style-button-bg: #f7f0df;
+  --style-button-color: var(--ae-ink);
+  --style-button-border-color: #f7f0df;
+}
+
+.theme-abstract-expressionism .reveal .button.secondary {
+  --style-button-secondary-bg: var(--ae-ink);
+  --style-button-secondary-color: #f7f0df;
+  --style-button-secondary-border-color: #f7f0df;
+}
+
+.theme-abstract-expressionism .complete-version {
+  border-top: 7px solid var(--ae-ink);
+}
+
+.theme-abstract-expressionism .tiny-footer {
+  padding-top: 36px;
+  border-top: 4px solid var(--ae-ink);
+}
+
+@media (max-width: 760px) {
   .theme-abstract-expressionism .hero {
     min-height: auto;
-    padding-inline: 18px;
+    margin-top: 12px;
+    padding: 64px 24px 58px;
+    box-shadow: 7px 8px 0 var(--ae-ink), 12px 14px 0 rgba(178, 58, 43, .82);
   }
 
-  .theme-abstract-expressionism .hero::before { width: 92%; opacity: .13; }
-  .theme-abstract-expressionism .hero::after { width: 70%; bottom: 7%; }
-  .theme-abstract-expressionism h1 { transform: none; }
-  .theme-abstract-expressionism .section::before { top: 36px; }
+  .theme-abstract-expressionism .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .theme-abstract-expressionism .hero::before {
+    top: 4%;
+    right: -13%;
+    width: 54%;
+    height: 36%;
+    opacity: .32;
+  }
+
+  .theme-abstract-expressionism .hero::after {
+    right: -20%;
+    bottom: 31%;
+    width: 92%;
+    opacity: .78;
+  }
+
+  .theme-abstract-expressionism h1 {
+    line-height: .9;
+    transform: rotate(-.5deg);
+  }
+
+  .theme-abstract-expressionism .hero-sub {
+    transform: none;
+  }
+
+  .theme-abstract-expressionism .hero-card {
+    max-width: 100%;
+    transform: rotate(1deg);
+  }
+
+  .theme-abstract-expressionism .section-head,
+  .theme-abstract-expressionism .timeline-item {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .theme-abstract-expressionism .principles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .theme-abstract-expressionism .section::before {
+    width: 55vw;
+  }
+
+  .theme-abstract-expressionism :is(.card, .timeline-item, .principle) {
+    box-shadow: 6px 7px 0 var(--ae-ink);
+  }
+
+  .theme-abstract-expressionism .cards .card:nth-child(even),
+  .theme-abstract-expressionism .principle:nth-child(even) {
+    box-shadow: -6px 7px 0 var(--ae-blue);
+  }
+}
+
+@media (max-width: 520px) {
+  .theme-abstract-expressionism .topbar-inner {
+    padding-inline: 7px;
+  }
+
+  .theme-abstract-expressionism .brand::before {
+    width: 26px;
+  }
+
+  .theme-abstract-expressionism .hero {
+    padding-inline: 20px;
+  }
+
+  .theme-abstract-expressionism .hero::after {
+    bottom: 29%;
+  }
+
+  .theme-abstract-expressionism .section {
+    padding-block: 72px;
+  }
+
+  .theme-abstract-expressionism h2 {
+    line-height: .94;
+  }
+
+  .theme-abstract-expressionism .contact-panel,
+  .theme-abstract-expressionism .reveal {
+    padding: 28px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-abstract-expressionism :is(.brand, h1, .hero-sub, .hero-card, .section-index, .card, .principle, .tag, .skill-pill) {
+    transform: none;
+  }
+
+  .theme-abstract-expressionism .button:hover,
+  .theme-abstract-expressionism .button:focus-visible {
+    translate: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .theme-abstract-expressionism .hero,
+  .theme-abstract-expressionism :is(.card, .hero-card, .timeline-item, .principle),
+  .theme-abstract-expressionism .contact-panel,
+  .theme-abstract-expressionism .reveal {
+    clip-path: none;
+    box-shadow: none;
+  }
 }
