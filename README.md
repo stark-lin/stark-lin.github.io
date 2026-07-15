@@ -14,7 +14,7 @@ A bilingual, build-free personal portfolio written in vanilla HTML, CSS, and Jav
 
 - **Reproducible generated views** — A seeded pseudo-random generator maps each reference code to a complete page configuration; the same `id` produces the same version.
 - **Native Chinese and English content** — English lives at `index.html`, Chinese at `zh.html`, and the language switch preserves query parameters and the current hash.
-- **Curated visual system** — The current pools contain 16 single-accent palettes, 16 flat patterned backgrounds, 8 solid surface treatments, and 8 restrained shape variants.
+- **Large visual system** — The current pools contain 30 CSS themes, 124 data-driven palettes, 128 backgrounds, 64 surfaces, and 32 shapes.
 - **Generated copy and layout** — Headlines, summaries, project descriptions, tags, section order, skill order, and visual traits are composed from the reference code.
 - **Compact and complete reading modes** — The default view keeps the signal compact, while the full-record view exposes complete project and implementation notes.
 - **Shareable state** — Each view exposes its reference code, combination rarity, and a shareable URL.
@@ -119,7 +119,7 @@ The simplest approach is to add an object to `window.PORTFOLIO_PALETTES` in `ass
   text: "#202020",
   muted: "#6B6B6B",
   accent: "#315EFB",
-  accent2: "#315EFB",
+  accent2: "#D95F59",
   border: "#DADADA"
 }
 ```
@@ -128,9 +128,9 @@ These colors are mapped to CSS variables by the application. To add a traditiona
 
 #### Edit visual variants
 
-Background, surface, and shape names live in `backgroundStyles`, `surfaceStyles`, and `shapeStyles` in both locale files, with their implementations in `assets/styles.css`. Each generated pool must remain non-empty and have a power-of-two length; the application validates palettes, backgrounds, surfaces, shapes, style genes, and layout pools at startup. The current visual lengths are 16 palettes, 16 backgrounds, 8 surfaces, and 8 shapes.
+Background, surface, and shape names live in `backgroundStyles`, `surfaceStyles`, and `shapeStyles` in both locale files, with their implementations in `assets/styles.css`. Each pool must remain non-empty and have a power-of-two length; the application validates this at startup. Their current lengths are 128, 64, and 32.
 
-Composable typography, density, border, button, and related traits are defined in `STYLE_GENES` in `assets/app.js`. Shadows are globally disabled. Changing a generation pool changes the mapping of existing IDs, so treat those pools as a versioned public interface if long-lived shared views must remain visually stable.
+Composable typography, density, border, shadow, button, and related traits are defined in `STYLE_GENES` in `assets/app.js`. Changing a generation pool changes the mapping of existing IDs, so treat those pools as a versioned public interface if long-lived shared views must remain visually stable.
 
 ### Validation and testing
 
@@ -194,7 +194,7 @@ Copyright © 2026 Stark Lin. This project is licensed under the [GNU Affero Gene
 
 - **可复现的生成式页面** — 参考代码通过带种子的伪随机数生成器映射到完整页面配置；相同的 `id` 会生成相同版本。
 - **原生中英文内容** — 英文入口为 `index.html`，中文入口为 `zh.html`；切换语言时会保留查询参数和当前页内锚点。
-- **克制的视觉系统** — 当前包含 16 套单强调色配色、16 种平面图案背景、8 种实体表面和 8 种克制的形状变体。
+- **丰富的视觉系统** — 当前包含 30 个 CSS 主题、124 个数据驱动配色，以及 128 种背景、64 种表面和 32 种形状。
 - **动态文案与布局** — 标题、简介、项目描述、标签、章节顺序、技能顺序和视觉特征都会根据参考代码组合。
 - **精简与完整两种阅读方式** — 默认页面突出关键信息，也可展开完整项目记录与实现说明。
 - **可分享的页面状态** — 每个页面都会显示参考代码、组合稀有度和可分享链接。
@@ -308,9 +308,9 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 
 #### 修改视觉变体
 
-背景、表面和形状名称位于两份语言数据文件的 `backgroundStyles`、`surfaceStyles` 和 `shapeStyles` 中，对应实现位于 `assets/styles.css`。每个生成池都必须保持非空且长度为 2 的幂；应用启动时会验证配色、背景、表面、形状、样式基因和布局池。当前视觉池长度为 16 套配色、16 种背景、8 种表面和 8 种形状。
+背景、表面和形状名称位于两份语言数据文件的 `backgroundStyles`、`surfaceStyles` 和 `shapeStyles` 中，对应实现位于 `assets/styles.css`。每个池都必须保持非空且长度为 2 的幂；应用启动时会验证该约束。当前长度分别为 128、64 和 32。
 
-排版、密度、边框、按钮等可组合特征定义在 `assets/app.js` 的 `STYLE_GENES` 中，阴影已在全局禁用。修改生成池会改变既有 `id` 的映射结果，因此如果需要长期保留分享链接的视觉结果，应把这些生成池视为需要版本管理的公开接口。
+排版、密度、边框、阴影、按钮等可组合特征定义在 `assets/app.js` 的 `STYLE_GENES` 中。修改生成池会改变既有 `id` 的映射结果，因此如果需要长期保留分享链接的视觉结果，应把这些生成池视为需要版本管理的公开接口。
 
 ### 验证与测试
 

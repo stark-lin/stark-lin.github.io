@@ -63,48 +63,101 @@
 
     const STYLE_GENES = {
       density: [
-        { variables: { "--style-site-width": "720px", "--style-card-padding": "16px", "--style-card-gap": "16px", "--style-section-padding-y": "40px", "--style-section-gap": "24px", "--style-hero-pad-top": "56px", "--style-hero-pad-bottom": "40px", "--style-hero-gap": "16px" } },
-        { variables: { "--style-site-width": "760px", "--style-card-padding": "16px", "--style-card-gap": "16px", "--style-section-padding-y": "48px", "--style-section-gap": "24px", "--style-hero-pad-top": "64px", "--style-hero-pad-bottom": "48px", "--style-hero-gap": "24px" } },
-        { variables: { "--style-site-width": "816px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "56px", "--style-section-gap": "32px", "--style-hero-pad-top": "72px", "--style-hero-pad-bottom": "56px", "--style-hero-gap": "24px" } },
-        { variables: { "--style-site-width": "880px", "--style-card-padding": "24px", "--style-card-gap": "24px", "--style-section-padding-y": "64px", "--style-section-gap": "32px", "--style-hero-pad-top": "80px", "--style-hero-pad-bottom": "64px", "--style-hero-gap": "32px" } },
-        { variables: { "--style-site-width": "944px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "72px", "--style-section-gap": "40px", "--style-hero-pad-top": "88px", "--style-hero-pad-bottom": "72px", "--style-hero-gap": "32px" } },
-        { variables: { "--style-site-width": "960px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "80px", "--style-section-gap": "40px", "--style-hero-pad-top": "96px", "--style-hero-pad-bottom": "72px", "--style-hero-gap": "32px" } },
-        { variables: { "--style-site-width": "1024px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "88px", "--style-section-gap": "48px", "--style-hero-pad-top": "104px", "--style-hero-pad-bottom": "80px", "--style-hero-gap": "40px" } },
-        { variables: { "--style-site-width": "1088px", "--style-card-padding": "32px", "--style-card-gap": "32px", "--style-section-padding-y": "96px", "--style-section-gap": "48px", "--style-hero-pad-top": "112px", "--style-hero-pad-bottom": "88px", "--style-hero-gap": "40px" } }
+        { variables: { "--style-site-width": "720px", "--style-card-padding": "16px", "--style-card-gap": "8px", "--style-section-padding-y": "40px", "--style-section-gap": "24px", "--style-hero-pad-top": "56px", "--style-hero-pad-bottom": "48px", "--style-hero-gap": "16px" } },
+        { variables: { "--style-site-width": "784px", "--style-card-padding": "16px", "--style-card-gap": "16px", "--style-section-padding-y": "48px", "--style-section-gap": "24px", "--style-hero-pad-top": "56px", "--style-hero-pad-bottom": "48px", "--style-hero-gap": "24px" } },
+        { variables: { "--style-site-width": "840px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "56px", "--style-section-gap": "24px", "--style-hero-pad-top": "64px", "--style-hero-pad-bottom": "56px", "--style-hero-gap": "24px" } },
+        { variables: { "--style-site-width": "896px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "64px", "--style-section-gap": "32px", "--style-hero-pad-top": "72px", "--style-hero-pad-bottom": "64px", "--style-hero-gap": "24px" } },
+        { variables: { "--style-site-width": "960px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "72px", "--style-section-gap": "32px", "--style-hero-pad-top": "80px", "--style-hero-pad-bottom": "72px", "--style-hero-gap": "32px" } },
+        { variables: { "--style-site-width": "1024px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "80px", "--style-section-gap": "32px", "--style-hero-pad-top": "88px", "--style-hero-pad-bottom": "80px", "--style-hero-gap": "32px" } },
+        { variables: { "--style-site-width": "1080px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "88px", "--style-section-gap": "40px", "--style-hero-pad-top": "96px", "--style-hero-pad-bottom": "80px", "--style-hero-gap": "32px" } },
+        { variables: { "--style-site-width": "944px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "96px", "--style-section-gap": "40px", "--style-hero-pad-top": "112px", "--style-hero-pad-bottom": "96px", "--style-hero-gap": "40px" } },
+        { variables: { "--style-site-width": "864px", "--style-card-padding": "24px", "--style-card-gap": "24px", "--style-section-padding-y": "80px", "--style-section-gap": "48px", "--style-hero-pad-top": "88px", "--style-hero-pad-bottom": "64px", "--style-hero-gap": "40px" } },
+        { variables: { "--style-site-width": "1120px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "104px", "--style-section-gap": "48px", "--style-hero-pad-top": "120px", "--style-hero-pad-bottom": "96px", "--style-hero-gap": "40px" } }
       ],
       frame: [
-        { variables: { "--style-component-border-width": "0px", "--style-component-border-style": "solid" } },
-        { variables: { "--style-component-border-width": "1px", "--style-component-border-style": "solid" } },
-        { variables: { "--style-component-border-width": "1px", "--style-component-border-style": "dashed" } },
-        { variables: { "--style-component-border-width": "2px", "--style-component-border-style": "solid" } }
+        { variables: { "--style-component-outline": "none" } },
+        { variables: { "--style-component-outline": "1px dashed var(--style-visible-border)" } },
+        { variables: { "--style-component-outline": "2px dashed var(--style-visible-border)" } },
+        { variables: { "--style-component-outline": "1px solid var(--style-visible-border)" } },
+        { variables: { "--style-component-outline": "2px solid var(--style-visible-border)" } },
+        { variables: { "--style-component-outline": "4px double var(--style-visible-border)" } }
+      ],
+      shadow: [
+        { variables: { "--style-card-shadow": "none", "--style-panel-shadow": "none", "--style-blur": "0px" } },
+        { variables: { "--style-card-shadow": "0 8px 22px rgba(0,0,0,.04)", "--style-panel-shadow": "0 18px 58px rgba(0,0,0,.07)", "--style-blur": "8px" } },
+        { variables: { "--style-card-shadow": "0 18px 60px rgba(0,0,0,.08)", "--style-panel-shadow": "0 26px 90px rgba(0,0,0,.10)", "--style-blur": "14px" } },
+        { variables: { "--style-card-shadow": "inset 0 1px 0 color-mix(in srgb, var(--fg), transparent 88%)", "--style-panel-shadow": "inset 0 1px 0 color-mix(in srgb, var(--fg), transparent 84%)", "--style-blur": "18px" } },
+        { variables: { "--style-card-shadow": "8px 8px 0 color-mix(in srgb, var(--accent), transparent 44%)", "--style-panel-shadow": "10px 10px 0 color-mix(in srgb, var(--accent), transparent 38%)", "--style-blur": "0px" } },
+        { variables: { "--style-card-shadow": "0 1px 0 color-mix(in srgb, var(--fg), transparent 80%)", "--style-panel-shadow": "0 1px 0 color-mix(in srgb, var(--fg), transparent 76%)", "--style-blur": "0px" } },
+        { variables: { "--style-card-shadow": "0 30px 90px rgba(0,0,0,.11)", "--style-panel-shadow": "0 42px 120px rgba(0,0,0,.15)", "--style-blur": "24px" } },
+        { variables: { "--style-card-shadow": "6px 6px 0 color-mix(in srgb, var(--fg), transparent 90%)", "--style-panel-shadow": "8px 8px 0 color-mix(in srgb, var(--fg), transparent 86%)", "--style-blur": "4px" } },
+        { variables: { "--style-card-shadow": "0 20px 70px rgba(0,0,0,.08)", "--style-panel-shadow": "0 34px 100px rgba(0,0,0,.11)", "--style-blur": "20px" } },
+        { variables: { "--style-card-shadow": "0 0 0 999px rgba(255,255,255,.015) inset", "--style-panel-shadow": "0 0 0 999px rgba(255,255,255,.025) inset", "--style-blur": "12px" } }
       ],
       type: [
-        { variables: { "--style-line-height": "1.5", "--style-h1-min": "40px", "--style-h1-fluid": "5.8vw", "--style-h1-max": "64px", "--style-h1-tracking": "-0.025em", "--style-h2-tracking": "-0.02em", "--style-h3-tracking": "-0.012em", "--style-desc-size": "17px", "--style-section-lead-size": "16px" } },
-        { variables: { "--style-line-height": "1.58", "--style-h1-min": "38px", "--style-h1-fluid": "5.4vw", "--style-h1-max": "60px", "--style-h1-tracking": "-0.018em", "--style-h2-tracking": "-0.014em", "--style-h3-tracking": "-0.008em", "--style-desc-size": "18px", "--style-section-lead-size": "17px" } },
-        { variables: { "--style-line-height": "1.64", "--style-h1-min": "36px", "--style-h1-fluid": "5vw", "--style-h1-max": "56px", "--style-h1-tracking": "-0.012em", "--style-h2-tracking": "-0.01em", "--style-h3-tracking": "0", "--style-desc-size": "17px", "--style-section-lead-size": "17px" } },
-        { variables: { "--style-line-height": "1.48", "--style-h1-min": "42px", "--style-h1-fluid": "6.2vw", "--style-h1-max": "68px", "--style-h1-tracking": "-0.022em", "--style-h2-tracking": "-0.016em", "--style-h3-tracking": "-0.01em", "--style-desc-size": "16px", "--style-section-lead-size": "16px" } }
+        { variables: { "--style-line-height": "1.42", "--style-h1-min": "44px", "--style-h1-fluid": "9vw", "--style-h1-max": "104px", "--style-h1-tracking": "-0.095em", "--style-h2-tracking": "-0.07em", "--style-h3-tracking": "-0.045em", "--style-desc-size": "18px", "--style-section-lead-size": "17px" } },
+        { variables: { "--style-line-height": "1.48", "--style-h1-min": "40px", "--style-h1-fluid": "7.5vw", "--style-h1-max": "86px", "--style-h1-tracking": "-0.065em", "--style-h2-tracking": "-0.05em", "--style-h3-tracking": "-0.03em", "--style-desc-size": "17px", "--style-section-lead-size": "16px" } },
+        { variables: { "--style-line-height": "1.6", "--style-h1-min": "42px", "--style-h1-fluid": "8vw", "--style-h1-max": "92px", "--style-h1-tracking": "-0.075em", "--style-h2-tracking": "-0.055em", "--style-h3-tracking": "-0.035em", "--style-desc-size": "18px", "--style-section-lead-size": "17px" } },
+        { variables: { "--style-line-height": "1.68", "--style-h1-min": "38px", "--style-h1-fluid": "6.8vw", "--style-h1-max": "78px", "--style-h1-tracking": "-0.04em", "--style-h2-tracking": "-0.035em", "--style-h3-tracking": "-0.018em", "--style-desc-size": "19px", "--style-section-lead-size": "18px" } },
+        { variables: { "--style-line-height": "1.52", "--style-h1-min": "46px", "--style-h1-fluid": "10vw", "--style-h1-max": "116px", "--style-h1-tracking": "-0.11em", "--style-h2-tracking": "-0.08em", "--style-h3-tracking": "-0.05em", "--style-desc-size": "17px", "--style-section-lead-size": "17px" } },
+        { variables: { "--style-line-height": "1.5", "--style-h1-min": "36px", "--style-h1-fluid": "6vw", "--style-h1-max": "70px", "--style-h1-tracking": "-0.025em", "--style-h2-tracking": "-0.02em", "--style-h3-tracking": "-0.012em", "--style-desc-size": "16px", "--style-section-lead-size": "15px" } },
+        { variables: { "--style-line-height": "1.74", "--style-h1-min": "42px", "--style-h1-fluid": "7vw", "--style-h1-max": "84px", "--style-h1-tracking": "-0.05em", "--style-h2-tracking": "-0.04em", "--style-h3-tracking": "-0.02em", "--style-desc-size": "20px", "--style-section-lead-size": "19px" } },
+        { variables: { "--style-line-height": "1.36", "--style-h1-min": "48px", "--style-h1-fluid": "9.5vw", "--style-h1-max": "108px", "--style-h1-tracking": "-0.085em", "--style-h2-tracking": "-0.065em", "--style-h3-tracking": "-0.04em", "--style-desc-size": "16px", "--style-section-lead-size": "16px" } },
+        { variables: { "--style-line-height": "1.58", "--style-h1-min": "41px", "--style-h1-fluid": "8.4vw", "--style-h1-max": "98px", "--style-h1-tracking": "-0.09em", "--style-h2-tracking": "-0.06em", "--style-h3-tracking": "-0.028em", "--style-desc-size": "19px", "--style-section-lead-size": "18px" } },
+        { variables: { "--style-line-height": "1.46", "--style-h1-min": "39px", "--style-h1-fluid": "7.8vw", "--style-h1-max": "88px", "--style-h1-tracking": "-0.055em", "--style-h2-tracking": "-0.042em", "--style-h3-tracking": "-0.024em", "--style-desc-size": "17px", "--style-section-lead-size": "18px" } }
       ],
       chrome: [
         { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px" } },
-        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-padding": "16px" } }
+        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-padding": "8px" } },
+        { variables: { "--style-title-rule-width": "2px", "--style-title-rule-padding": "16px" } },
+        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px" } },
+        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "dashed", "--style-title-rule-padding": "8px" } },
+        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px" } },
+        { variables: { "--style-title-rule-width": "3px", "--style-title-rule-style": "double", "--style-title-rule-padding": "16px" } },
+        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "solid", "--style-title-rule-padding": "16px" } }
       ],
       rhythm: [
-        { variables: { "--style-text-width": "624px" } },
-        { variables: { "--style-text-width": "688px" } },
-        { variables: { "--style-text-width": "760px" } },
-        { variables: { "--style-text-width": "816px" } }
+        { variables: { "--style-text-width": "624px", "--style-micro-opacity": ".72" } },
+        { variables: { "--style-text-width": "680px", "--style-micro-opacity": ".82" } },
+        { variables: { "--style-text-width": "720px", "--style-micro-opacity": ".9" } },
+        { variables: { "--style-text-width": "760px", "--style-micro-opacity": "1" } },
+        { variables: { "--style-text-width": "816px", "--style-micro-opacity": ".88" } },
+        { variables: { "--style-text-width": "896px", "--style-micro-opacity": ".76" } },
+        { variables: { "--style-text-width": "560px", "--style-micro-opacity": ".95" } },
+        { variables: { "--style-text-width": "100%", "--style-micro-opacity": ".68" } }
       ],
       controls: [
-        { variables: { "--style-button-y": "10px", "--style-button-x": "16px", "--style-button-size": "13px" } },
-        { variables: { "--style-button-y": "10px", "--style-button-x": "20px", "--style-button-size": "14px" } },
-        { variables: { "--style-button-y": "12px", "--style-button-x": "20px", "--style-button-size": "14px" } },
-        { variables: { "--style-button-y": "12px", "--style-button-x": "24px", "--style-button-size": "15px" } }
+        { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "12px" } },
+        { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "13px" } },
+        { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "14px" } },
+        { variables: { "--style-button-y": "8px", "--style-button-x": "24px", "--style-button-size": "14px" } },
+        { variables: { "--style-button-y": "16px", "--style-button-x": "24px", "--style-button-size": "15px" } },
+        { variables: { "--style-button-y": "8px", "--style-button-x": "24px", "--style-button-size": "12px" } },
+        { variables: { "--style-button-y": "16px", "--style-button-x": "16px", "--style-button-size": "16px" } },
+        { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "13px" } }
       ],
+      // Secondary buttons must separate from the page through either a visible
+      // border or an opaque foreground/background contrast fill.
       buttons: [
-        { variables: { "--style-button-radius": "0px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-secondary-bg": "transparent", "--style-button-secondary-border-color": "var(--fg)" } },
-        { variables: { "--style-button-radius": "4px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-secondary-bg": "var(--card-strong)", "--style-button-secondary-border-color": "var(--line)" } },
-        { variables: { "--style-button-radius": "6px", "--style-button-bg": "var(--accent)", "--style-button-color": "var(--bg)", "--style-button-secondary-bg": "transparent", "--style-button-secondary-border-color": "var(--accent)" } },
-        { variables: { "--style-button-radius": "8px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-secondary-bg": "color-mix(in srgb, var(--card-strong), var(--bg) 18%)", "--style-button-secondary-border-color": "var(--line)" } }
+        { variables: { "--style-button-radius": "999px", "--style-button-border-width": "1px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "transparent", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--fg)", "--style-button-shadow": "none", "--style-button-font": "inherit", "--style-button-weight": "inherit", "--style-button-tracking": "normal", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
+        { variables: { "--style-button-radius": "14px", "--style-button-border-width": "1px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "var(--card-strong)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--line)", "--style-button-shadow": "0 8px 18px rgba(0,0,0,.10)", "--style-button-font": "var(--sans)", "--style-button-weight": "700", "--style-button-tracking": ".01em", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
+        { variables: { "--style-button-radius": "4px", "--style-button-border-width": "1px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "transparent", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--line)", "--style-button-shadow": "none", "--style-button-font": "var(--mono)", "--style-button-weight": "650", "--style-button-tracking": ".08em", "--style-button-text-transform": "uppercase", "--style-button-backdrop": "none" } },
+        { variables: { "--style-button-radius": "8px", "--style-button-border-width": "2px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "var(--bg)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--fg)", "--style-button-shadow": "3px 3px 0 var(--accent)", "--style-button-font": "var(--sans)", "--style-button-weight": "760", "--style-button-tracking": ".01em", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
+        { variables: { "--style-button-radius": "10px", "--style-button-border-width": "1px", "--style-button-bg": "transparent", "--style-button-color": "var(--fg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "var(--accent-soft)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--line)", "--style-button-shadow": "none", "--style-button-font": "inherit", "--style-button-weight": "680", "--style-button-tracking": ".02em", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
+        { variables: { "--style-button-radius": "18px", "--style-button-border-width": "1px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "transparent", "--style-button-secondary-bg": "var(--accent-soft)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "color-mix(in srgb, var(--accent), var(--line) 72%)", "--style-button-shadow": "0 10px 26px color-mix(in srgb, var(--accent), transparent 82%)", "--style-button-font": "var(--sans)", "--style-button-weight": "720", "--style-button-tracking": ".01em", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
+        { variables: { "--style-button-radius": "999px", "--style-button-border-width": "0px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "transparent", "--style-button-secondary-bg": "color-mix(in srgb, var(--bg) 82%, var(--fg) 18%)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "transparent", "--style-button-shadow": "none", "--style-button-font": "inherit", "--style-button-weight": "700", "--style-button-tracking": "normal", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
+        { variables: { "--style-button-radius": "18px", "--style-button-border-width": "1px", "--style-button-bg": "color-mix(in srgb, var(--fg), transparent 8%)", "--style-button-color": "var(--bg)", "--style-button-border-color": "color-mix(in srgb, var(--fg), transparent 18%)", "--style-button-secondary-bg": "color-mix(in srgb, var(--card-strong), transparent 20%)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--line)", "--style-button-shadow": "0 10px 28px rgba(0,0,0,.10)", "--style-button-font": "inherit", "--style-button-weight": "680", "--style-button-tracking": ".01em", "--style-button-text-transform": "none", "--style-button-backdrop": "blur(14px) saturate(1.2)" } },
+        { variables: { "--style-button-radius": "0px", "--style-button-border-width": "3px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "transparent", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--fg)", "--style-button-shadow": "none", "--style-button-font": "var(--sans)", "--style-button-weight": "850", "--style-button-tracking": ".04em", "--style-button-text-transform": "uppercase", "--style-button-backdrop": "none" } }
+      ],
+      index: [
+        { variables: { "--style-index-box-border-width": "0px", "--style-index-box-padding": "0px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".08em" } },
+        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".1em" } },
+        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px 16px", "--style-meta-transform": "none", "--style-meta-spacing": ".02em" } },
+        { variables: { "--style-index-box-border-width": "2px", "--style-index-box-padding": "8px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".14em" } },
+        { variables: { "--style-index-box-border-width": "0px", "--style-index-box-padding": "0px", "--style-meta-transform": "lowercase", "--style-meta-spacing": ".04em" } },
+        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px 16px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".18em" } },
+        { variables: { "--style-index-box-border-width": "0px", "--style-index-box-padding": "0px", "--style-meta-transform": "none", "--style-meta-spacing": "0" } },
+        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px 16px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".06em" } }
       ]
     };
 
@@ -154,26 +207,16 @@
       }
     };
 
-    function assertPowerOfTwoPools() {
-      const generatedPools = {
-        "visual.palettes": RANDOM_POOLS.visual.palettes,
-        "visual.backgrounds": RANDOM_POOLS.visual.backgrounds,
-        "visual.surfaces": RANDOM_POOLS.visual.surfaces,
-        "visual.shapes": RANDOM_POOLS.visual.shapes,
-        ...Object.fromEntries(Object.entries(RANDOM_POOLS.visual.styleGenes).map(([name, pool]) => [`visual.styleGenes.${name}`, pool])),
-        "layout.educationPlacements": RANDOM_POOLS.layout.educationPlacements,
-        "layout.sections": RANDOM_POOLS.layout.sections
-      };
-
-      Object.entries(generatedPools).forEach(([poolName, pool]) => {
-        const size = pool.length;
+    function assertPowerOfTwoVisualPools() {
+      ["backgrounds", "surfaces", "shapes"].forEach(poolName => {
+        const size = RANDOM_POOLS.visual[poolName].length;
         if (size < 1 || (size & (size - 1)) !== 0) {
-          throw new Error(`Generated pool "${poolName}" must contain a power-of-two number of entries; received ${size}.`);
+          throw new Error(`Visual pool "${poolName}" must contain a power-of-two number of entries; received ${size}.`);
         }
       });
     }
 
-    assertPowerOfTwoPools();
+    assertPowerOfTwoVisualPools();
 
     function styleGeneSpace() {
       return RANDOM_POOLS.visual.surfaces.length * Object.values(RANDOM_POOLS.visual.styleGenes)
@@ -241,6 +284,28 @@
     function createRandom(id) {
       const [a, b, c, d] = cyrb128(id);
       return sfc32(a, b, c, d);
+    }
+
+    function createRandomHalos(id) {
+      const rng = createRandom(`${id}:halo`);
+      const colors = ["var(--accent)", "var(--accent-2)", "var(--fg)"];
+      const haloCount = 1 + Math.floor(rng() * 5);
+      const halos = Array.from({ length: haloCount }, () => {
+        const x = Math.round(-12 + rng() * 124);
+        const y = Math.round(-10 + rng() * 120);
+        const width = Math.round(22 + rng() * 34);
+        const height = Math.round(20 + rng() * 30);
+        const transparency = Math.round(91 + rng() * 6);
+        const shoulder = Math.round(28 + rng() * 24);
+        const color = colors[Math.floor(rng() * colors.length)];
+        const shape = rng() < 0.35
+          ? `circle ${Math.round((width + height) / 2)}rem`
+          : `ellipse ${width}rem ${height}rem`;
+
+        return `radial-gradient(${shape} at ${x}% ${y}%, color-mix(in srgb, ${color}, transparent ${transparency}%) 0% ${shoulder}%, transparent 100%)`;
+      });
+
+      return halos.join(", ");
     }
 
     function pick(rng, arr) {
@@ -368,6 +433,8 @@
       const backgroundStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.backgrounds);
       const colorTheme = colorThemeTrait.value;
       const backgroundStyle = backgroundStyleTrait.value;
+      // Glow is derived independently from the ID and enabled for half of generated backgrounds.
+      const randomHalos = rng() < 0.5 ? createRandomHalos(id) : "none";
       const styleGenome = createStyleGenome(rng);
       const surfaceStyle = styleGenome.mode;
       const shapeStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.shapes);
@@ -398,6 +465,7 @@
         layout,
         colorTheme,
         backgroundStyle,
+        randomHalos,
         surfaceStyle,
         styleGenome,
         shapeStyle,
@@ -632,7 +700,7 @@
       document.getElementById("hero").innerHTML = `
         <div class="hero-grid fade-in">
           <div>
-            <p class="hero-context">${escapeHtml(config.kicker)}</p>
+            <div class="kicker">${escapeHtml(config.kicker)}</div>
             <h1 aria-label="${escapeHtml(config.headline)}">${renderHeroHeadline(config.headline)}</h1>
             <p class="hero-sub">${escapeHtml(config.subhead)}</p>
             <div class="hero-actions">
@@ -649,6 +717,7 @@
       return `
         <section class="section" id="${id}">
           <div class="section-head">
+            <div class="section-index">${String(index).padStart(2, "0")} / ${escapeHtml(id)}</div>
             <div>
               <h2>${escapeHtml(title)}</h2>
               <p class="section-lead">${escapeHtml(lead)}</p>
@@ -718,7 +787,7 @@
     function renderPrinciples(config, index) {
       const body = `
         <div class="principles">
-          ${config.principles.map(principle => `<article class="principle"><p>${escapeHtml(principle)}</p></article>`).join("")}
+          ${config.principles.map((principle, i) => `<div class="principle"><span class="tag">P${String(i + 1).padStart(2, "0")}</span><p style="margin-top:16px">${escapeHtml(principle)}</p></div>`).join("")}
         </div>
       `;
       return sectionShell(index, "principles", UI.sectionTitles.principles, config.leads.principles, body);
@@ -730,7 +799,9 @@
           ${config.skills.map(([title, skills]) => `
             <article class="card third">
               <h3>${escapeHtml(title)}</h3>
-              <ul class="skill-list">${skills.map(skill => `<li>${escapeHtml(skill)}</li>`).join("")}</ul>
+              <div class="skill-cloud" style="margin-top:16px">
+                ${skills.map(skill => `<span class="skill-pill">${escapeHtml(skill)}</span>`).join("")}
+              </div>
             </article>
           `).join("")}
         </div>
@@ -742,7 +813,7 @@
       return sectionShell(index, "contact", UI.sectionTitles.contact, config.leads.contact, `
         <div class="contact-panel">
           <div>
-            <h3>${escapeHtml(config.contactCopy.headline)}</h3>
+            <h2>${escapeHtml(config.contactCopy.headline)}</h2>
             <p class="section-lead">${escapeHtml(config.contactCopy.body)}</p>
           </div>
           <div class="contact-links">
@@ -782,6 +853,7 @@
       const education = DATA.identity.education;
       complete.innerHTML = `
         <div class="complete-head">
+          <div class="section-index">${escapeHtml(UI.labels.completeIndex)}</div>
           <div>
             <h2>${escapeHtml(UI.labels.completeTitle)}</h2>
             <p class="section-lead">${escapeHtml(UI.labels.completeLead)}</p>
@@ -828,7 +900,7 @@
     function renderReveal(config) {
       const reveal = document.getElementById("reveal");
       reveal.innerHTML = `
-        <p class="reveal-context">${escapeHtml(config.revealCopy.kicker)}</p>
+        <div class="kicker">${escapeHtml(config.revealCopy.kicker)}</div>
         <h2>${escapeHtml(config.revealCopy.headline)}</h2>
         <p style="margin-top:16px">${escapeHtml(config.revealCopy.body)}</p>
         <div class="reveal-grid">
@@ -932,7 +1004,7 @@
           </button>
           <aside class="footer-spotlight-card" id="footerSpotlightCard" role="note" aria-live="polite" aria-label="${escapeHtml(UI.footerSpotlight.title)}">
             <button class="footer-spotlight-close" type="button" aria-label="${escapeHtml(UI.footerSpotlight.closeAria)}">&times;</button>
-            <div class="footer-spotlight-title">${escapeHtml(UI.footerSpotlight.title)}</div>
+            <div class="footer-spotlight-eyebrow">${escapeHtml(UI.footerSpotlight.title)}</div>
             ${UI.footerSpotlight.body.map(line => `<p>${escapeHtml(line)}</p>`).join("")}
           </aside>
         `;
@@ -1069,6 +1141,11 @@
         "layout-single"
       ].filter(Boolean).join(" ");
 
+      document.body.style.removeProperty("--random-halos");
+      if (config.randomHalos) {
+        document.body.style.setProperty("--random-halos", config.randomHalos);
+      }
+
       if (palette) {
         const variables = {
           "--bg": palette.bg,
@@ -1079,8 +1156,8 @@
           "--card-strong": palette.surface,
           "--accent": palette.accent,
           "--accent-2": palette.accent2,
-          "--accent-soft": `color-mix(in srgb, ${palette.accent}, transparent 93%)`,
-          "--accent-2-soft": `color-mix(in srgb, ${palette.accent2}, transparent 93%)`
+          "--accent-soft": `color-mix(in srgb, ${palette.accent}, transparent 89%)`,
+          "--accent-2-soft": `color-mix(in srgb, ${palette.accent2}, transparent 90%)`
         };
         Object.entries(variables).forEach(([name, value]) => document.body.style.setProperty(name, value));
       }
