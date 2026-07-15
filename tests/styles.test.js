@@ -123,6 +123,30 @@ test("deconstructivism separates clipped surfaces with color instead of outline 
   assert.doesNotMatch(css, /border(?:-top|-right|-bottom|-left)?:\s*[1-9]\d*px\s+solid/);
 });
 
+test("surrealism keeps project descriptions and skill pills legible on dark hover cards", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-1-avant-garde-modern-order",
+    "07-surrealism.css"
+  ));
+
+  assert.match(css, /\.theme-surrealism \.card:hover :is\([^)]*\.skill-pill[^)]*\)\s*{[^}]*color:\s*#f0b44e/s);
+  assert.match(css, /\.theme-surrealism \.card:hover \.generated-description\s*{[^}]*color:\s*var\(--card\)/s);
+});
+
+test("surrealism gives the arched profile card enough roof clearance for education", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-1-avant-garde-modern-order",
+    "07-surrealism.css"
+  ));
+
+  assert.match(css, /\.theme-surrealism \.hero-card\s*{[^}]*padding:\s*44px 22px 22px/s);
+  assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.theme-surrealism \.hero-card\s*{[^}]*padding:\s*26px 18px 18px/s);
+});
+
 test("both locale entry points load every style in registry order", () => {
   for (const entryPoint of ["index.html", "zh.html"]) {
     const html = read(path.join(ROOT, entryPoint));

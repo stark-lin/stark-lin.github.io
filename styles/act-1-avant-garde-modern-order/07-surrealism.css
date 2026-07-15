@@ -222,7 +222,7 @@ body.theme-surrealism.layout-single .site {
   z-index: 5;
   width: min(250px, 100%);
   margin: 0 0 30px auto;
-  padding: 22px;
+  padding: 44px 22px 22px;
   border-radius: 50% 50% 4px 4px / 28% 28% 4px 4px;
   outline: 1px solid rgba(242, 235, 220, .7);
   background: rgba(26, 24, 32, .72);
@@ -470,9 +470,13 @@ body.theme-surrealism.layout-single .site {
   transform: translateY(-7px) rotate(-.35deg);
 }
 
-.theme-surrealism .card:hover :is(.stack, .generated-desc-meta, .tag, ul) {
+.theme-surrealism .card:hover :is(.stack, .generated-desc-meta, .tag, .skill-pill, ul) {
   color: #f0b44e;
   border-color: currentColor;
+}
+
+.theme-surrealism .card:hover .generated-description {
+  color: var(--card);
 }
 
 .theme-surrealism .card.full,
@@ -877,7 +881,7 @@ body.theme-surrealism.layout-single .site {
     bottom: auto;
     width: 100%;
     margin-top: 28px;
-    padding: 18px;
+    padding: 26px 18px 18px;
     border-radius: 64px 64px 2px 2px / 24px 24px 2px 2px;
     background: rgba(24, 22, 30, .84);
     transform: none;
