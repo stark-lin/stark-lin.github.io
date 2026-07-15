@@ -31,6 +31,14 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 * Roll Again generates a new reference code and selects again from the 42 filters.
 * Random selection does not affect the copy, content structure, project order, or interaction logic.
 
+## Theme File Requirements
+
+* Every filter/theme must have its own matching HTML, JavaScript, and CSS files. Theme-specific markup, behavior, and styling must not be combined into another theme's files.
+* The three files for a theme must share the same filename stem and begin with a zero-padded, two-digit index.
+* File indexes start at `00` and increase continuously in the document order through `41`; no index may be skipped or reused.
+* The catalog numbers below remain `01`–`42`, so the file index is the catalog number minus one. For example, Futurism uses `00-futurism.html`, `00-futurism.js`, and `00-futurism.css`; Dada uses the `01-dada` trio; Post-Internet Art uses the `41-post-internet-art` trio.
+* Shared foundations may remain in common files, but they do not replace the required three-file set for any theme.
+
 ---
 
 # Act I: The Avant-Garde and Modern Order

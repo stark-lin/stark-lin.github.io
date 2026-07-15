@@ -116,7 +116,7 @@ When adding a project, use the same project `id` and project order in both local
 
 The complete filter list and the design boundary for each item live in [docs/42-filters.md](docs/42-filters.md). Each filter is an atomic visual system rather than a collection of independently randomized traits.
 
-Keep all 42 filters in a single ordered registry, give them equal selection weight, and implement their visual rules in `assets/styles.css`. A filter may adapt responsively or honor reduced-motion preferences, but it must not change copy, content order, structure, or behavior. Changing the registry order changes how existing reference codes map to filters, so treat that order as a versioned public interface.
+Keep all 42 filters in a single ordered registry and give them equal selection weight. Every filter must have its own matching HTML, JavaScript, and CSS files, using one shared filename stem prefixed by a continuous, zero-padded two-digit index from `00` through `41`. The file order follows the catalog order (`01`–`42`), so Futurism starts with `00-futurism.html`, `00-futurism.js`, and `00-futurism.css`. Theme-specific code must remain in that theme's file trio; shared foundations do not replace any of these required files. A filter may adapt responsively or honor reduced-motion preferences, but it must not change copy, content order, structure, or behavior. Changing the registry order changes how existing reference codes map to filters and file indexes, so treat that order as a versioned public interface.
 
 ### Validation and testing
 
@@ -137,6 +137,7 @@ Then verify at desktop and mobile widths:
 - The same `id` reproduces the same portfolio configuration and filter in both languages, and rerolling selects from the same 42-item registry.
 - Exactly one filter is active, and its style introduction appears with **Roll Again** in the final Room Control.
 - Applying a filter does not rewrite copy, reorder content, change the information structure, or alter interaction behavior.
+- Every filter has a complete HTML/JavaScript/CSS file trio, the three basenames match, and their prefixes form the continuous range `00`–`41` without duplicates.
 - Copied links, first-view onboarding, and full records work.
 - Project links, email, navigation, and keyboard focus work.
 - Unnecessary motion is removed under reduced-motion preferences.
@@ -284,7 +285,7 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 
 完整滤镜清单及每一项的设计边界位于 [docs/42-filters-zh.md](docs/42-filters-zh.md)。每种滤镜都是一个不可拆分的视觉系统，而不是若干可独立随机的视觉特征。
 
-请把 42 种滤镜保存在一个有序注册表中，赋予相同选择权重，并在 `assets/styles.css` 中实现各自的视觉规则。滤镜可以响应不同视口或遵循“减少动态效果”偏好，但不能改变文案、内容顺序、结构或行为。修改注册表顺序会改变既有参考代码对应的滤镜，因此应把该顺序视为需要版本管理的公开接口。
+请把 42 种滤镜保存在一个有序注册表中，并赋予相同选择权重。每个滤镜都必须分别拥有一组相互对应的 HTML、JavaScript 和 CSS 独立文件；同组文件使用完全相同的文件名主体，并以从 `00` 到 `41` 连续递增、补零后的两位数编号开头。文件顺序与下方 `01`–`42` 的目录顺序一致，因此未来主义从 `00-futurism.html`、`00-futurism.js` 和 `00-futurism.css` 开始。主题专属代码必须保留在该主题的三个文件中，共用基础代码不能替代这些必需文件。滤镜可以响应不同视口或遵循“减少动态效果”偏好，但不能改变文案、内容顺序、结构或行为。修改注册表顺序会改变既有参考代码对应的滤镜和文件编号，因此应把该顺序视为需要版本管理的公开接口。
 
 ### 验证与测试
 
@@ -305,6 +306,7 @@ python3 -m http.server 8080
 - 相同 `id` 在两种语言中会复现相同的作品集配置和滤镜，重新生成时仍从同一份 42 项注册表中选择。
 - 页面一次只启用一种滤镜，其风格介绍与 **Roll Again** 位于最后的 Room Control 中。
 - 应用滤镜不会重写文案、调整内容顺序、改变信息结构或修改交互行为。
+- 每个滤镜都具备完整的 HTML／JavaScript／CSS 文件组，同组文件名主体一致，编号前缀无重复且连续覆盖 `00`–`41`。
 - 复制链接、首次访问引导和完整项目记录均可使用。
 - 外部项目链接、邮箱链接、导航和键盘焦点均可使用。
 - 开启“减少动态效果”后不会出现不必要的动画。
