@@ -648,30 +648,6 @@ window.PORTFOLIO_LOCALE = {
       "copyView": "Copy URL",
       "showComplete": "I surrender. Show me the full version.",
       "viewCopied": "View link copied."
-    },
-    rarity: {
-      label: "Combination rarity",
-      odds: "About 1 in {odds}",
-      tiers: {
-        common: "Common",
-        uncommon: "Uncommon",
-        rare: "Rare",
-        ultraRare: "Ultra rare",
-        mythic: "Mythic",
-        cursed: "Cursed",
-        statisticallyOffensive: "Statistically offensive",
-        shouldNotExist: "Should not exist"
-      },
-      comments: {
-        common: ["The algorithm was unusually restrained.", "A normal homepage accidentally occurred."],
-        uncommon: ["Slightly less normal than necessary.", "Not rare enough to brag about. Still suspicious."],
-        rare: ["This combination had options and declined them.", "Statistically noticeable. Aesthetically negotiable."],
-        ultraRare: ["These visual traits were not supposed to meet often.", "Rare enough to inspect. Value not guaranteed."],
-        mythic: ["Generated deterministically. Regretted immediately.", "This view is rarer than it deserves to be."],
-        cursed: ["Legally a homepage. Emotionally not.", "Not valuable. Just unlikely."],
-        statisticallyOffensive: ["A statistical event with poor social judgment.", "The probability is low. The consequences are visible."],
-        shouldNotExist: ["This should not exist, but the reference code disagreed.", "A deterministic accident with witnesses."]
-      }
     }
   }
 };

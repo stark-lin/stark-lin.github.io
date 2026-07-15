@@ -546,24 +546,6 @@
       padding-top: 16px;
       border-top: 1px solid var(--line);
     }
-    .rarity-heading {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .rarity-tier { font-size: 18px; text-transform: uppercase; }
-    .rarity-odds {
-      font-family: var(--mono);
-      font-size: 12px;
-      opacity: .72;
-    }
-    .rarity-comment {
-      margin-top: 8px;
-      font-size: 13px;
-      line-height: 1.45;
-    }
     .reveal-actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; }
     .reveal .button.surrender {
       width: 100%;

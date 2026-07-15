@@ -2,24 +2,24 @@
 
 # Molybdenum
 
-> A reproducible portfolio in 42 visual languages.<br>
-> 一个以 42 种视觉语言呈现、可以被准确复现的个人作品集。
+> A deterministic, reproducible portfolio presented through 42 visual languages.<br>
+> 一个以 42 种视觉语言呈现、可确定性复现的个人作品集。
 
-[English](#english) · [中文](#中文) · [42 filters](docs/42-filters.md) · [42 种滤镜](docs/42-filters-zh.md) · [Live site](https://stark-lin.github.io/) · [License](LICENSE)
+[English](#english) · [中文](#中文) · [Filter specification](docs/42-filters.md) · [滤镜规范](docs/42-filters-zh.md) · [Production site](https://stark-lin.github.io/) · [License](LICENSE)
 
 <a id="english"></a>
 
 ## English
 
-Molybdenum is a bilingual, build-free personal portfolio written in vanilla HTML, CSS, and JavaScript. It treats a portfolio as a reproducible visual system rather than a single fixed page: each visit receives a reference code that deterministically composes the content view and selects exactly one style from a [42-filter catalog of art, design, and visual culture](docs/42-filters.md).
+Molybdenum is a bilingual static portfolio implemented in vanilla HTML, CSS, and JavaScript, with no build step or runtime dependencies. Rather than presenting one fixed page, the project implements the portfolio as a deterministic visual system. Each generated view is identified by a reference code that controls the content composition and selects exactly one style from the [42-filter catalog of art, design, and visual culture](docs/42-filters.md).
 
-The reference code acts as the identity of a generated view. Reusing the same `id` restores the same content configuration and visual filter, while **Roll Again** creates a new version. A filter can change typography, color, surfaces, decoration, and motion tone, but it never rewrites the copy, changes the information architecture, or replaces the interaction logic. The result is varied enough to feel like a new exhibition room and stable enough to share, inspect, and test.
+The reference code is the stable identifier for a generated view. Reusing the same `id` restores the same content configuration and visual filter; **Roll Again** creates a new identifier and generates another view. Filters may change typography, color, surfaces, decoration, and motion tone, but they do not rewrite copy, alter the information architecture, or replace interaction logic. Generated views therefore remain reproducible, shareable, inspectable, and testable.
 
-### At a glance
+### Project overview
 
 | Item | Description |
 | --- | --- |
-| Project type | Generative bilingual personal portfolio |
+| Project type | Deterministic bilingual personal portfolio |
 | Languages | English and Simplified Chinese |
 | Technology | Vanilla HTML, CSS, and JavaScript |
 | Visual systems | 42 equally weighted filters in five historical acts |
@@ -27,29 +27,30 @@ The reference code acts as the identity of a generated view. Reusing the same `i
 | Tooling | No runtime dependencies, package manager, or build step |
 | Hosting | GitHub Pages or any static file host |
 
-### Highlights
+### Core capabilities
 
 - **One reproducible filter per view** — A seeded selector maps each reference code to exactly one equal-probability entry in the implemented style pool; the same `id` produces the same filter.
 - **Native Chinese and English content** — English lives at `index.html`, Chinese at `zh.html`, and the language switch preserves query parameters and the current hash.
 - **All 42 historical visual languages implemented** — Five catalog folders now cover the complete sequence from Futurism through Post-Internet Art.
-- **Generated copy and layout** — Headlines, summaries, project descriptions, tags, section order, and skill order continue to follow the existing reference-code rules.
+- **Deterministic content composition** — Headlines, summaries, project descriptions, tags, section order, and skill order are selected according to the reference-code rules.
 - **Independent copy and style draws** — The same reference code derives separate, versioned random streams for copy and style, so consuming or expanding one pool cannot advance the other.
 - **Filter separation** — Filters do not rewrite copy, reorder content, change the information structure, or alter interaction logic.
 - **Compact and complete reading modes** — The default view keeps the signal compact, while the full-record view exposes complete project and implementation notes.
-- **Room Control** — The active style introduction and **Roll Again** sit together at the end of the page as the exhibition label and entrance to the next room.
+- **Room Control** — The active style introduction and **Roll Again** appear together at the end of the page, serving as the exhibition label and the entry point to the next view.
 - **Shareable state** — Each view exposes its reference code, active filter, and a shareable URL.
 - **Responsive and accessible** — Includes active navigation, visible keyboard focus, semantic sections, Chinese title segmentation, mobile layouts, and reduced-motion support.
 - **Static deployment** — No framework, package manager, or build artifact is required; the site can be hosted on GitHub Pages or any static file server.
 
-### Quick start
+### Local development
 
 #### Requirements
 
 - Git, only when cloning the repository
 - Python 3 or another local static-file server
+- Node.js, only when running static checks and automated tests
 - A modern browser with current Web API and CSS support
 
-#### Run locally
+#### Start the development server
 
 ```bash
 git clone https://github.com/stark-lin/stark-lin.github.io.git
@@ -62,15 +63,15 @@ Then open:
 - English: <http://localhost:8080/index.html>
 - Chinese: <http://localhost:8080/zh.html>
 
-There is no install or build step. Preview through HTTP instead of opening the HTML files directly so URL, clipboard, and browser security-context behavior more closely matches production.
+No installation or build step is required. Use an HTTP server instead of opening the HTML files directly so that URL handling, clipboard access, and browser security-context behavior match production more closely.
 
-### URL state and reproduction
+### URL parameters and reproducibility
 
 View state is stored in query parameters and can be used directly for testing or sharing.
 
 | Parameter | Values | Description |
 | --- | --- | --- |
-| `id` | Any string | Seed for page generation. If omitted, a 32-character code prefixed with `SL-` is created. |
+| `id` | Any string | Seed for page generation. If omitted, the page creates an `SL-` prefix followed by 32 generated characters. |
 | `label` | `guide`, `surface` | `guide` keeps the first-view onboarding; `surface` is the clean presentation link. |
 | `complete` | `1` | Opens the full project record immediately. |
 
@@ -120,7 +121,7 @@ As long as each pool, its version, and its generation algorithm remain unchanged
 
 Both HTML entry points load scripts in this order: selection engine → style registry → ordered theme files → active locale data → shared application logic. `app.js` reads `window.PORTFOLIO_LOCALE`, derives independent copy and style streams from the current reference code, and then builds the DOM, keeping the entry documents intentionally thin.
 
-### How it works
+### Architecture
 
 1. The page reads `id`; when absent, it creates a reference code with `crypto.getRandomValues()`.
 2. The selection engine combines that code with the pool name and version before `cyrb128` and `sfc32` create a deterministic random stream.
@@ -129,7 +130,7 @@ Both HTML entry points load scripts in this order: selection engine → style re
 5. The selected filter supplies one complete visual system for typography, boundaries, surfaces, patterns, decoration, and motion tone; it does not affect copy generation or renderer behavior.
 6. **Roll Again** creates a new `id` and redraws both independent streams; **Copy URL** creates an onboarding-free `surface` link.
 
-### Customizing content
+### Configuration and extension
 
 #### Edit profile and projects
 
@@ -153,7 +154,7 @@ Keep all 42 filters in a single ordered registry and give them equal selection w
 
 ### Validation and testing
 
-The project currently has no separate test framework. Before committing, run at least these checks:
+The project uses the Node.js built-in test runner and does not require a separate test framework. Before committing, run at least the following checks:
 
 ```bash
 node --check assets/app.js
@@ -193,7 +194,7 @@ This repository follows the `<username>.github.io` convention and can be deploye
 
 Publish the repository root directly and leave the build command empty. Preserve the relative paths of `index.html`, `zh.html`, `assets/`, and `LICENSE`; no SPA fallback rule is required.
 
-### Browser capabilities
+### Browser compatibility
 
 The site uses CSS custom properties, `color-mix()`, `crypto.getRandomValues()`, `URL`/`URLSearchParams`, `IntersectionObserver`, `requestAnimationFrame`, and the Clipboard API, plus `Intl.Segmenter` when available for Chinese title wrapping. A recent version of Chrome, Edge, Firefox, or Safari is recommended.
 
@@ -213,15 +214,15 @@ Copyright © 2026 Stark Lin. This project is licensed under the [GNU Affero Gene
 
 ## 中文
 
-Molybdenum 是一个零构建依赖、由原生 HTML、CSS 和 JavaScript 实现的双语个人作品集。它不把作品集视为一个固定页面，而是把它设计成一套可复现的视觉系统：每次访问都会获得一个参考代码，并据此确定性地组合内容视图，同时从[《42 种艺术、设计与视觉文化滤镜》](docs/42-filters-zh.md)中选择且只选择一种样式。
+Molybdenum 是一个使用原生 HTML、CSS 和 JavaScript 实现的双语静态个人作品集，无需构建步骤或运行时依赖。项目并非只呈现一个固定页面，而是将作品集实现为一套确定性、可复现的视觉系统。每个生成视图均由参考代码标识；该代码用于控制内容组合，并从[《42 种艺术、设计与视觉文化滤镜》](docs/42-filters-zh.md)中选择且只选择一种样式。
 
-参考代码相当于生成页面的身份标识。再次使用相同的 `id`，就能恢复相同的内容配置与视觉滤镜；点击 **Roll Again** 则会创建一个新版本。滤镜可以改变字体、颜色、表面、装饰与动效语气，但不会重写文案、改变信息架构或替换交互逻辑。因此，每次生成都像进入一个新的展厅，同时仍然可以被分享、检查和测试。
+参考代码是生成视图的稳定标识。再次使用相同的 `id` 即可恢复相同的内容配置与视觉滤镜；点击 **Roll Again** 会创建新的标识并生成另一个视图。滤镜可以改变字体、颜色、表面、装饰与动效语气，但不会重写文案、改变信息架构或替换交互逻辑。因此，每个生成视图都可以被准确复现、分享、检查和测试。
 
 ### 项目概览
 
 | 项目 | 说明 |
 | --- | --- |
-| 项目类型 | 生成式双语个人作品集 |
+| 项目类型 | 确定性双语个人作品集 |
 | 支持语言 | 英文、简体中文 |
 | 技术栈 | 原生 HTML、CSS、JavaScript |
 | 视觉系统 | 分为五个历史章节的 42 种等权重滤镜 |
@@ -229,29 +230,30 @@ Molybdenum 是一个零构建依赖、由原生 HTML、CSS 和 JavaScript 实现
 | 工具依赖 | 无运行时依赖、无包管理器、无构建步骤 |
 | 部署方式 | GitHub Pages 或任意静态文件托管服务 |
 
-### 功能亮点
+### 核心能力
 
 - **每次一种、可复现的滤镜** — 参考代码通过带种子的选择器映射到已实现样式池中的一个等概率条目；相同的 `id` 始终得到同一种滤镜。
 - **原生中英文内容** — 英文入口为 `index.html`，中文入口为 `zh.html`；切换语言时会保留查询参数和当前页内锚点。
 - **42 种历史视觉语言已全部实现** — 五个样式文件夹现已完整覆盖从未来主义到后互联网艺术的连续序列。
-- **动态文案与布局** — 标题、简介、项目描述、标签、章节顺序和技能顺序继续遵循现有的参考代码规则。
+- **确定性内容组合** — 标题、简介、项目描述、标签、章节顺序和技能顺序均按照参考代码规则完成选择。
 - **文案与样式独立抽选** — 同一个参考代码会派生出分别带版本的文案流和样式流；扩充或消耗其中一个池不会推进另一个池。
 - **滤镜与内容分离** — 滤镜不会重写文案、调整内容顺序、改变信息结构或修改交互逻辑。
 - **精简与完整两种阅读方式** — 默认页面突出关键信息，也可展开完整项目记录与实现说明。
-- **Room Control** — 当前风格介绍与 **Roll Again** 共同位于页面最后，作为本展厅的展签和下一展厅入口。
+- **Room Control** — 当前风格介绍与 **Roll Again** 共同位于页面末尾，分别承担展签说明与生成下一视图的入口功能。
 - **可分享的页面状态** — 每个页面都会显示参考代码、当前滤镜和可分享链接。
 - **响应式与无障碍设计** — 包含活动导航、清晰的键盘焦点、语义化区块、中文标题分词、移动端布局和减少动态效果支持。
 - **纯静态部署** — 无需框架、包管理器或构建产物，可直接托管到 GitHub Pages 或任意静态文件服务器。
 
-### 快速开始
+### 本地开发
 
 #### 环境要求
 
 - Git，仅在克隆仓库时需要
 - Python 3，或其他本地静态文件服务器
+- Node.js，仅在执行静态检查和自动化测试时需要
 - 支持现代 Web API 和 CSS 的浏览器
 
-#### 本地运行
+#### 启动开发服务器
 
 ```bash
 git clone https://github.com/stark-lin/stark-lin.github.io.git
@@ -264,15 +266,15 @@ python3 -m http.server 8080
 - 英文：<http://localhost:8080/index.html>
 - 中文：<http://localhost:8080/zh.html>
 
-项目没有安装或构建步骤。建议通过 HTTP 服务器预览，而不是直接打开 HTML 文件，这样 URL、剪贴板和浏览器安全上下文相关行为会更接近正式部署。
+项目无需安装依赖或执行构建。应通过 HTTP 服务器预览，而不是直接打开 HTML 文件，以确保 URL 处理、剪贴板访问和浏览器安全上下文等行为与正式部署更为一致。
 
-### URL 状态与页面复现
+### URL 参数与页面复现
 
 页面状态保存在查询参数中，可直接用于测试或分享。
 
 | 参数 | 可选值 | 说明 |
 | --- | --- | --- |
-| `id` | 任意字符串 | 生成页面的种子；未提供时会创建一个以 `SL-` 开头的 32 位代码。 |
+| `id` | 任意字符串 | 生成页面的种子；未提供时会创建由 `SL-` 前缀与 32 个随机字符组成的代码。 |
 | `label` | `guide`、`surface` | `guide` 保留首次访问引导；`surface` 是不含引导的纯展示链接。 |
 | `complete` | `1` | 直接打开完整项目记录。 |
 
@@ -322,7 +324,7 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 
 两个 HTML 入口按以下顺序加载脚本：抽选引擎 → 样式注册表 → 有序主题文件 → 当前语言数据 → 共享应用逻辑。`app.js` 读取 `window.PORTFOLIO_LOCALE`，根据当前参考代码派生彼此独立的文案流和样式流后再构建页面 DOM，因此入口 HTML 本身保持精简。
 
-### 工作原理
+### 系统架构
 
 1. 页面读取 `id`；如果不存在，则使用 `crypto.getRandomValues()` 创建参考代码。
 2. 抽选引擎先把参考代码与池名称、版本组合，再由 `cyrb128` 和 `sfc32` 生成确定性的随机流。
@@ -331,7 +333,7 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 5. 被选中的滤镜作为一个整体决定字体、边界、表面、图案、装饰和动效语气，但不会影响文案生成或渲染行为。
 6. **Roll Again** 会创建新 `id` 并分别重抽两个独立随机流；**复制 URL** 会生成不含首次引导的 `surface` 链接。
 
-### 自定义内容
+### 配置与扩展
 
 #### 修改个人资料和项目
 
@@ -355,7 +357,7 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 
 ### 验证与测试
 
-项目目前没有独立测试框架。提交前至少建议执行以下检查：
+项目使用 Node.js 内置测试运行器，无需额外测试框架。提交前至少应执行以下检查：
 
 ```bash
 node --check assets/app.js
@@ -395,7 +397,7 @@ python3 -m http.server 8080
 
 直接将仓库根目录作为发布目录，并将构建命令留空。请保持 `index.html`、`zh.html`、`assets/` 和 `LICENSE` 的相对路径不变；不需要配置 SPA 回退规则。
 
-### 浏览器能力
+### 浏览器兼容性
 
 页面使用 CSS 自定义属性、`color-mix()`、`crypto.getRandomValues()`、`URL`/`URLSearchParams`、`IntersectionObserver`、`requestAnimationFrame` 和剪贴板 API，并在可用时使用 `Intl.Segmenter` 优化中文标题换行。建议使用近期版本的 Chrome、Edge、Firefox 或 Safari。
 

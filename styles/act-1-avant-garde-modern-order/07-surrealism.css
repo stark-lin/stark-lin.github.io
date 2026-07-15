@@ -1,132 +1,993 @@
+/*
+ * Surrealism
+ * A daylight dream built from impossible architecture, editorial scale,
+ * suspended objects, and a deliberately theatrical colour system.
+ */
+
 body.theme-surrealism {
+  --dream-x: 0px;
+  --dream-y: 0px;
+  --dream-x-inverse: 0px;
+  --dream-y-inverse: 0px;
   background:
-    radial-gradient(ellipse at 8% 17%, color-mix(in srgb, #b4cabe, transparent 28%) 0 10vw, transparent 10.2vw),
-    radial-gradient(ellipse at 94% 58%, color-mix(in srgb, #cfb9c2, transparent 36%) 0 14vw, transparent 14.2vw),
-    var(--bg);
+    radial-gradient(circle at 9% 31%, rgba(223, 73, 45, .09) 0 7rem, transparent 7.1rem),
+    linear-gradient(90deg, transparent 49.94%, rgba(26, 24, 32, .055) 50%, transparent 50.06%),
+    #eee7d6;
+  color: var(--fg);
+  font-family: "Helvetica Neue", "Arial Nova", Arial, sans-serif;
+}
+
+body.theme-surrealism::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .3;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(22, 20, 27, .035) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(22, 20, 27, .018) 0 1px, transparent 1px 6px);
+  mask-image: linear-gradient(to bottom, #000, transparent 85%);
+}
+
+body.theme-surrealism.layout-single .site {
+  max-width: var(--style-site-width);
+}
+
+.theme-surrealism a {
+  text-decoration-thickness: 1px;
 }
 
 .theme-surrealism .topbar {
-  border-bottom-color: color-mix(in srgb, var(--line), transparent 48%);
-  background: color-mix(in srgb, var(--bg), transparent 15%);
+  top: 10px;
+  width: min(1180px, calc(100vw - 24px));
+  margin: 10px auto 0;
+  border: 1px solid rgba(26, 24, 32, .8);
+  border-radius: 999px;
+  background: rgba(238, 231, 214, .82);
+  box-shadow: 0 7px 0 rgba(26, 24, 32, .08);
+  backdrop-filter: blur(20px) saturate(1.2);
+}
+
+.theme-surrealism .topbar-inner {
+  padding: 7px 8px 7px 16px;
+}
+
+.theme-surrealism .brand {
+  gap: 10px;
+  font-size: 13px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
 }
 
 .theme-surrealism .brand::before {
   content: "";
-  width: 22px;
-  height: 22px;
-  border: 1px solid var(--line);
-  border-radius: 62% 38% 68% 32% / 42% 62% 38% 58%;
-  background: var(--card);
+  width: 24px;
+  height: 12px;
+  border: 1px solid currentColor;
+  border-radius: 100% 0 100% 0;
+  background:
+    radial-gradient(circle at 50% 50%, var(--accent) 0 2px, var(--fg) 2.5px 4px, transparent 4.5px),
+    #f5efdf;
+  transform: rotate(-8deg);
+}
+
+.theme-surrealism nav {
+  gap: clamp(10px, 1.5vw, 22px);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.theme-surrealism nav a.current {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.theme-surrealism nav a.current::before {
+  content: "• ";
+}
+
+.theme-surrealism .topbar .language-switch {
+  min-width: 58px;
 }
 
 .theme-surrealism .hero {
-  min-height: min(810px, 90vh);
+  min-height: min(860px, calc(100svh - 34px));
+  margin-top: 18px;
+  padding: clamp(54px, 8vw, 102px) clamp(30px, 6vw, 76px);
+  overflow: hidden;
+  border: 1px solid var(--fg);
+  border-radius: 2px 2px 72px 2px;
+  background:
+    linear-gradient(115deg, rgba(255,255,255,.035), transparent 35%),
+    var(--fg);
+  color: var(--card);
+  box-shadow: 12px 14px 0 #d7cdb5;
 }
 
-.theme-surrealism .hero-grid { width: 86%; }
-
 .theme-surrealism .hero::before {
-  content: "";
+  content: "DREAM / 07";
   position: absolute;
-  z-index: -1;
-  right: 0;
-  top: 8%;
-  width: clamp(130px, 24vw, 280px);
-  height: clamp(240px, 44vw, 490px);
-  border: 2px solid color-mix(in srgb, var(--line), transparent 20%);
-  border-radius: 65% 35% 53% 47% / 31% 56% 44% 69%;
-  background: color-mix(in srgb, var(--card), transparent 42%);
-  transform: rotate(7deg);
+  right: 18px;
+  bottom: 22px;
+  z-index: 4;
+  writing-mode: vertical-rl;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .22em;
+  color: rgba(238, 231, 214, .62);
 }
 
 .theme-surrealism .hero::after {
   content: "";
   position: absolute;
-  right: 9%;
-  top: 29%;
-  width: clamp(54px, 9vw, 104px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 16px color-mix(in srgb, var(--card), transparent 20%);
-  opacity: .78;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 58%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(238, 231, 214, .5), transparent);
+}
+
+.theme-surrealism .hero-grid {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  min-height: 620px;
+  grid-template-columns: minmax(0, 1.25fr) minmax(220px, .75fr);
+  align-items: center;
+}
+
+.theme-surrealism .hero-grid > div:first-child {
+  min-width: 0;
+  max-width: 720px;
+}
+
+.theme-surrealism .hero .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+  color: #f0b44e;
+  letter-spacing: .2em;
+}
+
+.theme-surrealism .hero .kicker::before {
+  content: "";
+  width: 32px;
+  height: 1px;
+  background: currentColor;
 }
 
 .theme-surrealism h1 {
-  max-width: 800px;
-  font-weight: 620;
-  line-height: .95;
+  max-width: 760px;
+  color: #f2ebdc;
+  font-size: clamp(62px, 8.2vw, 122px);
+  font-weight: 760;
+  line-height: .81;
+  letter-spacing: -.078em;
+  text-wrap: balance;
 }
 
-.theme-surrealism .hero-sub { max-width: 590px; }
+.theme-surrealism .hero-sub {
+  max-width: 600px;
+  margin-top: 36px;
+  color: rgba(242, 235, 220, .72);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(18px, 2vw, 23px);
+  font-style: italic;
+  line-height: 1.42;
+}
+
+.theme-surrealism .hero-actions {
+  gap: 10px;
+  margin-top: 38px;
+}
+
+.theme-surrealism .button {
+  min-height: 42px;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.theme-surrealism .button:hover {
+  filter: invert(1);
+}
+
+.theme-surrealism .hero .button {
+  border-color: #f2ebdc;
+  background: #f2ebdc;
+  color: var(--fg);
+}
+
+.theme-surrealism .hero .button.secondary {
+  background: transparent;
+  color: #f2ebdc;
+}
+
+.theme-surrealism .hero-card {
+  align-self: end;
+  z-index: 5;
+  width: min(250px, 100%);
+  margin: 0 0 30px auto;
+  padding: 22px;
+  border-radius: 50% 50% 4px 4px / 28% 28% 4px 4px;
+  outline: 1px solid rgba(242, 235, 220, .7);
+  background: rgba(26, 24, 32, .72);
+  color: #f2ebdc;
+  transform: rotate(3deg);
+  backdrop-filter: blur(12px);
+}
+
+.theme-surrealism .hero-card .stat {
+  border-color: rgba(242, 235, 220, .25);
+}
+
+.theme-surrealism .hero-card .stat-label,
+.theme-surrealism .hero-card .stat-value {
+  color: inherit;
+}
+
+/* The impossible landscape is injected by 07-surrealism.js. */
+.theme-surrealism .surreal-stage {
+  position: absolute;
+  z-index: 1;
+  top: 5%;
+  right: 2%;
+  width: min(48%, 520px);
+  height: 88%;
+  pointer-events: none;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+  transform: translate3d(var(--dream-x), var(--dream-y), 0);
+}
+
+.theme-surrealism .surreal-stage__sun {
+  position: absolute;
+  top: 2%;
+  right: -4%;
+  width: clamp(220px, 28vw, 340px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #df492d;
+  box-shadow: 0 0 0 1px rgba(242, 235, 220, .26);
+  transform: translate3d(var(--dream-x-inverse), var(--dream-y-inverse), 0);
+}
+
+.theme-surrealism .surreal-stage__sun::after {
+  content: "";
+  position: absolute;
+  inset: 46% -60% auto -130%;
+  height: 1px;
+  background: rgba(242, 235, 220, .2);
+}
+
+.theme-surrealism .surreal-stage__arch {
+  position: absolute;
+  top: 18%;
+  right: 17%;
+  width: clamp(180px, 22vw, 274px);
+  height: 67%;
+  overflow: hidden;
+  border: 2px solid #f2ebdc;
+  border-radius: 160px 160px 2px 2px;
+  background:
+    radial-gradient(circle at 50% 31%, #f0b44e 0 6%, transparent 6.5%),
+    linear-gradient(#6f79b8 0 42%, #b6a66e 42% 44%, #dbd1b9 44% 100%);
+  box-shadow: 24px 24px 0 #f2ebdc, 25px 25px 0 #18161e;
+  transform: translate3d(var(--dream-x), var(--dream-y), 0);
+}
+
+.theme-surrealism .surreal-stage__arch::before {
+  content: "";
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  bottom: 0;
+  height: 46%;
+  border: 1px solid rgba(24, 22, 30, .9);
+  border-bottom: 0;
+  border-radius: 100px 100px 0 0;
+  background:
+    linear-gradient(90deg, transparent 48%, rgba(242, 235, 220, .35) 49% 51%, transparent 52%),
+    #18161e;
+}
+
+.theme-surrealism .surreal-stage__arch::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 4px);
+  bottom: 7%;
+  width: 8px;
+  height: 38px;
+  border-radius: 50% 50% 0 0;
+  background: #df492d;
+  box-shadow: 0 7px 12px rgba(0,0,0,.35);
+}
+
+.theme-surrealism .surreal-stage__eye {
+  position: absolute;
+  top: 22%;
+  left: -3%;
+  width: clamp(120px, 14vw, 178px);
+  height: clamp(52px, 6vw, 72px);
+  border: 1px solid #18161e;
+  border-radius: 100% 0 100% 0;
+  background: #f2ebdc;
+  box-shadow: 9px 10px 0 rgba(24, 22, 30, .18);
+  transform: rotate(-9deg) translate3d(var(--dream-x-inverse), var(--dream-y-inverse), 0);
+}
+
+.theme-surrealism .surreal-stage__eye::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34%;
+  aspect-ratio: 1;
+  border: 9px solid #475ca6;
+  border-radius: 50%;
+  background: #18161e;
+  transform: translate(-50%, -50%);
+}
+
+.theme-surrealism .surreal-stage__eye::after {
+  content: "";
+  position: absolute;
+  left: 55%;
+  top: 32%;
+  width: 5px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.theme-surrealism .surreal-stage__moon {
+  position: absolute;
+  left: 1%;
+  bottom: 9%;
+  width: 104px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #f0b44e;
+  box-shadow: inset -28px -4px 0 #18161e;
+  transform: rotate(20deg) translate3d(var(--dream-x), var(--dream-y-inverse), 0);
+}
+
+.theme-surrealism .surreal-stage__orb {
+  position: absolute;
+  right: 1%;
+  bottom: 12%;
+  width: 54px;
+  aspect-ratio: 1;
+  border: 1px solid #f2ebdc;
+  border-radius: 50%;
+  background: #475ca6;
+  box-shadow: -16px 18px 0 rgba(24, 22, 30, .3);
+  transform: translate3d(var(--dream-x-inverse), var(--dream-y-inverse), 0);
+}
+
+.theme-surrealism .surreal-stage__stairs {
+  position: absolute;
+  right: -2%;
+  bottom: -4%;
+  width: 44%;
+  height: 34%;
+  border: 1px solid #f2ebdc;
+  background: repeating-linear-gradient(to bottom, #f2ebdc 0 3px, transparent 3px 18px);
+  clip-path: polygon(48% 0, 100% 26%, 100% 100%, 0 100%, 0 26%);
+  transform: perspective(280px) rotateX(48deg) rotateZ(-8deg);
+  transform-origin: bottom;
+  opacity: .74;
+}
+
+.theme-surrealism main {
+  padding-top: 46px;
+}
 
 .theme-surrealism .section {
-  border-top-color: color-mix(in srgb, var(--line), transparent 58%);
+  padding: clamp(84px, 11vw, 142px) 0;
+  border-top: 0;
+}
+
+.theme-surrealism .section + .section {
+  border-top: 1px solid rgba(26, 24, 32, .22);
 }
 
 .theme-surrealism .section-head {
-  grid-template-columns: minmax(92px, .2fr) minmax(0, 1fr);
-  gap: clamp(24px, 5vw, 72px);
+  grid-template-columns: minmax(120px, .32fr) minmax(0, 1fr);
+  gap: clamp(28px, 6vw, 84px);
+  margin-bottom: clamp(42px, 6vw, 72px);
 }
 
 .theme-surrealism .section-index {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
   color: var(--fg);
-  writing-mode: vertical-rl;
-  min-height: 110px;
+  font-size: 10px;
+  letter-spacing: .17em;
 }
 
-.theme-surrealism :is(.card, .hero-card, .principle, .timeline-item) {
-  border-radius: 34px 18px 48px 22px;
-  box-shadow: 0 18px 50px color-mix(in srgb, var(--fg), transparent 92%);
+.theme-surrealism .section-index::before {
+  content: "";
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0 3px, transparent 3.5px);
 }
 
-.theme-surrealism .cards .card:nth-child(even) { border-radius: 18px 46px 20px 52px; }
-.theme-surrealism .principle:nth-child(3n + 1) { border-radius: 56px 22px 40px 28px; }
+.theme-surrealism h2 {
+  max-width: 900px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(48px, 7vw, 92px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: .9;
+  letter-spacing: -.055em;
+}
+
+.theme-surrealism .section-lead {
+  max-width: 650px;
+  margin-top: 24px;
+  color: #5c574e;
+  font-size: 16px;
+}
+
+.theme-surrealism .cards {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.theme-surrealism .card {
+  grid-column: span 6;
+  min-height: 320px;
+  padding: clamp(28px, 4vw, 48px);
+  outline: 1px solid var(--fg);
+  border-radius: 0;
+  background: rgba(246, 240, 224, .74);
+  box-shadow: 8px 8px 0 rgba(26, 24, 32, .09);
+  transition: transform .25s ease, background .25s ease, color .25s ease;
+}
+
+.theme-surrealism .card:hover {
+  z-index: 2;
+  background: var(--fg);
+  color: var(--card);
+  transform: translateY(-7px) rotate(-.35deg);
+}
+
+.theme-surrealism .card:hover :is(.stack, .generated-desc-meta, .tag, ul) {
+  color: #f0b44e;
+  border-color: currentColor;
+}
+
+.theme-surrealism .card.full,
+.theme-surrealism .card.third,
+.theme-surrealism .complete-project {
+  grid-column: span 12;
+}
+
+.theme-surrealism #work .card.full {
+  min-height: 410px;
+  background:
+    radial-gradient(circle at 88% 18%, #df492d 0 76px, transparent 77px),
+    var(--fg);
+  color: var(--card);
+}
+
+.theme-surrealism #work .card.full :is(.stack, .generated-desc-meta) {
+  color: #f0b44e;
+}
+
+.theme-surrealism #work .card.full .tag {
+  border-color: var(--card);
+  color: var(--card);
+  background: transparent;
+}
+
+.theme-surrealism .card-title-row {
+  padding-bottom: 20px;
+  border-bottom: 1px solid currentColor;
+}
+
+.theme-surrealism h3 {
+  max-width: 720px;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 620;
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+
+.theme-surrealism .stack,
+.theme-surrealism .generated-desc-meta,
+.theme-surrealism .time-label {
+  color: var(--accent);
+  letter-spacing: .1em;
+}
 
 .theme-surrealism .tag,
 .theme-surrealism .skill-pill {
-  border-radius: 68% 32% 55% 45% / 42% 58% 42% 58%;
+  border-color: currentColor;
+  border-radius: 100% 0 100% 0;
+  background: transparent;
+}
+
+.theme-surrealism .generated-description {
+  max-width: 760px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.55;
+}
+
+.theme-surrealism .timeline-item {
+  grid-template-columns: minmax(120px, .3fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 70px);
+  padding: clamp(30px, 5vw, 58px);
+  outline: 1px solid var(--fg);
+  border-radius: 160px 0 0 160px;
+  background: #d9cdb1;
+  box-shadow: 10px 10px 0 #475ca6;
+}
+
+.theme-surrealism .time-label {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  align-self: center;
+  border: 1px solid var(--fg);
+  border-radius: 50%;
+  color: var(--fg);
+  text-align: center;
+}
+
+.theme-surrealism .principles {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.theme-surrealism .principle {
+  min-height: 260px;
+  padding: 34px;
+  outline: 1px solid var(--fg);
+  border-radius: 50% 50% 6px 6px / 22% 22% 6px 6px;
+  background: #f4eddd;
+  box-shadow: 7px 8px 0 rgba(26, 24, 32, .1);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  transition: transform .25s ease;
+}
+
+.theme-surrealism .principle:nth-child(2) {
+  margin-top: 56px;
+  border-radius: 6px 6px 50% 50% / 6px 6px 22% 22%;
+  background: #df492d;
+  color: #18161e;
+  transform: rotate(2deg);
+}
+
+.theme-surrealism .principle:nth-child(3) {
+  background: #475ca6;
+  color: #f4eddd;
+  transform: rotate(-2deg);
+}
+
+.theme-surrealism .principle:hover {
+  transform: translateY(-8px) rotate(0);
+}
+
+.theme-surrealism .skill-cloud {
+  gap: 10px;
+}
+
+.theme-surrealism .skill-pill {
+  padding: 10px 16px;
+  font-family: var(--mono);
+  font-size: 11px;
 }
 
 .theme-surrealism .contact-panel {
   grid-template-columns: minmax(0, 1.35fr) auto;
   align-items: end;
-  border-radius: 56px 24px 68px 30px;
-  padding: clamp(36px, 6vw, 68px);
-  outline-offset: -8px;
+  gap: 46px;
+  padding: clamp(38px, 7vw, 82px);
+  outline: 1px solid var(--fg);
+  border-radius: 0 190px 0 0;
+  background:
+    radial-gradient(circle at 87% 85%, #f0b44e 0 42px, transparent 43px),
+    #df492d;
+  box-shadow: 12px 12px 0 var(--fg);
+}
+
+.theme-surrealism .contact-panel h2 {
+  color: var(--fg);
+  font-size: clamp(52px, 8vw, 100px);
+}
+
+.theme-surrealism .contact-panel .section-lead {
+  color: rgba(24, 22, 30, .78);
+}
+
+.theme-surrealism .contact-links {
+  flex-direction: column;
+  min-width: 150px;
 }
 
 .theme-surrealism .reveal {
-  border-radius: 52px 28px 64px 24px;
-  padding: clamp(36px, 6vw, 68px);
+  margin: 96px 0 52px;
+  padding: clamp(40px, 7vw, 82px);
+  overflow: hidden;
+  outline: 0;
+  border: 1px solid var(--fg);
+  border-radius: 0 0 0 110px;
+  background:
+    radial-gradient(circle at 86% 18%, #475ca6 0 110px, transparent 111px),
+    var(--fg);
+  color: var(--card);
+  box-shadow: -12px 12px 0 #d7cdb5;
 }
 
 .theme-surrealism .reveal::before {
   content: "";
   position: absolute;
-  right: 7%;
-  bottom: 8%;
-  width: 110px;
-  height: 170px;
-  border: 1px solid var(--line);
-  border-radius: 54% 46% 58% 42% / 66% 32% 68% 34%;
-  opacity: .35;
+  right: 10%;
+  bottom: -15%;
+  width: 220px;
+  height: 68%;
+  border: 1px solid rgba(242, 235, 220, .68);
+  border-radius: 120px 120px 0 0;
+  opacity: .85;
 }
 
-@media (max-width: 720px) {
-  .theme-surrealism .hero-grid { width: 100%; }
-  .theme-surrealism .hero::before,
-  .theme-surrealism .hero::after { opacity: .12; }
-  .theme-surrealism .section-head { grid-template-columns: 1fr; }
-  .theme-surrealism .section-index { writing-mode: initial; min-height: 0; }
-  .theme-surrealism .contact-panel { grid-template-columns: 1fr; border-radius: 52px 22px; padding: 32px; }
-  .theme-surrealism .reveal { border-radius: 42px 18px; padding: 32px; }
+.theme-surrealism .reveal h2 {
+  max-width: 780px;
+  color: #f2ebdc;
+}
+
+.theme-surrealism .reveal p,
+.theme-surrealism .reveal .style-introduction {
+  color: rgba(242, 235, 220, .7);
+}
+
+.theme-surrealism .reveal-stat {
+  border-color: rgba(242, 235, 220, .4);
+  border-radius: 0;
+  background: rgba(242, 235, 220, .07);
+  color: #f2ebdc;
+  backdrop-filter: blur(12px);
+}
+
+.theme-surrealism .reveal-stat-section + .reveal-stat-section {
+  border-color: rgba(242, 235, 220, .24);
+}
+
+.theme-surrealism .reveal .button {
+  border-color: #f2ebdc;
+  background: #f2ebdc;
+  color: var(--fg);
+}
+
+.theme-surrealism .reveal .button.secondary {
+  background: transparent;
+  color: #f2ebdc;
+}
+
+.theme-surrealism .complete-version {
+  border-top-color: rgba(26, 24, 32, .22);
+}
+
+.theme-surrealism .complete-version .complete-head {
+  grid-template-columns: minmax(120px, .32fr) minmax(0, 1fr);
+  gap: clamp(28px, 6vw, 84px);
+}
+
+.theme-surrealism .complete-project .intro-list p {
+  border-radius: 0;
+  background: transparent;
+}
+
+.theme-surrealism .tiny-footer {
+  border-top: 1px solid rgba(26, 24, 32, .22);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .06em;
+}
+
+.theme-surrealism .regenerating {
+  background: #18161e;
+  color: #f2ebdc;
+}
+
+.theme-surrealism .regen-box {
+  border-radius: 50% 50% 0 0;
+  background: #df492d;
+  color: #18161e;
+}
+
+@media (max-width: 900px) {
+  .theme-surrealism .hero {
+    min-height: 820px;
+    padding-bottom: 300px;
+  }
+
+  .theme-surrealism .hero-grid {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .theme-surrealism .hero-grid > div:first-child {
+    max-width: 700px;
+  }
+
+  .theme-surrealism .hero-card {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(280px, 100%);
+    margin: 26px 0 0 auto;
+  }
+
+  .theme-surrealism .surreal-stage {
+    top: auto;
+    right: -2%;
+    bottom: -5%;
+    width: min(72%, 520px);
+    height: 54%;
+  }
+
+  .theme-surrealism .section-head,
+  .theme-surrealism .complete-version .complete-head {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-surrealism .section-index {
+    align-items: center;
+  }
+
+  .theme-surrealism .principles {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .theme-surrealism .principle:nth-child(3) {
+    grid-column: 1 / -1;
+    width: 52%;
+    justify-self: center;
+  }
+}
+
+@media (max-width: 640px) {
+  body.theme-surrealism {
+    background: #eee7d6;
+  }
+
+  .theme-surrealism .topbar {
+    top: 6px;
+    width: calc(100vw - 16px);
+    margin-top: 6px;
+  }
+
+  .theme-surrealism .topbar-inner {
+    padding-left: 12px;
+  }
+
+  .theme-surrealism .brand {
+    font-size: 11px;
+  }
+
+  .theme-surrealism .brand::before {
+    width: 20px;
+  }
+
+  .theme-surrealism .hero {
+    min-height: 760px;
+    margin-top: 12px;
+    padding: 56px 24px 280px;
+    border-radius: 2px 2px 44px 2px;
+    box-shadow: 6px 8px 0 #d7cdb5;
+  }
+
+  .theme-surrealism h1 {
+    font-size: clamp(52px, 16vw, 76px);
+    line-height: .85;
+  }
+
+  html[lang^="zh"] .theme-surrealism h1 {
+    font-size: clamp(43px, 12.5vw, 52px);
+    line-height: .92;
+  }
+
+  .theme-surrealism .hero-grid > div:first-child,
+  .theme-surrealism .hero-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .theme-surrealism .hero-sub {
+    margin-top: 26px;
+    font-size: 17px;
+  }
+
+  .theme-surrealism .hero .kicker {
+    display: block;
+    max-width: 100%;
+    font-size: 10px;
+    line-height: 1.8;
+    letter-spacing: .13em;
+    overflow-wrap: anywhere;
+  }
+
+  .theme-surrealism .hero .kicker::before {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .theme-surrealism .surreal-stage {
+    right: -14%;
+    bottom: -2%;
+    width: 118%;
+    height: 42%;
+  }
+
+  .theme-surrealism .surreal-stage__sun {
+    width: 210px;
+  }
+
+  .theme-surrealism .surreal-stage__arch {
+    right: 22%;
+    width: 150px;
+  }
+
+  .theme-surrealism .surreal-stage__eye {
+    left: 8%;
+    width: 110px;
+    height: 46px;
+  }
+
+  .theme-surrealism .surreal-stage__moon {
+    left: 12%;
+    width: 72px;
+  }
+
+  .theme-surrealism .surreal-stage__orb {
+    right: 9%;
+    width: 40px;
+  }
+
+  .theme-surrealism .hero-card {
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    margin-top: 28px;
+    padding: 18px;
+    border-radius: 64px 64px 2px 2px / 24px 24px 2px 2px;
+    background: rgba(24, 22, 30, .84);
+    transform: none;
+  }
+
+  .theme-surrealism .hero-card .stat-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+  }
+
+  .theme-surrealism .hero-card .stat {
+    padding-bottom: 10px;
+  }
+
+  .theme-surrealism .hero-card .stat:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .theme-surrealism .section {
+    padding: 82px 0;
+  }
+
+  .theme-surrealism h2 {
+    font-size: clamp(45px, 14vw, 68px);
+  }
+
+  .theme-surrealism .cards,
+  .theme-surrealism .principles {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-surrealism .card,
+  .theme-surrealism .card.full,
+  .theme-surrealism .card.third,
+  .theme-surrealism .complete-project {
+    grid-column: 1;
+    min-height: auto;
+    padding: 28px;
+  }
+
+  .theme-surrealism #work .card.full {
+    min-height: 410px;
+    background:
+      radial-gradient(circle at 90% 8%, #df492d 0 46px, transparent 47px),
+      var(--fg);
+  }
+
+  .theme-surrealism .timeline-item {
+    grid-template-columns: 1fr;
+    border-radius: 80px 0 0 0;
+  }
+
+  .theme-surrealism .time-label {
+    width: 96px;
+    justify-self: end;
+  }
+
+  .theme-surrealism .principle,
+  .theme-surrealism .principle:nth-child(2),
+  .theme-surrealism .principle:nth-child(3) {
+    grid-column: 1;
+    width: 100%;
+    min-height: 210px;
+    margin-top: 0;
+    transform: none;
+  }
+
+  .theme-surrealism .contact-panel {
+    grid-template-columns: 1fr;
+    border-radius: 0 100px 0 0;
+    box-shadow: 7px 8px 0 var(--fg);
+  }
+
+  .theme-surrealism .contact-links {
+    width: 100%;
+  }
+
+  .theme-surrealism .reveal {
+    margin-top: 72px;
+    border-radius: 0 0 0 64px;
+    box-shadow: -7px 8px 0 #d7cdb5;
+  }
+
+  .theme-surrealism .reveal::before {
+    right: -24%;
+    opacity: .35;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .theme-surrealism .hero::after { animation: surreal-drift 9s ease-in-out infinite alternate; }
+  .theme-surrealism .surreal-stage__orb {
+    animation: surreal-orbit 5.5s ease-in-out infinite alternate;
+  }
+
+  .theme-surrealism .surreal-stage__eye {
+    animation: surreal-blink 7s ease-in-out infinite;
+  }
+
+  .theme-surrealism .surreal-stage__moon {
+    animation: surreal-float 7s ease-in-out infinite alternate;
+  }
 }
 
-@keyframes surreal-drift {
-  to { transform: translate(-18px, 26px) scale(.86); }
+@media (prefers-reduced-motion: reduce) {
+  .theme-surrealism .surreal-stage,
+  .theme-surrealism .surreal-stage * {
+    transition: none;
+    animation: none;
+  }
+}
+
+@keyframes surreal-orbit {
+  to { translate: -18px -24px; }
+}
+
+@keyframes surreal-float {
+  to { translate: 8px -18px; rotate: -8deg; }
+}
+
+@keyframes surreal-blink {
+  0%, 44%, 50%, 100% { scale: 1 1; }
+  47% { scale: 1 .08; }
 }

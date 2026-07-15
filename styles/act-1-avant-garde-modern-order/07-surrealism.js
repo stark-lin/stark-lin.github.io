@@ -5,24 +5,78 @@
     id: "surrealism",
     classNames: ["theme-surrealism", "layout-single"],
     variables: {
-      "--bg": "#dbe6df",
-      "--fg": "#172125",
-      "--muted": "#455457",
-      "--line": "#35464a",
-      "--card": "#f7f3e8",
-      "--card-strong": "#c6d6cf",
-      "--accent": "#7d3a59",
-      "--radius": "38px",
-      "--style-site-width": "1060px",
-      "--style-h1-max": "102px",
+      "--bg": "#eee7d6",
+      "--fg": "#18161e",
+      "--muted": "#5c574e",
+      "--line": "#18161e",
+      "--card": "#f2ebdc",
+      "--card-strong": "#df492d",
+      "--accent": "#df492d",
+      "--radius": "0px",
+      "--style-site-width": "1180px",
+      "--style-h1-max": "122px",
       "--style-line-height": "1.62",
-      "--style-component-outline": "1px solid color-mix(in srgb, var(--line), transparent 30%)",
-      "--style-button-radius": "62% 38% 55% 45% / 45% 56% 44% 55%"
+      "--style-card-padding": "40px",
+      "--style-card-gap": "18px",
+      "--style-button-y": "12px",
+      "--style-button-x": "22px",
+      "--style-button-radius": "999px",
+      "--style-component-outline": "1px solid var(--line)"
     },
     label: { en: "Surrealism", zh: "超现实主义" },
     introduction: {
-      en: "Soft biological contours and locally impossible scale relationships make the familiar interface subtly uncanny.",
-      zh: "柔软的生物轮廓与局部不可能的尺度关系，让熟悉的界面产生轻微陌生感。"
+      en: "An impossible daylight stage of floating eyes, displaced suns, theatrical arches, and objects that refuse gravity.",
+      zh: "一座不可能的白昼梦境：漂浮的眼睛、错位的太阳、舞台般的拱门，以及拒绝重力的物体。"
     }
   });
+
+  if (typeof document === "undefined") return;
+
+  function installDreamStage() {
+    if (!document.body.classList.contains("theme-surrealism")) return;
+
+    const hero = document.getElementById("hero");
+    if (!hero || hero.querySelector(".surreal-stage")) return;
+
+    hero.insertAdjacentHTML("beforeend", `
+      <div class="surreal-stage" aria-hidden="true">
+        <span class="surreal-stage__sun"></span>
+        <span class="surreal-stage__arch"></span>
+        <span class="surreal-stage__eye"></span>
+        <span class="surreal-stage__moon"></span>
+        <span class="surreal-stage__orb"></span>
+        <span class="surreal-stage__stairs"></span>
+      </div>
+    `);
+
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+
+    let frame;
+    hero.addEventListener("pointermove", event => {
+      const bounds = hero.getBoundingClientRect();
+      const x = ((event.clientX - bounds.left) / bounds.width - .5) * 20;
+      const y = ((event.clientY - bounds.top) / bounds.height - .5) * 20;
+
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        hero.style.setProperty("--dream-x", `${x.toFixed(2)}px`);
+        hero.style.setProperty("--dream-y", `${y.toFixed(2)}px`);
+        hero.style.setProperty("--dream-x-inverse", `${(-x).toFixed(2)}px`);
+        hero.style.setProperty("--dream-y-inverse", `${(-y).toFixed(2)}px`);
+      });
+    }, { passive: true });
+
+    hero.addEventListener("pointerleave", () => {
+      hero.style.setProperty("--dream-x", "0px");
+      hero.style.setProperty("--dream-y", "0px");
+      hero.style.setProperty("--dream-x-inverse", "0px");
+      hero.style.setProperty("--dream-y-inverse", "0px");
+    }, { passive: true });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", installDreamStage, { once: true });
+  } else {
+    requestAnimationFrame(installDreamStage);
+  }
 })();

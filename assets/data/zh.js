@@ -760,30 +760,6 @@ window.PORTFOLIO_LOCALE = {
       "copyView": "复制 URL",
       "showComplete": "我投降，给我完整版本",
       "viewCopied": "视图链接复制好了。"
-    },
-    "rarity": {
-      "label": "组合稀有度",
-      "odds": "约 1 / {odds}",
-      "tiers": {
-        "common": "常见",
-        "uncommon": "不常见",
-        "rare": "稀有",
-        "ultraRare": "超稀有",
-        "mythic": "神话级",
-        "cursed": "受诅咒",
-        "statisticallyOffensive": "统计学冒犯",
-        "shouldNotExist": "不该存在"
-      },
-      "comments": {
-        "common": ["算法今天相当克制。", "一个意外正常的主页。"],
-        "uncommon": ["比必要程度稍微怪一点。", "不够炫耀，但值得怀疑。"],
-        "rare": ["这个组合有别的选择，但它拒绝了。", "统计上显眼，审美上另说。"],
-        "ultraRare": ["这套视觉组合本来不太该碰面。", "稀有到值得检查，但不保证值得收藏。"],
-        "mythic": ["确定性生成，即时后悔。", "它比自己应得的更稀有。"],
-        "cursed": ["法律上是主页，情绪上不是。", "不值钱，只是很难撞见。"],
-        "statisticallyOffensive": ["一次社会判断很差的统计事件。", "概率很低，后果肉眼可见。"],
-        "shouldNotExist": ["它不该存在，但参考码不同意。", "一个有目击者的确定性事故。"]
-      }
     }
   }
 };

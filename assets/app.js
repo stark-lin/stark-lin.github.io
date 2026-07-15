@@ -81,7 +81,6 @@
     sectionLeads: DATA.sectionLeads,
     footerQuips: SAFE_BILINGUAL_QUIPS,
     descriptionModes: UI.descriptionModes,
-    rarityComments: UI.rarity.comments,
     projects: DATA.projects.map(project => ({
       record: project,
       descriptions: [...project.intros, ...(PROJECT_DESCRIPTION_POOLS[project.id] || [])],
@@ -126,50 +125,6 @@
   }
 
   validateStylePool();
-
-    const RARITY_TIERS = [
-      "common",
-      "uncommon",
-      "rare",
-      "ultraRare",
-      "mythic",
-      "cursed",
-      "statisticallyOffensive",
-      "shouldNotExist"
-    ];
-
-    function getRarityTier(depth) {
-      const tierIndex = Math.min(depth, RARITY_TIERS.length - 1);
-      return { id: RARITY_TIERS[tierIndex], severity: tierIndex + 1 };
-    }
-
-    function formatRarityOdds(odds) {
-      const log10Odds = Math.log10(odds);
-      const exponent = Math.floor(log10Odds);
-      if (exponent < 15) {
-        return Math.max(1, Math.round(odds)).toLocaleString(document.documentElement.lang);
-      }
-      const mantissa = Math.pow(10, log10Odds - exponent);
-      return `${mantissa.toFixed(2)} × 10^${exponent}`;
-    }
-
-    function calculateRarity(rng) {
-      let depth = 0;
-      while (rng() < 0.5) depth++;
-
-      const odds = 2 ** (depth + 1);
-      const log10Odds = Math.log10(odds);
-      const tier = getRarityTier(depth);
-      const comments = COPY_POOL.rarityComments[tier.id] || COPY_POOL.rarityComments.common;
-
-      return {
-        depth,
-        log10Odds,
-        odds: formatRarityOdds(odds),
-        tier,
-        comment: pick(rng, comments)
-      };
-    }
 
     function createShortId() {
       const { idPrefix, idLength, idCharacters } = SYSTEM_CONFIG;
@@ -264,8 +219,6 @@
         footerQuip: pick(rng, COPY_POOL.footerQuips),
         skills: shuffle(rng, COPY_POOL.skills).map(([title, skills]) => [title, shuffle(rng, skills)])
       };
-
-      config.rarity = calculateRarity(rng);
 
       return config;
     }
@@ -715,14 +668,6 @@
             <div class="reveal-stat-section">
               <div class="reveal-stat-label">${escapeHtml(UI.labels.referenceCode)}</div>
               <div class="reveal-stat-value">${escapeHtml(config.id)}</div>
-            </div>
-            <div class="reveal-stat-section rarity-report" data-rarity-tier="${escapeHtml(config.rarity.tier.id)}">
-              <div class="reveal-stat-label">${escapeHtml(UI.rarity.label)}</div>
-              <div class="rarity-heading">
-                <div class="reveal-stat-value rarity-tier">${escapeHtml(UI.rarity.tiers[config.rarity.tier.id])}</div>
-                <div class="rarity-odds">${escapeHtml(UI.rarity.odds.replace("{odds}", config.rarity.odds))}</div>
-              </div>
-              <div class="rarity-comment">${escapeHtml(config.rarity.comment)}</div>
             </div>
           </div>
         </div>

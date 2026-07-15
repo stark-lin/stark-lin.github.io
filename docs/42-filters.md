@@ -1,17 +1,25 @@
 # 42 Filters of Art, Design, and Visual Culture
 
-## Project Definition
+> **Document status:** Implemented specification
+>
+> **Scope:** Runtime selection, visual constraints, and theme-file organization
+>
+> **Language:** English · [中文版](42-filters-zh.md)
 
-This project is a continuous exhibition of the same personal portfolio in 42 historic visual languages.
+## Purpose and scope
 
-All filters:
+This document defines the selection behavior, implementation requirements, and visual boundaries for a continuous exhibition of the same personal portfolio in 42 historically grounded visual languages.
 
-* follow the portfolio's existing rules;
-* do not alter, remove, or rewrite any copy;
-* do not change the content structure or interaction logic;
-* change only the typography, boundaries, surfaces, patterns, decoration, and tone of motion;
-* keep the style introduction and Roll Again together in Room Control at the end of the page;
-* have equal status and an equal probability of appearing at runtime.
+The following constraints apply to every filter:
+
+- Follow the portfolio's established content and interaction rules.
+- Do not alter, remove, or rewrite copy.
+- Do not change the content structure or interaction logic.
+- Restrict visual changes to typography, boundaries, surfaces, patterns, decoration, and motion tone.
+- Keep the style introduction and **Roll Again** together in **Room Control** at the end of the page.
+- Maintain equal runtime status and selection probability across all 42 filters.
+
+### Selection criteria
 
 The selection priorities are:
 
@@ -22,29 +30,31 @@ The selection priorities are:
 
 Some styles resemble an ordinary modern website. This is not a weakness, but a consequence of how deeply they have shaped contemporary visual design.
 
-## Runtime Rules
+## Runtime requirements
 
-* Each visit activates exactly one filter; palettes, backgrounds, surfaces, shapes, and typographic traits are no longer randomized separately.
-* The reference code selects one of the following 42 filters deterministically and with equal probability.
-* The same reference code always produces the same filter, in both the English and Chinese versions.
-* Copy and style selection use separate, versioned random streams derived from the reference code; consuming or expanding either pool must not advance or remap the other stream.
-* Each filter is a complete, indivisible visual system whose internal rules jointly determine typography, boundaries, surfaces, patterns, decoration, and the tone of motion.
-* Roll Again generates a new reference code and selects again from the 42 filters.
-* Random selection does not affect the copy, content structure, project order, or interaction logic.
+- Each visit activates exactly one filter; palettes, backgrounds, surfaces, shapes, and typographic traits are not randomized separately.
+- The reference code selects one of the 42 filters deterministically and with equal probability.
+- The same reference code produces the same filter in both the English and Chinese versions.
+- Copy and style selection use separate, versioned random streams derived from the reference code. Consuming or expanding either pool must not advance or remap the other stream.
+- Each filter is a complete, indivisible visual system whose internal rules jointly determine typography, boundaries, surfaces, patterns, decoration, and motion tone.
+- **Roll Again** generates a new reference code and selects another filter from the catalog.
+- Random selection does not affect copy, content structure, project order, or interaction logic.
 
-## Theme File Requirements
+## Theme-file requirements
 
-* Every filter/theme must have its own matching HTML, JavaScript, and CSS files. Theme-specific markup, behavior, and styling must not be combined into another theme's files.
-* The three files for a theme must share the same filename stem and begin with a zero-padded, two-digit index.
-* File indexes start at `00` and increase continuously in the document order through `41`; no index may be skipped or reused.
-* The catalog numbers below remain `01`–`42`, so the file index is the catalog number minus one. For example, Futurism uses `00-futurism.html`, `00-futurism.js`, and `00-futurism.css`; Dada uses the `01-dada` trio; Post-Internet Art uses the `41-post-internet-art` trio.
-* Shared foundations may remain in common files, but they do not replace the required three-file set for any theme.
+- Every filter must have its own corresponding HTML, JavaScript, and CSS files. Theme-specific markup, behavior, and styling must not be combined with another theme's files.
+- The three files for a theme must share the same filename stem and begin with a zero-padded, two-digit index.
+- File indexes start at `00` and increase continuously in document order through `41`; indexes must not be skipped or reused.
+- Catalog numbers remain `01`–`42`, so each file index equals the catalog number minus one. For example, Futurism uses `00-futurism.html`, `00-futurism.js`, and `00-futurism.css`; Dada uses the `01-dada` trio; Post-Internet Art uses the `41-post-internet-art` trio.
+- Shared foundations may remain in common files, but they do not replace the required three-file set for any theme.
 
 ---
 
-# Act I: The Avant-Garde and Modern Order
+## Filter catalog
 
-## 01. Futurism
+### Act I: The Avant-Garde and Modern Order
+
+#### 01. Futurism
 
 **Historical core:** Speed, machines, the city, motion, and a sense of time.
 
@@ -54,7 +64,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 02. Dada
+#### 02. Dada
 
 **Historical core:** Anti-art, chance, absurdity, collage, and typographic experimentation.
 
@@ -64,7 +74,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 03. Suprematism
+#### 03. Suprematism
 
 **Historical core:** Non-objectivity, pure geometry, weightless space, and visual perception.
 
@@ -74,7 +84,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 04. De Stijl
+#### 04. De Stijl
 
 **Historical core:** Horizontals, verticals, unequal rectangles, and asymmetrical balance.
 
@@ -84,7 +94,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 05. Purism
+#### 05. Purism
 
 **Historical core:** Simplified objects, stable proportions, clear outlines, and machine-age order.
 
@@ -94,7 +104,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 06. Constructivism
+#### 06. Constructivism
 
 **Historical core:** Structure, function, organization, active typography, and geometric tension.
 
@@ -104,7 +114,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 07. Bauhaus
+#### 07. Bauhaus
 
 **Historical core:** The union of art, craft, industrial production, material experimentation, and functional design.
 
@@ -114,7 +124,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 08. Surrealism
+#### 08. Surrealism
 
 **Historical core:** The unconscious, dreams, automatism, defamiliarization, and impossible juxtapositions.
 
@@ -124,7 +134,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 09. New Typography
+#### 09. New Typography
 
 **Historical core:** Asymmetry, functional organization of information, left alignment, and modern printing technology.
 
@@ -134,7 +144,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 10. Art Deco
+#### 10. Art Deco
 
 **Historical core:** Geometric ornament, central axes, stepped structures, radiating lines, and the machine-age metropolis.
 
@@ -144,7 +154,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 11. International Style
+#### 11. International Style
 
 **Historical core:** Open plans, structural rationalism, modular volumes, and the elimination of ornament.
 
@@ -154,7 +164,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 12. Concrete Art
+#### 12. Concrete Art
 
 **Historical core:** Autonomous geometry, mathematical relationships, proportion, sequence, and non-symbolic form.
 
@@ -164,9 +174,9 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-# Act II: Postwar Abstraction, Perception, and Popular Culture
+### Act II: Postwar Abstraction, Perception, and Popular Culture
 
-## 13. Abstract Expressionism
+#### 13. Abstract Expressionism
 
 **Historical core:** Large scale, gestural traces, all-over surfaces, and individual expression.
 
@@ -176,7 +186,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 14. Spatialism
+#### 14. Spatialism
 
 **Historical core:** Cuts, holes, penetration of the picture plane, and the space behind the surface.
 
@@ -186,7 +196,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 15. Color Field Painting
+#### 15. Color Field Painting
 
 **Historical core:** Vast fields of color, immersive space, weak boundaries, and low element density.
 
@@ -196,7 +206,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 16. Hard-Edge Painting
+#### 16. Hard-Edge Painting
 
 **Historical core:** Flat color, sharply adjoining fields, absence of brushwork, and crisp contours.
 
@@ -206,7 +216,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 17. Pop Art
+#### 17. Pop Art
 
 **Historical core:** Mass media, advertising, consumer goods, mechanical reproduction, and popular culture.
 
@@ -216,7 +226,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 18. Op Art
+#### 18. Op Art
 
 **Historical core:** Visual vibration, repeated lines, changing frequencies, and spatial illusion.
 
@@ -226,7 +236,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 19. ZERO
+#### 19. ZERO
 
 **Historical core:** Light, emptiness, vibration, subtle repetition, and a new beginning.
 
@@ -236,7 +246,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 20. Minimalism
+#### 20. Minimalism
 
 **Historical core:** Simple geometry, industrial fabrication, seriality, repetition, and impersonal form.
 
@@ -246,7 +256,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 21. International Typographic Style
+#### 21. International Typographic Style
 
 **Historical core:** Rigorous grids, neutral sans-serif type, left alignment, and an objective information hierarchy.
 
@@ -256,7 +266,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 22. Atomic Age Futurism / Atompunk
+#### 22. Atomic Age Futurism / Atompunk
 
 **Historical core:** The Atomic Age, the Space Age, postwar technological optimism, and popular visions of the future.
 
@@ -266,7 +276,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 23. Supergraphics
+#### 23. Supergraphics
 
 **Historical core:** Giant letters, numbers, bands of color, and wayfinding graphics extending across architectural surfaces.
 
@@ -276,9 +286,9 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-# Act III: Material, Concept, and Radical Design
+### Act III: Material, Concept, and Radical Design
 
-## 24. Brutalism
+#### 24. Brutalism
 
 **Historical core:** Raw materials, exposed structure, clarity of form, and architectural weight.
 
@@ -288,7 +298,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 25. Conceptual Art
+#### 25. Conceptual Art
 
 **Historical core:** The primacy of ideas, language, definitions, documentation, and the dematerialization of the art object.
 
@@ -298,7 +308,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 26. Arte Povera
+#### 26. Arte Povera
 
 **Historical core:** Everyday materials, non-precious matter, transience, and resistance to the commodification of art.
 
@@ -308,7 +318,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 27. Metabolism
+#### 27. Metabolism
 
 **Historical core:** Infrastructure, growing units, replaceable modules, and imagination at an urban scale.
 
@@ -318,7 +328,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 28. High-Tech
+#### 28. High-Tech
 
 **Historical core:** Exposed technology, lightweight frameworks, connectors, tracks, and precision construction.
 
@@ -328,7 +338,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 29. Radical Design
+#### 29. Radical Design
 
 **Historical core:** Conceptual counterproposals to functionalism, standardized ways of living, and the conventions of modern design.
 
@@ -338,7 +348,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 30. Anti-Design
+#### 30. Anti-Design
 
 **Historical core:** Rejection of unified standards, rational functionalism, and so-called “good taste.”
 
@@ -348,9 +358,9 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-# Act IV: Postmodernism and Plural Surfaces
+### Act IV: Postmodernism and Plural Surfaces
 
-## 31. Postmodernism
+#### 31. Postmodernism
 
 **Historical core:** Historical reference, parody, complexity and contradiction, the return of ornament, and stylistic self-awareness.
 
@@ -360,7 +370,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 32. Memphis
+#### 32. Memphis
 
 **Historical core:** Synthetic materials, vivid patterns, humor, strange geometry, and anti-functionalism.
 
@@ -370,7 +380,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 33. New Wave Typography
+#### 33. New Wave Typography
 
 **Historical core:** Breaking the Swiss grid, transparent layering, displaced baselines, and multidirectional type.
 
@@ -380,7 +390,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 34. Deconstructivism
+#### 34. Deconstructivism
 
 **Historical core:** Fractured grids, displaced planes, non-orthogonal structures, and unstable boundaries.
 
@@ -390,7 +400,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 35. Neo-Geo
+#### 35. Neo-Geo
 
 **Historical core:** Polished geometry, repeated symbols, commercial surfaces, and critical distance from systems of consumption.
 
@@ -400,7 +410,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 36. Pattern and Decoration
+#### 36. Pattern and Decoration
 
 **Historical core:** Continuous patterns, decorative surfaces, craft traditions, and a challenge to modernism's rejection of ornament.
 
@@ -410,9 +420,9 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-# Act V: Computers, the Web, and Future Visual Culture
+### Act V: Computers, the Web, and Future Visual Culture
 
-## 37. Early Computer Art
+#### 37. Early Computer Art
 
 **Historical core:** Plotters, matrices, limited computation, linear algorithms, and deterministic variation.
 
@@ -422,7 +432,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 38. ASCII Art
+#### 38. ASCII Art
 
 **Historical core:** Character grids, monospaced text, and digital images formed through character density.
 
@@ -432,9 +442,9 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 39. Early Web Design
+#### 39. Early Web Design
 
-### Web 1.0 Vernacular, 1991–1999
+##### Web 1.0 Vernacular, 1991–1999
 
 **Historical core:** HTML documents, hyperlinks, lists, tables, browser defaults, and the vernacular of the early web.
 
@@ -448,7 +458,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 40. Cyberpunk Visual Culture
+#### 40. Cyberpunk Visual Culture
 
 **Historical core:** High tech and low life, corporate systems, industrial density, information overload, and social wear.
 
@@ -458,7 +468,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 41. Glitch Art
+#### 41. Glitch Art
 
 **Historical core:** The visualization of corrupted data, signal displacement, slicing, and system anomalies.
 
@@ -468,7 +478,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-## 42. Post-Internet Art
+#### 42. Post-Internet Art
 
 **Historical core:** How platforms, copying, circulation, and interface packaging shape identity and culture after the internet has become the default cultural environment.
 
@@ -478,7 +488,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-# Final Grouping
+## Catalog summary
 
 | Act | Count |
 | --- | ---: |
@@ -491,47 +501,51 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-# Key Historical Relationships
+## Historical relationships
 
-## International Style, Swiss Typography, and the Conventional Modern Web
+### International Style, Swiss Typography, and the Conventional Modern Web
 
 Their similarity to today's conventional websites is not a flaw, but evidence of their historical influence.
 
-* International Style shaped approaches to space, volume, and structure.
-* Swiss typography shaped grids, type, and information hierarchy.
-* Minimalism shaped reduction, repetition, and restraint in components.
-* Bauhaus shaped function, systems, and modern design education.
+- International Style shaped approaches to space, volume, and structure.
+- Swiss typography shaped grids, type, and information hierarchy.
+- Minimalism shaped reduction, repetition, and restraint in components.
+- Bauhaus shaped function, systems, and modern design education.
 
 They should not be exaggerated or caricatured simply to make them look more like “art filters.”
 
 ---
 
-## Futurism, Atomic Age Futurism, and Cyberpunk
+### Futurism, Atomic Age Futurism, and Cyberpunk
 
-* **Futurism:** The machine surges forward.
-* **Atomic Age Futurism:** The future is packaged as an optimistic mass-market product.
-* **Cyberpunk:** Technology is highly advanced, but society and the conditions of everyday life continue to deteriorate.
+- **Futurism:** The machine surges forward.
+- **Atomic Age Futurism:** The future is packaged as an optimistic mass-market product.
+- **Cyberpunk:** Technology is highly advanced, but society and the conditions of everyday life continue to deteriorate.
 
 ---
 
-## Three Starting Points for Digital Media
+### Three Starting Points for Digital Media
 
-* **Early Computer Art:** The computer becomes a tool for generating graphics.
-* **ASCII Art:** Characters become material for digital images.
-* **Early Web Design:** HTML and the browser establish a new page-based medium.
+- **Early Computer Art:** The computer becomes a tool for generating graphics.
+- **ASCII Art:** Characters become material for digital images.
+- **Early Web Design:** HTML and the browser establish a new page-based medium.
 
 They represent three distinct starting points for digital visual culture: graphics, characters, and web pages.
 
 ---
 
-# Official Project Name
+## Project naming
 
-## 42 Filters of Art, Design, and Visual Culture
+### Official title
 
-The shorter name may still be used:
+**42 Filters of Art, Design, and Visual Culture**
+
+### Short form
+
+The following short form may be used in informal contexts:
 
 > **42 Art History Filters**
 
-Final project definition:
+### Approved project description
 
-> This is a continuous exhibition of the same personal portfolio under 42 filters of art, design, and visual culture. Each filter follows the portfolio's existing rules and changes only the typography, boundaries, surfaces, decoration, and tone of motion—never the copy, content structure, or interaction logic. Together, the style introduction and Roll Again form the exhibition label at the end of the page and the entrance to the next room.
+> This project presents the same personal portfolio as a continuous exhibition across 42 filters of art, design, and visual culture. Each filter follows the portfolio's established rules and changes only typography, boundaries, surfaces, decoration, and motion tone; it does not change copy, content structure, or interaction logic. The style introduction and **Roll Again** together form the exhibition label at the end of the page and the entry point to the next view.
