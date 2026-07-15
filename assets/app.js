@@ -5,7 +5,7 @@
   if (!locale) throw new Error("Portfolio locale data is missing.");
   const selection = window.PORTFOLIO_SELECTION;
   if (!selection) throw new Error("Portfolio selection engine is missing.");
-  const { createPoolRandom, pick, pickN, shuffle } = selection;
+  const { createPoolRandom, pick, pickN, seedModulo, shuffle } = selection;
   const { data: DATA, descriptions: PROJECT_DESCRIPTION_POOLS, titlePhrases: TITLE_PHRASES = {}, ui: UI } = locale;
   const registeredStyles = window.PORTFOLIO_STYLE_POOL;
   if (!Array.isArray(registeredStyles) || registeredStyles.length === 0) {
@@ -13,8 +13,7 @@
   }
   const STYLE_POOL = Object.freeze([...registeredStyles]);
   const POOL_STREAMS = Object.freeze({
-    copy: Object.freeze({ name: "copy", version: 1 }),
-    style: Object.freeze({ name: "style", version: 1 })
+    copy: Object.freeze({ name: "copy", version: 1 })
   });
   const VIEW_LABELS = Object.freeze({ GUIDE: "guide", SURFACE: "surface" });
   const ENTRY_ROOT = window.PORTFOLIO_ENTRY_ROOT || "./";
@@ -66,8 +65,17 @@
 
   const SYSTEM_CONFIG = Object.freeze({
     idPrefix: "SL-",
-    idLength: 32,
-    idCharacters: "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+    idLength: 42,
+    idCharacters: "0123456789ABCDEF",
+    styleModulo: 42
+  });
+
+  const TITLE_TYPOGRAPHY = Object.freeze({
+    safeGutter: 12,
+    mobileBreakpoint: 520,
+    h1: Object.freeze({ minLeading: 0.88, minLeadingZh: 1.05, mobileMaxSizeRatio: 0.18 }),
+    h2: Object.freeze({ minLeading: 0.94, minLeadingZh: 1.08, mobileMaxSizeRatio: 0.15 }),
+    h3: Object.freeze({ minLeading: 1.05, minLeadingZh: 1.18, mobileMaxSizeRatio: 0.105 })
   });
 
   const COPY_POOL = Object.freeze({
@@ -103,6 +111,10 @@
 
   function validateStylePool() {
     const ids = new Set();
+
+    if (STYLE_POOL.length !== SYSTEM_CONFIG.styleModulo) {
+      throw new Error(`Style pool must contain exactly ${SYSTEM_CONFIG.styleModulo} entries.`);
+    }
 
     STYLE_POOL.forEach((style, index) => {
       if (!style || typeof style.id !== "string" || !style.id.trim()) {
@@ -145,10 +157,12 @@
 
     function getId() {
       const params = new URLSearchParams(window.location.search);
-      const id = params.get("id") || createShortId();
+      const requestedId = params.get("id");
+      const needsGeneratedId = !requestedId || requestedId === SYSTEM_CONFIG.idPrefix;
+      const id = needsGeneratedId ? createShortId() : requestedId;
       const label = params.get("label");
 
-      if (!params.has("id") || !Object.values(VIEW_LABELS).includes(label)) {
+      if (needsGeneratedId || !Object.values(VIEW_LABELS).includes(label)) {
         const url = new URL(window.location.href);
         url.searchParams.set("id", id);
         if (!Object.values(VIEW_LABELS).includes(label)) {
@@ -230,7 +244,13 @@
         if (!forcedStyle) throw new Error(`Forced style "${forcedStyleId}" is not registered.`);
         return forcedStyle;
       }
-      return pick(createStream(id, POOL_STREAMS.style), STYLE_POOL);
+      const styleIndex = seedModulo(id, SYSTEM_CONFIG.styleModulo, {
+        prefix: SYSTEM_CONFIG.idPrefix,
+        alphabet: SYSTEM_CONFIG.idCharacters,
+        caseInsensitive: true,
+        hashInvalid: true
+      });
+      return STYLE_POOL[styleIndex];
     }
 
     function generateConfig(id) {
@@ -481,8 +501,8 @@
     }
 
     function renderWork(config, index) {
-      const cards = config.projects.map((project, i) => `
-        <article class="card ${i === 0 ? "full" : ""}">
+      const cards = config.projects.map(project => `
+        <article class="card project-card">
           <div class="card-title-row">
             <div>
               <h3>${escapeHtml(project.title)} — ${escapeHtml(project.subtitle)}</h3>
@@ -633,7 +653,7 @@
       window.history.replaceState(null, "", url.toString());
       renderCompleteVersion(config, true);
       segmentChineseText(document.getElementById("completeVersion"));
-      applyTitleTrackingLimits();
+      applyTitleTypographyLimits();
       document.getElementById("completeVersion").scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
@@ -836,35 +856,83 @@
       return Math.max(value, min);
     }
 
-    function applyTitleTrackingLimits() {
+    function applyTitleTypographyLimits() {
       const isChinese = document.documentElement.lang.startsWith("zh");
+      const viewportWidth = document.documentElement.clientWidth;
+      const safeRight = viewportWidth - TITLE_TYPOGRAPHY.safeGutter;
 
       document.querySelectorAll("h1, h2, h3").forEach(title => {
-        // Remove the previous clamp so responsive changes are always measured
-        // against the stylesheet's requested tracking.
-        title.style.removeProperty("letter-spacing");
-        const computedStyle = window.getComputedStyle(title);
-        const fontSizePx = Number.parseFloat(computedStyle.fontSize);
+        // Always measure the active theme, rather than a clamp from an earlier width.
+        title.classList.remove("title-boundary-fallback");
+        ["font-size", "letter-spacing", "line-height", "max-width"].forEach(property => {
+          title.style.removeProperty(property);
+        });
+
+        const level = title.tagName.toLowerCase();
+        const rules = TITLE_TYPOGRAPHY[level];
+        let computedStyle = window.getComputedStyle(title);
+        let fontSizePx = Number.parseFloat(computedStyle.fontSize);
+
+        if (viewportWidth <= TITLE_TYPOGRAPHY.mobileBreakpoint && Number.isFinite(fontSizePx)) {
+          const mobileMaxSize = viewportWidth * rules.mobileMaxSizeRatio;
+          if (fontSizePx > mobileMaxSize) {
+            title.style.fontSize = `${mobileMaxSize}px`;
+            computedStyle = window.getComputedStyle(title);
+            fontSizePx = Number.parseFloat(computedStyle.fontSize);
+          }
+        }
+
         const fontWeight = Number.parseInt(computedStyle.fontWeight, 10);
+        const lineHeightPx = Number.parseFloat(computedStyle.lineHeight);
         const trackingPx = Number.parseFloat(computedStyle.letterSpacing);
 
-        if (![fontSizePx, fontWeight, trackingPx].every(Number.isFinite) || fontSizePx <= 0) return;
+        if (!Number.isFinite(fontSizePx) || fontSizePx <= 0) return;
 
-        const tracking = trackingPx / fontSizePx;
-        const clampedTracking = isChinese
-          ? Math.max(tracking, 0.01)
-          : clampTitleTracking(tracking, fontWeight, fontSizePx);
-        if (clampedTracking > tracking) {
-          title.style.letterSpacing = `${clampedTracking}em`;
+        const minLeading = isChinese ? rules.minLeadingZh : rules.minLeading;
+        if (Number.isFinite(lineHeightPx) && lineHeightPx / fontSizePx < minLeading) {
+          title.style.lineHeight = String(minLeading);
+        }
+
+        if ([fontWeight, trackingPx].every(Number.isFinite)) {
+          const tracking = trackingPx / fontSizePx;
+          const clampedTracking = isChinese
+            ? Math.max(tracking, 0.01)
+            : clampTitleTracking(tracking, fontWeight, fontSizePx);
+          if (clampedTracking > tracking) {
+            title.style.letterSpacing = `${clampedTracking}em`;
+          }
+        }
+
+        // Preserve each theme's preferred measure until it crosses the viewport.
+        // Then narrow the title; remove decorative displacement only as a fallback.
+        let bounds = title.getBoundingClientRect();
+        if (bounds.left < TITLE_TYPOGRAPHY.safeGutter || bounds.right > safeRight) {
+          const availableWidth = Math.max(
+            1,
+            safeRight - Math.max(bounds.left, TITLE_TYPOGRAPHY.safeGutter)
+          );
+          const scaleX = title.offsetWidth > 0 ? bounds.width / title.offsetWidth : 1;
+          title.style.maxWidth = `${availableWidth / Math.max(scaleX, 0.01)}px`;
+          bounds = title.getBoundingClientRect();
+
+          if (bounds.left < TITLE_TYPOGRAPHY.safeGutter || bounds.right > safeRight) {
+            title.classList.add("title-boundary-fallback");
+            const fallbackBounds = title.getBoundingClientRect();
+            const fallbackWidth = Math.max(
+              1,
+              safeRight - Math.max(fallbackBounds.left, TITLE_TYPOGRAPHY.safeGutter)
+            );
+            title.style.maxWidth = `${fallbackWidth}px`;
+          }
         }
       });
     }
 
-    let titleTrackingFrame;
-    function scheduleTitleTrackingLimits() {
-      cancelAnimationFrame(titleTrackingFrame);
-      titleTrackingFrame = requestAnimationFrame(() => {
-        applyTitleTrackingLimits();
+    let titleTypographyFrame;
+    function scheduleTitleTypographyLimits() {
+      cancelAnimationFrame(titleTypographyFrame);
+      titleTypographyFrame = requestAnimationFrame(() => {
+        applyTitleTypographyLimits();
       });
     }
 
@@ -893,8 +961,8 @@
       setupActiveNavigation(config);
       setupFooterSpotlightOnboarding();
       segmentChineseText();
-      applyTitleTrackingLimits();
-      window.addEventListener("resize", scheduleTitleTrackingLimits, { passive: true });
+      applyTitleTypographyLimits();
+      window.addEventListener("resize", scheduleTitleTypographyLimits, { passive: true });
     }
 
     init();

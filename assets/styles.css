@@ -74,7 +74,9 @@
 
     html[lang^="zh"] :is(h1, h2, h3) .zh-word {
       display: inline-block;
-      white-space: nowrap;
+      max-inline-size: 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -325,6 +327,18 @@
 
     .card.full,
     .card.third { grid-column: 1 / -1; }
+
+    /* Featured projects keep the same full-row measure across every theme. */
+    #work .cards {
+      grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    #work .project-card {
+      grid-column: 1 / -1 !important;
+      inline-size: 100% !important;
+      margin-inline: 0 !important;
+    }
+
     .card-title-row {
       display: flex;
       justify-content: space-between;
@@ -821,6 +835,20 @@
       word-break: normal;
     }
 
+    body[data-style-id] :is(h1, h2, h3) {
+      max-inline-size: 100%;
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
+
+    body[data-style-id] :is(h1, h2) {
+      text-wrap: balance;
+    }
+
+    body[data-style-id] h3 {
+      text-wrap: pretty;
+    }
+
     h1, h2, h3,
     .hero-sub,
     .section-lead,
@@ -834,6 +862,15 @@
       min-width: 0;
       max-width: 100%;
       overflow-wrap: anywhere;
+    }
+
+    /* Applied only when a theme still pushes a title beyond the viewport. */
+    .title-boundary-fallback {
+      inset-inline: auto !important;
+      margin-inline: 0 !important;
+      rotate: none !important;
+      translate: none !important;
+      transform: none !important;
     }
 
     .card-title-row > *,
@@ -904,6 +941,7 @@
       .site { width: min(100vw - 24px, 960px); }
       .hero { padding-top: 56px; }
       .card, .hero-card, .contact-panel { padding: 24px; }
+      body[data-style-id] :is(h1, h2) { text-wrap: wrap; }
       .reveal-actions .button, .hero-actions .button { width: 100%; justify-content: center; }
       .footer-spotlight-card {
         bottom: calc(100% + 16px);

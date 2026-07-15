@@ -38,6 +38,12 @@ body.theme-surrealism.layout-single .site {
   text-decoration-thickness: 1px;
 }
 
+.theme-surrealism ::selection {
+  color: #18161e;
+  background: #f0b44e;
+  text-shadow: none;
+}
+
 .theme-surrealism .topbar {
   top: 10px;
   width: min(1180px, calc(100vw - 24px));
@@ -481,6 +487,10 @@ body.theme-surrealism.layout-single .site {
     radial-gradient(circle at 88% 18%, #df492d 0 76px, transparent 77px),
     var(--fg);
   color: var(--card);
+}
+
+.theme-surrealism #work .card {
+  grid-column: span 12;
 }
 
 .theme-surrealism #work .card.full :is(.stack, .generated-desc-meta) {

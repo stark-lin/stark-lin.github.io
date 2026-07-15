@@ -72,6 +72,58 @@
     return sfc32(...cyrb128(seed));
   }
 
+  function seedModulo(seed, modulus, {
+    prefix = "",
+    alphabet = "0123456789",
+    caseInsensitive = false,
+    hashInvalid = false
+  } = {}) {
+    if (!Number.isInteger(modulus) || modulus < 1) {
+      throw new Error("A positive integer modulus is required.");
+    }
+    if (typeof prefix !== "string") throw new Error("The seed prefix must be a string.");
+    if (typeof alphabet !== "string" || !alphabet.length) {
+      throw new Error("A non-empty seed alphabet is required.");
+    }
+    if (new Set(alphabet).size !== alphabet.length) {
+      throw new Error("The seed alphabet cannot contain duplicate characters.");
+    }
+
+    if (typeof caseInsensitive !== "boolean" || typeof hashInvalid !== "boolean") {
+      throw new Error("Seed modulo flags must be boolean values.");
+    }
+
+    const referenceCode = String(seed);
+    const payload = prefix && referenceCode.startsWith(prefix)
+      ? referenceCode.slice(prefix.length)
+      : referenceCode;
+    if (!payload.length) throw new Error("A non-empty seed is required.");
+
+    const normalizedPayload = caseInsensitive ? payload.toUpperCase() : payload;
+    const normalizedAlphabet = caseInsensitive ? alphabet.toUpperCase() : alphabet;
+    if (new Set(normalizedAlphabet).size !== normalizedAlphabet.length) {
+      throw new Error("The normalized seed alphabet cannot contain duplicate characters.");
+    }
+    const bigModulus = BigInt(modulus);
+    const base = BigInt(normalizedAlphabet.length);
+    let remainder = 0n;
+
+    for (const character of normalizedPayload) {
+      const digit = normalizedAlphabet.indexOf(character);
+      if (digit === -1) {
+        if (hashInvalid) {
+          return Number(cyrb128(referenceCode).reduce(
+            (hashRemainder, word) => ((hashRemainder << 32n) + BigInt(word)) % bigModulus,
+            0n
+          ));
+        }
+        throw new Error(`Seed contains character "${character}" outside its alphabet.`);
+      }
+      remainder = (remainder * base + BigInt(digit)) % bigModulus;
+    }
+    return Number(remainder);
+  }
+
   function uniformTrait(rng, options) {
     if (typeof rng !== "function") throw new Error("A random function is required.");
     if (!Array.isArray(options) || options.length === 0) {
@@ -104,5 +156,5 @@
     return shuffle(rng, options).slice(0, count);
   }
 
-  return Object.freeze({ createPoolRandom, pick, pickN, shuffle, uniformTrait });
+  return Object.freeze({ createPoolRandom, pick, pickN, seedModulo, shuffle, uniformTrait });
 });

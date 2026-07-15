@@ -22,18 +22,18 @@ The reference code is the stable identifier for a generated view. Reusing the sa
 | Project type | Deterministic bilingual personal portfolio |
 | Languages | English and Simplified Chinese |
 | Technology | Vanilla HTML, CSS, and JavaScript |
-| Visual systems | 42 equally weighted filters in five historical acts |
+| Visual systems | 42 modulo-indexed filters in five historical acts |
 | State model | Deterministic, shareable, URL-based reference codes |
 | Tooling | No runtime dependencies, package manager, or build step |
 | Hosting | GitHub Pages or any static file host |
 
 ### Core capabilities
 
-- **One reproducible filter per view** — A seeded selector maps each reference code to exactly one equal-probability entry in the implemented style pool; the same `id` produces the same filter.
+- **One reproducible filter per view** — A valid hexadecimal seed maps directly to style index `seed mod 42`; a non-HEX reference falls back to a deterministic hash, so the same `id` still produces the same filter.
 - **Native Chinese and English content** — English lives at `index.html`, Chinese at `zh.html`, and the language switch preserves query parameters and the current hash.
 - **All 42 historical visual languages implemented** — Five catalog folders now cover the complete sequence from Futurism through Post-Internet Art.
 - **Deterministic content composition** — Headlines, summaries, project descriptions, tags, section order, and skill order are selected according to the reference-code rules.
-- **Independent copy and style draws** — The same reference code derives separate, versioned random streams for copy and style, so consuming or expanding one pool cannot advance the other.
+- **Independent copy and style mapping** — Copy uses its own versioned random stream, while style uses only `seed mod 42`, so adding copy draw steps cannot remap the selected filter.
 - **Filter separation** — Filters do not rewrite copy, reorder content, change the information structure, or alter interaction logic.
 - **Compact and complete reading modes** — The default view keeps the signal compact, while the full-record view exposes complete project and implementation notes.
 - **Room Control** — The active style introduction and **Roll Again** appear together at the end of the page, serving as the exhibition label and the entry point to the next view.
@@ -71,18 +71,18 @@ View state is stored in query parameters and can be used directly for testing or
 
 | Parameter | Values | Description |
 | --- | --- | --- |
-| `id` | Any string | Seed for page generation. If omitted, the page creates an `SL-` prefix followed by 32 generated characters. |
+| `id` | At least one character; `SL-` is optional | Seed for page generation. HEX payloads (`0-9`, `A-F`, case-insensitive) use direct modulo; other strings use the hash fallback. If omitted, the page creates `SL-` plus 42 HEX characters. |
 | `label` | `guide`, `surface` | `guide` keeps the first-view onboarding; `surface` is the clean presentation link. |
 | `complete` | `1` | Opens the full project record immediately. |
 
 Examples:
 
 ```text
-http://localhost:8080/index.html?id=SL-DEMO&label=surface
+http://localhost:8080/index.html?id=SL-A&label=surface
 http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 ```
 
-As long as each pool, its version, and its generation algorithm remain unchanged, the same `id` resolves to the same portfolio configuration and filter. Copy and style use independent named streams, so changing how many random values the copy generator consumes does not shift the selected style, and vice versa. Both locales share the reference code, so they correspond to the same structural and visual configuration while selecting localized copy.
+As long as each pool, its version, and its generation algorithm remain unchanged, the same `id` resolves to the same portfolio configuration and filter. Copy uses a named random stream. For style, one or more HEX characters are decoded directly and mapped to registry index `seed mod 42`; any non-HEX reference is hashed first and then reduced modulo 42 for backward compatibility. Changing how many random values the copy generator consumes therefore cannot shift the selected style. Both locales share the reference code, so they correspond to the same structural and visual configuration while selecting localized copy.
 
 ### Project structure
 
@@ -119,16 +119,16 @@ As long as each pool, its version, and its generation algorithm remain unchanged
 └── README.md
 ```
 
-Both HTML entry points load scripts in this order: selection engine → style registry → ordered theme files → active locale data → shared application logic. `app.js` reads `window.PORTFOLIO_LOCALE`, derives independent copy and style streams from the current reference code, and then builds the DOM, keeping the entry documents intentionally thin.
+Both HTML entry points load scripts in this order: selection engine → style registry → ordered theme files → active locale data → shared application logic. `app.js` reads `window.PORTFOLIO_LOCALE`, derives the copy stream and direct style index from the current reference code, and then builds the DOM, keeping the entry documents intentionally thin.
 
 ### Architecture
 
 1. The page reads `id`; when absent, it creates a reference code with `crypto.getRandomValues()`.
-2. The selection engine combines that code with the pool name and version before `cyrb128` and `sfc32` create a deterministic random stream.
+2. The selection engine combines that code with the copy pool name and version before `cyrb128` and `sfc32` create a deterministic random stream.
 3. The `copy/v1` stream selects copy, project slices, tags, section order, and skill order exclusively from the copy and layout pools.
-4. The `style/v1` stream selects exactly one entry from the style registry without consuming any copy randomness.
+4. The style selector decodes a case-insensitive HEX seed of at least one character and selects registry index `seed mod 42`; non-HEX references use a deterministic 128-bit hash fallback.
 5. The selected filter supplies one complete visual system for typography, boundaries, surfaces, patterns, decoration, and motion tone; it does not affect copy generation or renderer behavior.
-6. **Roll Again** creates a new `id` and redraws both independent streams; **Copy URL** creates an onboarding-free `surface` link.
+6. **Roll Again** creates a new 42-character seed, recomposes the copy, and applies its modulo-selected style; **Copy URL** creates an onboarding-free `surface` link.
 
 ### Configuration and extension
 
@@ -150,7 +150,7 @@ When adding a project, use the same project `id` and project order in both local
 
 The complete filter list and the design boundary for each item live in [docs/42-filters.md](docs/42-filters.md). Each filter is an atomic visual system rather than a collection of independently randomized traits.
 
-Keep all 42 filters in a single ordered registry and give them equal selection weight. Every filter must have its own matching HTML, JavaScript, and CSS files, using one shared filename stem prefixed by a continuous, zero-padded two-digit index from `00` through `41`. The file order follows the catalog order (`01`–`42`), so Futurism starts with `00-futurism.html`, `00-futurism.js`, and `00-futurism.css`. Theme-specific code must remain in that theme's file trio; shared foundations do not replace any of these required files. A filter may adapt responsively or honor reduced-motion preferences, but it must not change copy, content order, structure, or behavior. Changing the registry order changes how existing reference codes map to filters and file indexes, so treat that order as a versioned public interface.
+Keep all 42 filters in a single ordered registry with one stable modulo index each. Every filter must have its own matching HTML, JavaScript, and CSS files, using one shared filename stem prefixed by a continuous, zero-padded two-digit index from `00` through `41`. The file order follows the catalog order (`01`–`42`), so Futurism starts with `00-futurism.html`, `00-futurism.js`, and `00-futurism.css`. Theme-specific code must remain in that theme's file trio; shared foundations do not replace any of these required files. A filter may adapt responsively or honor reduced-motion preferences, but it must not change copy, content order, structure, or behavior. Changing the registry order changes how existing reference codes map to filters and file indexes, so treat that order as a versioned public interface.
 
 ### Validation and testing
 
@@ -171,7 +171,7 @@ Then verify at desktop and mobile widths:
 - Both locale entry points load without console errors.
 - Language switching preserves `id`, `label`, `complete`, and hash state.
 - The same `id` reproduces the same portfolio configuration and filter in both languages, and rerolling selects from the same implemented registry.
-- Consuming additional values or adding internal draw steps in the copy stream does not advance the style stream, and vice versa.
+- Consuming additional values or adding internal draw steps in the copy stream does not change the direct `seed mod 42` style mapping.
 - Exactly one filter is active, and its style introduction appears with **Roll Again** in the final Room Control.
 - Applying a filter does not rewrite copy, reorder content, change the information structure, or alter interaction behavior.
 - Every implemented filter has a complete HTML/JavaScript/CSS file trio, the three basenames match, and every prefix matches its catalog position without duplicates.
@@ -200,7 +200,7 @@ The site uses CSS custom properties, `color-mix()`, `crypto.getRandomValues()`, 
 
 ### Contributing
 
-Fixes and improvements are welcome through issues or pull requests. Keep both locales synchronized, preserve the build-free deployment path, and keep the 42-filter registry ordered, complete, and equally weighted.
+Fixes and improvements are welcome through issues or pull requests. Keep both locales synchronized, preserve the build-free deployment path, and keep the 42-filter registry ordered, complete, and aligned with modulo indexes `0`–`41`.
 
 ### License
 
@@ -232,11 +232,11 @@ Molybdenum 是一个使用原生 HTML、CSS 和 JavaScript 实现的双语静态
 
 ### 核心能力
 
-- **每次一种、可复现的滤镜** — 参考代码通过带种子的选择器映射到已实现样式池中的一个等概率条目；相同的 `id` 始终得到同一种滤镜。
+- **每次一种、可复现的滤镜** — 合法 HEX seed 直接通过 `seed mod 42` 映射到样式索引；非 HEX 参考码回退到确定性 hash，因此相同的 `id` 仍始终得到同一种滤镜。
 - **原生中英文内容** — 英文入口为 `index.html`，中文入口为 `zh.html`；切换语言时会保留查询参数和当前页内锚点。
 - **42 种历史视觉语言已全部实现** — 五个样式文件夹现已完整覆盖从未来主义到后互联网艺术的连续序列。
 - **确定性内容组合** — 标题、简介、项目描述、标签、章节顺序和技能顺序均按照参考代码规则完成选择。
-- **文案与样式独立抽选** — 同一个参考代码会派生出分别带版本的文案流和样式流；扩充或消耗其中一个池不会推进另一个池。
+- **文案与样式独立映射** — 文案使用独立且带版本的随机流，样式只使用 `seed mod 42`，因此增加文案抽选步骤不会重新映射滤镜。
 - **滤镜与内容分离** — 滤镜不会重写文案、调整内容顺序、改变信息结构或修改交互逻辑。
 - **精简与完整两种阅读方式** — 默认页面突出关键信息，也可展开完整项目记录与实现说明。
 - **Room Control** — 当前风格介绍与 **Roll Again** 共同位于页面末尾，分别承担展签说明与生成下一视图的入口功能。
@@ -274,18 +274,18 @@ python3 -m http.server 8080
 
 | 参数 | 可选值 | 说明 |
 | --- | --- | --- |
-| `id` | 任意字符串 | 生成页面的种子；未提供时会创建由 `SL-` 前缀与 32 个随机字符组成的代码。 |
+| `id` | 至少一个字符；`SL-` 可选 | 生成页面的 seed。HEX 内容（`0-9`、`A-F`，不区分大小写）直接取模，其他字符串使用 hash 回退；未提供时会创建 `SL-` 加 42 个 HEX 字符。 |
 | `label` | `guide`、`surface` | `guide` 保留首次访问引导；`surface` 是不含引导的纯展示链接。 |
 | `complete` | `1` | 直接打开完整项目记录。 |
 
 示例：
 
 ```text
-http://localhost:8080/index.html?id=SL-DEMO&label=surface
+http://localhost:8080/index.html?id=SL-A&label=surface
 http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 ```
 
-只要各个抽选池、对应版本和生成算法没有改变，相同 `id` 就会得到相同的作品集配置与滤镜。文案和样式使用独立的命名随机流，因此文案生成器增加或减少随机数消耗不会改变选中的样式，反之亦然。中英文页面共用参考代码，因此会对应到相同的结构与视觉配置，同时分别选择本地化文案。
+只要各个抽选池、对应版本和生成算法没有改变，相同 `id` 就会得到相同的作品集配置与滤镜。文案使用命名随机流。样式接受至少一位、不区分大小写的 HEX seed，直接选择 `seed mod 42` 对应的注册表索引；非 HEX 参考码会先做 hash，再取模 42，以兼容旧链接。因此文案生成器增加或减少随机数消耗不会改变选中的样式。中英文页面共用参考代码，因此会对应到相同的结构与视觉配置，同时分别选择本地化文案。
 
 ### 项目结构
 
@@ -322,16 +322,16 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 └── README.md
 ```
 
-两个 HTML 入口按以下顺序加载脚本：抽选引擎 → 样式注册表 → 有序主题文件 → 当前语言数据 → 共享应用逻辑。`app.js` 读取 `window.PORTFOLIO_LOCALE`，根据当前参考代码派生彼此独立的文案流和样式流后再构建页面 DOM，因此入口 HTML 本身保持精简。
+两个 HTML 入口按以下顺序加载脚本：抽选引擎 → 样式注册表 → 有序主题文件 → 当前语言数据 → 共享应用逻辑。`app.js` 读取 `window.PORTFOLIO_LOCALE`，根据当前参考代码派生文案流并直接计算样式索引后再构建页面 DOM，因此入口 HTML 本身保持精简。
 
 ### 系统架构
 
 1. 页面读取 `id`；如果不存在，则使用 `crypto.getRandomValues()` 创建参考代码。
-2. 抽选引擎先把参考代码与池名称、版本组合，再由 `cyrb128` 和 `sfc32` 生成确定性的随机流。
+2. 抽选引擎先把参考代码与文案池名称、版本组合，再由 `cyrb128` 和 `sfc32` 生成确定性的随机流。
 3. `copy/v1` 随机流只从文案池和布局池中选择文案、项目切片、标签、章节顺序与技能顺序。
-4. `style/v1` 随机流独立地从样式注册表中选择且只选择一项，不消耗任何文案随机数。
+4. 样式选择器接受至少一位、不区分大小写的 HEX seed，直接选择注册表中 `seed mod 42` 对应的一项；非 HEX 参考码使用确定性的 128 位 hash 回退。
 5. 被选中的滤镜作为一个整体决定字体、边界、表面、图案、装饰和动效语气，但不会影响文案生成或渲染行为。
-6. **Roll Again** 会创建新 `id` 并分别重抽两个独立随机流；**复制 URL** 会生成不含首次引导的 `surface` 链接。
+6. **Roll Again** 会创建新的 42 字符 seed、重新组合文案并应用取模选中的样式；**复制 URL** 会生成不含首次引导的 `surface` 链接。
 
 ### 配置与扩展
 
@@ -353,7 +353,7 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 
 完整滤镜清单及每一项的设计边界位于 [docs/42-filters-zh.md](docs/42-filters-zh.md)。每种滤镜都是一个不可拆分的视觉系统，而不是若干可独立随机的视觉特征。
 
-请把 42 种滤镜保存在一个有序注册表中，并赋予相同选择权重。每个滤镜都必须分别拥有一组相互对应的 HTML、JavaScript 和 CSS 独立文件；同组文件使用完全相同的文件名主体，并以从 `00` 到 `41` 连续递增、补零后的两位数编号开头。文件顺序与下方 `01`–`42` 的目录顺序一致，因此未来主义从 `00-futurism.html`、`00-futurism.js` 和 `00-futurism.css` 开始。主题专属代码必须保留在该主题的三个文件中，共用基础代码不能替代这些必需文件。滤镜可以响应不同视口或遵循“减少动态效果”偏好，但不能改变文案、内容顺序、结构或行为。修改注册表顺序会改变既有参考代码对应的滤镜和文件编号，因此应把该顺序视为需要版本管理的公开接口。
+请把 42 种滤镜保存在一个有序注册表中，并让每项稳定对应一个取模索引。每个滤镜都必须分别拥有一组相互对应的 HTML、JavaScript 和 CSS 独立文件；同组文件使用完全相同的文件名主体，并以从 `00` 到 `41` 连续递增、补零后的两位数编号开头。文件顺序与下方 `01`–`42` 的目录顺序一致，因此未来主义从 `00-futurism.html`、`00-futurism.js` 和 `00-futurism.css` 开始。主题专属代码必须保留在该主题的三个文件中，共用基础代码不能替代这些必需文件。滤镜可以响应不同视口或遵循“减少动态效果”偏好，但不能改变文案、内容顺序、结构或行为。修改注册表顺序会改变既有参考代码对应的滤镜和文件编号，因此应把该顺序视为需要版本管理的公开接口。
 
 ### 验证与测试
 
@@ -374,7 +374,7 @@ python3 -m http.server 8080
 - 英文和中文入口均可加载，控制台没有错误。
 - 语言切换会保留 `id`、`label`、`complete` 和页内锚点状态。
 - 相同 `id` 在两种语言中会复现相同的作品集配置和滤镜，重新生成时仍从同一份已实现注册表中选择。
-- 文案流新增抽选步骤或额外消耗随机数不会推进样式流，反之亦然。
+- 文案流新增抽选步骤或额外消耗随机数不会改变 `seed mod 42` 的直接样式映射。
 - 页面一次只启用一种滤镜，其风格介绍与 **Roll Again** 位于最后的 Room Control 中。
 - 应用滤镜不会重写文案、调整内容顺序、改变信息结构或修改交互行为。
 - 每个已实现滤镜都具备完整的 HTML／JavaScript／CSS 文件组，同组文件名主体一致，且每个编号前缀都与目录中的主题位置一致、没有重复。
@@ -403,7 +403,7 @@ python3 -m http.server 8080
 
 ### 贡献
 
-欢迎通过 Issue 或 Pull Request 提交修复和改进。请保持中英文内容同步、保留无构建部署方式，并让 42 项滤镜注册表保持顺序稳定、内容完整且权重相等。
+欢迎通过 Issue 或 Pull Request 提交修复和改进。请保持中英文内容同步、保留无构建部署方式，并让 42 项滤镜注册表保持顺序稳定、内容完整且与 `0`–`41` 的取模索引一致。
 
 ### 许可证
 

@@ -11,7 +11,8 @@ body.theme-early-web-design {
 }
 
 .theme-early-web-design .topbar {
-  position: static;
+  position: sticky;
+  top: 0;
   border-bottom: 3px double var(--line);
   background: #d8d8d2;
   backdrop-filter: none;

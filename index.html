@@ -32,7 +32,8 @@
   中文：这是一个使用原生 HTML、CSS 和 JavaScript 编写的双语、免构建个人作品集。
   每次访问都会得到一个 reference code；代码以确定性方式组合文案和项目视图，并从横跨
   未来主义到后互联网艺术的 42 种视觉风格中准确选择一种。同一个 id 会复现同一个页面，
-  因此生成结果既有变化，也能被分享和验证。文案与视觉风格使用相互独立的随机流，视觉
+  因此生成结果既有变化，也能被分享和验证。文案使用独立随机流，视觉风格直接由
+  合法 HEX seed mod 42 决定，非 HEX 则使用 hash 回退；视觉
   滤镜只改变表达方式，不改写内容、信息结构或交互逻辑。页面同时提供紧凑视图和完整项目
   记录；它不是简历副本，而是用可运行项目、架构取舍和界面判断共同构成的一层证据。
   更多信息请阅读源码。
@@ -41,7 +42,8 @@
   JavaScript. Each visit receives a reference code that deterministically composes the copy and
   project view, then selects exactly one of 42 visual languages spanning Futurism through
   Post-Internet Art. The same id reproduces the same page, making each generated view both varied
-  and shareable. Copy and style use independent random streams, and a visual filter changes only
+  and shareable. Copy uses its own random stream while valid HEX seeds select style by seed mod 42,
+  with a hash fallback for non-HEX references; a visual filter changes only
   the presentation—not the content, information architecture, or interaction logic. Compact and
   full-record views expose the same project evidence. The site is not a résumé clone; it combines
   working projects, architectural tradeoffs, and interface judgment into a reproducible portfolio.

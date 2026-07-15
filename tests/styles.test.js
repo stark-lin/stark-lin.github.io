@@ -149,6 +149,16 @@ test("high-tech preserves its wide construction canvas", () => {
   assert.match(css, /body\.theme-high-tech\.layout-single \.site\s*{[^}]*max-width:\s*var\(--style-site-width\)/s);
 });
 
+test("featured projects remain equal-width full rows across themes", () => {
+  const app = read(path.join(ROOT, "assets", "app.js"));
+  const css = read(path.join(ROOT, "assets", "styles.css"));
+
+  assert.match(app, /<article class="card project-card">/);
+  assert.doesNotMatch(app, /class="card \$\{i === 0 \? "full"/);
+  assert.match(css, /#work \.cards\s*{[^}]*grid-template-columns:\s*minmax\(0, 1fr\) !important/s);
+  assert.match(css, /#work \.project-card\s*{[^}]*grid-column:\s*1 \/ -1 !important[^}]*inline-size:\s*100% !important[^}]*margin-inline:\s*0 !important/s);
+});
+
 test("all local stylesheet and script references resolve", () => {
   const htmlFiles = [
     path.join(ROOT, "index.html"),

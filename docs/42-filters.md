@@ -17,7 +17,7 @@ The following constraints apply to every filter:
 - Do not change the content structure or interaction logic.
 - Restrict visual changes to typography, boundaries, surfaces, patterns, decoration, and motion tone.
 - Keep the style introduction and **Roll Again** together in **Room Control** at the end of the page.
-- Maintain equal runtime status and selection probability across all 42 filters.
+- Maintain equal runtime status and stable modulo indexes across all 42 filters.
 
 ### Selection criteria
 
@@ -33,9 +33,9 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 ## Runtime requirements
 
 - Each visit activates exactly one filter; palettes, backgrounds, surfaces, shapes, and typographic traits are not randomized separately.
-- The reference code selects one of the 42 filters deterministically and with equal probability.
+- A valid case-insensitive HEX seed of at least one character selects index `seed mod 42`; a non-HEX reference uses a deterministic hash fallback before modulo reduction.
 - The same reference code produces the same filter in both the English and Chinese versions.
-- Copy and style selection use separate, versioned random streams derived from the reference code. Consuming or expanding either pool must not advance or remap the other stream.
+- Copy uses a versioned random stream derived from the reference code; style selection directly uses `seed mod 42`. Consuming or expanding the copy pool must not remap the selected style.
 - Each filter is a complete, indivisible visual system whose internal rules jointly determine typography, boundaries, surfaces, patterns, decoration, and motion tone.
 - **Roll Again** generates a new reference code and selects another filter from the catalog.
 - Random selection does not affect copy, content structure, project order, or interaction logic.
