@@ -1,0 +1,151 @@
+body.theme-metabolism {
+  background:
+    linear-gradient(90deg, transparent 0 calc(50% - 1px), color-mix(in srgb, var(--line), transparent 88%) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
+    repeating-linear-gradient(0deg, transparent 0 79px, color-mix(in srgb, var(--line), transparent 93%) 79px 80px),
+    var(--bg);
+}
+
+.theme-metabolism .topbar {
+  border-bottom: 2px solid var(--line);
+  background: color-mix(in srgb, var(--bg), transparent 5%);
+  backdrop-filter: blur(10px);
+}
+
+.theme-metabolism .brand::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 3px var(--bg);
+  background: var(--line);
+}
+
+.theme-metabolism .hero {
+  position: relative;
+  margin: 32px 0 48px;
+  padding-right: clamp(24px, 5vw, 64px);
+  padding-left: clamp(36px, 7vw, 88px);
+  border: 2px solid var(--line);
+  border-left: 14px solid var(--line);
+  background: var(--card);
+}
+
+.theme-metabolism .hero::before {
+  content: "";
+  position: absolute;
+  top: 18%;
+  bottom: 18%;
+  left: -23px;
+  width: 32px;
+  background:
+    radial-gradient(circle at 50% 8px, var(--accent) 0 6px, var(--bg) 6px 9px, var(--line) 9px 11px, transparent 11px),
+    radial-gradient(circle at 50% 50%, var(--accent) 0 6px, var(--bg) 6px 9px, var(--line) 9px 11px, transparent 11px),
+    radial-gradient(circle at 50% calc(100% - 8px), var(--accent) 0 6px, var(--bg) 6px 9px, var(--line) 9px 11px, transparent 11px);
+}
+
+.theme-metabolism h1 {
+  max-width: 920px;
+  font-weight: 820;
+}
+
+.theme-metabolism .hero-sub {
+  padding-left: 20px;
+  border-left: 4px solid var(--accent);
+}
+
+.theme-metabolism .section {
+  position: relative;
+  margin-left: 18px;
+  padding-left: clamp(24px, 4vw, 48px);
+  border-top: 2px solid var(--line);
+  border-left: 8px solid var(--line);
+}
+
+.theme-metabolism .section::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -19px;
+  width: 26px;
+  height: 26px;
+  border: 3px solid var(--line);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: inset 0 0 0 4px var(--bg);
+}
+
+.theme-metabolism .section-head {
+  grid-template-columns: minmax(116px, .27fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.theme-metabolism .section-index {
+  padding: 10px 14px;
+  border: 2px solid var(--line);
+  border-left: 8px solid var(--accent);
+  border-radius: 0 999px 999px 0;
+  color: var(--fg);
+  background: var(--card);
+}
+
+.theme-metabolism :is(.card, .hero-card, .timeline-item, .principle) {
+  position: relative;
+  border-left: 12px solid var(--accent);
+  box-shadow: 5px 5px 0 color-mix(in srgb, var(--line), transparent 78%);
+}
+
+.theme-metabolism :is(.card, .hero-card, .timeline-item, .principle)::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: -9px;
+  width: 6px;
+  height: calc(100% - 24px);
+  background: repeating-linear-gradient(0deg, var(--bg) 0 6px, transparent 6px 15px);
+}
+
+.theme-metabolism .cards .card:nth-child(even),
+.theme-metabolism .principle:nth-child(even) {
+  border-left-color: var(--line);
+  border-right: 8px solid var(--accent);
+}
+
+.theme-metabolism .tag,
+.theme-metabolism .skill-pill {
+  border-width: 2px;
+  border-radius: 4px 999px 999px 4px;
+}
+
+.theme-metabolism .contact-panel,
+.theme-metabolism .reveal {
+  border-radius: 10px;
+  outline-width: 2px;
+  border-left: 14px solid var(--accent);
+  box-shadow: 7px 7px 0 color-mix(in srgb, var(--line), transparent 75%);
+}
+
+.theme-metabolism .reveal::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 12px;
+  background: repeating-linear-gradient(90deg, var(--line) 0 18px, transparent 18px 24px, var(--accent) 24px 30px, transparent 30px 38px);
+}
+
+.theme-metabolism .reveal-stat {
+  border-width: 2px;
+  border-radius: 6px;
+}
+
+@media (max-width: 720px) {
+  .theme-metabolism .hero { padding-left: 30px; border-left-width: 10px; }
+  .theme-metabolism .hero::before { display: none; }
+  .theme-metabolism .section { margin-left: 5px; padding-left: 18px; border-left-width: 5px; }
+  .theme-metabolism .section-head { grid-template-columns: 1fr; }
+  .theme-metabolism .section-index { width: max-content; max-width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-metabolism .button { transition: none; }
+}

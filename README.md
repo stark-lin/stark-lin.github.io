@@ -14,7 +14,7 @@ A bilingual, build-free personal portfolio written in vanilla HTML, CSS, and Jav
 
 - **One reproducible filter per view** — A seeded selector maps each reference code to exactly one equal-probability entry in the implemented style pool; the same `id` produces the same filter.
 - **Native Chinese and English content** — English lives at `index.html`, Chinese at `zh.html`, and the language switch preserves query parameters and the current hash.
-- **Twelve implemented historical visual languages** — The first catalog folder covers Futurism through Concrete Art; the full specification continues to 42 filters.
+- **All 42 historical visual languages implemented** — Five catalog folders now cover the complete sequence from Futurism through Post-Internet Art.
 - **Generated copy and layout** — Headlines, summaries, project descriptions, tags, section order, and skill order continue to follow the existing reference-code rules.
 - **Independent copy and style draws** — The same reference code derives separate, versioned random streams for copy and style, so consuming or expanding one pool cannot advance the other.
 - **Filter separation** — Filters do not rewrite copy, reorder content, change the information structure, or alter interaction logic.
@@ -81,8 +81,16 @@ As long as each pool, its version, and its generation algorithm remain unchanged
 │       ├── zh.js           # Chinese content and UI copy
 │       └── styles.js       # Registry of implemented selectable styles
 ├── styles/
-│   └── act-1-avant-garde-modern-order/
-│       └── 00–11 HTML/JS/CSS theme trios
+│   ├── act-1-avant-garde-modern-order/
+│   │   └── 00–11 HTML/JS/CSS theme trios
+│   ├── act-2-postwar-abstraction-perception-popular-culture/
+│   │   └── 12–22 HTML/JS/CSS theme trios
+│   ├── act-3-material-concept-radical-design/
+│   │   └── 23–29 HTML/JS/CSS theme trios
+│   ├── act-4-postmodernism-plural-surfaces/
+│   │   └── 30–35 HTML/JS/CSS theme trios
+│   └── act-5-computers-web-future-visual-culture/
+│       └── 36–41 HTML/JS/CSS theme trios
 ├── docs/
 │   ├── 42-filters.md       # English specification for the 42-filter exhibition
 │   └── 42-filters-zh.md    # Chinese specification for the 42-filter exhibition
@@ -148,7 +156,7 @@ Then verify at desktop and mobile widths:
 - Consuming additional values or adding internal draw steps in the copy stream does not advance the style stream, and vice versa.
 - Exactly one filter is active, and its style introduction appears with **Roll Again** in the final Room Control.
 - Applying a filter does not rewrite copy, reorder content, change the information structure, or alter interaction behavior.
-- Every implemented filter has a complete HTML/JavaScript/CSS file trio, the three basenames match, and the current folder prefixes form the continuous range `00`–`11` without duplicates.
+- Every implemented filter has a complete HTML/JavaScript/CSS file trio, the three basenames match, and every prefix matches its catalog position without duplicates.
 - Copied links, first-view onboarding, and full records work.
 - Project links, email, navigation, and keyboard focus work.
 - Unnecessary motion is removed under reduced-motion preferences.
@@ -194,7 +202,7 @@ Copyright © 2026 Stark Lin. This project is licensed under the [GNU Affero Gene
 
 - **每次一种、可复现的滤镜** — 参考代码通过带种子的选择器映射到已实现样式池中的一个等概率条目；相同的 `id` 始终得到同一种滤镜。
 - **原生中英文内容** — 英文入口为 `index.html`，中文入口为 `zh.html`；切换语言时会保留查询参数和当前页内锚点。
-- **已实现 12 种历史视觉语言** — 首个样式文件夹覆盖未来主义至具体艺术；完整规格继续扩展到 42 种滤镜。
+- **42 种历史视觉语言已全部实现** — 五个样式文件夹现已完整覆盖从未来主义到后互联网艺术的连续序列。
 - **动态文案与布局** — 标题、简介、项目描述、标签、章节顺序和技能顺序继续遵循现有的参考代码规则。
 - **文案与样式独立抽选** — 同一个参考代码会派生出分别带版本的文案流和样式流；扩充或消耗其中一个池不会推进另一个池。
 - **滤镜与内容分离** — 滤镜不会重写文案、调整内容顺序、改变信息结构或修改交互逻辑。
@@ -261,8 +269,16 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 │       ├── zh.js           # 中文内容和界面文案
 │       └── styles.js       # 已实现且可抽选的样式注册表
 ├── styles/
-│   └── act-1-avant-garde-modern-order/
-│       └── 00–11 同名 HTML/JS/CSS 主题文件组
+│   ├── act-1-avant-garde-modern-order/
+│   │   └── 00–11 同名 HTML/JS/CSS 主题文件组
+│   ├── act-2-postwar-abstraction-perception-popular-culture/
+│   │   └── 12–22 同名 HTML/JS/CSS 主题文件组
+│   ├── act-3-material-concept-radical-design/
+│   │   └── 23–29 同名 HTML/JS/CSS 主题文件组
+│   ├── act-4-postmodernism-plural-surfaces/
+│   │   └── 30–35 同名 HTML/JS/CSS 主题文件组
+│   └── act-5-computers-web-future-visual-culture/
+│       └── 36–41 同名 HTML/JS/CSS 主题文件组
 ├── docs/
 │   ├── 42-filters.md       # 42 种滤镜连续展览英文规格
 │   └── 42-filters-zh.md    # 42 种滤镜连续展览中文规格
@@ -328,7 +344,7 @@ python3 -m http.server 8080
 - 文案流新增抽选步骤或额外消耗随机数不会推进样式流，反之亦然。
 - 页面一次只启用一种滤镜，其风格介绍与 **Roll Again** 位于最后的 Room Control 中。
 - 应用滤镜不会重写文案、调整内容顺序、改变信息结构或修改交互行为。
-- 每个已实现滤镜都具备完整的 HTML／JavaScript／CSS 文件组，同组文件名主体一致，当前文件夹编号前缀无重复且连续覆盖 `00`–`11`。
+- 每个已实现滤镜都具备完整的 HTML／JavaScript／CSS 文件组，同组文件名主体一致，且每个编号前缀都与目录中的主题位置一致、没有重复。
 - 复制链接、首次访问引导和完整项目记录均可使用。
 - 外部项目链接、邮箱链接、导航和键盘焦点均可使用。
 - 开启“减少动态效果”后不会出现不必要的动画。

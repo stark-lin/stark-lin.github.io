@@ -1,0 +1,176 @@
+body.theme-memphis {
+  background:
+    radial-gradient(circle at 8% 20%, color-mix(in srgb, #72b7ad, transparent 42%) 0 9px, transparent 10px),
+    radial-gradient(circle at 93% 68%, color-mix(in srgb, var(--accent), transparent 46%) 0 13px, transparent 14px),
+    var(--bg);
+  background-size: 120px 120px, 168px 168px, auto;
+}
+
+.theme-memphis .topbar {
+  border-bottom: 3px solid var(--line);
+  background: color-mix(in srgb, var(--bg), transparent 3%);
+  box-shadow: 0 5px 0 var(--accent);
+}
+
+.theme-memphis .brand {
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.theme-memphis .brand::before {
+  content: "";
+  width: 25px;
+  height: 15px;
+  border: 2px solid var(--line);
+  border-radius: 25px 25px 0 0;
+  background: #72b7ad;
+}
+
+.theme-memphis .hero {
+  min-height: min(820px, 90vh);
+  margin-top: 26px;
+  padding-inline: clamp(24px, 6vw, 76px);
+  border: 3px solid var(--line);
+  background: var(--card);
+  box-shadow: 12px 12px 0 #72b7ad;
+}
+
+.theme-memphis .hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 9%;
+  right: 5%;
+  width: clamp(120px, 22vw, 250px);
+  aspect-ratio: 2 / 1;
+  border: 4px solid var(--line);
+  border-radius: 999px 999px 0 0;
+  background: var(--card-strong);
+  transform: rotate(-8deg);
+}
+
+.theme-memphis .hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 4%;
+  bottom: 15%;
+  width: clamp(110px, 18vw, 210px);
+  height: 30px;
+  background:
+    linear-gradient(135deg, transparent 0 35%, var(--accent) 36% 48%, transparent 49% 85%, var(--accent) 86% 98%, transparent 99%) 0 0 / 42px 30px repeat-x;
+  transform: rotate(5deg);
+}
+
+.theme-memphis .hero-grid { width: 83%; }
+
+.theme-memphis h1 {
+  max-width: 820px;
+  font-weight: 900;
+  line-height: .88;
+  text-transform: uppercase;
+}
+
+.theme-memphis .kicker {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 2px solid var(--line);
+  color: var(--fg);
+  background: #72b7ad;
+  box-shadow: 4px 4px 0 var(--line);
+  transform: rotate(-1deg);
+}
+
+.theme-memphis .hero-sub {
+  max-width: 610px;
+  padding: 12px 16px;
+  border-left: 8px solid var(--accent);
+  background: color-mix(in srgb, var(--card), transparent 6%);
+}
+
+.theme-memphis .section {
+  border-top: 3px solid var(--line);
+}
+
+.theme-memphis .section:nth-child(even) {
+  border-top-style: dashed;
+}
+
+.theme-memphis .section-head {
+  grid-template-columns: minmax(105px, .22fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.theme-memphis .section-index {
+  width: max-content;
+  padding: 9px 13px;
+  border: 2px solid var(--line);
+  border-radius: 999px 999px 4px 4px;
+  color: var(--fg);
+  background: var(--card-strong);
+}
+
+.theme-memphis h2 {
+  font-weight: 900;
+  line-height: .9;
+}
+
+.theme-memphis :is(.card, .hero-card, .principle, .timeline-item) {
+  border: 2px solid var(--line);
+  outline: 0;
+  background: var(--card);
+}
+
+.theme-memphis .cards .card:nth-child(3n + 2),
+.theme-memphis .principle:nth-child(even) {
+  box-shadow: 7px 7px 0 var(--accent);
+}
+
+.theme-memphis .cards .card:nth-child(3n) {
+  box-shadow: 7px 7px 0 var(--card-strong);
+}
+
+.theme-memphis .card-title-row {
+  border-bottom: 3px dotted var(--line);
+  padding-bottom: 14px;
+}
+
+.theme-memphis .tag,
+.theme-memphis .skill-pill {
+  border: 2px solid var(--line);
+  border-radius: 3px 18px 3px 18px;
+  font-weight: 700;
+  background: var(--card-strong);
+}
+
+.theme-memphis .skill-pill:nth-child(3n + 2) { border-radius: 999px; background: #72b7ad; }
+.theme-memphis .skill-pill:nth-child(3n) { border-radius: 18px 3px; background: color-mix(in srgb, var(--accent), white 68%); }
+
+.theme-memphis .contact-panel,
+.theme-memphis .reveal {
+  border: 3px solid var(--line);
+  outline: 0;
+  padding: clamp(34px, 5vw, 58px);
+  background:
+    linear-gradient(135deg, transparent 0 41%, color-mix(in srgb, var(--accent), transparent 55%) 42% 49%, transparent 50%) 0 0 / 34px 34px,
+    var(--card-strong);
+}
+
+.theme-memphis .contact-panel { grid-template-columns: minmax(0, 1.3fr) auto; }
+
+.theme-memphis .reveal-stat {
+  border: 2px solid var(--line);
+  border-radius: 4px 24px;
+  box-shadow: 5px 5px 0 var(--accent);
+}
+
+@media (max-width: 720px) {
+  .theme-memphis .hero { min-height: auto; box-shadow: 7px 7px 0 #72b7ad; }
+  .theme-memphis .hero-grid { width: 100%; }
+  .theme-memphis .hero::before,
+  .theme-memphis .hero::after { opacity: .13; }
+  .theme-memphis .section-head,
+  .theme-memphis .contact-panel { grid-template-columns: 1fr; }
+  .theme-memphis .contact-panel,
+  .theme-memphis .reveal { padding: 30px 24px; }
+}

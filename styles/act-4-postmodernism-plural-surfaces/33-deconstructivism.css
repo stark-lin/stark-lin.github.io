@@ -1,0 +1,200 @@
+body.theme-deconstructivism {
+  background:
+    linear-gradient(166deg, transparent 0 23%, color-mix(in srgb, var(--accent), transparent 93%) 23.1% 31%, transparent 31.1%),
+    linear-gradient(14deg, transparent 0 68%, color-mix(in srgb, var(--line), transparent 94%) 68.1% 76%, transparent 76.1%),
+    var(--bg);
+}
+
+.theme-deconstructivism .topbar {
+  border-bottom: 2px solid var(--line);
+  background: color-mix(in srgb, var(--bg), transparent 4%);
+}
+
+.theme-deconstructivism .topbar-inner {
+  border-left: 10px solid var(--accent);
+  padding-left: 14px;
+}
+
+.theme-deconstructivism .brand {
+  font-family: var(--mono);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+}
+
+.theme-deconstructivism .brand::after {
+  content: "/ IV";
+  color: var(--accent);
+  letter-spacing: .02em;
+}
+
+.theme-deconstructivism .hero {
+  min-height: min(830px, 91vh);
+  padding-inline: clamp(26px, 7vw, 88px);
+  border-left: 2px solid var(--line);
+  border-right: 8px solid var(--line);
+}
+
+.theme-deconstructivism .hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 9% -7% 12% 24%;
+  border: 2px solid var(--line);
+  background: color-mix(in srgb, var(--card-strong), transparent 22%);
+  clip-path: polygon(5% 0, 100% 9%, 92% 58%, 100% 100%, 0 91%, 8% 39%);
+  transform: rotate(-3deg);
+}
+
+.theme-deconstructivism .hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 4%;
+  bottom: 17%;
+  width: 58%;
+  height: 2px;
+  background: var(--accent);
+  transform: rotate(-7deg);
+  transform-origin: left center;
+}
+
+.theme-deconstructivism .hero-grid { width: 86%; }
+
+.theme-deconstructivism h1 {
+  max-width: 850px;
+  font-weight: 870;
+  line-height: .86;
+}
+
+.theme-deconstructivism .kicker {
+  display: inline-block;
+  padding: 8px 13px;
+  color: var(--bg);
+  background: var(--accent);
+  clip-path: polygon(0 8%, 96% 0, 100% 86%, 4% 100%);
+}
+
+.theme-deconstructivism .hero-sub {
+  max-width: 620px;
+  padding: 18px 18px 16px 24px;
+  border-left: 2px solid var(--line);
+  background: color-mix(in srgb, var(--card), transparent 12%);
+}
+
+.theme-deconstructivism .section {
+  border-top: 0;
+  padding-top: calc(var(--style-section-padding-y) + 8px);
+}
+
+.theme-deconstructivism .section::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: -4%;
+  width: 108%;
+  height: 2px;
+  background: var(--line);
+  transform: rotate(-1.4deg);
+}
+
+.theme-deconstructivism .section:nth-child(even)::before {
+  transform: rotate(1.4deg);
+}
+
+.theme-deconstructivism .section-head {
+  grid-template-columns: minmax(116px, .23fr) minmax(0, 1fr);
+  gap: 12px;
+}
+
+.theme-deconstructivism .section-index {
+  width: max-content;
+  padding: 9px 13px;
+  border: 2px solid var(--line);
+  color: var(--fg);
+  background: var(--card);
+  transform: translate(10px, 12px) rotate(-4deg);
+}
+
+.theme-deconstructivism h2 {
+  font-size: clamp(38px, 6vw, 70px);
+  font-weight: 860;
+  line-height: .88;
+}
+
+.theme-deconstructivism :is(.card, .hero-card, .principle, .timeline-item) {
+  border: 2px solid var(--line);
+  outline: 0;
+  background: var(--card);
+  clip-path: polygon(0 0, 66% 0, 67% 7px, 100% 7px, 100% 100%, 38% 100%, 37% calc(100% - 7px), 0 calc(100% - 7px));
+}
+
+.theme-deconstructivism :is(.card, .principle, .timeline-item)::after {
+  content: "";
+  position: absolute;
+  inset: 10px 8px 9px 11px;
+  z-index: 2;
+  border-right: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+  pointer-events: none;
+  clip-path: polygon(0 0, 92% 0, 100% 14%, 96% 100%, 0 94%);
+}
+
+.theme-deconstructivism .cards .card:nth-child(even),
+.theme-deconstructivism .principle:nth-child(even) {
+  clip-path: polygon(0 7px, 34% 7px, 35% 0, 100% 0, 100% calc(100% - 7px), 63% calc(100% - 7px), 62% 100%, 0 100%);
+}
+
+.theme-deconstructivism .card-title-row {
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 14px;
+}
+
+.theme-deconstructivism .tag,
+.theme-deconstructivism .skill-pill {
+  border: 2px solid var(--line);
+  border-radius: 0;
+  background: var(--card);
+  clip-path: polygon(4px 0, 100% 0, calc(100% - 5px) 100%, 0 calc(100% - 3px));
+}
+
+.theme-deconstructivism .contact-panel,
+.theme-deconstructivism .reveal {
+  border: 2px solid var(--line);
+  outline: 0;
+  background: var(--card-strong);
+  clip-path: polygon(0 4%, 71% 0, 72% 3%, 100% 1%, 98% 82%, 100% 100%, 33% 97%, 31% 100%, 1% 96%);
+}
+
+.theme-deconstructivism .contact-panel {
+  grid-template-columns: minmax(0, 1.25fr) auto;
+}
+
+.theme-deconstructivism .reveal::before {
+  content: "";
+  position: absolute;
+  right: -8%;
+  top: 12%;
+  width: 50%;
+  height: 2px;
+  background: var(--accent);
+  transform: rotate(-9deg);
+}
+
+.theme-deconstructivism .reveal-stat {
+  border: 2px solid var(--line);
+  border-radius: 0;
+}
+
+@media (max-width: 720px) {
+  .theme-deconstructivism .hero { min-height: auto; }
+  .theme-deconstructivism .hero-grid { width: 100%; }
+  .theme-deconstructivism .hero::before { inset: 8% 0 8% 38%; opacity: .18; }
+  .theme-deconstructivism .section-head,
+  .theme-deconstructivism .contact-panel { grid-template-columns: 1fr; gap: 18px; }
+  .theme-deconstructivism .section::before,
+  .theme-deconstructivism .section:nth-child(even)::before { left: 0; width: 100%; transform: none; }
+  .theme-deconstructivism .section-index { transform: rotate(-2deg); }
+  .theme-deconstructivism .contact-panel,
+  .theme-deconstructivism .reveal { clip-path: polygon(0 1%, 100% 0, 99% 99%, 1% 100%); }
+}

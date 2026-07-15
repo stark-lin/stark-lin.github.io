@@ -1,0 +1,206 @@
+body.theme-early-web-design {
+  font-family: "Times New Roman", Times, serif;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--line), transparent 78%) 0 1px, transparent 1px),
+    var(--bg);
+  background-size: 8px 8px;
+}
+
+.theme-early-web-design .site {
+  background: color-mix(in srgb, var(--bg), transparent 7%);
+}
+
+.theme-early-web-design .topbar {
+  position: static;
+  border-bottom: 3px double var(--line);
+  background: #d8d8d2;
+  backdrop-filter: none;
+}
+
+.theme-early-web-design .topbar-inner {
+  padding-block: 6px;
+}
+
+.theme-early-web-design .brand {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0;
+}
+
+.theme-early-web-design .brand::before {
+  content: "◆";
+  color: #8b2020;
+  font-size: 13px;
+}
+
+.theme-early-web-design nav {
+  gap: 12px;
+  color: #0000a8;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+.theme-early-web-design a {
+  color: #0000a8;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.theme-early-web-design a:visited { color: #621f75; }
+
+.theme-early-web-design .brand,
+.theme-early-web-design h1,
+.theme-early-web-design h2,
+.theme-early-web-design h3,
+.theme-early-web-design .button,
+.theme-early-web-design summary {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.theme-early-web-design .hero {
+  min-height: auto;
+  display: block;
+  padding: 56px 16px 48px;
+  text-align: center;
+  border-bottom: 3px ridge #9b9b95;
+}
+
+.theme-early-web-design .hero-grid { justify-items: center; }
+
+.theme-early-web-design .kicker {
+  color: #8b2020;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: .04em;
+  text-transform: none;
+}
+
+.theme-early-web-design h1 {
+  max-width: 800px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  line-height: 1.02;
+}
+
+.theme-early-web-design .hero-sub {
+  margin-inline: auto;
+  max-width: 720px;
+  font-size: 20px;
+  line-height: 1.45;
+}
+
+.theme-early-web-design .hero-actions { justify-content: center; }
+
+.theme-early-web-design .button {
+  min-height: 30px;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 #5f5f5f;
+  background: linear-gradient(#efefeb, #c9c9c3);
+  text-transform: none;
+}
+
+.theme-early-web-design .button:active {
+  box-shadow:
+    inset -1px -1px 0 #fff,
+    inset 1px 1px 0 #5f5f5f;
+}
+
+.theme-early-web-design .hero-card {
+  width: min(640px, 100%);
+  margin-top: 24px;
+  border: 2px ridge #a8a8a2;
+  outline: 0;
+  text-align: left;
+}
+
+.theme-early-web-design .section {
+  padding-inline: 16px;
+  border-top: 0;
+}
+
+.theme-early-web-design .section::before {
+  content: "";
+  display: block;
+  height: 3px;
+  margin-bottom: var(--style-section-padding-y);
+  border-top: 1px solid #606060;
+  border-bottom: 1px solid #fff;
+}
+
+.theme-early-web-design .section-head {
+  gap: 8px;
+  text-align: center;
+}
+
+.theme-early-web-design .section-index {
+  color: #8b2020;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.theme-early-web-design h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 5vw, 48px);
+  letter-spacing: -.02em;
+}
+
+.theme-early-web-design .section-lead {
+  margin-inline: auto;
+  max-width: 680px;
+  font-size: 17px;
+}
+
+.theme-early-web-design .cards,
+.theme-early-web-design .principles,
+.theme-early-web-design .timeline {
+  gap: 0;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+
+.theme-early-web-design :is(.card, .principle, .timeline-item) {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  outline: 0;
+  background: var(--card);
+}
+
+.theme-early-web-design :is(.card, .principle, .timeline-item):last-child { border-bottom: 0; }
+
+.theme-early-web-design .card-title-row {
+  border-bottom: 1px solid #b6b6b0;
+  padding-bottom: 8px;
+}
+
+.theme-early-web-design h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+}
+
+.theme-early-web-design .tag,
+.theme-early-web-design .skill-pill,
+.theme-early-web-design .reveal-stat,
+.theme-early-web-design .complete-project .intro-list p {
+  border-radius: 0;
+  background: #ecece7;
+}
+
+.theme-early-web-design .contact-panel,
+.theme-early-web-design .reveal {
+  border: 3px ridge #969690;
+  outline: 0;
+  border-radius: 0;
+  background: #e2e2dc;
+}
+
+.theme-early-web-design .reveal-grid { max-width: none; }
+
+@media (max-width: 720px) {
+  .theme-early-web-design .hero { padding-inline: 0; }
+  .theme-early-web-design .section { padding-inline: 0; }
+  .theme-early-web-design h1 { font-size: clamp(40px, 12vw, 62px); }
+  .theme-early-web-design .section::before { margin-bottom: 40px; }
+}

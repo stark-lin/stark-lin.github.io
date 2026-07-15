@@ -1,0 +1,171 @@
+body.theme-new-wave-typography {
+  background:
+    linear-gradient(90deg, transparent 0 17%, color-mix(in srgb, var(--accent), transparent 91%) 17% 31%, transparent 31% 74%, color-mix(in srgb, #298c99, transparent 93%) 74% 91%, transparent 91%),
+    var(--bg);
+}
+
+.theme-new-wave-typography .topbar {
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg), transparent 15%);
+}
+
+.theme-new-wave-typography .brand {
+  font-family: var(--mono);
+  font-weight: 500;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.theme-new-wave-typography .brand::after {
+  content: "//33";
+  color: var(--accent);
+  font-size: 11px;
+}
+
+.theme-new-wave-typography nav {
+  letter-spacing: .04em;
+}
+
+.theme-new-wave-typography .hero {
+  min-height: min(850px, 92vh);
+  border-left: 1px solid var(--line);
+  padding-inline: clamp(24px, 7vw, 92px);
+}
+
+.theme-new-wave-typography .hero::before {
+  content: "WAVE\A TYPO";
+  white-space: pre;
+  position: absolute;
+  z-index: -1;
+  right: -1%;
+  top: 10%;
+  color: color-mix(in srgb, var(--accent), transparent 86%);
+  font: 900 clamp(72px, 15vw, 180px)/.72 var(--sans);
+  letter-spacing: -.1em;
+  text-align: right;
+}
+
+.theme-new-wave-typography .hero-grid { width: 88%; }
+
+.theme-new-wave-typography h1 {
+  max-width: 860px;
+  font-weight: 820;
+  line-height: .86;
+  text-shadow:
+    8px 8px 0 color-mix(in srgb, var(--accent), transparent 73%),
+    -5px -5px 0 color-mix(in srgb, #298c99, transparent 78%);
+}
+
+.theme-new-wave-typography .kicker {
+  margin-left: clamp(0px, 9vw, 100px);
+  color: var(--fg);
+  font-size: 13px;
+  transform: rotate(-2deg);
+}
+
+.theme-new-wave-typography .hero-sub {
+  max-width: 590px;
+  margin-left: clamp(0px, 7vw, 78px);
+  padding-left: 18px;
+  border-left: 1px solid var(--accent);
+}
+
+.theme-new-wave-typography .hero-actions {
+  margin-left: clamp(0px, 4vw, 44px);
+}
+
+.theme-new-wave-typography .section {
+  border-top: 1px solid var(--line);
+}
+
+.theme-new-wave-typography .section-head {
+  grid-template-columns: minmax(120px, .24fr) minmax(0, 1fr);
+  gap: 0;
+}
+
+.theme-new-wave-typography .section-index {
+  width: max-content;
+  color: var(--fg);
+  transform: rotate(-6deg) translateY(12px);
+  transform-origin: left top;
+}
+
+.theme-new-wave-typography h2 {
+  position: relative;
+  z-index: 1;
+  font-weight: 820;
+  line-height: .89;
+  transform: translateX(-18px);
+  text-shadow: 6px 6px 0 color-mix(in srgb, var(--accent), transparent 78%);
+}
+
+.theme-new-wave-typography .section-lead {
+  margin-left: clamp(0px, 6vw, 64px);
+}
+
+.theme-new-wave-typography :is(.card, .hero-card, .principle, .timeline-item) {
+  border: 1px solid var(--line);
+  outline: 0;
+  background: color-mix(in srgb, var(--card), transparent 6%);
+}
+
+.theme-new-wave-typography .cards .card:nth-child(even),
+.theme-new-wave-typography .principle:nth-child(even) {
+  box-shadow: -9px 9px 0 color-mix(in srgb, #298c99, transparent 78%);
+}
+
+.theme-new-wave-typography .card-title-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+
+.theme-new-wave-typography .card-title-row h3 {
+  font-size: clamp(23px, 3vw, 32px);
+  transform: translateY(-4px);
+}
+
+.theme-new-wave-typography .tag,
+.theme-new-wave-typography .skill-pill {
+  border-radius: 0;
+  background: color-mix(in srgb, var(--card-strong), transparent 18%);
+}
+
+.theme-new-wave-typography .skill-pill:nth-child(4n + 2) {
+  transform: translateY(5px);
+}
+
+.theme-new-wave-typography .contact-panel,
+.theme-new-wave-typography .reveal {
+  border: 1px solid var(--line);
+  outline: 0;
+  box-shadow:
+    12px 12px 0 color-mix(in srgb, var(--accent), transparent 70%),
+    -9px -9px 0 color-mix(in srgb, #298c99, transparent 78%);
+}
+
+.theme-new-wave-typography .contact-panel {
+  grid-template-columns: minmax(0, 1.25fr) auto;
+}
+
+.theme-new-wave-typography .reveal-grid {
+  margin-left: clamp(0px, 7vw, 72px);
+}
+
+@media (max-width: 720px) {
+  .theme-new-wave-typography .hero { min-height: auto; }
+  .theme-new-wave-typography .hero-grid { width: 100%; }
+  .theme-new-wave-typography .hero::before { opacity: .45; }
+  .theme-new-wave-typography .kicker,
+  .theme-new-wave-typography .hero-sub,
+  .theme-new-wave-typography .hero-actions,
+  .theme-new-wave-typography .section-lead,
+  .theme-new-wave-typography .reveal-grid { margin-left: 0; }
+  .theme-new-wave-typography .section-head,
+  .theme-new-wave-typography .contact-panel { grid-template-columns: 1fr; gap: 18px; }
+  .theme-new-wave-typography .section-index,
+  .theme-new-wave-typography h2 { transform: none; }
+  .theme-new-wave-typography h1 { text-shadow: 4px 4px 0 color-mix(in srgb, var(--accent), transparent 76%); }
+  .theme-new-wave-typography .card-title-row { grid-template-columns: 1fr; }
+}

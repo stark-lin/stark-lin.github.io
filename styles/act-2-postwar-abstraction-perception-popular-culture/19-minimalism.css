@@ -1,0 +1,128 @@
+body.theme-minimalism {
+  background: var(--bg);
+}
+
+.theme-minimalism .topbar {
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg), transparent 5%);
+}
+
+.theme-minimalism .brand {
+  font-weight: 560;
+  letter-spacing: 0;
+}
+
+.theme-minimalism .brand::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--fg);
+}
+
+.theme-minimalism .hero {
+  min-height: min(720px, 82vh);
+  border-bottom: 1px solid var(--line);
+}
+
+.theme-minimalism .hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  bottom: 0;
+  width: 40%;
+  height: 22%;
+  background:
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 25% 100%,
+    color-mix(in srgb, var(--card-strong), transparent 25%);
+  border: 1px solid var(--line);
+}
+
+.theme-minimalism h1 {
+  max-width: 760px;
+  font-weight: 590;
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+
+.theme-minimalism .hero-sub {
+  max-width: 560px;
+}
+
+.theme-minimalism .button {
+  font-weight: 540;
+}
+
+.theme-minimalism .section {
+  border-top: 1px solid var(--line);
+}
+
+.theme-minimalism .section-head {
+  grid-template-columns: minmax(96px, .25fr) minmax(0, 1fr);
+  margin-bottom: 32px;
+}
+
+.theme-minimalism .section-index {
+  color: var(--muted);
+  letter-spacing: .06em;
+}
+
+.theme-minimalism h2,
+.theme-minimalism h3 {
+  font-weight: 580;
+}
+
+.theme-minimalism .cards,
+.theme-minimalism .principles,
+.theme-minimalism .timeline {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.theme-minimalism .cards .card,
+.theme-minimalism .cards .card.full,
+.theme-minimalism .cards .card.third {
+  grid-column: auto;
+}
+
+.theme-minimalism :is(.card, .timeline-item, .principle, .hero-card) {
+  min-height: 184px;
+  background: var(--card);
+}
+
+.theme-minimalism .cards .card:nth-child(3n),
+.theme-minimalism .principle:nth-child(3n) {
+  background: var(--card-strong);
+}
+
+.theme-minimalism .tag,
+.theme-minimalism .skill-pill {
+  border-radius: 0;
+  background: transparent;
+}
+
+.theme-minimalism .contact-panel,
+.theme-minimalism .reveal {
+  border: 1px solid var(--line);
+  background: var(--card-strong);
+}
+
+.theme-minimalism .reveal-stat {
+  border-radius: 0;
+  border-color: var(--line);
+}
+
+.theme-minimalism .complete-version .cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 720px) {
+  .theme-minimalism .hero { min-height: auto; }
+  .theme-minimalism .hero::after { width: 56%; height: 13%; opacity: .6; }
+  .theme-minimalism .section-head { grid-template-columns: 1fr; }
+  .theme-minimalism .cards,
+  .theme-minimalism .principles,
+  .theme-minimalism .timeline,
+  .theme-minimalism .complete-version .cards { grid-template-columns: 1fr; }
+  .theme-minimalism :is(.card, .timeline-item, .principle, .hero-card) { min-height: auto; }
+}
+

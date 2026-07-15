@@ -1,0 +1,407 @@
+body.theme-international-typographic-style {
+  background: var(--bg);
+  font-kerning: normal;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+}
+
+.theme-international-typographic-style .topbar {
+  border-bottom: 1px solid var(--fg);
+  background: color-mix(in srgb, var(--bg), transparent 3%);
+  backdrop-filter: none;
+}
+
+.theme-international-typographic-style .topbar-inner {
+  width: min(var(--style-site-width), calc(100vw - 32px));
+  margin-inline: auto;
+  padding: 12px 0 11px;
+}
+
+.theme-international-typographic-style .brand {
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -.015em;
+}
+
+.theme-international-typographic-style .brand::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 11px;
+  height: 11px;
+  background: var(--accent);
+}
+
+.theme-international-typographic-style nav {
+  gap: clamp(16px, 2.4vw, 32px);
+  color: var(--fg);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.theme-international-typographic-style nav a.current {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.theme-international-typographic-style .topbar .button.language-switch {
+  border: 0;
+  padding: 4px 0;
+  background: transparent;
+  color: var(--fg);
+}
+
+.theme-international-typographic-style .hero {
+  min-height: min(720px, 82vh);
+  border-bottom: 1px solid var(--fg);
+  align-items: end;
+}
+
+.theme-international-typographic-style .hero-grid {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 16px;
+  row-gap: 40px;
+  width: 100%;
+}
+
+.theme-international-typographic-style .hero-grid > div:first-child {
+  grid-column: 1 / 10;
+}
+
+.theme-international-typographic-style .hero-card {
+  grid-column: 10 / -1;
+  align-self: end;
+}
+
+.theme-international-typographic-style h1 {
+  max-width: 880px;
+  font-weight: 700;
+  line-height: .89;
+  text-wrap: balance;
+}
+
+.theme-international-typographic-style .hero-sub {
+  max-width: 560px;
+  color: var(--fg);
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.42;
+}
+
+.theme-international-typographic-style .kicker,
+.theme-international-typographic-style .section-index,
+.theme-international-typographic-style .stack,
+.theme-international-typographic-style .generated-desc-meta,
+.theme-international-typographic-style .time-label,
+.theme-international-typographic-style .stat-label,
+.theme-international-typographic-style .reveal-stat-label {
+  color: var(--accent);
+  font-family: var(--sans);
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.theme-international-typographic-style .hero-actions {
+  gap: 8px;
+}
+
+.theme-international-typographic-style .button {
+  min-height: 36px;
+  justify-content: center;
+}
+
+.theme-international-typographic-style .button.secondary {
+  background: transparent;
+}
+
+.theme-international-typographic-style .button:focus-visible,
+.theme-international-typographic-style a:focus-visible,
+.theme-international-typographic-style summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.theme-international-typographic-style main {
+  padding-top: 0;
+}
+
+.theme-international-typographic-style .section {
+  border-top: 0;
+  border-bottom: 1px solid var(--fg);
+}
+
+.theme-international-typographic-style .section-head,
+.theme-international-typographic-style .complete-head {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 16px;
+  row-gap: 16px;
+}
+
+.theme-international-typographic-style .section-index,
+.theme-international-typographic-style .complete-head > .section-index {
+  grid-column: 1 / 4;
+  padding-top: .45em;
+}
+
+.theme-international-typographic-style .section-head > div:last-child,
+.theme-international-typographic-style .complete-head > div:last-child {
+  grid-column: 4 / -1;
+}
+
+.theme-international-typographic-style h2,
+.theme-international-typographic-style h3 {
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.theme-international-typographic-style h2 {
+  max-width: 720px;
+}
+
+.theme-international-typographic-style .section-lead {
+  max-width: 600px;
+  color: var(--fg);
+  line-height: 1.5;
+}
+
+.theme-international-typographic-style .cards,
+.theme-international-typographic-style .principles,
+.theme-international-typographic-style .timeline {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 16px;
+  row-gap: 24px;
+}
+
+.theme-international-typographic-style .cards .card,
+.theme-international-typographic-style .cards .card.full,
+.theme-international-typographic-style .cards .card.third,
+.theme-international-typographic-style .cards .complete-project,
+.theme-international-typographic-style .principle,
+.theme-international-typographic-style .timeline-item {
+  grid-column: 4 / -1;
+}
+
+.theme-international-typographic-style :is(.card, .timeline-item, .principle, .hero-card) {
+  border-top: 4px solid var(--fg);
+  padding: 20px 0 32px;
+  background: transparent;
+}
+
+.theme-international-typographic-style .hero-card {
+  border-top-color: var(--accent);
+  padding-bottom: 0;
+}
+
+.theme-international-typographic-style .timeline-item {
+  grid-template-columns: 2fr 7fr;
+  column-gap: 16px;
+}
+
+.theme-international-typographic-style .card-title-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+
+.theme-international-typographic-style .tag,
+.theme-international-typographic-style .skill-pill {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-align: left;
+}
+
+.theme-international-typographic-style .skill-cloud {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+
+.theme-international-typographic-style .principle {
+  min-height: 0;
+}
+
+.theme-international-typographic-style .principle .tag {
+  display: block;
+  margin-bottom: 0;
+  color: var(--accent);
+}
+
+.theme-international-typographic-style .principle p {
+  max-width: 640px;
+  font-size: clamp(19px, 2.4vw, 26px);
+  line-height: 1.25;
+}
+
+.theme-international-typographic-style .contact-panel {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 16px;
+  border-top: 8px solid var(--accent);
+  border-radius: 0;
+  padding: 32px 0 0;
+  background: transparent;
+}
+
+.theme-international-typographic-style .contact-panel > div:first-child {
+  grid-column: 1 / 9;
+}
+
+.theme-international-typographic-style .contact-links {
+  grid-column: 10 / -1;
+  display: grid;
+  align-self: end;
+  gap: 8px;
+}
+
+.theme-international-typographic-style .contact-links .button {
+  width: 100%;
+}
+
+.theme-international-typographic-style .reveal {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 16px;
+  border-top: 8px solid var(--accent);
+  border-radius: 0;
+  padding: 32px 0 40px;
+  background: transparent;
+}
+
+.theme-international-typographic-style .reveal > .kicker {
+  grid-column: 1 / 4;
+  margin: 0;
+  padding-top: .45em;
+}
+
+.theme-international-typographic-style .reveal > h2,
+.theme-international-typographic-style .reveal > p,
+.theme-international-typographic-style .reveal-grid,
+.theme-international-typographic-style .reveal-actions {
+  grid-column: 4 / -1;
+}
+
+.theme-international-typographic-style .reveal > p,
+.theme-international-typographic-style .reveal-grid {
+  max-width: 600px;
+}
+
+.theme-international-typographic-style .reveal-grid {
+  width: 100%;
+}
+
+.theme-international-typographic-style .reveal-stat {
+  border: 0;
+  border-top: 1px solid var(--fg);
+  border-radius: 0;
+  padding: 16px 0 0;
+  background: transparent;
+}
+
+.theme-international-typographic-style .complete-version {
+  border-top: 0;
+  border-bottom: 1px solid var(--fg);
+}
+
+.theme-international-typographic-style .complete-project .intro-list p {
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  padding: 16px 0 0;
+  background: transparent;
+}
+
+.theme-international-typographic-style .tiny-footer {
+  padding-top: 24px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: .03em;
+}
+
+@media (max-width: 720px) {
+  .theme-international-typographic-style .topbar-inner {
+    width: min(100vw - 24px, var(--style-site-width));
+  }
+
+  .theme-international-typographic-style .hero {
+    min-height: auto;
+  }
+
+  .theme-international-typographic-style .hero-grid {
+    display: block;
+  }
+
+  .theme-international-typographic-style .hero-card {
+    margin-top: 40px;
+  }
+
+  .theme-international-typographic-style .section-head,
+  .theme-international-typographic-style .complete-head,
+  .theme-international-typographic-style .cards,
+  .theme-international-typographic-style .principles,
+  .theme-international-typographic-style .timeline,
+  .theme-international-typographic-style .contact-panel,
+  .theme-international-typographic-style .reveal {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-international-typographic-style .section-index,
+  .theme-international-typographic-style .complete-head > .section-index,
+  .theme-international-typographic-style .section-head > div:last-child,
+  .theme-international-typographic-style .complete-head > div:last-child,
+  .theme-international-typographic-style .cards .card,
+  .theme-international-typographic-style .cards .card.full,
+  .theme-international-typographic-style .cards .card.third,
+  .theme-international-typographic-style .cards .complete-project,
+  .theme-international-typographic-style .principle,
+  .theme-international-typographic-style .timeline-item,
+  .theme-international-typographic-style .contact-panel > div:first-child,
+  .theme-international-typographic-style .contact-links,
+  .theme-international-typographic-style .reveal > .kicker,
+  .theme-international-typographic-style .reveal > h2,
+  .theme-international-typographic-style .reveal > p,
+  .theme-international-typographic-style .reveal-grid,
+  .theme-international-typographic-style .reveal-actions {
+    grid-column: 1;
+  }
+
+  .theme-international-typographic-style .section-index,
+  .theme-international-typographic-style .complete-head > .section-index,
+  .theme-international-typographic-style .reveal > .kicker {
+    padding-top: 0;
+  }
+
+  .theme-international-typographic-style .timeline-item,
+  .theme-international-typographic-style .card-title-row {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-international-typographic-style .skill-cloud {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .theme-international-typographic-style .contact-panel,
+  .theme-international-typographic-style .reveal {
+    row-gap: 24px;
+  }
+
+  .theme-international-typographic-style .contact-links {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .theme-international-typographic-style .skill-cloud {
+    grid-template-columns: 1fr;
+  }
+}
