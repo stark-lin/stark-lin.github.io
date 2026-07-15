@@ -27,6 +27,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 * Each visit activates exactly one filter; palettes, backgrounds, surfaces, shapes, and typographic traits are no longer randomized separately.
 * The reference code selects one of the following 42 filters deterministically and with equal probability.
 * The same reference code always produces the same filter, in both the English and Chinese versions.
+* Copy and style selection use separate, versioned random streams derived from the reference code; consuming or expanding either pool must not advance or remap the other stream.
 * Each filter is a complete, indivisible visual system whose internal rules jointly determine typography, boundaries, surfaces, patterns, decoration, and the tone of motion.
 * Roll Again generates a new reference code and selects again from the 42 filters.
 * Random selection does not affect the copy, content structure, project order, or interaction logic.

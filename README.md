@@ -16,6 +16,7 @@ A bilingual, build-free personal portfolio written in vanilla HTML, CSS, and Jav
 - **Native Chinese and English content** — English lives at `index.html`, Chinese at `zh.html`, and the language switch preserves query parameters and the current hash.
 - **42 historical visual languages** — The exhibition spans avant-garde movements, postwar abstraction, radical design, postmodern surfaces, and digital visual culture.
 - **Generated copy and layout** — Headlines, summaries, project descriptions, tags, section order, and skill order continue to follow the existing reference-code rules.
+- **Independent copy and style draws** — The same reference code derives separate, versioned random streams for copy and style, so consuming or expanding one pool cannot advance the other.
 - **Filter separation** — Filters do not rewrite copy, reorder content, change the information structure, or alter interaction logic.
 - **Compact and complete reading modes** — The default view keeps the signal compact, while the full-record view exposes complete project and implementation notes.
 - **Room Control** — The active style introduction and **Roll Again** sit together at the end of the page as the exhibition label and entrance to the next room.
@@ -63,7 +64,7 @@ http://localhost:8080/index.html?id=SL-DEMO&label=surface
 http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 ```
 
-As long as the content pools, 42-filter registry, and generation algorithm remain unchanged, the same `id` resolves to the same portfolio configuration and filter. Both locales share the reference code, so they correspond to the same structural and visual configuration while selecting localized copy.
+As long as each pool, its version, and its generation algorithm remain unchanged, the same `id` resolves to the same portfolio configuration and filter. Copy and style use independent named streams, so changing how many random values the copy generator consumes does not shift the selected style, and vice versa. Both locales share the reference code, so they correspond to the same structural and visual configuration while selecting localized copy.
 
 ### Project structure
 
@@ -73,28 +74,31 @@ As long as the content pools, 42-filter registry, and generation algorithm remai
 ├── zh.html                 # Chinese entry point
 ├── assets/
 │   ├── app.js              # Generation, rendering, interaction, and accessibility
+│   ├── selection.js        # Deterministic, namespaced pool selection engine
 │   ├── styles.css          # Base styles and the 42 filter implementations
 │   └── data/
 │       ├── en.js           # English content and UI copy
 │       ├── zh.js           # Chinese content and UI copy
-│       └── palettes.js     # Shared color definitions used by filters
+│       └── styles.js       # Registry of implemented selectable styles
 ├── docs/
 │   ├── 42-filters.md       # English specification for the 42-filter exhibition
 │   └── 42-filters-zh.md    # Chinese specification for the 42-filter exhibition
+├── tests/
+│   └── selection.test.js   # Determinism and pool-isolation tests
 ├── LICENSE                 # AGPL-3.0-only
 └── README.md
 ```
 
-Both HTML entry points load scripts in this order: shared color data → active locale data → shared application logic. `app.js` reads `window.PORTFOLIO_LOCALE`, selects the filter for the current reference code, and then builds the DOM, keeping the entry documents intentionally thin.
+Both HTML entry points load scripts in this order: selection engine → style registry → active locale data → shared application logic. `app.js` reads `window.PORTFOLIO_LOCALE`, derives independent copy and style streams from the current reference code, and then builds the DOM, keeping the entry documents intentionally thin.
 
 ### How it works
 
 1. The page reads `id`; when absent, it creates a reference code with `crypto.getRandomValues()`.
-2. `cyrb128` hashes the code into four 32-bit seeds, and `sfc32` provides a deterministic random sequence.
-3. The existing generator selects copy and layout while preserving the established portfolio rules.
-4. The filter selector maps the seed to exactly one of the 42 filters, with every filter receiving equal probability.
-5. The selected filter supplies one complete visual system for typography, boundaries, surfaces, patterns, decoration, and motion tone; these traits are not randomized separately and do not affect the renderer's content or behavior.
-6. **Roll Again** creates a new `id` and selects another filter; **Copy URL** creates an onboarding-free `surface` link.
+2. The selection engine combines that code with the pool name and version before `cyrb128` and `sfc32` create a deterministic random stream.
+3. The `copy/v1` stream selects copy, project slices, tags, section order, and skill order exclusively from the copy and layout pools.
+4. The `style/v1` stream selects exactly one entry from the style registry without consuming any copy randomness.
+5. The selected filter supplies one complete visual system for typography, boundaries, surfaces, patterns, decoration, and motion tone; it does not affect copy generation or renderer behavior.
+6. **Roll Again** creates a new `id` and redraws both independent streams; **Copy URL** creates an onboarding-free `surface` link.
 
 ### Customizing content
 
@@ -124,9 +128,11 @@ The project currently has no separate test framework. Before committing, run at 
 
 ```bash
 node --check assets/app.js
+node --check assets/selection.js
 node --check assets/data/en.js
 node --check assets/data/zh.js
-node --check assets/data/palettes.js
+node --check assets/data/styles.js
+node --test tests/selection.test.js
 python3 -m http.server 8080
 ```
 
@@ -135,6 +141,7 @@ Then verify at desktop and mobile widths:
 - Both locale entry points load without console errors.
 - Language switching preserves `id`, `label`, `complete`, and hash state.
 - The same `id` reproduces the same portfolio configuration and filter in both languages, and rerolling selects from the same 42-item registry.
+- Consuming additional values or adding internal draw steps in the copy stream does not advance the style stream, and vice versa.
 - Exactly one filter is active, and its style introduction appears with **Roll Again** in the final Room Control.
 - Applying a filter does not rewrite copy, reorder content, change the information structure, or alter interaction behavior.
 - Every filter has a complete HTML/JavaScript/CSS file trio, the three basenames match, and their prefixes form the continuous range `00`–`41` without duplicates.
@@ -185,6 +192,7 @@ Copyright © 2026 Stark Lin. This project is licensed under the [GNU Affero Gene
 - **原生中英文内容** — 英文入口为 `index.html`，中文入口为 `zh.html`；切换语言时会保留查询参数和当前页内锚点。
 - **42 种历史视觉语言** — 展览覆盖先锋派、战后抽象、激进设计、后现代多元表面和数字视觉文化。
 - **动态文案与布局** — 标题、简介、项目描述、标签、章节顺序和技能顺序继续遵循现有的参考代码规则。
+- **文案与样式独立抽选** — 同一个参考代码会派生出分别带版本的文案流和样式流；扩充或消耗其中一个池不会推进另一个池。
 - **滤镜与内容分离** — 滤镜不会重写文案、调整内容顺序、改变信息结构或修改交互逻辑。
 - **精简与完整两种阅读方式** — 默认页面突出关键信息，也可展开完整项目记录与实现说明。
 - **Room Control** — 当前风格介绍与 **Roll Again** 共同位于页面最后，作为本展厅的展签和下一展厅入口。
@@ -232,7 +240,7 @@ http://localhost:8080/index.html?id=SL-DEMO&label=surface
 http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 ```
 
-只要内容池、42 项滤镜注册表和生成算法没有改变，相同 `id` 就会得到相同的作品集配置与滤镜。中英文页面共用参考代码，因此会对应到相同的结构与视觉配置，同时分别选择本地化文案。
+只要各个抽选池、对应版本和生成算法没有改变，相同 `id` 就会得到相同的作品集配置与滤镜。文案和样式使用独立的命名随机流，因此文案生成器增加或减少随机数消耗不会改变选中的样式，反之亦然。中英文页面共用参考代码，因此会对应到相同的结构与视觉配置，同时分别选择本地化文案。
 
 ### 项目结构
 
@@ -242,28 +250,31 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 ├── zh.html                 # 中文入口
 ├── assets/
 │   ├── app.js              # 生成、渲染、交互与无障碍逻辑
+│   ├── selection.js        # 确定性、带命名空间的抽选引擎
 │   ├── styles.css          # 基础样式和 42 种滤镜实现
 │   └── data/
 │       ├── en.js           # 英文内容和界面文案
 │       ├── zh.js           # 中文内容和界面文案
-│       └── palettes.js     # 滤镜共用的颜色定义
+│       └── styles.js       # 已实现且可抽选的样式注册表
 ├── docs/
 │   ├── 42-filters.md       # 42 种滤镜连续展览英文规格
 │   └── 42-filters-zh.md    # 42 种滤镜连续展览中文规格
+├── tests/
+│   └── selection.test.js   # 确定性与抽选池隔离测试
 ├── LICENSE                 # AGPL-3.0-only
 └── README.md
 ```
 
-两个 HTML 入口按以下顺序加载脚本：共用颜色数据 → 当前语言数据 → 共享应用逻辑。`app.js` 读取 `window.PORTFOLIO_LOCALE`，根据当前参考代码选择滤镜后再构建页面 DOM，因此入口 HTML 本身保持精简。
+两个 HTML 入口按以下顺序加载脚本：抽选引擎 → 样式注册表 → 当前语言数据 → 共享应用逻辑。`app.js` 读取 `window.PORTFOLIO_LOCALE`，根据当前参考代码派生彼此独立的文案流和样式流后再构建页面 DOM，因此入口 HTML 本身保持精简。
 
 ### 工作原理
 
 1. 页面读取 `id`；如果不存在，则使用 `crypto.getRandomValues()` 创建参考代码。
-2. `cyrb128` 将代码哈希为四个 32 位种子，`sfc32` 再生成确定性的随机序列。
-3. 现有生成器继续按照既定主页规则选择文案和布局。
-4. 滤镜选择器把种子映射到 42 种滤镜中的一项，每一种获得相同的出现概率。
-5. 被选中的滤镜作为一个整体决定字体、边界、表面、图案、装饰和动效语气；这些特征不再分别随机组合，也不影响渲染器的内容或行为。
-6. **Roll Again** 会创建新 `id` 并重新选择滤镜；**复制 URL** 会生成不含首次引导的 `surface` 链接。
+2. 抽选引擎先把参考代码与池名称、版本组合，再由 `cyrb128` 和 `sfc32` 生成确定性的随机流。
+3. `copy/v1` 随机流只从文案池和布局池中选择文案、项目切片、标签、章节顺序与技能顺序。
+4. `style/v1` 随机流独立地从样式注册表中选择且只选择一项，不消耗任何文案随机数。
+5. 被选中的滤镜作为一个整体决定字体、边界、表面、图案、装饰和动效语气，但不会影响文案生成或渲染行为。
+6. **Roll Again** 会创建新 `id` 并分别重抽两个独立随机流；**复制 URL** 会生成不含首次引导的 `surface` 链接。
 
 ### 自定义内容
 
@@ -293,9 +304,11 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 
 ```bash
 node --check assets/app.js
+node --check assets/selection.js
 node --check assets/data/en.js
 node --check assets/data/zh.js
-node --check assets/data/palettes.js
+node --check assets/data/styles.js
+node --test tests/selection.test.js
 python3 -m http.server 8080
 ```
 
@@ -304,6 +317,7 @@ python3 -m http.server 8080
 - 英文和中文入口均可加载，控制台没有错误。
 - 语言切换会保留 `id`、`label`、`complete` 和页内锚点状态。
 - 相同 `id` 在两种语言中会复现相同的作品集配置和滤镜，重新生成时仍从同一份 42 项注册表中选择。
+- 文案流新增抽选步骤或额外消耗随机数不会推进样式流，反之亦然。
 - 页面一次只启用一种滤镜，其风格介绍与 **Roll Again** 位于最后的 Room Control 中。
 - 应用滤镜不会重写文案、调整内容顺序、改变信息结构或修改交互行为。
 - 每个滤镜都具备完整的 HTML／JavaScript／CSS 文件组，同组文件名主体一致，编号前缀无重复且连续覆盖 `00`–`41`。

@@ -3,7 +3,18 @@
 
   const locale = window.PORTFOLIO_LOCALE;
   if (!locale) throw new Error("Portfolio locale data is missing.");
+  const selection = window.PORTFOLIO_SELECTION;
+  if (!selection) throw new Error("Portfolio selection engine is missing.");
+  const { createPoolRandom, pick, pickN, shuffle } = selection;
   const { data: DATA, descriptions: PROJECT_DESCRIPTION_POOLS, titlePhrases: TITLE_PHRASES = {}, ui: UI } = locale;
+  const STYLE_POOL = window.PORTFOLIO_STYLE_POOL;
+  if (!Array.isArray(STYLE_POOL) || STYLE_POOL.length === 0) {
+    throw new Error("Portfolio style pool is missing or empty.");
+  }
+  const POOL_STREAMS = Object.freeze({
+    copy: Object.freeze({ name: "copy", version: 1 }),
+    style: Object.freeze({ name: "style", version: 1 })
+  });
   const VIEW_LABELS = Object.freeze({ GUIDE: "guide", SURFACE: "surface" });
   const SAFE_BILINGUAL_QUIPS = [
     { zh: "这页会变，但不是在逃避责任。", en: "This page changes, but it is not dodging responsibility." },
@@ -46,93 +57,65 @@
     { zh: "刷新按钮不是逃生门，是换镜头。", en: "The refresh button is not an escape hatch. It is a camera cut." },
     { zh: "这页的目标不是赢设计奖，是让合适的人多看一眼。", en: "The goal is not to win a design award. It is to make the right person look twice." }
   ];
+  const LAYOUT_POOL = Object.freeze({
+    educationPlacements: Object.freeze(["hero", "section"]),
+    sections: Object.freeze(["work", "experience", "principles", "skills"])
+  });
 
+  const SYSTEM_CONFIG = Object.freeze({
+    idPrefix: "SL-",
+    idLength: 32,
+    idCharacters: "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+  });
 
-    const RANDOM_POOLS = {
-      layout: {
-        educationPlacements: ["hero", "section"],
-        sections: ["work", "experience", "principles", "skills"]
-      },
-      system: {
-        idPrefix: "SL-",
-        idLength: 32,
-        idCharacters: "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
-      },
-      copy: {
-        kickers: DATA.heroKickers,
-        headlines: DATA.heroHeadlines,
-        subheads: DATA.heroSubheads,
-        principles: DATA.principles,
-        educationBodies: DATA.educationBodies,
-        contactCopies: DATA.contactCopies,
-        revealCopies: DATA.revealCopies,
-        sectionLeads: DATA.sectionLeads,
-        footerQuips: SAFE_BILINGUAL_QUIPS,
-        descriptionModes: UI.descriptionModes,
-        rarityComments: UI.rarity.comments,
-        projects: DATA.projects.map(project => ({
-          record: project,
-          descriptions: [...project.intros, ...(PROJECT_DESCRIPTION_POOLS[project.id] || [])],
-          tags: project.tags
-        })),
-        experienceProject: {
-          record: DATA.experienceProject,
-          descriptions: [
-            ...DATA.experienceProject.intros,
-            ...(PROJECT_DESCRIPTION_POOLS[DATA.experienceProject.id] || [])
-          ],
-          tags: DATA.experienceProject.tags
-        },
-        skills: UI.skills
+  const COPY_POOL = Object.freeze({
+    kickers: DATA.heroKickers,
+    headlines: DATA.heroHeadlines,
+    subheads: DATA.heroSubheads,
+    principles: DATA.principles,
+    educationBodies: DATA.educationBodies,
+    contactCopies: DATA.contactCopies,
+    revealCopies: DATA.revealCopies,
+    sectionLeads: DATA.sectionLeads,
+    footerQuips: SAFE_BILINGUAL_QUIPS,
+    descriptionModes: UI.descriptionModes,
+    rarityComments: UI.rarity.comments,
+    projects: DATA.projects.map(project => ({
+      record: project,
+      descriptions: [...project.intros, ...(PROJECT_DESCRIPTION_POOLS[project.id] || [])],
+      tags: project.tags
+    })),
+    experienceProject: {
+      record: DATA.experienceProject,
+      descriptions: [
+        ...DATA.experienceProject.intros,
+        ...(PROJECT_DESCRIPTION_POOLS[DATA.experienceProject.id] || [])
+      ],
+      tags: DATA.experienceProject.tags
+    },
+    skills: UI.skills
+  });
+
+  function createStream(id, stream) {
+    return createPoolRandom(id, stream.name, stream.version);
+  }
+
+  function validateStylePool() {
+    const ids = new Set();
+
+    STYLE_POOL.forEach((style, index) => {
+      if (!style || typeof style.id !== "string" || !style.id.trim()) {
+        throw new Error(`Style pool entry ${index} requires a non-empty id.`);
       }
-    };
-
-
-    function cyrb128(str) {
-      let h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
-      for (let i = 0; i < str.length; i++) {
-        const k = str.charCodeAt(i);
-        h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
-        h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
-        h3 = h4 ^ Math.imul(h3 ^ k, 951274213);
-        h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+      if (ids.has(style.id)) throw new Error(`Style pool contains duplicate id "${style.id}".`);
+      if (!Array.isArray(style.classNames) || style.classNames.length === 0) {
+        throw new Error(`Style "${style.id}" requires at least one body class.`);
       }
-      h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
-      h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
-      h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
-      h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
-      return [(h1 ^ h2 ^ h3 ^ h4) >>> 0, (h2 ^ h1) >>> 0, (h3 ^ h1) >>> 0, (h4 ^ h1) >>> 0];
-    }
+      ids.add(style.id);
+    });
+  }
 
-    function sfc32(a, b, c, d) {
-      return function() {
-        a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0;
-        let t = (a + b) | 0;
-        a = b ^ (b >>> 9);
-        b = (c + (c << 3)) | 0;
-        c = (c << 21) | (c >>> 11);
-        d = (d + 1) | 0;
-        t = (t + d) | 0;
-        c = (c + t) | 0;
-        return (t >>> 0) / 4294967296;
-      }
-    }
-
-    function createRandom(id) {
-      const [a, b, c, d] = cyrb128(id);
-      return sfc32(a, b, c, d);
-    }
-
-
-    function pick(rng, arr) {
-      return uniformTrait(rng, arr).value;
-    }
-
-    function uniformTrait(rng, options) {
-      if (!options.length) throw new Error("A random pool cannot be empty.");
-      const index = Math.floor(rng() * options.length);
-      return { value: options[index], index, probability: 1 / options.length };
-    }
+  validateStylePool();
 
     const RARITY_TIERS = [
       "common",
@@ -167,7 +150,7 @@
       const odds = 2 ** (depth + 1);
       const log10Odds = Math.log10(odds);
       const tier = getRarityTier(depth);
-      const comments = RANDOM_POOLS.copy.rarityComments[tier.id] || RANDOM_POOLS.copy.rarityComments.common;
+      const comments = COPY_POOL.rarityComments[tier.id] || COPY_POOL.rarityComments.common;
 
       return {
         depth,
@@ -178,21 +161,8 @@
       };
     }
 
-    function shuffle(rng, arr) {
-      const copy = [...arr];
-      for (let i = copy.length - 1; i > 0; i--) {
-        const j = Math.floor(rng() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-      }
-      return copy;
-    }
-
-    function pickN(rng, arr, n) {
-      return shuffle(rng, arr).slice(0, n);
-    }
-
     function createShortId() {
-      const { idPrefix, idLength, idCharacters } = RANDOM_POOLS.system;
+      const { idPrefix, idLength, idCharacters } = SYSTEM_CONFIG;
       const bytes = new Uint8Array(idLength);
       const unbiasedLimit = 256 - (256 % idCharacters.length);
       let id = idPrefix;
@@ -242,29 +212,27 @@
       return url.toString();
     }
 
-    function generateConfig(id) {
-      const rng = createRandom(id);
+    function generateCopyConfig(id) {
+      const rng = createStream(id, POOL_STREAMS.copy);
       const layout = "single";
-      // Keep the established ID-to-content mapping after removing the visual generator.
-      for (let index = 0; index < 14; index += 1) rng();
-      const educationPlacement = pick(rng, RANDOM_POOLS.layout.educationPlacements);
-      const sectionPool = [...RANDOM_POOLS.layout.sections];
+      const educationPlacement = pick(rng, LAYOUT_POOL.educationPlacements);
+      const sectionPool = [...LAYOUT_POOL.sections];
       if (educationPlacement === "section") sectionPool.push("education");
       const sections = shuffle(rng, sectionPool);
-      const projects = shuffle(rng, RANDOM_POOLS.copy.projects).map(source => {
+      const projects = shuffle(rng, COPY_POOL.projects).map(source => {
         return {
           ...source.record,
           description: pick(rng, source.descriptions),
-          descriptionMode: pick(rng, RANDOM_POOLS.copy.descriptionModes),
+          descriptionMode: pick(rng, COPY_POOL.descriptionModes),
           tag: pick(rng, source.tags)
         };
       });
 
-      const experienceSource = RANDOM_POOLS.copy.experienceProject;
+      const experienceSource = COPY_POOL.experienceProject;
       const experienceProject = {
         ...experienceSource.record,
         description: pick(rng, experienceSource.descriptions),
-        descriptionMode: pick(rng, RANDOM_POOLS.copy.descriptionModes),
+        descriptionMode: pick(rng, COPY_POOL.descriptionModes),
         tag: pick(rng, experienceSource.tags)
       };
 
@@ -272,24 +240,35 @@
         id,
         layout,
         educationPlacement,
-        kicker: pick(rng, RANDOM_POOLS.copy.kickers),
-        headline: pick(rng, RANDOM_POOLS.copy.headlines),
-        subhead: pick(rng, RANDOM_POOLS.copy.subheads),
+        kicker: pick(rng, COPY_POOL.kickers),
+        headline: pick(rng, COPY_POOL.headlines),
+        subhead: pick(rng, COPY_POOL.subheads),
         sections,
         projects,
         experienceProject,
-        principles: pickN(rng, RANDOM_POOLS.copy.principles, 2 + Math.floor(rng() * 4)),
-        educationBody: pick(rng, RANDOM_POOLS.copy.educationBodies),
-        contactCopy: pick(rng, RANDOM_POOLS.copy.contactCopies),
-        revealCopy: pick(rng, RANDOM_POOLS.copy.revealCopies),
-        leads: Object.fromEntries(Object.entries(RANDOM_POOLS.copy.sectionLeads).map(([key, values]) => [key, pick(rng, values)])),
-        footerQuip: pick(rng, RANDOM_POOLS.copy.footerQuips),
-        skills: shuffle(rng, RANDOM_POOLS.copy.skills).map(([title, skills]) => [title, shuffle(rng, skills)])
+        principles: pickN(rng, COPY_POOL.principles, 2 + Math.floor(rng() * 4)),
+        educationBody: pick(rng, COPY_POOL.educationBodies),
+        contactCopy: pick(rng, COPY_POOL.contactCopies),
+        revealCopy: pick(rng, COPY_POOL.revealCopies),
+        leads: Object.fromEntries(Object.entries(COPY_POOL.sectionLeads).map(([key, values]) => [key, pick(rng, values)])),
+        footerQuip: pick(rng, COPY_POOL.footerQuips),
+        skills: shuffle(rng, COPY_POOL.skills).map(([title, skills]) => [title, shuffle(rng, skills)])
       };
 
       config.rarity = calculateRarity(rng);
 
       return config;
+    }
+
+    function selectStyle(id) {
+      return pick(createStream(id, POOL_STREAMS.style), STYLE_POOL);
+    }
+
+    function generateConfig(id) {
+      return {
+        ...generateCopyConfig(id),
+        style: selectStyle(id)
+      };
     }
 
     function escapeHtml(str) {
@@ -918,15 +897,23 @@
       });
     }
 
-    function applyBodyClass() {
-      document.body.className = "theme-monochrome layout-single";
+    function applySelectedStyle(style) {
+      document.body.className = style.classNames.join(" ");
+      document.body.dataset.styleId = style.id;
+
+      Object.entries(style.variables || {}).forEach(([name, value]) => {
+        if (!name.startsWith("--")) {
+          throw new Error(`Style "${style.id}" contains invalid CSS variable "${name}".`);
+        }
+        document.documentElement.style.setProperty(name, String(value));
+      });
     }
 
     function init() {
       const id = getId();
       const config = generateConfig(id);
       renderShell(config);
-      applyBodyClass();
+      applySelectedStyle(config.style);
       renderNav(config);
       renderHero(config);
       renderMain(config);
