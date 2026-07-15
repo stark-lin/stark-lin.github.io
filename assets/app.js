@@ -7,15 +7,17 @@
   if (!selection) throw new Error("Portfolio selection engine is missing.");
   const { createPoolRandom, pick, pickN, shuffle } = selection;
   const { data: DATA, descriptions: PROJECT_DESCRIPTION_POOLS, titlePhrases: TITLE_PHRASES = {}, ui: UI } = locale;
-  const STYLE_POOL = window.PORTFOLIO_STYLE_POOL;
-  if (!Array.isArray(STYLE_POOL) || STYLE_POOL.length === 0) {
+  const registeredStyles = window.PORTFOLIO_STYLE_POOL;
+  if (!Array.isArray(registeredStyles) || registeredStyles.length === 0) {
     throw new Error("Portfolio style pool is missing or empty.");
   }
+  const STYLE_POOL = Object.freeze([...registeredStyles]);
   const POOL_STREAMS = Object.freeze({
     copy: Object.freeze({ name: "copy", version: 1 }),
     style: Object.freeze({ name: "style", version: 1 })
   });
   const VIEW_LABELS = Object.freeze({ GUIDE: "guide", SURFACE: "surface" });
+  const ENTRY_ROOT = window.PORTFOLIO_ENTRY_ROOT || "./";
   const SAFE_BILINGUAL_QUIPS = [
     { zh: "这页会变，但不是在逃避责任。", en: "This page changes, but it is not dodging responsibility." },
     { zh: "随机的是外观，固定的是链接能点。", en: "The surface is random. The links are reliably clickable." },
@@ -110,6 +112,14 @@
       if (ids.has(style.id)) throw new Error(`Style pool contains duplicate id "${style.id}".`);
       if (!Array.isArray(style.classNames) || style.classNames.length === 0) {
         throw new Error(`Style "${style.id}" requires at least one body class.`);
+      }
+      for (const localeKey of ["en", "zh"]) {
+        if (typeof style.label?.[localeKey] !== "string" || !style.label[localeKey].trim()) {
+          throw new Error(`Style "${style.id}" requires a ${localeKey} label.`);
+        }
+        if (typeof style.introduction?.[localeKey] !== "string" || !style.introduction[localeKey].trim()) {
+          throw new Error(`Style "${style.id}" requires a ${localeKey} introduction.`);
+        }
       }
       ids.add(style.id);
     });
@@ -261,6 +271,12 @@
     }
 
     function selectStyle(id) {
+      const forcedStyleId = window.PORTFOLIO_FORCED_STYLE_ID;
+      if (forcedStyleId) {
+        const forcedStyle = STYLE_POOL.find(style => style.id === forcedStyleId);
+        if (!forcedStyle) throw new Error(`Forced style "${forcedStyleId}" is not registered.`);
+        return forcedStyle;
+      }
       return pick(createStream(id, POOL_STREAMS.style), STYLE_POOL);
     }
 
@@ -368,7 +384,8 @@
 
     function getLanguageSwitch() {
       const isChinese = document.documentElement.lang.startsWith("zh");
-      const targetUrl = new URL(isChinese ? "./index.html" : "./zh.html", window.location.href);
+      const siteRootUrl = new URL(ENTRY_ROOT, window.location.href);
+      const targetUrl = new URL(isChinese ? "index.html" : "zh.html", siteRootUrl);
       targetUrl.search = window.location.search;
       targetUrl.hash = window.location.hash;
 
@@ -386,6 +403,7 @@
       const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
       const footerQuip = config.footerQuip?.[language] || shell.footer;
       const languageSwitch = getLanguageSwitch();
+      const licenseUrl = new URL("LICENSE", new URL(ENTRY_ROOT, window.location.href));
       document.body.innerHTML = `
         <div class="regenerating" id="regenerating" aria-hidden="true">
           <div class="regen-box">
@@ -411,7 +429,7 @@
         <span>${escapeHtml(footerQuip)}</span>
         <span>
           <a href="https://github.com/stark-lin/stark-lin.github.io" target="_blank" rel="noreferrer">${escapeHtml(shell.sourceLabel)}</a>
-          · <a href="./LICENSE">AGPL-3.0</a>
+          · <a href="${escapeHtml(licenseUrl.href)}">AGPL-3.0</a>
         </span>
       </footer>
         </div>
@@ -680,12 +698,20 @@
 
     function renderReveal(config) {
       const reveal = document.getElementById("reveal");
+      const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
+      const styleLabel = config.style.label[language];
+      const styleIntroduction = config.style.introduction[language];
       reveal.innerHTML = `
         <div class="kicker">${escapeHtml(config.revealCopy.kicker)}</div>
         <h2>${escapeHtml(config.revealCopy.headline)}</h2>
         <p style="margin-top:16px">${escapeHtml(config.revealCopy.body)}</p>
         <div class="reveal-grid">
           <div class="reveal-stat">
+            <div class="reveal-stat-section active-style-report">
+              <div class="reveal-stat-label">${escapeHtml(UI.labels.activeStyle)}</div>
+              <div class="reveal-stat-value active-style-value">${escapeHtml(styleLabel)}</div>
+              <div class="style-introduction">${escapeHtml(styleIntroduction)}</div>
+            </div>
             <div class="reveal-stat-section">
               <div class="reveal-stat-label">${escapeHtml(UI.labels.referenceCode)}</div>
               <div class="reveal-stat-value">${escapeHtml(config.id)}</div>

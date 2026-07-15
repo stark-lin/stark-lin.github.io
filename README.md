@@ -8,13 +8,13 @@
 
 ## English
 
-A bilingual, build-free personal portfolio written in vanilla HTML, CSS, and JavaScript. Each visit receives a reference code that deterministically composes the portfolio view and selects exactly one of [42 filters of art, design, and visual culture](docs/42-filters.md). The selected filter changes only the visual language, never the copy, content structure, or interaction logic. Generate another version when you want one, or share the original URL to reproduce the same view.
+A bilingual, build-free personal portfolio written in vanilla HTML, CSS, and JavaScript. Each visit receives a reference code that deterministically composes the portfolio view and selects exactly one implemented style from a [42-filter catalog of art, design, and visual culture](docs/42-filters.md). The selected filter changes only the visual language, never the copy, content structure, or interaction logic. Generate another version when you want one, or share the original URL to reproduce the same view.
 
 ### Highlights
 
-- **One reproducible filter per view** — A seeded selector maps each reference code to exactly one of 42 equal-probability filters; the same `id` produces the same filter.
+- **One reproducible filter per view** — A seeded selector maps each reference code to exactly one equal-probability entry in the implemented style pool; the same `id` produces the same filter.
 - **Native Chinese and English content** — English lives at `index.html`, Chinese at `zh.html`, and the language switch preserves query parameters and the current hash.
-- **42 historical visual languages** — The exhibition spans avant-garde movements, postwar abstraction, radical design, postmodern surfaces, and digital visual culture.
+- **Twelve implemented historical visual languages** — The first catalog folder covers Futurism through Concrete Art; the full specification continues to 42 filters.
 - **Generated copy and layout** — Headlines, summaries, project descriptions, tags, section order, and skill order continue to follow the existing reference-code rules.
 - **Independent copy and style draws** — The same reference code derives separate, versioned random streams for copy and style, so consuming or expanding one pool cannot advance the other.
 - **Filter separation** — Filters do not rewrite copy, reorder content, change the information structure, or alter interaction logic.
@@ -75,21 +75,25 @@ As long as each pool, its version, and its generation algorithm remain unchanged
 ├── assets/
 │   ├── app.js              # Generation, rendering, interaction, and accessibility
 │   ├── selection.js        # Deterministic, namespaced pool selection engine
-│   ├── styles.css          # Base styles and the 42 filter implementations
+│   ├── styles.css          # Shared layout and component foundations
 │   └── data/
 │       ├── en.js           # English content and UI copy
 │       ├── zh.js           # Chinese content and UI copy
 │       └── styles.js       # Registry of implemented selectable styles
+├── styles/
+│   └── act-1-avant-garde-modern-order/
+│       └── 00–11 HTML/JS/CSS theme trios
 ├── docs/
 │   ├── 42-filters.md       # English specification for the 42-filter exhibition
 │   └── 42-filters-zh.md    # Chinese specification for the 42-filter exhibition
 ├── tests/
-│   └── selection.test.js   # Determinism and pool-isolation tests
+│   ├── selection.test.js   # Determinism and pool-isolation tests
+│   └── styles.test.js      # Theme trio, registry, and entry-point tests
 ├── LICENSE                 # AGPL-3.0-only
 └── README.md
 ```
 
-Both HTML entry points load scripts in this order: selection engine → style registry → active locale data → shared application logic. `app.js` reads `window.PORTFOLIO_LOCALE`, derives independent copy and style streams from the current reference code, and then builds the DOM, keeping the entry documents intentionally thin.
+Both HTML entry points load scripts in this order: selection engine → style registry → ordered theme files → active locale data → shared application logic. `app.js` reads `window.PORTFOLIO_LOCALE`, derives independent copy and style streams from the current reference code, and then builds the DOM, keeping the entry documents intentionally thin.
 
 ### How it works
 
@@ -132,7 +136,7 @@ node --check assets/selection.js
 node --check assets/data/en.js
 node --check assets/data/zh.js
 node --check assets/data/styles.js
-node --test tests/selection.test.js
+node --test tests/*.test.js
 python3 -m http.server 8080
 ```
 
@@ -140,11 +144,11 @@ Then verify at desktop and mobile widths:
 
 - Both locale entry points load without console errors.
 - Language switching preserves `id`, `label`, `complete`, and hash state.
-- The same `id` reproduces the same portfolio configuration and filter in both languages, and rerolling selects from the same 42-item registry.
+- The same `id` reproduces the same portfolio configuration and filter in both languages, and rerolling selects from the same implemented registry.
 - Consuming additional values or adding internal draw steps in the copy stream does not advance the style stream, and vice versa.
 - Exactly one filter is active, and its style introduction appears with **Roll Again** in the final Room Control.
 - Applying a filter does not rewrite copy, reorder content, change the information structure, or alter interaction behavior.
-- Every filter has a complete HTML/JavaScript/CSS file trio, the three basenames match, and their prefixes form the continuous range `00`–`41` without duplicates.
+- Every implemented filter has a complete HTML/JavaScript/CSS file trio, the three basenames match, and the current folder prefixes form the continuous range `00`–`11` without duplicates.
 - Copied links, first-view onboarding, and full records work.
 - Project links, email, navigation, and keyboard focus work.
 - Unnecessary motion is removed under reduced-motion preferences.
@@ -184,13 +188,13 @@ Copyright © 2026 Stark Lin. This project is licensed under the [GNU Affero Gene
 
 ## 中文翻译
 
-这是一个零构建依赖、由原生 HTML、CSS 和 JavaScript 实现的双语个人作品集。每次访问都会获得一个参考代码，并据此确定性地生成作品集视图，同时从[《42 种艺术、设计与视觉文化滤镜》](docs/42-filters-zh.md)中选择且只选择一种。被选中的滤镜只改变视觉语言，不修改文案、内容结构或交互逻辑。你可以随时生成另一个版本，也可以分享原链接以复现同一页面。
+这是一个零构建依赖、由原生 HTML、CSS 和 JavaScript 实现的双语个人作品集。每次访问都会获得一个参考代码，并据此确定性地生成作品集视图，同时从[《42 种艺术、设计与视觉文化滤镜》](docs/42-filters-zh.md)中当前已经实现的样式里选择且只选择一种。被选中的滤镜只改变视觉语言，不修改文案、内容结构或交互逻辑。你可以随时生成另一个版本，也可以分享原链接以复现同一页面。
 
 ### 功能亮点
 
-- **每次一种、可复现的滤镜** — 参考代码通过带种子的选择器映射到 42 种等概率滤镜中的一项；相同的 `id` 始终得到同一种滤镜。
+- **每次一种、可复现的滤镜** — 参考代码通过带种子的选择器映射到已实现样式池中的一个等概率条目；相同的 `id` 始终得到同一种滤镜。
 - **原生中英文内容** — 英文入口为 `index.html`，中文入口为 `zh.html`；切换语言时会保留查询参数和当前页内锚点。
-- **42 种历史视觉语言** — 展览覆盖先锋派、战后抽象、激进设计、后现代多元表面和数字视觉文化。
+- **已实现 12 种历史视觉语言** — 首个样式文件夹覆盖未来主义至具体艺术；完整规格继续扩展到 42 种滤镜。
 - **动态文案与布局** — 标题、简介、项目描述、标签、章节顺序和技能顺序继续遵循现有的参考代码规则。
 - **文案与样式独立抽选** — 同一个参考代码会派生出分别带版本的文案流和样式流；扩充或消耗其中一个池不会推进另一个池。
 - **滤镜与内容分离** — 滤镜不会重写文案、调整内容顺序、改变信息结构或修改交互逻辑。
@@ -251,21 +255,25 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 ├── assets/
 │   ├── app.js              # 生成、渲染、交互与无障碍逻辑
 │   ├── selection.js        # 确定性、带命名空间的抽选引擎
-│   ├── styles.css          # 基础样式和 42 种滤镜实现
+│   ├── styles.css          # 共享布局与组件基础样式
 │   └── data/
 │       ├── en.js           # 英文内容和界面文案
 │       ├── zh.js           # 中文内容和界面文案
 │       └── styles.js       # 已实现且可抽选的样式注册表
+├── styles/
+│   └── act-1-avant-garde-modern-order/
+│       └── 00–11 同名 HTML/JS/CSS 主题文件组
 ├── docs/
 │   ├── 42-filters.md       # 42 种滤镜连续展览英文规格
 │   └── 42-filters-zh.md    # 42 种滤镜连续展览中文规格
 ├── tests/
-│   └── selection.test.js   # 确定性与抽选池隔离测试
+│   ├── selection.test.js   # 确定性与抽选池隔离测试
+│   └── styles.test.js      # 主题文件组、注册表与入口引用测试
 ├── LICENSE                 # AGPL-3.0-only
 └── README.md
 ```
 
-两个 HTML 入口按以下顺序加载脚本：抽选引擎 → 样式注册表 → 当前语言数据 → 共享应用逻辑。`app.js` 读取 `window.PORTFOLIO_LOCALE`，根据当前参考代码派生彼此独立的文案流和样式流后再构建页面 DOM，因此入口 HTML 本身保持精简。
+两个 HTML 入口按以下顺序加载脚本：抽选引擎 → 样式注册表 → 有序主题文件 → 当前语言数据 → 共享应用逻辑。`app.js` 读取 `window.PORTFOLIO_LOCALE`，根据当前参考代码派生彼此独立的文案流和样式流后再构建页面 DOM，因此入口 HTML 本身保持精简。
 
 ### 工作原理
 
@@ -308,7 +316,7 @@ node --check assets/selection.js
 node --check assets/data/en.js
 node --check assets/data/zh.js
 node --check assets/data/styles.js
-node --test tests/selection.test.js
+node --test tests/*.test.js
 python3 -m http.server 8080
 ```
 
@@ -316,11 +324,11 @@ python3 -m http.server 8080
 
 - 英文和中文入口均可加载，控制台没有错误。
 - 语言切换会保留 `id`、`label`、`complete` 和页内锚点状态。
-- 相同 `id` 在两种语言中会复现相同的作品集配置和滤镜，重新生成时仍从同一份 42 项注册表中选择。
+- 相同 `id` 在两种语言中会复现相同的作品集配置和滤镜，重新生成时仍从同一份已实现注册表中选择。
 - 文案流新增抽选步骤或额外消耗随机数不会推进样式流，反之亦然。
 - 页面一次只启用一种滤镜，其风格介绍与 **Roll Again** 位于最后的 Room Control 中。
 - 应用滤镜不会重写文案、调整内容顺序、改变信息结构或修改交互行为。
-- 每个滤镜都具备完整的 HTML／JavaScript／CSS 文件组，同组文件名主体一致，编号前缀无重复且连续覆盖 `00`–`41`。
+- 每个已实现滤镜都具备完整的 HTML／JavaScript／CSS 文件组，同组文件名主体一致，当前文件夹编号前缀无重复且连续覆盖 `00`–`11`。
 - 复制链接、首次访问引导和完整项目记录均可使用。
 - 外部项目链接、邮箱链接、导航和键盘焦点均可使用。
 - 开启“减少动态效果”后不会出现不必要的动画。

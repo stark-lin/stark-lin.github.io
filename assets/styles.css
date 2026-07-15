@@ -513,7 +513,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       gap: 16px;
-      max-width: 416px;
+      max-width: 608px;
     }
     .reveal-stat {
       border: 1px solid var(--line);
@@ -533,6 +533,14 @@
       margin-bottom: 8px;
     }
     .reveal-stat-value { font-weight: 720; letter-spacing: -0.02em; }
+    .active-style-value { font-size: 20px; }
+    .style-introduction {
+      margin-top: 8px;
+      max-width: 520px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
     .reveal-stat-section + .reveal-stat-section {
       margin-top: 16px;
       padding-top: 16px;

@@ -1,0 +1,119 @@
+body.theme-suprematism { background: var(--bg); }
+
+.theme-suprematism .topbar {
+  border-bottom-color: color-mix(in srgb, var(--line), transparent 72%);
+  background: color-mix(in srgb, var(--bg), transparent 8%);
+}
+
+.theme-suprematism .hero {
+  min-height: min(840px, 92vh);
+  overflow: visible;
+}
+
+.theme-suprematism .hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 10%;
+  right: -5%;
+  width: clamp(90px, 18vw, 210px);
+  height: clamp(130px, 28vw, 320px);
+  background: #1a1a18;
+  transform: rotate(18deg);
+}
+
+.theme-suprematism .hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  bottom: 12%;
+  width: clamp(78px, 12vw, 140px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #bd3425;
+}
+
+.theme-suprematism .hero-grid::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -5%;
+  bottom: 7%;
+  width: clamp(120px, 26vw, 300px);
+  height: 18px;
+  background: #d0a52e;
+  transform: rotate(-12deg);
+}
+
+.theme-suprematism h1 {
+  max-width: 770px;
+  font-weight: 760;
+}
+
+.theme-suprematism .hero-sub { max-width: 570px; }
+
+.theme-suprematism .section {
+  border-top-color: color-mix(in srgb, var(--line), transparent 78%);
+}
+
+.theme-suprematism .section:nth-child(even)::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 14%;
+  right: -4%;
+  width: 44px;
+  height: 130px;
+  background: #2a5276;
+  transform: rotate(11deg);
+  opacity: .72;
+}
+
+.theme-suprematism .section-head {
+  grid-template-columns: minmax(86px, .2fr) minmax(0, 1fr);
+  gap: clamp(24px, 6vw, 80px);
+}
+
+.theme-suprematism .section-index {
+  color: var(--fg);
+  border-top: 8px solid var(--accent);
+  padding-top: 12px;
+}
+
+.theme-suprematism .cards,
+.theme-suprematism .principles,
+.theme-suprematism .timeline { gap: 40px; }
+
+.theme-suprematism :is(.card, .hero-card, .principle, .timeline-item) {
+  background: color-mix(in srgb, var(--card), transparent 8%);
+}
+
+.theme-suprematism .cards .card:nth-child(odd) { margin-right: clamp(0px, 5vw, 72px); }
+.theme-suprematism .cards .card:nth-child(even) { margin-left: clamp(0px, 5vw, 72px); }
+
+.theme-suprematism .tag,
+.theme-suprematism .skill-pill,
+.theme-suprematism .button { border-radius: 0; }
+
+.theme-suprematism .contact-panel {
+  outline-width: 2px;
+  box-shadow: 28px 28px 0 color-mix(in srgb, #d0a52e, transparent 18%);
+}
+
+.theme-suprematism .reveal {
+  outline: 0;
+  border: 1px solid color-mix(in srgb, var(--line), transparent 72%);
+  background:
+    linear-gradient(16deg, transparent 0 78%, color-mix(in srgb, var(--accent), transparent 20%) 78% 83%, transparent 83%),
+    var(--card-strong);
+}
+
+@media (max-width: 720px) {
+  .theme-suprematism .hero { min-height: 690px; }
+  .theme-suprematism .hero::before { opacity: .12; }
+  .theme-suprematism .hero::after { opacity: .22; }
+  .theme-suprematism .section-head { grid-template-columns: 1fr; gap: 18px; }
+  .theme-suprematism .cards .card { margin-inline: 0; }
+  .theme-suprematism .contact-panel { box-shadow: 12px 12px 0 color-mix(in srgb, #d0a52e, transparent 18%); }
+}

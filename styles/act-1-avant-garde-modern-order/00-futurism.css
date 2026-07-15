@@ -1,0 +1,145 @@
+body.theme-futurism {
+  background:
+    linear-gradient(112deg, transparent 0 72%, color-mix(in srgb, var(--accent), transparent 86%) 72% 76%, transparent 76%),
+    repeating-linear-gradient(112deg, transparent 0 78px, color-mix(in srgb, var(--line), transparent 91%) 78px 80px),
+    var(--bg);
+}
+
+.theme-futurism .topbar {
+  border-bottom-width: 3px;
+  background: color-mix(in srgb, var(--bg), transparent 8%);
+  clip-path: polygon(0 0, 100% 0, 98% 100%, 0 100%);
+}
+
+.theme-futurism .brand::before {
+  content: ">>";
+  color: var(--accent);
+  font-family: var(--mono);
+  letter-spacing: -.22em;
+}
+
+.theme-futurism .hero {
+  min-height: min(820px, 90vh);
+  align-items: end;
+  border-left: 8px solid var(--accent);
+  padding-left: clamp(20px, 5vw, 72px);
+  overflow: hidden;
+}
+
+.theme-futurism .hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 8%;
+  right: -8%;
+  width: 62%;
+  height: 64%;
+  background: var(--accent);
+  clip-path: polygon(100% 0, 0 48%, 100% 100%);
+  opacity: .13;
+}
+
+.theme-futurism .hero::after {
+  content: "VELOCITY / SYSTEM / SIGNAL";
+  position: absolute;
+  right: 0;
+  bottom: 24px;
+  font: 700 11px/1 var(--mono);
+  letter-spacing: .18em;
+  writing-mode: vertical-rl;
+}
+
+.theme-futurism h1 {
+  font-style: italic;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow: 7px 7px 0 color-mix(in srgb, var(--accent), transparent 62%);
+}
+
+.theme-futurism .hero-sub {
+  border-left: 3px solid var(--line);
+  padding-left: 20px;
+}
+
+.theme-futurism .section {
+  border-top-width: 5px;
+}
+
+.theme-futurism .section::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 0;
+  width: clamp(72px, 16vw, 190px);
+  height: 5px;
+  background: var(--accent);
+}
+
+.theme-futurism .section-head {
+  grid-template-columns: minmax(96px, .28fr) minmax(0, 1fr);
+  align-items: end;
+}
+
+.theme-futurism .section-index {
+  padding: 10px 18px 10px 10px;
+  color: var(--bg);
+  background: var(--line);
+  clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+}
+
+.theme-futurism h2 {
+  font-weight: 880;
+  text-transform: uppercase;
+}
+
+.theme-futurism :is(.card, .hero-card, .timeline-item, .principle) {
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+}
+
+.theme-futurism .cards .card:nth-child(even) {
+  background: color-mix(in srgb, var(--card), var(--accent) 7%);
+}
+
+.theme-futurism .tag,
+.theme-futurism .skill-pill {
+  border-radius: 0;
+  transform: skewX(-8deg);
+}
+
+.theme-futurism .contact-panel,
+.theme-futurism .reveal {
+  border-left: 12px solid var(--accent);
+  background: var(--card);
+  clip-path: polygon(0 0, calc(100% - 42px) 0, 100% 42px, 100% 100%, 0 100%);
+}
+
+.theme-futurism .reveal::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto auto;
+  width: 38%;
+  height: 100%;
+  background: repeating-linear-gradient(112deg, transparent 0 22px, color-mix(in srgb, var(--accent), transparent 72%) 22px 28px);
+  opacity: .36;
+}
+
+@media (max-width: 720px) {
+  .theme-futurism .hero {
+    min-height: auto;
+    border-left-width: 5px;
+    padding-left: 18px;
+  }
+
+  .theme-futurism .hero::after { display: none; }
+  .theme-futurism .section-head { grid-template-columns: 1fr; }
+  .theme-futurism .section-index { width: max-content; max-width: 100%; }
+  .theme-futurism h1 { text-shadow: 4px 4px 0 color-mix(in srgb, var(--accent), transparent 68%); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .theme-futurism .hero::before { animation: futurism-pulse 7s ease-in-out infinite alternate; }
+}
+
+@keyframes futurism-pulse {
+  to { transform: translateX(4%) scaleX(1.06); }
+}

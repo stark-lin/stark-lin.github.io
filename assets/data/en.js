@@ -642,6 +642,7 @@ window.PORTFOLIO_LOCALE = {
       "completeIndex": "Full / records",
       "completeTitle": "Full project record",
       "completeLead": "This opens the full supporting material behind the compact portfolio view.",
+      "activeStyle": "Active style",
       "referenceCode": "Reference code",
       "refreshView": "Show another version",
       "copyView": "Copy URL",

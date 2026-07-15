@@ -754,6 +754,7 @@ window.PORTFOLIO_LOCALE = {
       "completeIndex": "完整 / 不抽样",
       "completeTitle": "完整版本",
       "completeLead": "不抽样，不装神秘。把项目材料一次性摊开。",
+      "activeStyle": "当前样式",
       "referenceCode": "参考码",
       "refreshView": "换一个版本",
       "copyView": "复制 URL",
