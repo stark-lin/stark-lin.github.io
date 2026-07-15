@@ -1,0 +1,139 @@
+body.theme-arte-povera {
+  background:
+    repeating-linear-gradient(86deg, transparent 0 74px, color-mix(in srgb, var(--line), transparent 91%) 74px 75px, transparent 75px 151px),
+    repeating-linear-gradient(4deg, transparent 0 138px, color-mix(in srgb, var(--accent), transparent 93%) 138px 139px, transparent 139px 226px),
+    var(--bg);
+}
+
+.theme-arte-povera .topbar {
+  border-bottom: 1px dashed var(--line);
+  background: color-mix(in srgb, var(--bg), transparent 6%);
+  backdrop-filter: none;
+}
+
+.theme-arte-povera .brand::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--accent);
+  transform: rotate(-7deg);
+}
+
+.theme-arte-povera .hero {
+  position: relative;
+  margin: 28px 0;
+  padding-right: clamp(20px, 6vw, 72px);
+  padding-left: clamp(20px, 6vw, 72px);
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--card), transparent 14%);
+  clip-path: polygon(0 8px, 18% 0, 52% 5px, 78% 1px, 100% 10px, calc(100% - 5px) 96%, 82% 100%, 45% calc(100% - 4px), 14% 100%, 4px 95%);
+}
+
+.theme-arte-povera .hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 7%;
+  right: 9%;
+  width: 1px;
+  height: 86%;
+  background: var(--accent);
+  transform: rotate(4deg);
+}
+
+.theme-arte-povera h1 {
+  font-weight: 720;
+  letter-spacing: -.045em;
+}
+
+.theme-arte-povera .hero-sub {
+  padding-left: 20px;
+  border-left: 2px dashed var(--accent);
+}
+
+.theme-arte-povera .section {
+  position: relative;
+  border-top: 1px dashed var(--line);
+}
+
+.theme-arte-povera .section-head {
+  grid-template-columns: minmax(108px, .26fr) minmax(0, 1fr);
+}
+
+.theme-arte-povera .section-index {
+  align-self: start;
+  padding: 8px 12px;
+  border-left: 3px solid var(--accent);
+  color: var(--fg);
+}
+
+.theme-arte-povera :is(.card, .hero-card, .timeline-item, .principle) {
+  position: relative;
+  border: 1px solid var(--line);
+  outline: 0;
+  box-shadow: 3px 4px 0 color-mix(in srgb, var(--line), transparent 72%);
+  clip-path: polygon(3px 1%, 31% 0, 58% 3px, 84% 0, calc(100% - 2px) 5px, 100% 82%, calc(100% - 5px) 100%, 63% calc(100% - 2px), 22% 100%, 0 calc(100% - 5px));
+}
+
+.theme-arte-povera .cards .card:nth-child(even),
+.theme-arte-povera .principle:nth-child(even) {
+  clip-path: polygon(0 5px, 26% 0, 67% 2px, calc(100% - 4px) 0, 100% calc(100% - 5px), 76% 100%, 39% calc(100% - 3px), 3px 100%);
+}
+
+.theme-arte-povera :is(.card, .hero-card, .timeline-item, .principle)::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: -1px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 26px 0 -5px var(--accent);
+}
+
+.theme-arte-povera .card-title-row {
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 16px;
+}
+
+.theme-arte-povera .tag,
+.theme-arte-povera .skill-pill {
+  border-style: dashed;
+  border-radius: 54% 46% 48% 52% / 42% 57% 43% 58%;
+  background: var(--card);
+}
+
+.theme-arte-povera .contact-panel,
+.theme-arte-povera .reveal {
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  outline: 0;
+  box-shadow: 5px 6px 0 color-mix(in srgb, var(--line), transparent 68%);
+  clip-path: polygon(2px 0, 45% 3px, 77% 0, 100% 6px, calc(100% - 3px) 100%, 54% calc(100% - 2px), 17% 100%, 0 calc(100% - 6px));
+}
+
+.theme-arte-povera .reveal::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px dashed color-mix(in srgb, var(--line), transparent 52%);
+  pointer-events: none;
+}
+
+.theme-arte-povera .reveal-stat,
+.theme-arte-povera .complete-project .intro-list p {
+  border-style: dashed;
+  border-radius: 2px;
+}
+
+@media (max-width: 720px) {
+  .theme-arte-povera .hero { padding-right: 24px; padding-left: 24px; }
+  .theme-arte-povera .section-head { grid-template-columns: 1fr; }
+  .theme-arte-povera .section-index { width: max-content; max-width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-arte-povera .button { transition: none; }
+}

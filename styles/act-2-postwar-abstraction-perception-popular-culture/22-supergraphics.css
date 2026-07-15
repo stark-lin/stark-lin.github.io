@@ -1,0 +1,162 @@
+body.theme-supergraphics {
+  background:
+    linear-gradient(90deg, transparent 0 7%, color-mix(in srgb, var(--accent), transparent 12%) 7% 11%, transparent 11% 100%),
+    var(--bg);
+  overflow-x: clip;
+}
+
+.theme-supergraphics .topbar {
+  border-bottom: 3px solid var(--line);
+  background: color-mix(in srgb, var(--card), transparent 6%);
+}
+
+.theme-supergraphics .brand::before {
+  content: "22";
+  color: var(--accent);
+  font: 900 14px/1 var(--sans);
+}
+
+.theme-supergraphics .hero {
+  min-height: min(800px, 87vh);
+  overflow: hidden;
+  border-bottom: 3px solid var(--line);
+}
+
+.theme-supergraphics .hero::before {
+  content: "II";
+  position: absolute;
+  z-index: -1;
+  top: -12%;
+  right: -4%;
+  color: var(--accent);
+  font: 950 clamp(260px, 46vw, 560px)/.8 var(--sans);
+  letter-spacing: -.14em;
+  opacity: .82;
+}
+
+.theme-supergraphics .hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -22%;
+  bottom: -34%;
+  width: 88%;
+  aspect-ratio: 1;
+  border: clamp(34px, 6vw, 76px) solid #2d7770;
+  border-radius: 50%;
+}
+
+.theme-supergraphics .hero-grid > div:first-child {
+  width: min(760px, 82%);
+  padding: clamp(24px, 5vw, 48px);
+  background: color-mix(in srgb, var(--card), transparent 4%);
+  border: 3px solid var(--line);
+}
+
+.theme-supergraphics h1 {
+  font-weight: 900;
+  line-height: .88;
+}
+
+.theme-supergraphics .section {
+  border-top: 3px solid var(--line);
+  counter-increment: supergraphic-section;
+  overflow: clip;
+}
+
+.theme-supergraphics main {
+  counter-reset: supergraphic-section;
+}
+
+.theme-supergraphics .section::before {
+  content: counter(supergraphic-section, decimal-leading-zero);
+  position: absolute;
+  z-index: -1;
+  top: 12px;
+  right: -2%;
+  color: color-mix(in srgb, var(--accent), transparent 10%);
+  font: 950 clamp(132px, 22vw, 260px)/.75 var(--sans);
+  letter-spacing: -.09em;
+}
+
+.theme-supergraphics .section:nth-child(even)::before {
+  right: auto;
+  left: -4%;
+  color: #2d7770;
+}
+
+.theme-supergraphics .section::after {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  top: 38%;
+  left: calc(50% - 50vw);
+  width: 100vw;
+  height: 34px;
+  background: var(--accent);
+  transform: rotate(-3deg);
+}
+
+.theme-supergraphics .section:nth-child(even)::after {
+  background: #2d7770;
+  transform: rotate(3deg);
+}
+
+.theme-supergraphics .section-head {
+  width: min(820px, 88%);
+  padding: 24px;
+  background: var(--card);
+  border: 3px solid var(--line);
+}
+
+.theme-supergraphics .section:nth-child(even) .section-head {
+  margin-left: auto;
+}
+
+.theme-supergraphics :is(.card, .timeline-item, .principle, .hero-card) {
+  background: var(--card);
+}
+
+.theme-supergraphics .tag,
+.theme-supergraphics .skill-pill {
+  border-radius: 0;
+  border-width: 2px;
+}
+
+.theme-supergraphics .contact-panel,
+.theme-supergraphics .reveal {
+  border: 3px solid var(--line);
+  background: var(--card-strong);
+}
+
+.theme-supergraphics .reveal::before {
+  content: "23";
+  inset: auto -3% -12% auto;
+  width: auto;
+  height: auto;
+  color: var(--accent);
+  background: none;
+  font: 950 clamp(150px, 28vw, 300px)/.8 var(--sans);
+  letter-spacing: -.12em;
+  opacity: .72;
+}
+
+.theme-supergraphics .reveal-stat {
+  border-radius: 0;
+  border-width: 2px;
+}
+
+@media (max-width: 720px) {
+  body.theme-supergraphics {
+    background: linear-gradient(90deg, transparent 0 4%, color-mix(in srgb, var(--accent), transparent 12%) 4% 8%, transparent 8% 100%), var(--bg);
+  }
+
+  .theme-supergraphics .hero { min-height: auto; }
+  .theme-supergraphics .hero::before { top: 2%; right: -18%; font-size: 52vw; opacity: .38; }
+  .theme-supergraphics .hero::after { opacity: .42; }
+  .theme-supergraphics .hero-grid > div:first-child { width: 92%; padding: 20px; }
+  .theme-supergraphics .section::before { font-size: 34vw; opacity: .48; }
+  .theme-supergraphics .section::after { height: 18px; opacity: .74; }
+  .theme-supergraphics .section-head { width: 92%; padding: 20px; }
+  .theme-supergraphics .reveal::before { font-size: 42vw; opacity: .35; }
+}

@@ -3,22 +3,21 @@
 
   const locale = window.PORTFOLIO_LOCALE;
   if (!locale) throw new Error("Portfolio locale data is missing.");
+  const selection = window.PORTFOLIO_SELECTION;
+  if (!selection) throw new Error("Portfolio selection engine is missing.");
+  const { createPoolRandom, pick, pickN, shuffle } = selection;
   const { data: DATA, descriptions: PROJECT_DESCRIPTION_POOLS, titlePhrases: TITLE_PHRASES = {}, ui: UI } = locale;
-  const CSS_PALETTE_IDS = window.PORTFOLIO_CSS_PALETTE_IDS || [];
-  const CUSTOM_PALETTES = window.PORTFOLIO_PALETTES || [];
-  const CUSTOM_PALETTES_BY_ID = new Map(CUSTOM_PALETTES.map(palette => [palette.id, palette]));
-  const SAFE_SPACING_STEP_PX = 8;
-  const SAFE_SPACING_MIN_PX = 16;
+  const registeredStyles = window.PORTFOLIO_STYLE_POOL;
+  if (!Array.isArray(registeredStyles) || registeredStyles.length === 0) {
+    throw new Error("Portfolio style pool is missing or empty.");
+  }
+  const STYLE_POOL = Object.freeze([...registeredStyles]);
+  const POOL_STREAMS = Object.freeze({
+    copy: Object.freeze({ name: "copy", version: 1 }),
+    style: Object.freeze({ name: "style", version: 1 })
+  });
   const VIEW_LABELS = Object.freeze({ GUIDE: "guide", SURFACE: "surface" });
-  const SAFE_SPACING_VARIABLES = new Set([
-    "--style-card-padding",
-    "--style-card-gap",
-    "--style-section-padding-y",
-    "--style-section-gap",
-    "--style-hero-pad-top",
-    "--style-hero-pad-bottom",
-    "--style-hero-gap"
-  ]);
+  const ENTRY_ROOT = window.PORTFOLIO_ENTRY_ROOT || "./";
   const SAFE_BILINGUAL_QUIPS = [
     { zh: "这页会变，但不是在逃避责任。", en: "This page changes, but it is not dodging responsibility." },
     { zh: "随机的是外观，固定的是链接能点。", en: "The surface is random. The links are reliably clickable." },
@@ -60,263 +59,73 @@
     { zh: "刷新按钮不是逃生门，是换镜头。", en: "The refresh button is not an escape hatch. It is a camera cut." },
     { zh: "这页的目标不是赢设计奖，是让合适的人多看一眼。", en: "The goal is not to win a design award. It is to make the right person look twice." }
   ];
+  const LAYOUT_POOL = Object.freeze({
+    educationPlacements: Object.freeze(["hero", "section"]),
+    sections: Object.freeze(["work", "experience", "principles", "skills"])
+  });
 
-    const STYLE_GENES = {
-      density: [
-        { variables: { "--style-site-width": "720px", "--style-card-padding": "16px", "--style-card-gap": "8px", "--style-section-padding-y": "40px", "--style-section-gap": "24px", "--style-hero-pad-top": "56px", "--style-hero-pad-bottom": "48px", "--style-hero-gap": "16px" } },
-        { variables: { "--style-site-width": "784px", "--style-card-padding": "16px", "--style-card-gap": "16px", "--style-section-padding-y": "48px", "--style-section-gap": "24px", "--style-hero-pad-top": "56px", "--style-hero-pad-bottom": "48px", "--style-hero-gap": "24px" } },
-        { variables: { "--style-site-width": "840px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "56px", "--style-section-gap": "24px", "--style-hero-pad-top": "64px", "--style-hero-pad-bottom": "56px", "--style-hero-gap": "24px" } },
-        { variables: { "--style-site-width": "896px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "64px", "--style-section-gap": "32px", "--style-hero-pad-top": "72px", "--style-hero-pad-bottom": "64px", "--style-hero-gap": "24px" } },
-        { variables: { "--style-site-width": "960px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "72px", "--style-section-gap": "32px", "--style-hero-pad-top": "80px", "--style-hero-pad-bottom": "72px", "--style-hero-gap": "32px" } },
-        { variables: { "--style-site-width": "1024px", "--style-card-padding": "24px", "--style-card-gap": "16px", "--style-section-padding-y": "80px", "--style-section-gap": "32px", "--style-hero-pad-top": "88px", "--style-hero-pad-bottom": "80px", "--style-hero-gap": "32px" } },
-        { variables: { "--style-site-width": "1080px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "88px", "--style-section-gap": "40px", "--style-hero-pad-top": "96px", "--style-hero-pad-bottom": "80px", "--style-hero-gap": "32px" } },
-        { variables: { "--style-site-width": "944px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "96px", "--style-section-gap": "40px", "--style-hero-pad-top": "112px", "--style-hero-pad-bottom": "96px", "--style-hero-gap": "40px" } },
-        { variables: { "--style-site-width": "864px", "--style-card-padding": "24px", "--style-card-gap": "24px", "--style-section-padding-y": "80px", "--style-section-gap": "48px", "--style-hero-pad-top": "88px", "--style-hero-pad-bottom": "64px", "--style-hero-gap": "40px" } },
-        { variables: { "--style-site-width": "1120px", "--style-card-padding": "32px", "--style-card-gap": "24px", "--style-section-padding-y": "104px", "--style-section-gap": "48px", "--style-hero-pad-top": "120px", "--style-hero-pad-bottom": "96px", "--style-hero-gap": "40px" } }
-      ],
-      frame: [
-        { variables: { "--style-component-outline": "none" } },
-        { variables: { "--style-component-outline": "1px dashed var(--style-visible-border)" } },
-        { variables: { "--style-component-outline": "2px dashed var(--style-visible-border)" } },
-        { variables: { "--style-component-outline": "1px solid var(--style-visible-border)" } },
-        { variables: { "--style-component-outline": "2px solid var(--style-visible-border)" } },
-        { variables: { "--style-component-outline": "4px double var(--style-visible-border)" } }
-      ],
-      shadow: [
-        { variables: { "--style-card-shadow": "none", "--style-panel-shadow": "none", "--style-blur": "0px" } },
-        { variables: { "--style-card-shadow": "0 8px 22px rgba(0,0,0,.04)", "--style-panel-shadow": "0 18px 58px rgba(0,0,0,.07)", "--style-blur": "8px" } },
-        { variables: { "--style-card-shadow": "0 18px 60px rgba(0,0,0,.08)", "--style-panel-shadow": "0 26px 90px rgba(0,0,0,.10)", "--style-blur": "14px" } },
-        { variables: { "--style-card-shadow": "inset 0 1px 0 color-mix(in srgb, var(--fg), transparent 88%)", "--style-panel-shadow": "inset 0 1px 0 color-mix(in srgb, var(--fg), transparent 84%)", "--style-blur": "18px" } },
-        { variables: { "--style-card-shadow": "8px 8px 0 color-mix(in srgb, var(--accent), transparent 44%)", "--style-panel-shadow": "10px 10px 0 color-mix(in srgb, var(--accent), transparent 38%)", "--style-blur": "0px" } },
-        { variables: { "--style-card-shadow": "0 1px 0 color-mix(in srgb, var(--fg), transparent 80%)", "--style-panel-shadow": "0 1px 0 color-mix(in srgb, var(--fg), transparent 76%)", "--style-blur": "0px" } },
-        { variables: { "--style-card-shadow": "0 30px 90px rgba(0,0,0,.11)", "--style-panel-shadow": "0 42px 120px rgba(0,0,0,.15)", "--style-blur": "24px" } },
-        { variables: { "--style-card-shadow": "6px 6px 0 color-mix(in srgb, var(--fg), transparent 90%)", "--style-panel-shadow": "8px 8px 0 color-mix(in srgb, var(--fg), transparent 86%)", "--style-blur": "4px" } },
-        { variables: { "--style-card-shadow": "0 20px 70px rgba(0,0,0,.08)", "--style-panel-shadow": "0 34px 100px rgba(0,0,0,.11)", "--style-blur": "20px" } },
-        { variables: { "--style-card-shadow": "0 0 0 999px rgba(255,255,255,.015) inset", "--style-panel-shadow": "0 0 0 999px rgba(255,255,255,.025) inset", "--style-blur": "12px" } }
-      ],
-      type: [
-        { variables: { "--style-line-height": "1.42", "--style-h1-min": "44px", "--style-h1-fluid": "9vw", "--style-h1-max": "104px", "--style-h1-tracking": "-0.095em", "--style-h2-tracking": "-0.07em", "--style-h3-tracking": "-0.045em", "--style-desc-size": "18px", "--style-section-lead-size": "17px" } },
-        { variables: { "--style-line-height": "1.48", "--style-h1-min": "40px", "--style-h1-fluid": "7.5vw", "--style-h1-max": "86px", "--style-h1-tracking": "-0.065em", "--style-h2-tracking": "-0.05em", "--style-h3-tracking": "-0.03em", "--style-desc-size": "17px", "--style-section-lead-size": "16px" } },
-        { variables: { "--style-line-height": "1.6", "--style-h1-min": "42px", "--style-h1-fluid": "8vw", "--style-h1-max": "92px", "--style-h1-tracking": "-0.075em", "--style-h2-tracking": "-0.055em", "--style-h3-tracking": "-0.035em", "--style-desc-size": "18px", "--style-section-lead-size": "17px" } },
-        { variables: { "--style-line-height": "1.68", "--style-h1-min": "38px", "--style-h1-fluid": "6.8vw", "--style-h1-max": "78px", "--style-h1-tracking": "-0.04em", "--style-h2-tracking": "-0.035em", "--style-h3-tracking": "-0.018em", "--style-desc-size": "19px", "--style-section-lead-size": "18px" } },
-        { variables: { "--style-line-height": "1.52", "--style-h1-min": "46px", "--style-h1-fluid": "10vw", "--style-h1-max": "116px", "--style-h1-tracking": "-0.11em", "--style-h2-tracking": "-0.08em", "--style-h3-tracking": "-0.05em", "--style-desc-size": "17px", "--style-section-lead-size": "17px" } },
-        { variables: { "--style-line-height": "1.5", "--style-h1-min": "36px", "--style-h1-fluid": "6vw", "--style-h1-max": "70px", "--style-h1-tracking": "-0.025em", "--style-h2-tracking": "-0.02em", "--style-h3-tracking": "-0.012em", "--style-desc-size": "16px", "--style-section-lead-size": "15px" } },
-        { variables: { "--style-line-height": "1.74", "--style-h1-min": "42px", "--style-h1-fluid": "7vw", "--style-h1-max": "84px", "--style-h1-tracking": "-0.05em", "--style-h2-tracking": "-0.04em", "--style-h3-tracking": "-0.02em", "--style-desc-size": "20px", "--style-section-lead-size": "19px" } },
-        { variables: { "--style-line-height": "1.36", "--style-h1-min": "48px", "--style-h1-fluid": "9.5vw", "--style-h1-max": "108px", "--style-h1-tracking": "-0.085em", "--style-h2-tracking": "-0.065em", "--style-h3-tracking": "-0.04em", "--style-desc-size": "16px", "--style-section-lead-size": "16px" } },
-        { variables: { "--style-line-height": "1.58", "--style-h1-min": "41px", "--style-h1-fluid": "8.4vw", "--style-h1-max": "98px", "--style-h1-tracking": "-0.09em", "--style-h2-tracking": "-0.06em", "--style-h3-tracking": "-0.028em", "--style-desc-size": "19px", "--style-section-lead-size": "18px" } },
-        { variables: { "--style-line-height": "1.46", "--style-h1-min": "39px", "--style-h1-fluid": "7.8vw", "--style-h1-max": "88px", "--style-h1-tracking": "-0.055em", "--style-h2-tracking": "-0.042em", "--style-h3-tracking": "-0.024em", "--style-desc-size": "17px", "--style-section-lead-size": "18px" } }
-      ],
-      chrome: [
-        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px" } },
-        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-padding": "8px" } },
-        { variables: { "--style-title-rule-width": "2px", "--style-title-rule-padding": "16px" } },
-        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px" } },
-        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "dashed", "--style-title-rule-padding": "8px" } },
-        { variables: { "--style-title-rule-width": "0px", "--style-title-rule-padding": "0px" } },
-        { variables: { "--style-title-rule-width": "3px", "--style-title-rule-style": "double", "--style-title-rule-padding": "16px" } },
-        { variables: { "--style-title-rule-width": "1px", "--style-title-rule-style": "solid", "--style-title-rule-padding": "16px" } }
-      ],
-      rhythm: [
-        { variables: { "--style-text-width": "624px", "--style-micro-opacity": ".72" } },
-        { variables: { "--style-text-width": "680px", "--style-micro-opacity": ".82" } },
-        { variables: { "--style-text-width": "720px", "--style-micro-opacity": ".9" } },
-        { variables: { "--style-text-width": "760px", "--style-micro-opacity": "1" } },
-        { variables: { "--style-text-width": "816px", "--style-micro-opacity": ".88" } },
-        { variables: { "--style-text-width": "896px", "--style-micro-opacity": ".76" } },
-        { variables: { "--style-text-width": "560px", "--style-micro-opacity": ".95" } },
-        { variables: { "--style-text-width": "100%", "--style-micro-opacity": ".68" } }
-      ],
-      controls: [
-        { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "12px" } },
-        { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "13px" } },
-        { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "14px" } },
-        { variables: { "--style-button-y": "8px", "--style-button-x": "24px", "--style-button-size": "14px" } },
-        { variables: { "--style-button-y": "16px", "--style-button-x": "24px", "--style-button-size": "15px" } },
-        { variables: { "--style-button-y": "8px", "--style-button-x": "24px", "--style-button-size": "12px" } },
-        { variables: { "--style-button-y": "16px", "--style-button-x": "16px", "--style-button-size": "16px" } },
-        { variables: { "--style-button-y": "8px", "--style-button-x": "16px", "--style-button-size": "13px" } }
-      ],
-      // Secondary buttons must separate from the page through either a visible
-      // border or an opaque foreground/background contrast fill.
-      buttons: [
-        { variables: { "--style-button-radius": "999px", "--style-button-border-width": "1px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "transparent", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--fg)", "--style-button-shadow": "none", "--style-button-font": "inherit", "--style-button-weight": "inherit", "--style-button-tracking": "normal", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
-        { variables: { "--style-button-radius": "14px", "--style-button-border-width": "1px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "var(--card-strong)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--line)", "--style-button-shadow": "0 8px 18px rgba(0,0,0,.10)", "--style-button-font": "var(--sans)", "--style-button-weight": "700", "--style-button-tracking": ".01em", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
-        { variables: { "--style-button-radius": "4px", "--style-button-border-width": "1px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "transparent", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--line)", "--style-button-shadow": "none", "--style-button-font": "var(--mono)", "--style-button-weight": "650", "--style-button-tracking": ".08em", "--style-button-text-transform": "uppercase", "--style-button-backdrop": "none" } },
-        { variables: { "--style-button-radius": "8px", "--style-button-border-width": "2px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "var(--bg)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--fg)", "--style-button-shadow": "3px 3px 0 var(--accent)", "--style-button-font": "var(--sans)", "--style-button-weight": "760", "--style-button-tracking": ".01em", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
-        { variables: { "--style-button-radius": "10px", "--style-button-border-width": "1px", "--style-button-bg": "transparent", "--style-button-color": "var(--fg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "var(--accent-soft)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--line)", "--style-button-shadow": "none", "--style-button-font": "inherit", "--style-button-weight": "680", "--style-button-tracking": ".02em", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
-        { variables: { "--style-button-radius": "18px", "--style-button-border-width": "1px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "transparent", "--style-button-secondary-bg": "var(--accent-soft)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "color-mix(in srgb, var(--accent), var(--line) 72%)", "--style-button-shadow": "0 10px 26px color-mix(in srgb, var(--accent), transparent 82%)", "--style-button-font": "var(--sans)", "--style-button-weight": "720", "--style-button-tracking": ".01em", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
-        { variables: { "--style-button-radius": "999px", "--style-button-border-width": "0px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "transparent", "--style-button-secondary-bg": "color-mix(in srgb, var(--bg) 82%, var(--fg) 18%)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "transparent", "--style-button-shadow": "none", "--style-button-font": "inherit", "--style-button-weight": "700", "--style-button-tracking": "normal", "--style-button-text-transform": "none", "--style-button-backdrop": "none" } },
-        { variables: { "--style-button-radius": "18px", "--style-button-border-width": "1px", "--style-button-bg": "color-mix(in srgb, var(--fg), transparent 8%)", "--style-button-color": "var(--bg)", "--style-button-border-color": "color-mix(in srgb, var(--fg), transparent 18%)", "--style-button-secondary-bg": "color-mix(in srgb, var(--card-strong), transparent 20%)", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--line)", "--style-button-shadow": "0 10px 28px rgba(0,0,0,.10)", "--style-button-font": "inherit", "--style-button-weight": "680", "--style-button-tracking": ".01em", "--style-button-text-transform": "none", "--style-button-backdrop": "blur(14px) saturate(1.2)" } },
-        { variables: { "--style-button-radius": "0px", "--style-button-border-width": "3px", "--style-button-bg": "var(--fg)", "--style-button-color": "var(--bg)", "--style-button-border-color": "var(--fg)", "--style-button-secondary-bg": "transparent", "--style-button-secondary-color": "var(--fg)", "--style-button-secondary-border-color": "var(--fg)", "--style-button-shadow": "none", "--style-button-font": "var(--sans)", "--style-button-weight": "850", "--style-button-tracking": ".04em", "--style-button-text-transform": "uppercase", "--style-button-backdrop": "none" } }
-      ],
-      index: [
-        { variables: { "--style-index-box-border-width": "0px", "--style-index-box-padding": "0px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".08em" } },
-        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".1em" } },
-        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px 16px", "--style-meta-transform": "none", "--style-meta-spacing": ".02em" } },
-        { variables: { "--style-index-box-border-width": "2px", "--style-index-box-padding": "8px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".14em" } },
-        { variables: { "--style-index-box-border-width": "0px", "--style-index-box-padding": "0px", "--style-meta-transform": "lowercase", "--style-meta-spacing": ".04em" } },
-        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px 16px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".18em" } },
-        { variables: { "--style-index-box-border-width": "0px", "--style-index-box-padding": "0px", "--style-meta-transform": "none", "--style-meta-spacing": "0" } },
-        { variables: { "--style-index-box-border-width": "1px", "--style-index-box-padding": "8px 16px", "--style-meta-transform": "uppercase", "--style-meta-spacing": ".06em" } }
-      ]
-    };
+  const SYSTEM_CONFIG = Object.freeze({
+    idPrefix: "SL-",
+    idLength: 32,
+    idCharacters: "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+  });
 
-    const RANDOM_POOLS = {
-      visual: {
-        palettes: [...CSS_PALETTE_IDS, ...CUSTOM_PALETTES.map(palette => palette.id)],
-        backgrounds: DATA.backgroundStyles,
-        surfaces: DATA.surfaceStyles,
-        shapes: DATA.shapeStyles,
-        styleGenes: STYLE_GENES
-      },
-      layout: {
-        educationPlacements: ["hero", "section"],
-        sections: ["work", "experience", "principles", "skills"]
-      },
-      system: {
-        idPrefix: "SL-",
-        idLength: 32,
-        idCharacters: "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
-      },
-      copy: {
-        kickers: DATA.heroKickers,
-        headlines: DATA.heroHeadlines,
-        subheads: DATA.heroSubheads,
-        principles: DATA.principles,
-        educationBodies: DATA.educationBodies,
-        contactCopies: DATA.contactCopies,
-        revealCopies: DATA.revealCopies,
-        sectionLeads: DATA.sectionLeads,
-        footerQuips: SAFE_BILINGUAL_QUIPS,
-        descriptionModes: UI.descriptionModes,
-        rarityComments: UI.rarity.comments,
-        projects: DATA.projects.map(project => ({
-          record: project,
-          descriptions: [...project.intros, ...(PROJECT_DESCRIPTION_POOLS[project.id] || [])],
-          tags: project.tags
-        })),
-        experienceProject: {
-          record: DATA.experienceProject,
-          descriptions: [
-            ...DATA.experienceProject.intros,
-            ...(PROJECT_DESCRIPTION_POOLS[DATA.experienceProject.id] || [])
-          ],
-          tags: DATA.experienceProject.tags
-        },
-        skills: UI.skills
+  const COPY_POOL = Object.freeze({
+    kickers: DATA.heroKickers,
+    headlines: DATA.heroHeadlines,
+    subheads: DATA.heroSubheads,
+    principles: DATA.principles,
+    educationBodies: DATA.educationBodies,
+    contactCopies: DATA.contactCopies,
+    revealCopies: DATA.revealCopies,
+    sectionLeads: DATA.sectionLeads,
+    footerQuips: SAFE_BILINGUAL_QUIPS,
+    descriptionModes: UI.descriptionModes,
+    rarityComments: UI.rarity.comments,
+    projects: DATA.projects.map(project => ({
+      record: project,
+      descriptions: [...project.intros, ...(PROJECT_DESCRIPTION_POOLS[project.id] || [])],
+      tags: project.tags
+    })),
+    experienceProject: {
+      record: DATA.experienceProject,
+      descriptions: [
+        ...DATA.experienceProject.intros,
+        ...(PROJECT_DESCRIPTION_POOLS[DATA.experienceProject.id] || [])
+      ],
+      tags: DATA.experienceProject.tags
+    },
+    skills: UI.skills
+  });
+
+  function createStream(id, stream) {
+    return createPoolRandom(id, stream.name, stream.version);
+  }
+
+  function validateStylePool() {
+    const ids = new Set();
+
+    STYLE_POOL.forEach((style, index) => {
+      if (!style || typeof style.id !== "string" || !style.id.trim()) {
+        throw new Error(`Style pool entry ${index} requires a non-empty id.`);
       }
-    };
-
-    function assertPowerOfTwoVisualPools() {
-      ["backgrounds", "surfaces", "shapes"].forEach(poolName => {
-        const size = RANDOM_POOLS.visual[poolName].length;
-        if (size < 1 || (size & (size - 1)) !== 0) {
-          throw new Error(`Visual pool "${poolName}" must contain a power-of-two number of entries; received ${size}.`);
+      if (ids.has(style.id)) throw new Error(`Style pool contains duplicate id "${style.id}".`);
+      if (!Array.isArray(style.classNames) || style.classNames.length === 0) {
+        throw new Error(`Style "${style.id}" requires at least one body class.`);
+      }
+      for (const localeKey of ["en", "zh"]) {
+        if (typeof style.label?.[localeKey] !== "string" || !style.label[localeKey].trim()) {
+          throw new Error(`Style "${style.id}" requires a ${localeKey} label.`);
         }
-      });
-    }
-
-    assertPowerOfTwoVisualPools();
-
-    function styleGeneSpace() {
-      return RANDOM_POOLS.visual.surfaces.length * Object.values(RANDOM_POOLS.visual.styleGenes)
-        .reduce((total, options) => total * options.length, 1);
-    }
-
-    function chooseGene(rng, options) {
-      const trait = uniformTrait(rng, options);
-      return { index: trait.index, option: trait.value };
-    }
-
-    function createStyleGenome(rng) {
-      const modeTrait = uniformTrait(rng, RANDOM_POOLS.visual.surfaces);
-      const modeIndex = modeTrait.index;
-      const mode = modeTrait.value;
-      const variables = {};
-      const signature = [modeIndex];
-
-      Object.entries(RANDOM_POOLS.visual.styleGenes).forEach(([name, options]) => {
-        const { index, option } = chooseGene(rng, options);
-        signature.push(index);
-        Object.assign(variables, option.variables);
-      });
-
-      return {
-        id: "SG-" + signature.map(value => value.toString(36).toUpperCase()).join(""),
-        mode,
-        variables,
-        signature,
-        space: styleGeneSpace()
-      };
-    }
-
-
-    function cyrb128(str) {
-      let h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
-      for (let i = 0; i < str.length; i++) {
-        const k = str.charCodeAt(i);
-        h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
-        h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
-        h3 = h4 ^ Math.imul(h3 ^ k, 951274213);
-        h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+        if (typeof style.introduction?.[localeKey] !== "string" || !style.introduction[localeKey].trim()) {
+          throw new Error(`Style "${style.id}" requires a ${localeKey} introduction.`);
+        }
       }
-      h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
-      h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
-      h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
-      h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
-      return [(h1 ^ h2 ^ h3 ^ h4) >>> 0, (h2 ^ h1) >>> 0, (h3 ^ h1) >>> 0, (h4 ^ h1) >>> 0];
-    }
+      ids.add(style.id);
+    });
+  }
 
-    function sfc32(a, b, c, d) {
-      return function() {
-        a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0;
-        let t = (a + b) | 0;
-        a = b ^ (b >>> 9);
-        b = (c + (c << 3)) | 0;
-        c = (c << 21) | (c >>> 11);
-        d = (d + 1) | 0;
-        t = (t + d) | 0;
-        c = (c + t) | 0;
-        return (t >>> 0) / 4294967296;
-      }
-    }
-
-    function createRandom(id) {
-      const [a, b, c, d] = cyrb128(id);
-      return sfc32(a, b, c, d);
-    }
-
-    function createRandomHalos(id) {
-      const rng = createRandom(`${id}:halo`);
-      const colors = ["var(--accent)", "var(--accent-2)", "var(--fg)"];
-      const haloCount = 1 + Math.floor(rng() * 5);
-      const halos = Array.from({ length: haloCount }, () => {
-        const x = Math.round(-12 + rng() * 124);
-        const y = Math.round(-10 + rng() * 120);
-        const width = Math.round(22 + rng() * 34);
-        const height = Math.round(20 + rng() * 30);
-        const transparency = Math.round(91 + rng() * 6);
-        const shoulder = Math.round(28 + rng() * 24);
-        const color = colors[Math.floor(rng() * colors.length)];
-        const shape = rng() < 0.35
-          ? `circle ${Math.round((width + height) / 2)}rem`
-          : `ellipse ${width}rem ${height}rem`;
-
-        return `radial-gradient(${shape} at ${x}% ${y}%, color-mix(in srgb, ${color}, transparent ${transparency}%) 0% ${shoulder}%, transparent 100%)`;
-      });
-
-      return halos.join(", ");
-    }
-
-    function pick(rng, arr) {
-      return uniformTrait(rng, arr).value;
-    }
-
-    function uniformTrait(rng, options) {
-      if (!options.length) throw new Error("A random pool cannot be empty.");
-      const index = Math.floor(rng() * options.length);
-      return { value: options[index], index, probability: 1 / options.length };
-    }
+  validateStylePool();
 
     const RARITY_TIERS = [
       "common",
@@ -351,7 +160,7 @@
       const odds = 2 ** (depth + 1);
       const log10Odds = Math.log10(odds);
       const tier = getRarityTier(depth);
-      const comments = RANDOM_POOLS.copy.rarityComments[tier.id] || RANDOM_POOLS.copy.rarityComments.common;
+      const comments = COPY_POOL.rarityComments[tier.id] || COPY_POOL.rarityComments.common;
 
       return {
         depth,
@@ -362,21 +171,8 @@
       };
     }
 
-    function shuffle(rng, arr) {
-      const copy = [...arr];
-      for (let i = copy.length - 1; i > 0; i--) {
-        const j = Math.floor(rng() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-      }
-      return copy;
-    }
-
-    function pickN(rng, arr, n) {
-      return shuffle(rng, arr).slice(0, n);
-    }
-
     function createShortId() {
-      const { idPrefix, idLength, idCharacters } = RANDOM_POOLS.system;
+      const { idPrefix, idLength, idCharacters } = SYSTEM_CONFIG;
       const bytes = new Uint8Array(idLength);
       const unbiasedLimit = 256 - (256 % idCharacters.length);
       let id = idPrefix;
@@ -426,68 +222,69 @@
       return url.toString();
     }
 
-    function generateConfig(id) {
-      const rng = createRandom(id);
+    function generateCopyConfig(id) {
+      const rng = createStream(id, POOL_STREAMS.copy);
       const layout = "single";
-      const colorThemeTrait = uniformTrait(rng, RANDOM_POOLS.visual.palettes);
-      const backgroundStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.backgrounds);
-      const colorTheme = colorThemeTrait.value;
-      const backgroundStyle = backgroundStyleTrait.value;
-      // Glow is derived independently from the ID and enabled for half of generated backgrounds.
-      const randomHalos = rng() < 0.5 ? createRandomHalos(id) : "none";
-      const styleGenome = createStyleGenome(rng);
-      const surfaceStyle = styleGenome.mode;
-      const shapeStyleTrait = uniformTrait(rng, RANDOM_POOLS.visual.shapes);
-      const shapeStyle = shapeStyleTrait.value;
-      const educationPlacement = pick(rng, RANDOM_POOLS.layout.educationPlacements);
-      const sectionPool = [...RANDOM_POOLS.layout.sections];
+      const educationPlacement = pick(rng, LAYOUT_POOL.educationPlacements);
+      const sectionPool = [...LAYOUT_POOL.sections];
       if (educationPlacement === "section") sectionPool.push("education");
       const sections = shuffle(rng, sectionPool);
-      const projects = shuffle(rng, RANDOM_POOLS.copy.projects).map(source => {
+      const projects = shuffle(rng, COPY_POOL.projects).map(source => {
         return {
           ...source.record,
           description: pick(rng, source.descriptions),
-          descriptionMode: pick(rng, RANDOM_POOLS.copy.descriptionModes),
+          descriptionMode: pick(rng, COPY_POOL.descriptionModes),
           tag: pick(rng, source.tags)
         };
       });
 
-      const experienceSource = RANDOM_POOLS.copy.experienceProject;
+      const experienceSource = COPY_POOL.experienceProject;
       const experienceProject = {
         ...experienceSource.record,
         description: pick(rng, experienceSource.descriptions),
-        descriptionMode: pick(rng, RANDOM_POOLS.copy.descriptionModes),
+        descriptionMode: pick(rng, COPY_POOL.descriptionModes),
         tag: pick(rng, experienceSource.tags)
       };
 
       const config = {
         id,
         layout,
-        colorTheme,
-        backgroundStyle,
-        randomHalos,
-        surfaceStyle,
-        styleGenome,
-        shapeStyle,
         educationPlacement,
-        kicker: pick(rng, RANDOM_POOLS.copy.kickers),
-        headline: pick(rng, RANDOM_POOLS.copy.headlines),
-        subhead: pick(rng, RANDOM_POOLS.copy.subheads),
+        kicker: pick(rng, COPY_POOL.kickers),
+        headline: pick(rng, COPY_POOL.headlines),
+        subhead: pick(rng, COPY_POOL.subheads),
         sections,
         projects,
         experienceProject,
-        principles: pickN(rng, RANDOM_POOLS.copy.principles, 2 + Math.floor(rng() * 4)),
-        educationBody: pick(rng, RANDOM_POOLS.copy.educationBodies),
-        contactCopy: pick(rng, RANDOM_POOLS.copy.contactCopies),
-        revealCopy: pick(rng, RANDOM_POOLS.copy.revealCopies),
-        leads: Object.fromEntries(Object.entries(RANDOM_POOLS.copy.sectionLeads).map(([key, values]) => [key, pick(rng, values)])),
-        footerQuip: pick(rng, RANDOM_POOLS.copy.footerQuips),
-        skills: shuffle(rng, RANDOM_POOLS.copy.skills).map(([title, skills]) => [title, shuffle(rng, skills)])
+        principles: pickN(rng, COPY_POOL.principles, 2 + Math.floor(rng() * 4)),
+        educationBody: pick(rng, COPY_POOL.educationBodies),
+        contactCopy: pick(rng, COPY_POOL.contactCopies),
+        revealCopy: pick(rng, COPY_POOL.revealCopies),
+        leads: Object.fromEntries(Object.entries(COPY_POOL.sectionLeads).map(([key, values]) => [key, pick(rng, values)])),
+        footerQuip: pick(rng, COPY_POOL.footerQuips),
+        skills: shuffle(rng, COPY_POOL.skills).map(([title, skills]) => [title, shuffle(rng, skills)])
       };
 
       config.rarity = calculateRarity(rng);
 
       return config;
+    }
+
+    function selectStyle(id) {
+      const forcedStyleId = window.PORTFOLIO_FORCED_STYLE_ID;
+      if (forcedStyleId) {
+        const forcedStyle = STYLE_POOL.find(style => style.id === forcedStyleId);
+        if (!forcedStyle) throw new Error(`Forced style "${forcedStyleId}" is not registered.`);
+        return forcedStyle;
+      }
+      return pick(createStream(id, POOL_STREAMS.style), STYLE_POOL);
+    }
+
+    function generateConfig(id) {
+      return {
+        ...generateCopyConfig(id),
+        style: selectStyle(id)
+      };
     }
 
     function escapeHtml(str) {
@@ -587,7 +384,8 @@
 
     function getLanguageSwitch() {
       const isChinese = document.documentElement.lang.startsWith("zh");
-      const targetUrl = new URL(isChinese ? "./index.html" : "./zh.html", window.location.href);
+      const siteRootUrl = new URL(ENTRY_ROOT, window.location.href);
+      const targetUrl = new URL(isChinese ? "index.html" : "zh.html", siteRootUrl);
       targetUrl.search = window.location.search;
       targetUrl.hash = window.location.hash;
 
@@ -605,6 +403,7 @@
       const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
       const footerQuip = config.footerQuip?.[language] || shell.footer;
       const languageSwitch = getLanguageSwitch();
+      const licenseUrl = new URL("LICENSE", new URL(ENTRY_ROOT, window.location.href));
       document.body.innerHTML = `
         <div class="regenerating" id="regenerating" aria-hidden="true">
           <div class="regen-box">
@@ -630,7 +429,7 @@
         <span>${escapeHtml(footerQuip)}</span>
         <span>
           <a href="https://github.com/stark-lin/stark-lin.github.io" target="_blank" rel="noreferrer">${escapeHtml(shell.sourceLabel)}</a>
-          · <a href="./LICENSE">AGPL-3.0</a>
+          · <a href="${escapeHtml(licenseUrl.href)}">AGPL-3.0</a>
         </span>
       </footer>
         </div>
@@ -899,12 +698,20 @@
 
     function renderReveal(config) {
       const reveal = document.getElementById("reveal");
+      const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
+      const styleLabel = config.style.label[language];
+      const styleIntroduction = config.style.introduction[language];
       reveal.innerHTML = `
         <div class="kicker">${escapeHtml(config.revealCopy.kicker)}</div>
         <h2>${escapeHtml(config.revealCopy.headline)}</h2>
         <p style="margin-top:16px">${escapeHtml(config.revealCopy.body)}</p>
         <div class="reveal-grid">
           <div class="reveal-stat">
+            <div class="reveal-stat-section active-style-report">
+              <div class="reveal-stat-label">${escapeHtml(UI.labels.activeStyle)}</div>
+              <div class="reveal-stat-value active-style-value">${escapeHtml(styleLabel)}</div>
+              <div class="style-introduction">${escapeHtml(styleIntroduction)}</div>
+            </div>
             <div class="reveal-stat-section">
               <div class="reveal-stat-label">${escapeHtml(UI.labels.referenceCode)}</div>
               <div class="reveal-stat-value">${escapeHtml(config.id)}</div>
@@ -1073,19 +880,6 @@
       }, 980);
     }
 
-    function applyStyleGenome(styleGenome) {
-      Object.entries(styleGenome.variables).forEach(([property, value]) => {
-        let safeValue = value;
-        if (SAFE_SPACING_VARIABLES.has(property)) {
-          const pixels = Number.parseFloat(value);
-          if (Number.isFinite(pixels)) {
-            safeValue = `${Math.max(SAFE_SPACING_MIN_PX, Math.ceil(pixels / SAFE_SPACING_STEP_PX) * SAFE_SPACING_STEP_PX)}px`;
-          }
-        }
-        document.body.style.setProperty(property, safeValue);
-      });
-      document.documentElement.dataset.styleGenome = styleGenome.id;
-    }
 
     function clampTitleTracking(value, fontWeight, fontSizePx) {
       let min = -0.045;
@@ -1102,7 +896,7 @@
 
       document.querySelectorAll("h1, h2, h3").forEach(title => {
         // Remove the previous clamp so responsive changes are always measured
-        // against the tracking requested by the current generated style.
+        // against the stylesheet's requested tracking.
         title.style.removeProperty("letter-spacing");
         const computedStyle = window.getComputedStyle(title);
         const fontSizePx = Number.parseFloat(computedStyle.fontSize);
@@ -1129,47 +923,23 @@
       });
     }
 
-    function applyBodyClass(config) {
-      const palette = CUSTOM_PALETTES_BY_ID.get(config.colorTheme);
-      document.body.className = [
-        `theme-${config.colorTheme}`,
-        palette ? "palette-safe" : "",
-        `bg-${config.backgroundStyle}`,
-        `style-${config.surfaceStyle}`,
-        `shape-${config.shapeStyle}`,
-        "style-generated",
-        "layout-single"
-      ].filter(Boolean).join(" ");
+    function applySelectedStyle(style) {
+      document.body.className = style.classNames.join(" ");
+      document.body.dataset.styleId = style.id;
 
-      document.body.style.removeProperty("--random-halos");
-      if (config.randomHalos) {
-        document.body.style.setProperty("--random-halos", config.randomHalos);
-      }
-
-      if (palette) {
-        const variables = {
-          "--bg": palette.bg,
-          "--fg": palette.text,
-          "--muted": palette.muted,
-          "--line": palette.border,
-          "--card": palette.surface,
-          "--card-strong": palette.surface,
-          "--accent": palette.accent,
-          "--accent-2": palette.accent2,
-          "--accent-soft": `color-mix(in srgb, ${palette.accent}, transparent 89%)`,
-          "--accent-2-soft": `color-mix(in srgb, ${palette.accent2}, transparent 90%)`
-        };
-        Object.entries(variables).forEach(([name, value]) => document.body.style.setProperty(name, value));
-      }
-
-      applyStyleGenome(config.styleGenome);
+      Object.entries(style.variables || {}).forEach(([name, value]) => {
+        if (!name.startsWith("--")) {
+          throw new Error(`Style "${style.id}" contains invalid CSS variable "${name}".`);
+        }
+        document.documentElement.style.setProperty(name, String(value));
+      });
     }
 
     function init() {
       const id = getId();
       const config = generateConfig(id);
       renderShell(config);
-      applyBodyClass(config);
+      applySelectedStyle(config.style);
       renderNav(config);
       renderHero(config);
       renderMain(config);

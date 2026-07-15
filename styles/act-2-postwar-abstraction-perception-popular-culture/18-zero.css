@@ -1,0 +1,136 @@
+body.theme-zero {
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--fg), transparent 88%) 0 1px, transparent 1.3px) 0 0 / 12px 12px,
+    linear-gradient(90deg, transparent 49.8%, color-mix(in srgb, var(--line), transparent 80%) 50%, transparent 50.2%),
+    var(--bg);
+  overflow-x: clip;
+}
+
+.theme-zero .topbar {
+  border-bottom: 1px solid color-mix(in srgb, var(--line), transparent 35%);
+  background: color-mix(in srgb, var(--card), transparent 9%);
+}
+
+.theme-zero .brand {
+  letter-spacing: .12em;
+  font-weight: 520;
+  text-transform: uppercase;
+}
+
+.theme-zero .brand::before {
+  content: "○";
+  color: var(--muted);
+  font-weight: 300;
+}
+
+.theme-zero .hero {
+  min-height: min(820px, 89vh);
+  border-bottom: 1px solid color-mix(in srgb, var(--line), transparent 48%);
+  overflow: clip;
+}
+
+.theme-zero .hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 8%;
+  right: 4%;
+  width: min(360px, 40vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--line), transparent 25%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--fg), transparent 74%) 0 1.5px, transparent 1.8px) 0 0 / 10px 10px;
+  opacity: .66;
+}
+
+.theme-zero .hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 7%;
+  bottom: 9%;
+  width: 54%;
+  height: 1px;
+  background: var(--line);
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--line), transparent 32%), 0 12px 0 color-mix(in srgb, var(--line), transparent 62%);
+}
+
+.theme-zero h1 {
+  max-width: 760px;
+  font-weight: 480;
+  letter-spacing: -.045em;
+}
+
+.theme-zero .hero-sub {
+  max-width: 540px;
+}
+
+.theme-zero .button {
+  font-weight: 520;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.theme-zero .section {
+  border-top-color: color-mix(in srgb, var(--line), transparent 40%);
+}
+
+.theme-zero .section-head {
+  grid-template-columns: minmax(104px, .24fr) minmax(0, 1fr);
+}
+
+.theme-zero .section-index {
+  color: var(--muted);
+  font-weight: 450;
+}
+
+.theme-zero :is(.card, .timeline-item, .principle, .hero-card) {
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--fg), transparent 88%) 0 1px, transparent 1.3px) 0 0 / 12px 12px,
+    var(--card);
+}
+
+.theme-zero .tag,
+.theme-zero .skill-pill {
+  border-radius: 1px;
+  border-color: color-mix(in srgb, var(--line), transparent 28%);
+  background: color-mix(in srgb, var(--card), transparent 14%);
+  letter-spacing: .08em;
+}
+
+.theme-zero .contact-panel,
+.theme-zero .reveal {
+  border: 1px solid color-mix(in srgb, var(--line), transparent 30%);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 15px, color-mix(in srgb, var(--line), transparent 88%) 15px 16px),
+    var(--card-strong);
+}
+
+.theme-zero .reveal::before {
+  content: "";
+  inset: 0 0 0 auto;
+  width: 36%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--fg), transparent 78%) 0 1.2px, transparent 1.5px) 0 0 / 9px 9px;
+  opacity: .48;
+}
+
+.theme-zero .reveal-stat {
+  border-radius: 1px;
+  border-color: color-mix(in srgb, var(--line), transparent 32%);
+}
+
+@media (max-width: 720px) {
+  .theme-zero .hero { min-height: auto; }
+  .theme-zero .hero::before { right: -18%; width: 58vw; opacity: .34; }
+  .theme-zero .hero::after { width: 76%; }
+  .theme-zero .section-head { grid-template-columns: 1fr; }
+  .theme-zero .reveal::before { width: 24%; opacity: .25; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .theme-zero .hero::before { animation: zero-vibration 9s ease-in-out infinite alternate; }
+}
+
+@keyframes zero-vibration {
+  to { transform: translateY(5px); opacity: .54; }
+}

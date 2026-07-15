@@ -1,23 +1,43 @@
 <a id="top"></a>
 
-# Stark Lin Portfolio
+# Molybdenum
 
-[English](#english) · [中文](#中文) · [Live site](https://stark-lin.github.io/) · [License](LICENSE)
+> A reproducible portfolio in 42 visual languages.<br>
+> 一个以 42 种视觉语言呈现、可以被准确复现的个人作品集。
+
+[English](#english) · [中文](#中文) · [42 filters](docs/42-filters.md) · [42 种滤镜](docs/42-filters-zh.md) · [Live site](https://stark-lin.github.io/) · [License](LICENSE)
 
 <a id="english"></a>
 
 ## English
 
-A bilingual, build-free personal portfolio written in vanilla HTML, CSS, and JavaScript. Each visit receives a reference code that deterministically composes the copy, project order, palette, background, surface, shape, and typography traits. Generate a new version when you want one; share the original URL to reproduce the same view.
+Molybdenum is a bilingual, build-free personal portfolio written in vanilla HTML, CSS, and JavaScript. It treats a portfolio as a reproducible visual system rather than a single fixed page: each visit receives a reference code that deterministically composes the content view and selects exactly one style from a [42-filter catalog of art, design, and visual culture](docs/42-filters.md).
+
+The reference code acts as the identity of a generated view. Reusing the same `id` restores the same content configuration and visual filter, while **Roll Again** creates a new version. A filter can change typography, color, surfaces, decoration, and motion tone, but it never rewrites the copy, changes the information architecture, or replaces the interaction logic. The result is varied enough to feel like a new exhibition room and stable enough to share, inspect, and test.
+
+### At a glance
+
+| Item | Description |
+| --- | --- |
+| Project type | Generative bilingual personal portfolio |
+| Languages | English and Simplified Chinese |
+| Technology | Vanilla HTML, CSS, and JavaScript |
+| Visual systems | 42 equally weighted filters in five historical acts |
+| State model | Deterministic, shareable, URL-based reference codes |
+| Tooling | No runtime dependencies, package manager, or build step |
+| Hosting | GitHub Pages or any static file host |
 
 ### Highlights
 
-- **Reproducible generated views** — A seeded pseudo-random generator maps each reference code to a complete page configuration; the same `id` produces the same version.
+- **One reproducible filter per view** — A seeded selector maps each reference code to exactly one equal-probability entry in the implemented style pool; the same `id` produces the same filter.
 - **Native Chinese and English content** — English lives at `index.html`, Chinese at `zh.html`, and the language switch preserves query parameters and the current hash.
-- **Large visual system** — The current pools contain 30 CSS themes, 124 data-driven palettes, 128 backgrounds, 64 surfaces, and 32 shapes.
-- **Generated copy and layout** — Headlines, summaries, project descriptions, tags, section order, skill order, and visual traits are composed from the reference code.
+- **All 42 historical visual languages implemented** — Five catalog folders now cover the complete sequence from Futurism through Post-Internet Art.
+- **Generated copy and layout** — Headlines, summaries, project descriptions, tags, section order, and skill order continue to follow the existing reference-code rules.
+- **Independent copy and style draws** — The same reference code derives separate, versioned random streams for copy and style, so consuming or expanding one pool cannot advance the other.
+- **Filter separation** — Filters do not rewrite copy, reorder content, change the information structure, or alter interaction logic.
 - **Compact and complete reading modes** — The default view keeps the signal compact, while the full-record view exposes complete project and implementation notes.
-- **Shareable state** — Each view exposes its reference code, combination rarity, and a shareable URL.
+- **Room Control** — The active style introduction and **Roll Again** sit together at the end of the page as the exhibition label and entrance to the next room.
+- **Shareable state** — Each view exposes its reference code, active filter, and a shareable URL.
 - **Responsive and accessible** — Includes active navigation, visible keyboard focus, semantic sections, Chinese title segmentation, mobile layouts, and reduced-motion support.
 - **Static deployment** — No framework, package manager, or build artifact is required; the site can be hosted on GitHub Pages or any static file server.
 
@@ -61,7 +81,7 @@ http://localhost:8080/index.html?id=SL-DEMO&label=surface
 http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 ```
 
-As long as the content pools and generation algorithm remain unchanged, the same `id` resolves to the same combination. Both locales share the reference code and generation pipeline, so they correspond to the same structural and visual configuration while selecting their own localized copy.
+As long as each pool, its version, and its generation algorithm remain unchanged, the same `id` resolves to the same portfolio configuration and filter. Copy and style use independent named streams, so changing how many random values the copy generator consumes does not shift the selected style, and vice versa. Both locales share the reference code, so they correspond to the same structural and visual configuration while selecting localized copy.
 
 ### Project structure
 
@@ -71,25 +91,43 @@ As long as the content pools and generation algorithm remain unchanged, the same
 ├── zh.html                 # Chinese entry point
 ├── assets/
 │   ├── app.js              # Generation, rendering, interaction, and accessibility
-│   ├── styles.css          # Base styles and all visual variants
+│   ├── selection.js        # Deterministic, namespaced pool selection engine
+│   ├── styles.css          # Shared layout and component foundations
 │   └── data/
 │       ├── en.js           # English content and UI copy
 │       ├── zh.js           # Chinese content and UI copy
-│       └── palettes.js     # Theme IDs and data-driven palettes
+│       └── styles.js       # Registry of implemented selectable styles
+├── styles/
+│   ├── act-1-avant-garde-modern-order/
+│   │   └── 00–11 HTML/JS/CSS theme trios
+│   ├── act-2-postwar-abstraction-perception-popular-culture/
+│   │   └── 12–22 HTML/JS/CSS theme trios
+│   ├── act-3-material-concept-radical-design/
+│   │   └── 23–29 HTML/JS/CSS theme trios
+│   ├── act-4-postmodernism-plural-surfaces/
+│   │   └── 30–35 HTML/JS/CSS theme trios
+│   └── act-5-computers-web-future-visual-culture/
+│       └── 36–41 HTML/JS/CSS theme trios
+├── docs/
+│   ├── 42-filters.md       # English specification for the 42-filter exhibition
+│   └── 42-filters-zh.md    # Chinese specification for the 42-filter exhibition
+├── tests/
+│   ├── selection.test.js   # Determinism and pool-isolation tests
+│   └── styles.test.js      # Theme trio, registry, and entry-point tests
 ├── LICENSE                 # AGPL-3.0-only
 └── README.md
 ```
 
-Both HTML entry points load scripts in this order: palette data → active locale data → shared application logic. `app.js` reads `window.PORTFOLIO_LOCALE`, generates a configuration, and then builds the DOM, keeping the entry documents intentionally thin.
+Both HTML entry points load scripts in this order: selection engine → style registry → ordered theme files → active locale data → shared application logic. `app.js` reads `window.PORTFOLIO_LOCALE`, derives independent copy and style streams from the current reference code, and then builds the DOM, keeping the entry documents intentionally thin.
 
 ### How it works
 
 1. The page reads `id`; when absent, it creates a reference code with `crypto.getRandomValues()`.
-2. `cyrb128` hashes the code into four 32-bit seeds, and `sfc32` provides a deterministic random sequence.
-3. The generator selects from visual, layout, and copy pools and orders projects, sections, and skills.
-4. Style genes are merged into CSS custom properties, while theme classes provide background, surface, and shape variants.
-5. The shared renderer creates navigation, work, experience, education, principles, skills, contact, and full records from the active locale data.
-6. **Show another version** creates a new `id`; **Copy URL** creates an onboarding-free `surface` link.
+2. The selection engine combines that code with the pool name and version before `cyrb128` and `sfc32` create a deterministic random stream.
+3. The `copy/v1` stream selects copy, project slices, tags, section order, and skill order exclusively from the copy and layout pools.
+4. The `style/v1` stream selects exactly one entry from the style registry without consuming any copy randomness.
+5. The selected filter supplies one complete visual system for typography, boundaries, surfaces, patterns, decoration, and motion tone; it does not affect copy generation or renderer behavior.
+6. **Roll Again** creates a new `id` and redraws both independent streams; **Copy URL** creates an onboarding-free `surface` link.
 
 ### Customizing content
 
@@ -100,37 +138,18 @@ Edit both `assets/data/en.js` and `assets/data/zh.js`. The files share the same 
 - `data.identity` — Name, education, email, and GitHub
 - `data.projects` — Project titles, stacks, links, introductions, implementation notes, and tags
 - `data.experienceProject` — Project experience
-- `data.heroKickers`, `data.heroHeadlines`, `data.heroSubheads` — Hero copy pools
-- `data.principles`, `data.educationBodies`, `data.contactCopies` — Supporting copy pools
-- `descriptions` — Additional generated descriptions by project
-- `ui` — Navigation, controls, labels, skills, and rarity copy
+- `data.heroKickers`, `data.heroHeadlines`, `data.heroSubheads` — Hero copy
+- `data.principles`, `data.educationBodies`, `data.contactCopies` — Supporting copy
+- `descriptions` — Project descriptions
+- `ui` — Navigation, controls, labels, skills, and filter copy
 
-When adding a project, use the same project `id` and project order in both locales and add the matching `descriptions` entry. Keep fields, project IDs, and visual pools synchronized; copy-only pools may contain different numbers of candidates when a locale needs them.
+When adding a project, use the same project `id` and project order in both locales and add the matching `descriptions` entry. Keep fields and project IDs synchronized so every filter presents the same underlying portfolio.
 
-#### Edit palettes
+#### Edit the 42 filters
 
-The simplest approach is to add an object to `window.PORTFOLIO_PALETTES` in `assets/data/palettes.js`:
+The complete filter list and the design boundary for each item live in [docs/42-filters.md](docs/42-filters.md). Each filter is an atomic visual system rather than a collection of independently randomized traits.
 
-```js
-{
-  id: "my-palette",
-  bg: "#F5F5F5",
-  surface: "#FFFFFF",
-  text: "#202020",
-  muted: "#6B6B6B",
-  accent: "#315EFB",
-  accent2: "#D95F59",
-  border: "#DADADA"
-}
-```
-
-These colors are mapped to CSS variables by the application. To add a traditional CSS theme, also register its ID in `window.PORTFOLIO_CSS_PALETTE_IDS` and define the matching `body.theme-<id>` in `assets/styles.css`.
-
-#### Edit visual variants
-
-Background, surface, and shape names live in `backgroundStyles`, `surfaceStyles`, and `shapeStyles` in both locale files, with their implementations in `assets/styles.css`. Each pool must remain non-empty and have a power-of-two length; the application validates this at startup. Their current lengths are 128, 64, and 32.
-
-Composable typography, density, border, shadow, button, and related traits are defined in `STYLE_GENES` in `assets/app.js`. Changing a generation pool changes the mapping of existing IDs, so treat those pools as a versioned public interface if long-lived shared views must remain visually stable.
+Keep all 42 filters in a single ordered registry and give them equal selection weight. Every filter must have its own matching HTML, JavaScript, and CSS files, using one shared filename stem prefixed by a continuous, zero-padded two-digit index from `00` through `41`. The file order follows the catalog order (`01`–`42`), so Futurism starts with `00-futurism.html`, `00-futurism.js`, and `00-futurism.css`. Theme-specific code must remain in that theme's file trio; shared foundations do not replace any of these required files. A filter may adapt responsively or honor reduced-motion preferences, but it must not change copy, content order, structure, or behavior. Changing the registry order changes how existing reference codes map to filters and file indexes, so treat that order as a versioned public interface.
 
 ### Validation and testing
 
@@ -138,9 +157,11 @@ The project currently has no separate test framework. Before committing, run at 
 
 ```bash
 node --check assets/app.js
+node --check assets/selection.js
 node --check assets/data/en.js
 node --check assets/data/zh.js
-node --check assets/data/palettes.js
+node --check assets/data/styles.js
+node --test tests/*.test.js
 python3 -m http.server 8080
 ```
 
@@ -148,7 +169,11 @@ Then verify at desktop and mobile widths:
 
 - Both locale entry points load without console errors.
 - Language switching preserves `id`, `label`, `complete`, and hash state.
-- The same `id` reproduces a view, and rerolling creates a new one.
+- The same `id` reproduces the same portfolio configuration and filter in both languages, and rerolling selects from the same implemented registry.
+- Consuming additional values or adding internal draw steps in the copy stream does not advance the style stream, and vice versa.
+- Exactly one filter is active, and its style introduction appears with **Roll Again** in the final Room Control.
+- Applying a filter does not rewrite copy, reorder content, change the information structure, or alter interaction behavior.
+- Every implemented filter has a complete HTML/JavaScript/CSS file trio, the three basenames match, and every prefix matches its catalog position without duplicates.
 - Copied links, first-view onboarding, and full records work.
 - Project links, email, navigation, and keyboard focus work.
 - Unnecessary motion is removed under reduced-motion preferences.
@@ -174,7 +199,7 @@ The site uses CSS custom properties, `color-mix()`, `crypto.getRandomValues()`, 
 
 ### Contributing
 
-Fixes and improvements are welcome through issues or pull requests. Keep both locales synchronized, preserve the build-free deployment path, and maintain power-of-two lengths when extending visual pools.
+Fixes and improvements are welcome through issues or pull requests. Keep both locales synchronized, preserve the build-free deployment path, and keep the 42-filter registry ordered, complete, and equally weighted.
 
 ### License
 
@@ -186,18 +211,35 @@ Copyright © 2026 Stark Lin. This project is licensed under the [GNU Affero Gene
 
 <a id="中文"></a>
 
-## 中文翻译
+## 中文
 
-这是一个零构建依赖、由原生 HTML、CSS 和 JavaScript 实现的双语个人作品集。每次访问都会获得一个参考代码，并据此确定性地组合页面文案、项目顺序、配色、背景、卡片表面、形状与排版特征。你可以随时生成新版本，也可以分享原链接以复现同一页面。
+Molybdenum 是一个零构建依赖、由原生 HTML、CSS 和 JavaScript 实现的双语个人作品集。它不把作品集视为一个固定页面，而是把它设计成一套可复现的视觉系统：每次访问都会获得一个参考代码，并据此确定性地组合内容视图，同时从[《42 种艺术、设计与视觉文化滤镜》](docs/42-filters-zh.md)中选择且只选择一种样式。
+
+参考代码相当于生成页面的身份标识。再次使用相同的 `id`，就能恢复相同的内容配置与视觉滤镜；点击 **Roll Again** 则会创建一个新版本。滤镜可以改变字体、颜色、表面、装饰与动效语气，但不会重写文案、改变信息架构或替换交互逻辑。因此，每次生成都像进入一个新的展厅，同时仍然可以被分享、检查和测试。
+
+### 项目概览
+
+| 项目 | 说明 |
+| --- | --- |
+| 项目类型 | 生成式双语个人作品集 |
+| 支持语言 | 英文、简体中文 |
+| 技术栈 | 原生 HTML、CSS、JavaScript |
+| 视觉系统 | 分为五个历史章节的 42 种等权重滤镜 |
+| 状态模型 | 基于 URL 参考代码、可确定性复现与分享 |
+| 工具依赖 | 无运行时依赖、无包管理器、无构建步骤 |
+| 部署方式 | GitHub Pages 或任意静态文件托管服务 |
 
 ### 功能亮点
 
-- **可复现的生成式页面** — 参考代码通过带种子的伪随机数生成器映射到完整页面配置；相同的 `id` 会生成相同版本。
+- **每次一种、可复现的滤镜** — 参考代码通过带种子的选择器映射到已实现样式池中的一个等概率条目；相同的 `id` 始终得到同一种滤镜。
 - **原生中英文内容** — 英文入口为 `index.html`，中文入口为 `zh.html`；切换语言时会保留查询参数和当前页内锚点。
-- **丰富的视觉系统** — 当前包含 30 个 CSS 主题、124 个数据驱动配色，以及 128 种背景、64 种表面和 32 种形状。
-- **动态文案与布局** — 标题、简介、项目描述、标签、章节顺序、技能顺序和视觉特征都会根据参考代码组合。
+- **42 种历史视觉语言已全部实现** — 五个样式文件夹现已完整覆盖从未来主义到后互联网艺术的连续序列。
+- **动态文案与布局** — 标题、简介、项目描述、标签、章节顺序和技能顺序继续遵循现有的参考代码规则。
+- **文案与样式独立抽选** — 同一个参考代码会派生出分别带版本的文案流和样式流；扩充或消耗其中一个池不会推进另一个池。
+- **滤镜与内容分离** — 滤镜不会重写文案、调整内容顺序、改变信息结构或修改交互逻辑。
 - **精简与完整两种阅读方式** — 默认页面突出关键信息，也可展开完整项目记录与实现说明。
-- **可分享的页面状态** — 每个页面都会显示参考代码、组合稀有度和可分享链接。
+- **Room Control** — 当前风格介绍与 **Roll Again** 共同位于页面最后，作为本展厅的展签和下一展厅入口。
+- **可分享的页面状态** — 每个页面都会显示参考代码、当前滤镜和可分享链接。
 - **响应式与无障碍设计** — 包含活动导航、清晰的键盘焦点、语义化区块、中文标题分词、移动端布局和减少动态效果支持。
 - **纯静态部署** — 无需框架、包管理器或构建产物，可直接托管到 GitHub Pages 或任意静态文件服务器。
 
@@ -241,7 +283,7 @@ http://localhost:8080/index.html?id=SL-DEMO&label=surface
 http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 ```
 
-只要内容池和生成算法没有改变，相同 `id` 就会得到相同组合。中英文页面共用参考代码和生成流程，因此会对应到相同的结构与视觉配置，同时分别选择本地化文案。
+只要各个抽选池、对应版本和生成算法没有改变，相同 `id` 就会得到相同的作品集配置与滤镜。文案和样式使用独立的命名随机流，因此文案生成器增加或减少随机数消耗不会改变选中的样式，反之亦然。中英文页面共用参考代码，因此会对应到相同的结构与视觉配置，同时分别选择本地化文案。
 
 ### 项目结构
 
@@ -251,25 +293,43 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 ├── zh.html                 # 中文入口
 ├── assets/
 │   ├── app.js              # 生成、渲染、交互与无障碍逻辑
-│   ├── styles.css          # 基础样式和全部视觉变体
+│   ├── selection.js        # 确定性、带命名空间的抽选引擎
+│   ├── styles.css          # 共享布局与组件基础样式
 │   └── data/
 │       ├── en.js           # 英文内容和界面文案
 │       ├── zh.js           # 中文内容和界面文案
-│       └── palettes.js     # 主题 ID 和数据驱动配色
+│       └── styles.js       # 已实现且可抽选的样式注册表
+├── styles/
+│   ├── act-1-avant-garde-modern-order/
+│   │   └── 00–11 同名 HTML/JS/CSS 主题文件组
+│   ├── act-2-postwar-abstraction-perception-popular-culture/
+│   │   └── 12–22 同名 HTML/JS/CSS 主题文件组
+│   ├── act-3-material-concept-radical-design/
+│   │   └── 23–29 同名 HTML/JS/CSS 主题文件组
+│   ├── act-4-postmodernism-plural-surfaces/
+│   │   └── 30–35 同名 HTML/JS/CSS 主题文件组
+│   └── act-5-computers-web-future-visual-culture/
+│       └── 36–41 同名 HTML/JS/CSS 主题文件组
+├── docs/
+│   ├── 42-filters.md       # 42 种滤镜连续展览英文规格
+│   └── 42-filters-zh.md    # 42 种滤镜连续展览中文规格
+├── tests/
+│   ├── selection.test.js   # 确定性与抽选池隔离测试
+│   └── styles.test.js      # 主题文件组、注册表与入口引用测试
 ├── LICENSE                 # AGPL-3.0-only
 └── README.md
 ```
 
-两个 HTML 入口按以下顺序加载脚本：配色数据 → 当前语言数据 → 共享应用逻辑。`app.js` 读取 `window.PORTFOLIO_LOCALE`，生成配置后再构建页面 DOM，因此入口 HTML 本身保持精简。
+两个 HTML 入口按以下顺序加载脚本：抽选引擎 → 样式注册表 → 有序主题文件 → 当前语言数据 → 共享应用逻辑。`app.js` 读取 `window.PORTFOLIO_LOCALE`，根据当前参考代码派生彼此独立的文案流和样式流后再构建页面 DOM，因此入口 HTML 本身保持精简。
 
 ### 工作原理
 
 1. 页面读取 `id`；如果不存在，则使用 `crypto.getRandomValues()` 创建参考代码。
-2. `cyrb128` 将代码哈希为四个 32 位种子，`sfc32` 再生成确定性的随机序列。
-3. 生成器从视觉、布局和文案池中选择内容，并对项目、章节和技能进行排序。
-4. 样式基因被合并为 CSS 自定义属性，主题类负责背景、表面和形状变体。
-5. 共享渲染器根据当前语言数据创建导航、作品、经历、教育、原则、技能、联系方式和完整项目记录。
-6. **再生成一个版本**会创建新 `id`；**复制 URL** 会生成不含首次引导的 `surface` 链接。
+2. 抽选引擎先把参考代码与池名称、版本组合，再由 `cyrb128` 和 `sfc32` 生成确定性的随机流。
+3. `copy/v1` 随机流只从文案池和布局池中选择文案、项目切片、标签、章节顺序与技能顺序。
+4. `style/v1` 随机流独立地从样式注册表中选择且只选择一项，不消耗任何文案随机数。
+5. 被选中的滤镜作为一个整体决定字体、边界、表面、图案、装饰和动效语气，但不会影响文案生成或渲染行为。
+6. **Roll Again** 会创建新 `id` 并分别重抽两个独立随机流；**复制 URL** 会生成不含首次引导的 `surface` 链接。
 
 ### 自定义内容
 
@@ -280,37 +340,18 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 - `data.identity` — 姓名、教育、邮箱和 GitHub
 - `data.projects` — 项目标题、技术栈、链接、简介、实现要点和标签
 - `data.experienceProject` — 项目经历
-- `data.heroKickers`、`data.heroHeadlines`、`data.heroSubheads` — 首屏文案池
-- `data.principles`、`data.educationBodies`、`data.contactCopies` — 其他内容池
-- `descriptions` — 各项目可随机选择的补充描述
-- `ui` — 导航、控件、标签、技能和稀有度文案
+- `data.heroKickers`、`data.heroHeadlines`、`data.heroSubheads` — 首屏文案
+- `data.principles`、`data.educationBodies`、`data.contactCopies` — 其他文案
+- `descriptions` — 项目描述
+- `ui` — 导航、控件、标签、技能和滤镜文案
 
-新增项目时，应在两种语言的 `data.projects` 中使用相同的项目 `id` 和项目顺序，并为该 `id` 补充对应的 `descriptions`。请保持两份语言文件的字段、项目 ID 和视觉池同步；纯文案池可以根据语言需要使用不同数量的候选内容。
+新增项目时，应在两种语言的 `data.projects` 中使用相同的项目 `id` 和项目顺序，并为该 `id` 补充对应的 `descriptions`。请保持两份语言文件的字段和项目 ID 同步，让每种滤镜都呈现同一份作品集内容。
 
-#### 修改配色
+#### 修改 42 种滤镜
 
-最直接的方式是在 `assets/data/palettes.js` 的 `window.PORTFOLIO_PALETTES` 中添加对象：
+完整滤镜清单及每一项的设计边界位于 [docs/42-filters-zh.md](docs/42-filters-zh.md)。每种滤镜都是一个不可拆分的视觉系统，而不是若干可独立随机的视觉特征。
 
-```js
-{
-  id: "my-palette",
-  bg: "#F5F5F5",
-  surface: "#FFFFFF",
-  text: "#202020",
-  muted: "#6B6B6B",
-  accent: "#315EFB",
-  accent2: "#D95F59",
-  border: "#DADADA"
-}
-```
-
-这些颜色会由应用映射到 CSS 变量。若要添加传统 CSS 主题，还需要将 ID 加入 `window.PORTFOLIO_CSS_PALETTE_IDS`，并在 `assets/styles.css` 中定义对应的 `body.theme-<id>`。
-
-#### 修改视觉变体
-
-背景、表面和形状名称位于两份语言数据文件的 `backgroundStyles`、`surfaceStyles` 和 `shapeStyles` 中，对应实现位于 `assets/styles.css`。每个池都必须保持非空且长度为 2 的幂；应用启动时会验证该约束。当前长度分别为 128、64 和 32。
-
-排版、密度、边框、阴影、按钮等可组合特征定义在 `assets/app.js` 的 `STYLE_GENES` 中。修改生成池会改变既有 `id` 的映射结果，因此如果需要长期保留分享链接的视觉结果，应把这些生成池视为需要版本管理的公开接口。
+请把 42 种滤镜保存在一个有序注册表中，并赋予相同选择权重。每个滤镜都必须分别拥有一组相互对应的 HTML、JavaScript 和 CSS 独立文件；同组文件使用完全相同的文件名主体，并以从 `00` 到 `41` 连续递增、补零后的两位数编号开头。文件顺序与下方 `01`–`42` 的目录顺序一致，因此未来主义从 `00-futurism.html`、`00-futurism.js` 和 `00-futurism.css` 开始。主题专属代码必须保留在该主题的三个文件中，共用基础代码不能替代这些必需文件。滤镜可以响应不同视口或遵循“减少动态效果”偏好，但不能改变文案、内容顺序、结构或行为。修改注册表顺序会改变既有参考代码对应的滤镜和文件编号，因此应把该顺序视为需要版本管理的公开接口。
 
 ### 验证与测试
 
@@ -318,9 +359,11 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 
 ```bash
 node --check assets/app.js
+node --check assets/selection.js
 node --check assets/data/en.js
 node --check assets/data/zh.js
-node --check assets/data/palettes.js
+node --check assets/data/styles.js
+node --test tests/*.test.js
 python3 -m http.server 8080
 ```
 
@@ -328,7 +371,11 @@ python3 -m http.server 8080
 
 - 英文和中文入口均可加载，控制台没有错误。
 - 语言切换会保留 `id`、`label`、`complete` 和页内锚点状态。
-- 相同 `id` 可以复现同一页面，重新生成会创建新 `id`。
+- 相同 `id` 在两种语言中会复现相同的作品集配置和滤镜，重新生成时仍从同一份已实现注册表中选择。
+- 文案流新增抽选步骤或额外消耗随机数不会推进样式流，反之亦然。
+- 页面一次只启用一种滤镜，其风格介绍与 **Roll Again** 位于最后的 Room Control 中。
+- 应用滤镜不会重写文案、调整内容顺序、改变信息结构或修改交互行为。
+- 每个已实现滤镜都具备完整的 HTML／JavaScript／CSS 文件组，同组文件名主体一致，且每个编号前缀都与目录中的主题位置一致、没有重复。
 - 复制链接、首次访问引导和完整项目记录均可使用。
 - 外部项目链接、邮箱链接、导航和键盘焦点均可使用。
 - 开启“减少动态效果”后不会出现不必要的动画。
@@ -354,7 +401,7 @@ python3 -m http.server 8080
 
 ### 贡献
 
-欢迎通过 Issue 或 Pull Request 提交修复和改进。请保持中英文内容同步、保留无构建部署方式，并在扩展视觉池时维持长度为 2 的幂。
+欢迎通过 Issue 或 Pull Request 提交修复和改进。请保持中英文内容同步、保留无构建部署方式，并让 42 项滤镜注册表保持顺序稳定、内容完整且权重相等。
 
 ### 许可证
 

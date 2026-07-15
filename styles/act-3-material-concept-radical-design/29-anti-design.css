@@ -1,0 +1,158 @@
+body.theme-anti-design {
+  background: var(--bg);
+}
+
+.theme-anti-design .topbar {
+  border-bottom: 4px solid var(--line);
+  background: var(--card-strong);
+  backdrop-filter: none;
+}
+
+.theme-anti-design .brand {
+  font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.theme-anti-design nav,
+.theme-anti-design .kicker,
+.theme-anti-design .section-index,
+.theme-anti-design .generated-desc-meta,
+.theme-anti-design .time-label {
+  font-family: var(--mono);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.theme-anti-design .hero {
+  padding-right: clamp(24px, 6vw, 72px);
+  padding-left: clamp(24px, 6vw, 72px);
+  border-right: 4px solid var(--line);
+  border-bottom: 4px dashed var(--accent);
+  border-left: 4px solid var(--line);
+  background: var(--card);
+}
+
+.theme-anti-design h1,
+.theme-anti-design h2,
+.theme-anti-design h3 {
+  font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
+  font-weight: 800;
+  letter-spacing: -.045em;
+}
+
+.theme-anti-design h1 {
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-color: var(--card-strong);
+  text-decoration-thickness: .12em;
+  text-underline-offset: .08em;
+}
+
+.theme-anti-design .hero-sub {
+  color: var(--fg);
+  font-family: var(--mono);
+}
+
+.theme-anti-design .section {
+  border-top: 4px solid var(--line);
+}
+
+.theme-anti-design .section-head {
+  grid-template-columns: minmax(120px, .28fr) minmax(0, 1fr);
+}
+
+.theme-anti-design .section-index {
+  padding: 10px 14px;
+  border: 3px dashed var(--accent);
+  border-radius: 999px;
+  color: var(--fg);
+  background: var(--card);
+}
+
+.theme-anti-design :is(.cards .card:nth-child(odd), .timeline-item:nth-child(odd), .principle:nth-child(odd), .hero-card) {
+  outline: 4px solid var(--line);
+  border-radius: 0;
+  background: var(--fg);
+  color: var(--bg);
+  box-shadow: 7px 7px 0 var(--accent);
+}
+
+.theme-anti-design :is(.cards .card:nth-child(odd), .timeline-item:nth-child(odd), .principle:nth-child(odd), .hero-card)
+  :is(h3, p, li, .generated-description, .generated-desc-meta, .stack, .time-label, .stat-label, .stat-value, summary) {
+  color: inherit;
+}
+
+.theme-anti-design :is(.cards .card:nth-child(odd), .timeline-item:nth-child(odd), .hero-card) :is(.tag, .skill-pill) {
+  border-color: var(--bg);
+  color: var(--bg);
+  background: transparent;
+}
+
+.theme-anti-design :is(.cards .card:nth-child(even), .timeline-item:nth-child(even), .principle:nth-child(even)) {
+  outline: 4px dashed var(--accent);
+  border-radius: 28px;
+  background: var(--card);
+  box-shadow: none;
+}
+
+.theme-anti-design .card-title-row {
+  border-bottom: 3px dotted currentColor;
+  padding-bottom: 16px;
+}
+
+.theme-anti-design .tag,
+.theme-anti-design .skill-pill {
+  border-width: 3px;
+  border-style: dashed;
+  border-radius: 999px;
+  background: var(--card-strong);
+}
+
+.theme-anti-design .contact-panel {
+  border: 4px dashed var(--accent);
+  border-radius: 34px;
+  outline: 0;
+  background: var(--card);
+}
+
+.theme-anti-design .reveal {
+  border-radius: 0;
+  outline: 4px solid var(--line);
+  background: var(--card-strong);
+  box-shadow: 10px 10px 0 var(--line);
+}
+
+.theme-anti-design .reveal::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 3px dashed color-mix(in srgb, var(--line), transparent 28%);
+  pointer-events: none;
+}
+
+.theme-anti-design .reveal-stat,
+.theme-anti-design .complete-project .intro-list p {
+  border-width: 3px;
+  border-radius: 0;
+  background: var(--card);
+}
+
+.theme-anti-design .button.secondary {
+  border-style: dashed;
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--fg);
+}
+
+@media (max-width: 720px) {
+  .theme-anti-design .hero { padding-right: 24px; padding-left: 24px; }
+  .theme-anti-design .section-head { grid-template-columns: 1fr; }
+  .theme-anti-design .section-index { width: max-content; max-width: 100%; }
+  .theme-anti-design :is(.cards .card:nth-child(odd), .timeline-item:nth-child(odd), .principle:nth-child(odd), .hero-card) { box-shadow: 5px 5px 0 var(--accent); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-anti-design .button { transition: none; }
+}

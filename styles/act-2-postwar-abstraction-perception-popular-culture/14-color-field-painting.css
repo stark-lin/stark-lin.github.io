@@ -1,0 +1,120 @@
+body.theme-color-field-painting {
+  background:
+    linear-gradient(
+      172deg,
+      #85464c 0 13%,
+      #a96a56 22%,
+      #c49a72 35%,
+      #5d7276 48%,
+      #344f59 59%,
+      #85666f 72%,
+      #b07960 86%,
+      #70404a 100%
+    );
+  background-size: 100% 100%;
+}
+
+.theme-color-field-painting .topbar {
+  border-bottom: 0;
+  background: color-mix(in srgb, #f2e9df, transparent 16%);
+}
+
+.theme-color-field-painting .brand::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.theme-color-field-painting .hero {
+  min-height: min(820px, 88vh);
+}
+
+.theme-color-field-painting .hero-grid {
+  padding: clamp(32px, 6vw, 72px);
+  border-radius: 36px;
+  background: color-mix(in srgb, var(--card), transparent 7%);
+}
+
+.theme-color-field-painting h1 {
+  max-width: 760px;
+  font-weight: 650;
+  line-height: 1;
+}
+
+.theme-color-field-painting .hero-sub {
+  max-width: 560px;
+}
+
+.theme-color-field-painting .section {
+  border-top: 0;
+}
+
+.theme-color-field-painting .section-head {
+  width: min(760px, 92%);
+  padding: clamp(24px, 5vw, 48px);
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--card), transparent 8%);
+}
+
+.theme-color-field-painting .section:nth-child(even) .section-head {
+  margin-left: auto;
+}
+
+.theme-color-field-painting .section-index {
+  color: var(--accent);
+}
+
+.theme-color-field-painting .cards,
+.theme-color-field-painting .principles,
+.theme-color-field-painting .timeline {
+  width: min(880px, 94%);
+  margin-inline: auto;
+}
+
+.theme-color-field-painting :is(.card, .timeline-item, .principle, .hero-card) {
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--card), transparent 4%);
+  box-shadow: 0 24px 70px rgba(37, 25, 31, .12);
+}
+
+.theme-color-field-painting .tag,
+.theme-color-field-painting .skill-pill {
+  border: 0;
+  background: color-mix(in srgb, var(--card-strong), transparent 12%);
+}
+
+.theme-color-field-painting .contact-panel,
+.theme-color-field-painting .reveal {
+  width: min(900px, 94%);
+  margin-inline: auto;
+  border-radius: 30px;
+  background: color-mix(in srgb, var(--card-strong), transparent 5%);
+  box-shadow: 0 30px 90px rgba(37, 25, 31, .16);
+}
+
+.theme-color-field-painting .reveal-stat {
+  border: 0;
+  background: color-mix(in srgb, var(--card), transparent 12%);
+}
+
+.theme-color-field-painting .complete-version {
+  border-top: 0;
+}
+
+@media (max-width: 720px) {
+  body.theme-color-field-painting {
+    background: linear-gradient(168deg, #85464c 0 17%, #b47c60 34%, #516b70 52%, #8c6b73 72%, #70404a 100%);
+  }
+
+  .theme-color-field-painting .hero { min-height: auto; }
+  .theme-color-field-painting .hero-grid { padding: 24px; border-radius: 24px; }
+  .theme-color-field-painting .section-head { width: 100%; padding: 24px; }
+  .theme-color-field-painting .cards,
+  .theme-color-field-painting .principles,
+  .theme-color-field-painting .timeline,
+  .theme-color-field-painting .contact-panel,
+  .theme-color-field-painting .reveal { width: 100%; }
+}
+

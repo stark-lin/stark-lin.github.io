@@ -1,0 +1,181 @@
+body.theme-postmodernism {
+  background:
+    linear-gradient(90deg, transparent 0 11%, color-mix(in srgb, var(--accent), transparent 91%) 11% 11.4%, transparent 11.4% 100%),
+    var(--bg);
+}
+
+.theme-postmodernism .topbar {
+  border-bottom: 4px double var(--line);
+  background: color-mix(in srgb, var(--bg), transparent 4%);
+}
+
+.theme-postmodernism .topbar-inner {
+  border-inline: 1px solid var(--line);
+}
+
+.theme-postmodernism .brand {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.theme-postmodernism .brand::before {
+  content: "§";
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--accent);
+  font: 700 17px/1 Georgia, "Times New Roman", serif;
+}
+
+.theme-postmodernism nav {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.theme-postmodernism .hero {
+  min-height: min(820px, 90vh);
+  margin-top: 34px;
+  padding-inline: clamp(28px, 6vw, 78px);
+  border: 1px solid var(--line);
+  outline: 1px solid var(--line);
+  outline-offset: -12px;
+  background: var(--card);
+  box-shadow:
+    14px 14px 0 color-mix(in srgb, var(--accent), transparent 70%),
+    -8px -8px 0 color-mix(in srgb, var(--line), transparent 88%);
+}
+
+.theme-postmodernism .hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 8%;
+  right: 2%;
+  width: clamp(110px, 18vw, 210px);
+  height: 46%;
+  border: 2px solid var(--accent);
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0 / 28% 28% 0 0;
+  box-shadow:
+    inset 0 0 0 10px var(--card),
+    inset 0 0 0 11px var(--line);
+  opacity: .4;
+}
+
+.theme-postmodernism .hero-grid { width: 88%; }
+
+.theme-postmodernism h1,
+.theme-postmodernism h2,
+.theme-postmodernism h3 {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.theme-postmodernism h1 {
+  max-width: 810px;
+  font-weight: 600;
+  line-height: .93;
+}
+
+.theme-postmodernism .kicker {
+  display: inline-block;
+  padding: 7px 11px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: var(--card);
+}
+
+.theme-postmodernism .hero-sub {
+  max-width: 620px;
+  font-family: var(--sans);
+}
+
+.theme-postmodernism .section {
+  border-top: 4px double var(--line);
+}
+
+.theme-postmodernism .section-head {
+  grid-template-columns: minmax(112px, .24fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 64px);
+}
+
+.theme-postmodernism .section-index {
+  width: max-content;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--accent), transparent 46%);
+  color: var(--fg);
+  background: var(--card);
+}
+
+.theme-postmodernism h2 {
+  font-weight: 600;
+  line-height: .96;
+}
+
+.theme-postmodernism :is(.card, .hero-card, .principle, .timeline-item) {
+  padding: calc(var(--style-card-padding) + 8px);
+  border: 1px solid var(--line);
+  outline: 1px solid var(--line);
+  outline-offset: -8px;
+  background: var(--card);
+}
+
+.theme-postmodernism .card-title-row {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+
+.theme-postmodernism .card-title-row h3 {
+  font-weight: 600;
+}
+
+.theme-postmodernism .tag,
+.theme-postmodernism .skill-pill {
+  border-radius: 1px;
+  box-shadow: 3px 3px 0 color-mix(in srgb, var(--accent), transparent 65%);
+}
+
+.theme-postmodernism .skill-pill:nth-child(even) {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+}
+
+.theme-postmodernism .contact-panel,
+.theme-postmodernism .reveal {
+  border: 1px solid var(--line);
+  outline: 4px double var(--line);
+  outline-offset: -14px;
+  padding: clamp(38px, 6vw, 68px);
+  background: var(--card-strong);
+}
+
+.theme-postmodernism .contact-panel {
+  grid-template-columns: minmax(0, 1.3fr) auto;
+  align-items: end;
+}
+
+.theme-postmodernism .reveal::before {
+  content: "IV";
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  color: color-mix(in srgb, var(--accent), transparent 66%);
+  font: 600 clamp(72px, 14vw, 160px)/1 Georgia, "Times New Roman", serif;
+}
+
+@media (max-width: 720px) {
+  .theme-postmodernism .hero { min-height: auto; margin-top: 20px; box-shadow: 7px 7px 0 color-mix(in srgb, var(--accent), transparent 70%); }
+  .theme-postmodernism .hero-grid { width: 100%; }
+  .theme-postmodernism .hero::before { opacity: .12; }
+  .theme-postmodernism .section-head,
+  .theme-postmodernism .contact-panel { grid-template-columns: 1fr; }
+  .theme-postmodernism .contact-panel,
+  .theme-postmodernism .reveal { padding: 34px 26px; }
+  .theme-postmodernism .reveal::before { opacity: .26; }
+}

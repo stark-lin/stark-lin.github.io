@@ -1,0 +1,183 @@
+body.theme-neo-geo {
+  background:
+    radial-gradient(circle, transparent 0 8px, color-mix(in srgb, var(--line), transparent 86%) 8px 9px, transparent 9px) 0 0 / 58px 58px,
+    linear-gradient(90deg, transparent 0 82%, color-mix(in srgb, var(--accent), transparent 92%) 82% 100%),
+    var(--bg);
+}
+
+.theme-neo-geo .topbar {
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg), transparent 3%);
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--line), transparent 88%);
+}
+
+.theme-neo-geo .brand {
+  font-family: var(--mono);
+  font-weight: 760;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.theme-neo-geo .brand::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border: 5px solid var(--accent);
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.theme-neo-geo .hero {
+  min-height: min(810px, 90vh);
+  margin-top: 26px;
+  padding-inline: clamp(26px, 7vw, 84px);
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: 0 24px 42px color-mix(in srgb, var(--fg), transparent 84%);
+}
+
+.theme-neo-geo .hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 8%;
+  right: 1%;
+  width: clamp(120px, 20vw, 220px);
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, transparent 0 12%, var(--accent) 12.5% 18%, transparent 18.5% 30%, var(--line) 30.5% 32%, transparent 32.5% 47%, color-mix(in srgb, var(--accent), transparent 18%) 47.5% 52%, transparent 52.5%);
+}
+
+.theme-neo-geo .hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 12%;
+  bottom: 12%;
+  width: clamp(58px, 9vw, 104px);
+  aspect-ratio: 1;
+  border: 12px solid color-mix(in srgb, var(--accent), transparent 20%);
+  box-shadow: 0 0 0 1px var(--line), inset 0 0 0 1px var(--line);
+}
+
+.theme-neo-geo .hero-grid { width: 80%; }
+
+.theme-neo-geo h1 {
+  max-width: 790px;
+  font-weight: 780;
+  line-height: .9;
+}
+
+.theme-neo-geo .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg);
+}
+
+.theme-neo-geo .kicker::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+}
+
+.theme-neo-geo .section {
+  border-top: 1px solid var(--line);
+}
+
+.theme-neo-geo .section-head {
+  grid-template-columns: minmax(104px, .2fr) minmax(0, 1fr);
+  gap: 28px;
+}
+
+.theme-neo-geo .section-index {
+  display: inline-flex;
+  width: max-content;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg);
+}
+
+.theme-neo-geo .section-index::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 6px var(--accent);
+}
+
+.theme-neo-geo h2 {
+  font-weight: 760;
+  line-height: .94;
+}
+
+.theme-neo-geo :is(.card, .hero-card, .principle, .timeline-item) {
+  border: 1px solid var(--line);
+  outline: 0;
+  background: var(--card);
+}
+
+.theme-neo-geo :is(.card, .principle, .timeline-item)::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 18px;
+  height: 18px;
+  border: 4px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.theme-neo-geo .cards .card:nth-child(even)::before,
+.theme-neo-geo .principle:nth-child(even)::before {
+  border-radius: 0;
+  transform: rotate(45deg);
+}
+
+.theme-neo-geo .card-title-row {
+  padding-right: 34px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+
+.theme-neo-geo .tag,
+.theme-neo-geo .skill-pill {
+  border-radius: 2px;
+  border-color: color-mix(in srgb, var(--line), transparent 20%);
+  background: var(--card);
+  box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--accent), transparent 52%);
+}
+
+.theme-neo-geo .contact-panel,
+.theme-neo-geo .reveal {
+  border: 1px solid var(--line);
+  outline: 0;
+  background:
+    radial-gradient(circle, transparent 0 9px, color-mix(in srgb, var(--line), transparent 64%) 9px 10px, transparent 10px) right 20px top 20px / 48px 48px,
+    var(--card-strong);
+}
+
+.theme-neo-geo .contact-panel {
+  grid-template-columns: minmax(0, 1.3fr) auto;
+}
+
+.theme-neo-geo .reveal-stat {
+  border-radius: 2px;
+  box-shadow: inset 6px 0 0 var(--accent);
+}
+
+@media (max-width: 720px) {
+  .theme-neo-geo .hero { min-height: auto; }
+  .theme-neo-geo .hero-grid { width: 100%; }
+  .theme-neo-geo .hero::before,
+  .theme-neo-geo .hero::after { opacity: .12; }
+  .theme-neo-geo .section-head,
+  .theme-neo-geo .contact-panel { grid-template-columns: 1fr; }
+}

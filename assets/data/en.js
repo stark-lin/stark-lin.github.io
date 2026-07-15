@@ -6,7 +6,7 @@ window.PORTFOLIO_LOCALE = {
         education: {
           school: "University of New South Wales",
           degree: "Bachelor of Computer Science",
-          graduation: "Expected Dec 2026"
+          graduation: "Expected Mar 2027"
         },
         contact: {
           email: "stark.lin@outlook.com",
@@ -461,10 +461,6 @@ window.PORTFOLIO_LOCALE = {
           body: "The reference code is enough to return to this page state."
         }
       ],
-
-      backgroundStyles: ["grid", "dots", "scanlines", "diagonal", "crosshatch", "clean", "halo", "corner-cut", "rings", "columns", "checker", "dashed", "pixels", "orbit", "fold", "split", "horizon", "circuit", "letterpress", "spotlight", "topography", "matrix", "radar", "vignette", "zebra", "notebook", "window", "stage", "mesh", "blue-noise", "terminal-bars", "sunrise", "blueprint", "waves", "sunburst", "constellation", "isometric", "tartan", "graph-paper", "moire", "arches", "aurora", "confetti", "seismic", "aperture", "ribbons", "microdots", "frame", "hex", "brick", "diamonds", "pinstripe", "bubbles", "chevrons", "star-map", "paper-fibers", "eclipse", "color-blocks", "lattice", "spot-grid", "axis", "radial-grid", "offset-grid", "corner-orbits", "soft-check", "data-rain", "gradient-wash", "steps", "contour-lines", "halftone", "bauhaus", "candy-stripes", "fan", "terrazzo", "weave", "parquet", "target", "sonar-pulse", "barcode", "filmstrip", "calendar", "staff", "elevation-bands", "scallops", "plus-field", "capsule-grid", "honeycomb", "cube-field", "polar-rays", "prism", "spotlight-duo", "horizon-glow", "corner-beam", "portal", "waterfall", "strata", "noise-bars", "patchwork", "plaid-wide", "quilting", "chain", "sprinkles", "meteor", "rain", "snow", "fireflies", "reeds", "dunes", "mountains", "city", "staircases", "conveyor", "zigzag", "maze", "circuit-nodes", "crosshair", "ruler", "registration", "blueprint-dots", "wave-grid", "lens", "bloom", "hourglass", "shards", "kaleidoscope", "monolith", "torn-paper", "paper-folds"],
-      surfaceStyles: ["soft", "sharp", "editorial", "terminalish", "filecard", "plain", "brutal", "ledger", "poster", "codeblock", "manifesto", "receipt", "glass", "indexed", "dossier", "lab", "zine", "spec", "luxury", "micro", "mega", "overprint", "labelmaker", "index-card", "thin", "heavy", "captioned", "solid", "enamel", "duotone-solid", "paper-stack", "accent-panel", "banded-solid", "inset-solid", "sticker-solid", "tonal", "quiet-depth", "grid-surface", "header-rule", "soft-relief", "wash-panel", "mono-surface", "highlight-surface", "window-chrome", "side-rail", "split-tone", "beveled", "perforated", "ruled", "neon", "museum", "comic", "newspaper", "dashboard", "taped", "gradient-frame", "frosted", "carbon", "warning-stripe", "blueprint-plate", "floating", "terminal-panel", "soft-outline", "wireframe"],
-      shapeStyles: ["rounded", "soft-rounded", "right-angle", "small-radius", "pill-boxes", "no-boxes", "line-only", "ticket", "slab", "cut", "stamp", "folder", "postcard", "underline", "offset", "badge", "chamfered", "asymmetric", "tabbed", "inset-edge", "capsule-cards", "top-accent", "bottom-accent", "speech", "bracketed", "framed", "split-radius", "leaf", "edge-accent", "diamond-cut", "framed-outline", "squircle"]
     },
   descriptions: {
       saturn: [
@@ -548,7 +544,7 @@ window.PORTFOLIO_LOCALE = {
         ],
         [
           "Graduation",
-          "Expected Dec 2026"
+          "Expected Mar 2027"
         ],
         [
           "Working stack",
@@ -646,6 +642,7 @@ window.PORTFOLIO_LOCALE = {
       "completeIndex": "Full / records",
       "completeTitle": "Full project record",
       "completeLead": "This opens the full supporting material behind the compact portfolio view.",
+      "activeStyle": "Active style",
       "referenceCode": "Reference code",
       "refreshView": "Show another version",
       "copyView": "Copy URL",

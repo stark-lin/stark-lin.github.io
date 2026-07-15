@@ -1,0 +1,176 @@
+body.theme-ascii-art {
+  font-family: var(--mono);
+  background:
+    repeating-linear-gradient(0deg, transparent 0 20px, color-mix(in srgb, var(--line), transparent 95%) 20px 21px),
+    var(--bg);
+}
+
+.theme-ascii-art .topbar {
+  border-bottom: 0;
+  background: color-mix(in srgb, var(--bg), transparent 3%);
+}
+
+.theme-ascii-art .topbar-inner {
+  border-bottom: 1px dashed var(--line);
+}
+
+.theme-ascii-art .brand {
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.theme-ascii-art .brand::before {
+  content: "[::]";
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.theme-ascii-art nav {
+  font-size: 12px;
+}
+
+.theme-ascii-art .hero {
+  min-height: min(760px, 88vh);
+}
+
+.theme-ascii-art .hero::before {
+  content: ".:-=+*#%@\A ..:-==++**##%%@@\A ....::--==++**##\A      ..::--==++**";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 12%;
+  width: 34ch;
+  padding: 18px;
+  border: 1px dashed var(--line);
+  color: color-mix(in srgb, var(--accent), transparent 24%);
+  font: 12px/1.45 var(--mono);
+  letter-spacing: .12em;
+  white-space: pre;
+  transform: rotate(3deg);
+  opacity: .74;
+}
+
+.theme-ascii-art .hero::after {
+  content: "+--------------------------------+";
+  position: absolute;
+  z-index: -1;
+  right: 3ch;
+  bottom: 16%;
+  color: color-mix(in srgb, var(--line), transparent 20%);
+  font-size: 12px;
+  white-space: nowrap;
+  transform: rotate(-2deg);
+}
+
+.theme-ascii-art h1 {
+  max-width: 790px;
+  font-family: var(--mono);
+  font-weight: 720;
+  line-height: 1;
+  letter-spacing: -.055em;
+}
+
+.theme-ascii-art h2,
+.theme-ascii-art h3 {
+  font-family: var(--mono);
+  letter-spacing: -.045em;
+}
+
+.theme-ascii-art .kicker::before { content: "> "; }
+
+.theme-ascii-art .hero-sub {
+  max-width: 64ch;
+  font-size: clamp(16px, 2vw, 21px);
+}
+
+.theme-ascii-art .section {
+  border-top: 0;
+}
+
+.theme-ascii-art .section::before {
+  content: "+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+";
+  display: block;
+  width: 100%;
+  margin-bottom: var(--style-section-padding-y);
+  color: var(--line);
+  overflow: hidden;
+  font-size: 12px;
+  letter-spacing: .14em;
+  white-space: nowrap;
+}
+
+.theme-ascii-art .section-head {
+  grid-template-columns: minmax(88px, .2fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 64px);
+}
+
+.theme-ascii-art .section-index {
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.theme-ascii-art .section-index::before { content: "[#] "; }
+
+.theme-ascii-art :is(.card, .hero-card, .principle, .timeline-item) {
+  outline-style: dashed;
+  background: var(--card);
+}
+
+.theme-ascii-art :is(.card, .hero-card, .principle, .timeline-item)::after {
+  content: "+";
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  padding: 0 2px;
+  color: var(--accent);
+  background: var(--bg);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.theme-ascii-art .cards .card:nth-child(even) { outline-style: dotted; }
+
+.theme-ascii-art .tag,
+.theme-ascii-art .skill-pill,
+.theme-ascii-art .reveal-stat {
+  border-radius: 0;
+  border-style: dashed;
+}
+
+.theme-ascii-art .tag::before,
+.theme-ascii-art .skill-pill::before { content: "<"; color: var(--accent); }
+.theme-ascii-art .tag::after,
+.theme-ascii-art .skill-pill::after { content: ">"; color: var(--accent); }
+
+.theme-ascii-art .button::before { content: "["; }
+.theme-ascii-art .button::after { content: "]"; }
+
+.theme-ascii-art .contact-panel,
+.theme-ascii-art .reveal {
+  border-radius: 0;
+  outline-style: dashed;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 8px, color-mix(in srgb, var(--line), transparent 92%) 8px 9px),
+    var(--card-strong);
+}
+
+.theme-ascii-art .reveal::before {
+  content: "# # #\A # # \A# # #";
+  position: absolute;
+  right: 5%;
+  bottom: 9%;
+  color: color-mix(in srgb, var(--accent), transparent 58%);
+  font: 26px/1 var(--mono);
+  letter-spacing: .24em;
+  white-space: pre;
+  transform: rotate(-4deg);
+}
+
+@media (max-width: 720px) {
+  .theme-ascii-art .hero { min-height: auto; }
+  .theme-ascii-art .hero::before { width: 26ch; opacity: .16; }
+  .theme-ascii-art .hero::after { display: none; }
+  .theme-ascii-art .section-head { grid-template-columns: 1fr; }
+  .theme-ascii-art .section::before { margin-bottom: 40px; }
+  .theme-ascii-art .reveal::before { opacity: .24; }
+}

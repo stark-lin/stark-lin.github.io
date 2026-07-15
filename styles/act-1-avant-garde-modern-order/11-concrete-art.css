@@ -1,0 +1,156 @@
+body.theme-concrete-art {
+  background:
+    linear-gradient(90deg, transparent 0 calc(12.5% - 1px), color-mix(in srgb, var(--line), transparent 92%) calc(12.5% - 1px) calc(12.5% + 1px), transparent calc(12.5% + 1px)),
+    linear-gradient(0deg, transparent 0 calc(25% - 1px), color-mix(in srgb, var(--line), transparent 93%) calc(25% - 1px) calc(25% + 1px), transparent calc(25% + 1px)),
+    var(--bg);
+}
+
+.theme-concrete-art .topbar {
+  border-bottom: 2px solid var(--line);
+  background: var(--bg);
+}
+
+.theme-concrete-art .brand {
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.theme-concrete-art .brand::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+}
+
+.theme-concrete-art .hero {
+  min-height: min(768px, 88vh);
+  border-inline: 2px solid var(--line);
+  padding-inline: clamp(24px, 6vw, 72px);
+}
+
+.theme-concrete-art .hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 12.5%;
+  width: 25%;
+  aspect-ratio: 1;
+  background:
+    linear-gradient(90deg, var(--accent) 0 50%, transparent 50%),
+    linear-gradient(0deg, color-mix(in srgb, #d6ad42, transparent 8%) 0 50%, transparent 50%);
+  opacity: .78;
+}
+
+.theme-concrete-art .hero::after {
+  content: "1:2:4:8";
+  position: absolute;
+  right: 0;
+  bottom: 16px;
+  font: 700 11px/1 var(--mono);
+  letter-spacing: .16em;
+}
+
+.theme-concrete-art h1 {
+  max-width: 810px;
+  font-weight: 700;
+  line-height: .92;
+}
+
+.theme-concrete-art .kicker {
+  display: inline-grid;
+  min-width: 25%;
+  padding: 8px;
+  color: var(--bg);
+  background: var(--accent);
+}
+
+.theme-concrete-art .section {
+  border-top-width: 2px;
+}
+
+.theme-concrete-art .section::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+}
+
+.theme-concrete-art .section-head {
+  grid-template-columns: 1fr 3fr;
+  gap: 24px;
+}
+
+.theme-concrete-art .section-index {
+  align-self: start;
+  padding: 12px;
+  border: 2px solid var(--line);
+  color: var(--fg);
+  background: var(--card);
+}
+
+.theme-concrete-art h2 {
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 700;
+}
+
+.theme-concrete-art .cards,
+.theme-concrete-art .principles { gap: 24px; }
+
+.theme-concrete-art :is(.card, .hero-card, .principle, .timeline-item) {
+  background:
+    linear-gradient(90deg, var(--accent) 0 8px, transparent 8px),
+    var(--card);
+}
+
+.theme-concrete-art .cards .card:nth-child(3n + 2) {
+  background:
+    linear-gradient(90deg, #d6ad42 0 8px, transparent 8px),
+    var(--card);
+}
+
+.theme-concrete-art .cards .card:nth-child(3n) {
+  background:
+    linear-gradient(90deg, #356b88 0 8px, transparent 8px),
+    var(--card);
+}
+
+.theme-concrete-art .tag,
+.theme-concrete-art .skill-pill {
+  border-width: 2px;
+  border-radius: 0;
+}
+
+.theme-concrete-art .skill-pill:nth-child(4n + 1) { padding-inline: 24px; }
+.theme-concrete-art .skill-pill:nth-child(4n + 2) { padding-inline: 16px; }
+.theme-concrete-art .skill-pill:nth-child(4n + 3) { padding-inline: 12px; }
+
+.theme-concrete-art .contact-panel {
+  grid-template-columns: 3fr 1fr;
+  border: 2px solid var(--line);
+  outline: 8px solid color-mix(in srgb, var(--accent), transparent 28%);
+  outline-offset: -10px;
+}
+
+.theme-concrete-art .reveal {
+  border: 2px solid var(--line);
+  outline: 0;
+  background:
+    linear-gradient(90deg, var(--accent) 0 12.5%, transparent 12.5%),
+    linear-gradient(0deg, transparent 0 87.5%, color-mix(in srgb, #d6ad42, transparent 8%) 87.5%),
+    var(--card-strong);
+  padding-left: calc(var(--style-card-padding) + 14%);
+}
+
+@media (max-width: 720px) {
+  .theme-concrete-art .hero { min-height: auto; }
+  .theme-concrete-art .hero::before { opacity: .14; }
+  .theme-concrete-art .section-head,
+  .theme-concrete-art .contact-panel { grid-template-columns: 1fr; }
+  .theme-concrete-art .reveal { background: var(--card-strong); padding-left: calc(var(--style-card-padding) + 8px); }
+}
