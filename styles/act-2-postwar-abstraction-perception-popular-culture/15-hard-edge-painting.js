@@ -11,6 +11,7 @@
       "--style-component-outline": "3px solid var(--line)", "--style-button-radius": "0px", "--style-button-border-width": "2px"
     },
     label: { en: "Hard-Edge Painting", zh: "硬边绘画" },
+    period: "1950s",
     introduction: {
       en: "Crisp adjoining planes and a few large color decisions organize the page without gradients, blur, or brushwork.",
       zh: "锐利相接的平面与少量大色块组织页面，不使用渐变、模糊或笔触。"

@@ -43,6 +43,7 @@
       "--style-button-weight": "680"
     },
     label: { en: "International Style", zh: "国际风格" },
+    period: "1920s",
     introduction: {
       en: "Open plan, architectural proportion, and undecorated horizontal volumes let spatial relationships carry the design.",
       zh: "开放平面、建筑式比例与无装饰的水平体块，让空间关系本身承担设计。"

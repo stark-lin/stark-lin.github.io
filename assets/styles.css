@@ -548,6 +548,30 @@
     }
     .reveal-stat-value { font-weight: 720; letter-spacing: -0.02em; }
     .active-style-value { font-size: 20px; }
+    .active-style-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      min-width: 0;
+    }
+    .active-style-heading .active-style-value { min-width: 0; }
+    .style-period {
+      flex: 0 0 auto;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      color: var(--muted);
+      filter: none;
+      font: inherit;
+      font-size: 20px;
+      font-weight: 420;
+      letter-spacing: -0.02em;
+      text-shadow: none;
+      white-space: nowrap;
+    }
     .style-introduction {
       margin-top: 8px;
       max-width: 520px;

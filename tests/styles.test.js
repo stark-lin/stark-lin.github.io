@@ -83,6 +83,7 @@ test("all implemented styles register once with bilingual exhibition copy", () =
     assert.ok(style.classNames.includes(`theme-${style.id}`));
     assert.ok(style.label.en);
     assert.ok(style.label.zh);
+    assert.match(style.period, /^\d{4}s$/);
     assert.ok(style.introduction.en);
     assert.ok(style.introduction.zh);
   });
@@ -98,6 +99,28 @@ test("each standalone preview forces and loads only its matching style", () => {
     assert.match(html, new RegExp(`href=["']\\./${stem}\\.css["']`));
     assert.match(html, new RegExp(`src=["']\\./${stem}\\.js["']`));
   });
+});
+
+test("the application accepts a single registered style in forced preview mode", () => {
+  const app = read(path.join(ROOT, "assets", "app.js"));
+
+  assert.match(app, /const forcedStyleId = window\.PORTFOLIO_FORCED_STYLE_ID;/);
+  assert.match(app, /const expectedStyleCount = forcedStyleId \? 1 : SYSTEM_CONFIG\.styleModulo;/);
+  assert.match(app, /forcedStyleId && !ids\.has\(forcedStyleId\)/);
+});
+
+test("deconstructivism separates clipped surfaces with color instead of outline borders", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-4-postmodernism-plural-surfaces",
+    "33-deconstructivism.css"
+  ));
+
+  assert.match(css, /\.theme-deconstructivism :is\(\.card, \.principle, \.timeline-item\)\s*{[^}]*border:\s*0;/s);
+  assert.match(css, /\.theme-deconstructivism \.contact-panel,\s*\.theme-deconstructivism \.reveal\s*{[^}]*border:\s*0;/s);
+  assert.match(css, /\.theme-deconstructivism \.button\s*{[^}]*border:\s*0;/s);
+  assert.doesNotMatch(css, /border(?:-top|-right|-bottom|-left)?:\s*[1-9]\d*px\s+solid/);
 });
 
 test("both locale entry points load every style in registry order", () => {

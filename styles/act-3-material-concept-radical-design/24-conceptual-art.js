@@ -26,6 +26,7 @@
       "--style-button-tracking": ".08em"
     },
     label: { en: "Conceptual Art", zh: "观念艺术" },
+    period: "1960s",
     introduction: {
       en: "Document hierarchy, existing metadata, and disciplined marginal structure let language carry the visual argument.",
       zh: "文档层级、既有元数据与克制的边注结构，让语言本身承担视觉论述。"

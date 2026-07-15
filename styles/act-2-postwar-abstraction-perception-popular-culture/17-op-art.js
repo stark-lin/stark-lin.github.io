@@ -11,6 +11,7 @@
       "--style-card-gap": "28px"
     },
     label: { en: "Op Art", zh: "欧普艺术" },
+    period: "1960s",
     introduction: {
       en: "Localized line frequencies, concentric structures, and checker fields create optical tension around calm reading surfaces.",
       zh: "局部线条频率、同心结构与棋格色场在安静阅读平面周围制造视错张力。"

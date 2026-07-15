@@ -38,6 +38,7 @@
       "--style-button-secondary-border-color": "var(--line)"
     },
     label: { en: "ASCII Art", zh: "ASCII 艺术" },
+    period: "1960s",
     introduction: {
       en: "A phosphor-green terminal system built from prompts, character frames, numbered data blocks, scan lines, and live ASCII status graphics.",
       zh: "一套由命令提示符、字符边框、编号数据块、扫描线与实时 ASCII 状态图形组成的磷光绿终端系统。"

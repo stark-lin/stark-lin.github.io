@@ -28,6 +28,7 @@
       "--style-meta-spacing": ".04em"
     },
     label: { en: "New Wave Typography", zh: "新浪潮排版" },
+    period: "1970s",
     introduction: {
       en: "Displaced headings, translucent typographic layers, and localized shifts loosen the grid while every paragraph keeps a stable baseline.",
       zh: "错位标题、透明文字层与局部偏移松动了网格，但每一段正文仍保持稳定基线。"

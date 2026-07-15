@@ -24,6 +24,7 @@
       "--style-title-rule-padding": "16px"
     },
     label: { en: "Constructivism", zh: "构成主义" },
+    period: "1910s",
     introduction: {
       en: "Hard diagonals, cut corners, structural circles, and high-contrast planes turn information into an active construction.",
       zh: "强对角线、切角、结构圆点与高对比平面，把信息组织成具有行动感的构造。"

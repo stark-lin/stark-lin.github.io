@@ -25,6 +25,7 @@
       "--style-button-tracking": ".08em"
     },
     label: { en: "High-Tech", zh: "高技派" },
+    period: "1960s",
     introduction: {
       en: "Light frames, exposed fasteners, edge scales, and precise panel joints make construction visible without becoming a control interface.",
       zh: "轻型框架、外露连接件、边缘刻度与精密面板接缝，让构造可见但不变成控制界面。"

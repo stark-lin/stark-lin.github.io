@@ -12,6 +12,7 @@
       "--style-button-radius": "52% 48% 46% 54% / 58% 44% 56% 42%", "--style-button-weight": "800"
     },
     label: { en: "Atomic Age Futurism", zh: "原子时代未来主义" },
+    period: "1940s",
     introduction: {
       en: "Elliptical orbits, starbursts, boomerang corners, and buoyant planes express postwar technological optimism.",
       zh: "椭圆轨道、星爆、回旋镖转角与悬浮平面呈现战后技术乐观主义。"

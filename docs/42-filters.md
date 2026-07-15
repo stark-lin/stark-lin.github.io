@@ -54,7 +54,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ### Act I: The Avant-Garde and Modern Order
 
-#### 01. Futurism
+#### 01. Futurism, 1900s–1940s
 
 **Historical core:** Speed, machines, the city, motion, and a sense of time.
 
@@ -64,7 +64,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 02. Dada
+#### 02. Dada, 1910s–1920s
 
 **Historical core:** Anti-art, chance, absurdity, collage, and typographic experimentation.
 
@@ -74,7 +74,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 03. Suprematism
+#### 03. Suprematism, 1910s–1920s
 
 **Historical core:** Non-objectivity, pure geometry, weightless space, and visual perception.
 
@@ -84,7 +84,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 04. De Stijl
+#### 04. De Stijl, 1910s–1930s
 
 **Historical core:** Horizontals, verticals, unequal rectangles, and asymmetrical balance.
 
@@ -94,7 +94,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 05. Purism
+#### 05. Purism, 1910s–1920s
 
 **Historical core:** Simplified objects, stable proportions, clear outlines, and machine-age order.
 
@@ -104,7 +104,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 06. Constructivism
+#### 06. Constructivism, 1910s–1930s
 
 **Historical core:** Structure, function, organization, active typography, and geometric tension.
 
@@ -114,7 +114,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 07. Bauhaus
+#### 07. Bauhaus, 1910s–1930s
 
 **Historical core:** The union of art, craft, industrial production, material experimentation, and functional design.
 
@@ -124,7 +124,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 08. Surrealism
+#### 08. Surrealism, 1920s–1960s
 
 **Historical core:** The unconscious, dreams, automatism, defamiliarization, and impossible juxtapositions.
 
@@ -134,7 +134,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 09. New Typography
+#### 09. New Typography, 1920s–1930s
 
 **Historical core:** Asymmetry, functional organization of information, left alignment, and modern printing technology.
 
@@ -144,7 +144,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 10. Art Deco
+#### 10. Art Deco, 1910s–1930s
 
 **Historical core:** Geometric ornament, central axes, stepped structures, radiating lines, and the machine-age metropolis.
 
@@ -154,7 +154,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 11. International Style
+#### 11. International Style, 1920s–1960s
 
 **Historical core:** Open plans, structural rationalism, modular volumes, and the elimination of ornament.
 
@@ -164,7 +164,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 12. Concrete Art
+#### 12. Concrete Art, 1930s–1960s
 
 **Historical core:** Autonomous geometry, mathematical relationships, proportion, sequence, and non-symbolic form.
 
@@ -176,7 +176,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ### Act II: Postwar Abstraction, Perception, and Popular Culture
 
-#### 13. Abstract Expressionism
+#### 13. Abstract Expressionism, 1940s–1950s
 
 **Historical core:** Large scale, gestural traces, all-over surfaces, and individual expression.
 
@@ -186,7 +186,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 14. Spatialism
+#### 14. Spatialism, 1940s–1960s
 
 **Historical core:** Cuts, holes, penetration of the picture plane, and the space behind the surface.
 
@@ -196,7 +196,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 15. Color Field Painting
+#### 15. Color Field Painting, 1940s–1960s
 
 **Historical core:** Vast fields of color, immersive space, weak boundaries, and low element density.
 
@@ -206,7 +206,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 16. Hard-Edge Painting
+#### 16. Hard-Edge Painting, 1950s–1960s
 
 **Historical core:** Flat color, sharply adjoining fields, absence of brushwork, and crisp contours.
 
@@ -216,7 +216,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 17. Pop Art
+#### 17. Pop Art, 1950s–1970s
 
 **Historical core:** Mass media, advertising, consumer goods, mechanical reproduction, and popular culture.
 
@@ -226,7 +226,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 18. Op Art
+#### 18. Op Art, 1960s–1970s
 
 **Historical core:** Visual vibration, repeated lines, changing frequencies, and spatial illusion.
 
@@ -236,7 +236,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 19. ZERO
+#### 19. ZERO, 1950s–1960s
 
 **Historical core:** Light, emptiness, vibration, subtle repetition, and a new beginning.
 
@@ -246,7 +246,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 20. Minimalism
+#### 20. Minimalism, 1960s–1970s
 
 **Historical core:** Simple geometry, industrial fabrication, seriality, repetition, and impersonal form.
 
@@ -256,7 +256,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 21. International Typographic Style
+#### 21. International Typographic Style, 1950s–1960s
 
 **Historical core:** Rigorous grids, neutral sans-serif type, left alignment, and an objective information hierarchy.
 
@@ -266,7 +266,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 22. Atomic Age Futurism / Atompunk
+#### 22. Atomic Age Futurism / Atompunk, 1940s–1960s
 
 **Historical core:** The Atomic Age, the Space Age, postwar technological optimism, and popular visions of the future.
 
@@ -276,7 +276,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 23. Supergraphics
+#### 23. Supergraphics, 1960s–1970s
 
 **Historical core:** Giant letters, numbers, bands of color, and wayfinding graphics extending across architectural surfaces.
 
@@ -288,7 +288,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ### Act III: Material, Concept, and Radical Design
 
-#### 24. Brutalism
+#### 24. Brutalism, 1950s–1970s
 
 **Historical core:** Raw materials, exposed structure, clarity of form, and architectural weight.
 
@@ -298,7 +298,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 25. Conceptual Art
+#### 25. Conceptual Art, 1960s–1970s
 
 **Historical core:** The primacy of ideas, language, definitions, documentation, and the dematerialization of the art object.
 
@@ -308,7 +308,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 26. Arte Povera
+#### 26. Arte Povera, 1960s–1970s
 
 **Historical core:** Everyday materials, non-precious matter, transience, and resistance to the commodification of art.
 
@@ -318,7 +318,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 27. Metabolism
+#### 27. Metabolism, 1960s–1970s
 
 **Historical core:** Infrastructure, growing units, replaceable modules, and imagination at an urban scale.
 
@@ -328,7 +328,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 28. High-Tech
+#### 28. High-Tech, 1960s–1980s
 
 **Historical core:** Exposed technology, lightweight frameworks, connectors, tracks, and precision construction.
 
@@ -338,7 +338,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 29. Radical Design
+#### 29. Radical Design, 1960s–1970s
 
 **Historical core:** Conceptual counterproposals to functionalism, standardized ways of living, and the conventions of modern design.
 
@@ -348,7 +348,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 30. Anti-Design
+#### 30. Anti-Design, 1960s–1980s
 
 **Historical core:** Rejection of unified standards, rational functionalism, and so-called “good taste.”
 
@@ -360,7 +360,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ### Act IV: Postmodernism and Plural Surfaces
 
-#### 31. Postmodernism
+#### 31. Postmodernism, 1970s–1990s
 
 **Historical core:** Historical reference, parody, complexity and contradiction, the return of ornament, and stylistic self-awareness.
 
@@ -370,7 +370,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 32. Memphis
+#### 32. Memphis, 1980s
 
 **Historical core:** Synthetic materials, vivid patterns, humor, strange geometry, and anti-functionalism.
 
@@ -380,7 +380,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 33. New Wave Typography
+#### 33. New Wave Typography, 1970s–1990s
 
 **Historical core:** Breaking the Swiss grid, transparent layering, displaced baselines, and multidirectional type.
 
@@ -390,7 +390,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 34. Deconstructivism
+#### 34. Deconstructivism, 1980s–1990s
 
 **Historical core:** Fractured grids, displaced planes, non-orthogonal structures, and unstable boundaries.
 
@@ -400,7 +400,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 35. Neo-Geo
+#### 35. Neo-Geo, 1980s–1990s
 
 **Historical core:** Polished geometry, repeated symbols, commercial surfaces, and critical distance from systems of consumption.
 
@@ -410,7 +410,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 36. Pattern and Decoration
+#### 36. Pattern and Decoration, 1970s–1980s
 
 **Historical core:** Continuous patterns, decorative surfaces, craft traditions, and a challenge to modernism's rejection of ornament.
 
@@ -422,7 +422,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ### Act V: Computers, the Web, and Future Visual Culture
 
-#### 37. Early Computer Art
+#### 37. Early Computer Art, 1950s–1970s
 
 **Historical core:** Plotters, matrices, limited computation, linear algorithms, and deterministic variation.
 
@@ -432,7 +432,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 38. ASCII Art
+#### 38. ASCII Art, 1960s–1990s
 
 **Historical core:** Character grids, monospaced text, and digital images formed through character density.
 
@@ -442,9 +442,9 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 39. Early Web Design
+#### 39. Early Web Design, 1990s
 
-##### Web 1.0 Vernacular, 1991–1999
+##### Web 1.0 Vernacular, 1990s
 
 **Historical core:** HTML documents, hyperlinks, lists, tables, browser defaults, and the vernacular of the early web.
 
@@ -458,7 +458,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 40. Cyberpunk Visual Culture
+#### 40. Cyberpunk Visual Culture, 1980s–1990s
 
 **Historical core:** High tech and low life, corporate systems, industrial density, information overload, and social wear.
 
@@ -468,7 +468,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 41. Glitch Art
+#### 41. Glitch Art, 1990s–2020s
 
 **Historical core:** The visualization of corrupted data, signal displacement, slicing, and system anomalies.
 
@@ -478,7 +478,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 42. Post-Internet Art
+#### 42. Post-Internet Art, 2000s–2010s
 
 **Historical core:** How platforms, copying, circulation, and interface packaging shape identity and culture after the internet has become the default cultural environment.
 

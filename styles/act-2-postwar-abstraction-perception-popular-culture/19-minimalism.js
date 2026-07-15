@@ -11,6 +11,7 @@
       "--style-card-gap": "16px", "--style-component-outline": "1px solid var(--line)", "--style-button-radius": "0px"
     },
     label: { en: "Minimalism", zh: "极简主义" },
+    period: "1960s",
     introduction: {
       en: "Serial modules, industrial restraint, and a deliberately narrow hierarchy make repetition carry the visual system.",
       zh: "序列模块、工业克制与刻意压缩的层级，让重复本身承担视觉系统。"

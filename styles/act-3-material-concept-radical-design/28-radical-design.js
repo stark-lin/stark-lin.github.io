@@ -22,6 +22,7 @@
       "--style-button-weight": "780"
     },
     label: { en: "Radical Design", zh: "激进设计" },
+    period: "1960s",
     introduction: {
       en: "One existing signal—the section index—is enlarged into an elongated counter-proposal while every operation stays familiar.",
       zh: "只把一个既有信号——章节编号——放大并拉长为反提案，其余操作仍保持熟悉。"

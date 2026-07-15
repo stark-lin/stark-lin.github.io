@@ -24,6 +24,7 @@
       "--style-button-secondary-bg": "var(--card-strong)"
     },
     label: { en: "Arte Povera", zh: "贫穷艺术" },
+    period: "1960s",
     introduction: {
       en: "Unfinished edges, fibre-like lines, and plainly exposed joins give ordinary surfaces a provisional material presence.",
       zh: "未精加工的边缘、纤维式线条与直接外露的连接，让普通表面呈现临时而真实的物质感。"

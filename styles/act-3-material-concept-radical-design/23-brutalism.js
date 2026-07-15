@@ -25,6 +25,7 @@
       "--style-title-rule-padding": "16px"
     },
     label: { en: "Brutalism", zh: "粗野主义" },
+    period: "1950s",
     introduction: {
       en: "Architectural mass, exposed seams, and weight-bearing frames make the page feel assembled from direct, legible structure.",
       zh: "建筑体量、外露接缝与承重框架，让页面像由直接、清晰的结构装配而成。"

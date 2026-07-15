@@ -21,6 +21,7 @@
       "--style-button-radius": "0px"
     },
     label: { en: "Suprematism", zh: "至上主义" },
+    period: "1910s",
     introduction: {
       en: "A few weightless geometric events occupy a large open field, keeping composition sparse, non-objective, and deliberate.",
       zh: "少量失重几何事件悬浮在大面积开放背景中，让构图保持稀疏、非对象化且有意为之。"

@@ -12,6 +12,7 @@
       "--style-button-radius": "0px", "--style-button-weight": "800"
     },
     label: { en: "Supergraphics", zh: "超级图形" },
+    period: "1960s",
     introduction: {
       en: "Architectural bands, oversized section numbers, and broad arcs cross page regions as a continuous wayfinding system.",
       zh: "建筑式色带、超大章节编号与宽阔圆弧跨越页面区域，形成连续导视系统。"

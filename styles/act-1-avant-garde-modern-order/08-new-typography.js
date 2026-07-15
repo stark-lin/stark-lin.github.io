@@ -25,6 +25,7 @@
       "--style-title-rule-padding": "16px"
     },
     label: { en: "New Typography", zh: "新排版" },
+    period: "1920s",
     introduction: {
       en: "Asymmetric type scale, active white space, and functional rules create a strong informational cadence.",
       zh: "非对称字号层级、动态留白与功能性线条，共同建立强烈的信息节奏。"

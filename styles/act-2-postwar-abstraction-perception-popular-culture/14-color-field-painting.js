@@ -12,6 +12,7 @@
       "--style-button-radius": "999px"
     },
     label: { en: "Color Field Painting", zh: "色域绘画" },
+    period: "1940s",
     introduction: {
       en: "Large continuous zones of muted color carry quiet islands of text through an immersive, low-density page.",
       zh: "大片连续的低饱和色域承载安静的文字岛，形成沉浸且低密度的页面。"

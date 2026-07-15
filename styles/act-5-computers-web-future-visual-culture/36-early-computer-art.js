@@ -23,6 +23,7 @@
       "--style-button-text-transform": "uppercase"
     },
     label: { en: "Early Computer Art", zh: "早期计算机艺术" },
+    period: "1950s",
     introduction: {
       en: "Plotter-fine vectors, finite matrices, and deterministic line variations make computation visible without turning the page into a live simulation.",
       zh: "绘图仪般的细向量、有限矩阵与确定性线条变体，让计算过程可见，同时不把页面变成实时模拟。"

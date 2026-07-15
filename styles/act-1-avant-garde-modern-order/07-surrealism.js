@@ -24,6 +24,7 @@
       "--style-component-outline": "1px solid var(--line)"
     },
     label: { en: "Surrealism", zh: "超现实主义" },
+    period: "1920s",
     introduction: {
       en: "An impossible daylight stage of floating eyes, displaced suns, theatrical arches, and objects that refuse gravity.",
       zh: "一座不可能的白昼梦境：漂浮的眼睛、错位的太阳、舞台般的拱门，以及拒绝重力的物体。"

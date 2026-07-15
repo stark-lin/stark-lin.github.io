@@ -22,6 +22,7 @@
       "--style-button-radius": "8px"
     },
     label: { en: "Purism", zh: "纯粹主义" },
+    period: "1910s",
     introduction: {
       en: "Clear contours, stable ratios, and quiet machine-age forms reduce the page to calm, legible essentials.",
       zh: "清晰轮廓、稳定比例与安静的机器时代形态，把页面收束为清楚可读的基本关系。"

@@ -29,6 +29,7 @@
       "--style-button-secondary-border-color": "#767676"
     },
     label: { en: "Early Web Design", zh: "早期万维网设计" },
+    period: "1990s",
     introduction: {
       en: "Document hierarchy, direct links, simple rules, and table-like modules recall the browser as a plain information surface.",
       zh: "文档层级、直接链接、简单分隔线与表格式模块，让浏览器重新成为朴素的信息表面。"

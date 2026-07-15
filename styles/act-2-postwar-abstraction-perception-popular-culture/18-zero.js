@@ -12,6 +12,7 @@
       "--style-button-radius": "1px"
     },
     label: { en: "ZERO", zh: "ZERO" },
+    period: "1950s",
     introduction: {
       en: "Perforations, fine line vibration, and low-contrast repetition hold the surface just above visual zero.",
       zh: "孔洞、细线振动与低对比重复，让页面表面停留在视觉归零之前。"

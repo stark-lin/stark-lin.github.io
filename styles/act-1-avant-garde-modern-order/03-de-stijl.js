@@ -22,6 +22,7 @@
       "--style-title-rule-padding": "16px"
     },
     label: { en: "De Stijl", zh: "风格派" },
+    period: "1910s",
     introduction: {
       en: "Unequal orthogonal fields, visible structural bars, and restrained color blocks create asymmetric equilibrium.",
       zh: "不等的正交区域、可见结构线与克制色块共同形成非对称平衡。"

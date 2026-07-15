@@ -11,6 +11,7 @@
       "--style-card-shadow": "12px 12px 0 rgba(16, 19, 21, .2)", "--style-button-radius": "0px"
     },
     label: { en: "Spatialism", zh: "空间主义" },
+    period: "1940s",
     introduction: {
       en: "Slits and measured voids open the pale reading plane onto a deeper color layer without cutting through the text.",
       zh: "狭缝与克制的空洞打开浅色阅读平面，露出更深的色层，同时不切穿正文。"

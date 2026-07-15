@@ -25,6 +25,7 @@
       "--style-button-tracking": ".1em"
     },
     label: { en: "Neo-Geo", zh: "新几何主义" },
+    period: "1980s",
     introduction: {
       en: "Serialized circles, squares, and precise artificial finishes turn the portfolio into a cool system of repeated abstract signs.",
       zh: "系列化圆形、方形与精确的人工表面把作品集转化为一套冷静重复的抽象符号系统。"

@@ -25,6 +25,7 @@
       "--style-button-tracking": ".1em"
     },
     label: { en: "Cyberpunk Visual Culture", zh: "赛博朋克视觉文化" },
+    period: "1980s",
     introduction: {
       en: "Industrial amber, segmented frames, edge graduations, and worn information density stage high technology against an everyday, low-gloss surface.",
       zh: "工业琥珀色、分段框架、边缘刻度与磨损的信息密度，让高技术落在低光泽的日常表面上。"

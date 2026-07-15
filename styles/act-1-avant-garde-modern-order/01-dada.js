@@ -22,6 +22,7 @@
       "--style-button-weight": "700"
     },
     label: { en: "Dada", zh: "达达主义" },
+    period: "1910s",
     introduction: {
       en: "Numbered blocks, clipped type planes, and controlled collisions produce anti-order without scrambling the actual record.",
       zh: "编号块、裁切字面与受控冲突制造反秩序感，但不拆解真实内容。"

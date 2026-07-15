@@ -17,6 +17,7 @@
       "--style-button-secondary-border-color": "var(--fg)", "--style-meta-spacing": ".09em"
     },
     label: { en: "International Typographic Style", zh: "瑞士国际主义排版" },
+    period: "1950s",
     introduction: {
       en: "A rigorous column grid, neutral sans serif, precise baselines, and restrained red metadata produce an objective hierarchy.",
       zh: "严格栏网、中性无衬线、精确基线与克制红色元数据共同形成客观层级。"

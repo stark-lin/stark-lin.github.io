@@ -23,6 +23,7 @@
       "--style-button-tracking": ".08em"
     },
     label: { en: "Futurism", zh: "未来主义" },
+    period: "1900s",
     introduction: {
       en: "Diagonal force, accelerating scale, and machine-age rhythm push the surface forward while the reading plane stays stable.",
       zh: "斜向力量、递进尺度与机器时代节奏把页面向前推进，同时保持正文阅读平面稳定。"

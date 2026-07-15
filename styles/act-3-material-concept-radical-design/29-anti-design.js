@@ -25,6 +25,7 @@
       "--style-button-tracking": ".05em"
     },
     label: { en: "Anti-Design", zh: "反设计" },
+    period: "1960s",
     introduction: {
       en: "Two deliberate surface and border systems disagree in public, creating tension without introducing accidental errors or hiding content.",
       zh: "两套明确的表面与边界系统公开冲突，在不制造意外错误或遮挡内容的前提下形成张力。"

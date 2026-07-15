@@ -23,6 +23,7 @@
       "--style-button-tracking": ".12em"
     },
     label: { en: "Art Deco", zh: "装饰艺术" },
+    period: "1910s",
     introduction: {
       en: "Stepped symmetry, slender borders, and fan-like geometry give the machine age a measured ceremonial surface.",
       zh: "阶梯式对称、细长边框与扇形几何，为机器时代建立克制而庄重的表面。"

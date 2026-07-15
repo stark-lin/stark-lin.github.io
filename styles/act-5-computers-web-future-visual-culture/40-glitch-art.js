@@ -22,6 +22,7 @@
       "--style-button-weight": "700"
     },
     label: { en: "Glitch Art", zh: "故障艺术" },
+    period: "1990s",
     introduction: {
       en: "Small displaced slices and chromatic edge errors interrupt decorative planes briefly, while every line of real copy stays still and intact.",
       zh: "小范围错位切片与色彩边缘误差短暂打断装饰平面，而每一行真实正文始终稳定、完整。"

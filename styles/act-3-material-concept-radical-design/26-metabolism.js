@@ -22,6 +22,7 @@
       "--style-title-rule-padding": "16px"
     },
     label: { en: "Metabolism", zh: "新陈代谢派" },
+    period: "1960s",
     introduction: {
       en: "A visible service spine, repeatable interfaces, and attached modules express growth without altering the underlying components.",
       zh: "可见的服务骨架、可重复接口与附着模块，在不改变底层组件的前提下表达生长。"

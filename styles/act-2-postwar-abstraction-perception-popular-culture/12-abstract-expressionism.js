@@ -14,6 +14,7 @@
       "--style-button-x": "18px", "--style-button-radius": "1px", "--style-button-border-width": "3px"
     },
     label: { en: "Abstract Expressionism", zh: "抽象表现主义" },
+    period: "1940s",
     introduction: {
       en: "A raw canvas of sweeping gestures, displaced color and ink-heavy structure keeps expressive energy in tension with readable content.",
       zh: "横扫的动作痕迹、错位色块与厚重墨线铺成一张原始画布，让表现张力与内容可读性彼此牵制。"

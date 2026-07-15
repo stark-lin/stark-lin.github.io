@@ -27,6 +27,7 @@
       "--style-button-tracking": ".07em"
     },
     label: { en: "Memphis", zh: "孟菲斯" },
+    period: "1980s",
     introduction: {
       en: "Playful waves, zigzags, semicircles, and diagonals animate a deliberately synthetic surface while content remains firmly organized.",
       zh: "波浪、锯齿、半圆与斜线让刻意人工化的表面活跃起来，同时内容仍保持清楚而稳定的组织。"

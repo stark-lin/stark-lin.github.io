@@ -13,6 +13,7 @@
       "--style-button-weight": "900", "--style-button-text-transform": "uppercase"
     },
     label: { en: "Pop Art", zh: "波普艺术" },
+    period: "1950s",
     introduction: {
       en: "Mechanical dots, repeated units, heavy outlines, and offset print color turn the interface into a bold mass-media surface.",
       zh: "机械网点、重复单元、粗轮廓与错位印色，把界面转化为强烈的大众媒介表面。"

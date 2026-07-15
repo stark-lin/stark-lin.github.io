@@ -25,6 +25,7 @@
       "--style-button-tracking": ".09em"
     },
     label: { en: "Postmodernism", zh: "后现代主义" },
+    period: "1970s",
     introduction: {
       en: "Frames within frames, mixed typographic voices, and layered architectural surfaces bring ornament back without turning the page into a retro miscellany.",
       zh: "框中框、并置的字体声部与层叠的建筑式表面让装饰回归，同时避免把页面变成复古大杂烩。"

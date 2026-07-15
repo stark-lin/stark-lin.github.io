@@ -20,6 +20,7 @@
       "--style-card-gap": "20px"
     },
     label: { en: "Bauhaus", zh: "包豪斯" },
+    period: "1910s",
     introduction: {
       en: "Functional zones, workshop geometry, and material-minded components connect experimentation to clear use.",
       zh: "功能分区、工坊几何与具有材料感的组件，把实验性和清晰用途连接起来。"

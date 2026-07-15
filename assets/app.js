@@ -111,9 +111,11 @@
 
   function validateStylePool() {
     const ids = new Set();
+    const forcedStyleId = window.PORTFOLIO_FORCED_STYLE_ID;
+    const expectedStyleCount = forcedStyleId ? 1 : SYSTEM_CONFIG.styleModulo;
 
-    if (STYLE_POOL.length !== SYSTEM_CONFIG.styleModulo) {
-      throw new Error(`Style pool must contain exactly ${SYSTEM_CONFIG.styleModulo} entries.`);
+    if (STYLE_POOL.length !== expectedStyleCount) {
+      throw new Error(`Style pool must contain exactly ${expectedStyleCount} ${forcedStyleId ? "forced preview" : "catalog"} ${expectedStyleCount === 1 ? "entry" : "entries"}.`);
     }
 
     STYLE_POOL.forEach((style, index) => {
@@ -132,8 +134,15 @@
           throw new Error(`Style "${style.id}" requires a ${localeKey} introduction.`);
         }
       }
+      if (typeof style.period !== "string" || !style.period.trim()) {
+        throw new Error(`Style "${style.id}" requires a period label.`);
+      }
       ids.add(style.id);
     });
+
+    if (forcedStyleId && !ids.has(forcedStyleId)) {
+      throw new Error(`Forced style "${forcedStyleId}" is not registered by this preview.`);
+    }
   }
 
   validateStylePool();
@@ -674,6 +683,7 @@
       const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
       const styleLabel = config.style.label[language];
       const styleIntroduction = config.style.introduction[language];
+      const stylePeriod = config.style.period;
       reveal.innerHTML = `
         <div class="kicker">${escapeHtml(config.revealCopy.kicker)}</div>
         <h2>${escapeHtml(config.revealCopy.headline)}</h2>
@@ -682,7 +692,10 @@
           <div class="reveal-stat">
             <div class="reveal-stat-section active-style-report">
               <div class="reveal-stat-label">${escapeHtml(UI.labels.activeStyle)}</div>
-              <div class="reveal-stat-value active-style-value">${escapeHtml(styleLabel)}</div>
+              <div class="active-style-heading">
+                <div class="reveal-stat-value active-style-value">${escapeHtml(styleLabel)}</div>
+                <div class="style-period">${escapeHtml(stylePeriod)}</div>
+              </div>
               <div class="style-introduction">${escapeHtml(styleIntroduction)}</div>
             </div>
             <div class="reveal-stat-section">
