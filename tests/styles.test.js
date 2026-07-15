@@ -147,6 +147,28 @@ test("surrealism gives the arched profile card enough roof clearance for educati
   assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.theme-surrealism \.hero-card\s*{[^}]*padding:\s*26px 18px 18px/s);
 });
 
+test("ascii art builds component frames from literal ASCII glyphs instead of visible CSS borders", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-5-computers-web-future-visual-culture",
+    "37-ascii-art.css"
+  ));
+  const script = read(path.join(
+    ROOT,
+    "styles",
+    "act-5-computers-web-future-visual-culture",
+    "37-ascii-art.js"
+  ));
+
+  assert.match(script, /function buildRule\(width, label = ""\)/);
+  assert.match(script, /for \(const edge of \["top", "left", "right", "bottom"\]\)/);
+  assert.match(script, /frame\.setAttribute\("aria-hidden", "true"\)/);
+  assert.match(css, /\.theme-ascii-art \.ascii-frame\s*{[^}]*font:\s*10px\/14px var\(--mono\)/s);
+  assert.match(css, /\.theme-ascii-art \.ascii-framed::before,[\s\S]*?content:\s*none;/);
+  assert.match(css, /\.theme-ascii-art \.hero-grid,[\s\S]*?border:\s*0;/);
+});
+
 test("both locale entry points load every style in registry order", () => {
   for (const entryPoint of ["index.html", "zh.html"]) {
     const html = read(path.join(ROOT, entryPoint));
