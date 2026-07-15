@@ -1,8 +1,10 @@
 # Agent 入口
 
-本文件适用于整个仓库。任何 agent 在规划、实现、重构、评审或验收本项目之前，都必须先完整阅读：
+本文件适用于整个仓库。任何 agent 在规划、实现、重构、评审或验收本项目之前，都必须先完整阅读规范总索引及索引列出的 `00`–`28` 全部分册：
 
-- [生成式个人主页通用设计规范](docs/GENERATIVE_PORTFOLIO_DESIGN_SPEC.md)
+- [生成式个人主页通用设计规范总索引](docs/GENERATIVE_PORTFOLIO_DESIGN_SPEC.md)
+
+不得只读取与当前任务标题最接近的单一分册。实现或修改某个展厅前，还必须读取对应的 `docs/rooms/NN-style-id.md`。
 
 ## 规范优先级
 
@@ -19,9 +21,9 @@
 
 - 内容系统、结构系统、展厅系统、配色系统和随机系统必须保持解耦。
 - 所有随机结果必须由 seed 确定并可通过 URL 复现，禁止在生成流程中直接使用无 seed 的随机值。
-- 固定语义顺序必须保持为 Hero → Personal Archive → Contact → Roll Again → Room Introduction。
+- 页面采用“首尾固定、中间可变”：Hero 永远位于最前；Projects、Experience、Education、Working Stack 与 Room Introduction / Exhibition Note 位于由 seed 决定顺序的中段；Contact → Roll Again 固定构成末段，Roll Again 永远位于最后。
 - 展厅差异必须作用于整页结构和表达，不得退化为换色、换字体或通用卡片换肤。
 - 42 个展厅中的每一个都必须拥有独立的风格设计规范文件，并按 `docs/rooms/NN-style-id.md` 命名；编号必须为 `01`–`42` 的两位数，风格标识必须使用小写英文 kebab-case。
 - 每个展厅还必须在 `rooms/NN-style-id/` 下拥有独立且同名的 `NN-style-id.html`、`NN-style-id.css` 和 `NN-style-id.js`；展厅专属结构、样式和行为不得集中到全局文件。
 - 任何实现都必须同时考虑中英文、移动端、键盘、屏幕阅读器和 Reduced Motion。
-- 新功能、重构和验收应逐项对照规范第 26 节的验收标准。
+- 新功能、重构和验收应逐项对照[规范第 26 节的验收标准](docs/spec/26-acceptance-criteria.md)。
