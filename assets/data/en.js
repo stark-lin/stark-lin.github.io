@@ -6,7 +6,7 @@ window.PORTFOLIO_LOCALE = {
         education: {
           school: "University of New South Wales",
           degree: "Bachelor of Computer Science",
-          graduation: "Expected Dec 2026"
+          graduation: "Expected Mar 2027"
         },
         contact: {
           email: "stark.lin@outlook.com",
@@ -544,7 +544,7 @@ window.PORTFOLIO_LOCALE = {
         ],
         [
           "Graduation",
-          "Expected Dec 2026"
+          "Expected Mar 2027"
         ],
         [
           "Working stack",

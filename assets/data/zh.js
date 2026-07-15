@@ -6,7 +6,7 @@ window.PORTFOLIO_LOCALE = {
             "education": {
                   "school": "新南威尔士大学",
                   "degree": "计算机科学学士",
-                  "graduation": "预计 2026 年 12 月毕业"
+                  "graduation": "预计 2027 年 3 月毕业"
             },
             "contact": {
                   "email": "stark.lin@outlook.com",
@@ -656,7 +656,7 @@ window.PORTFOLIO_LOCALE = {
         ],
         [
           "毕业",
-          "预计 2026 年 12 月毕业"
+          "预计 2027 年 3 月毕业"
         ],
         [
           "常用栈",
