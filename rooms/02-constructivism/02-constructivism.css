@@ -1,0 +1,706 @@
+.room-constructivism {
+  --construct-width: min(92vw, 98rem);
+  background: var(--color-bg);
+  font-family: "Arial Narrow", "Roboto Condensed", Arial, "Noto Sans SC", sans-serif;
+}
+
+.room-constructivism .site-header {
+  position: sticky;
+  z-index: 50;
+  top: 0;
+  border-bottom: var(--line-heavy) solid var(--color-line);
+  background: var(--color-surface);
+}
+
+.room-constructivism .site-navigation {
+  width: var(--construct-width);
+  min-height: 4.5rem;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: stretch;
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.room-constructivism .site-navigation a {
+  display: flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  text-decoration: none;
+}
+
+.room-constructivism .construct-brand {
+  background: var(--color-accent);
+  color: var(--color-surface);
+}
+
+.room-constructivism .command-navigation {
+  display: flex;
+  justify-content: center;
+}
+
+.room-constructivism .command-navigation a:hover,
+.room-constructivism .command-navigation a:focus-visible,
+.room-constructivism .command-navigation a.is-current {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.room-constructivism .language-command {
+  border-left: var(--line-heavy) solid var(--color-line);
+}
+
+.room-constructivism .room-main {
+  width: var(--construct-width);
+  margin-inline: auto;
+}
+
+.room-constructivism .hero,
+.room-constructivism .construct-hero {
+  min-height: 100svh;
+}
+
+.room-constructivism .construct-hero {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  padding: var(--space-8) clamp(1rem, 5vw, 6rem);
+  border-inline: var(--line-medium) solid var(--color-line);
+}
+
+.room-constructivism .construct-hero::after {
+  content: "";
+  position: absolute;
+  right: -10%;
+  bottom: 8%;
+  width: 46%;
+  height: 22%;
+  transform: rotate(var(--construct-axis));
+  background: var(--color-accent-2);
+}
+
+.room-constructivism .construct-hero-copy {
+  position: relative;
+  z-index: 4;
+  width: min(82%, 72rem);
+}
+
+.room-constructivism .construct-hero-copy > p:first-child,
+.room-constructivism .hero-seed,
+.room-constructivism .hero-direction {
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.room-constructivism .construct-hero h1 {
+  margin: var(--space-2) 0;
+  font-size: clamp(5rem, 14vw, 14rem);
+  font-weight: 900;
+  letter-spacing: -0.065em;
+  line-height: 0.76;
+  text-transform: uppercase;
+}
+
+.room-constructivism .construct-hero h2 {
+  width: min(22ch, 90%);
+  margin: var(--space-5) 0 var(--space-3) 12%;
+  font-size: var(--font-size-xl);
+  line-height: 0.95;
+}
+
+.room-constructivism .hero-secondary {
+  max-width: 48ch;
+  margin-left: 28%;
+}
+
+.room-constructivism .hero-number {
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  top: 2%;
+  color: var(--color-surface-2);
+  font-size: clamp(12rem, 35vw, 36rem);
+  font-weight: 900;
+  line-height: 0.8;
+}
+
+.room-constructivism .hero-action {
+  position: absolute;
+  z-index: 3;
+  right: 3%;
+  top: 38%;
+  padding: var(--space-2) var(--space-5);
+  transform: rotate(var(--construct-axis));
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-size: var(--font-size-lg);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.room-constructivism .construct-circle {
+  position: absolute;
+  z-index: 2;
+  right: 13%;
+  top: 14%;
+  width: clamp(8rem, 20vw, 20rem);
+  aspect-ratio: 1;
+  border: var(--line-heavy) solid var(--color-line);
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.room-constructivism .axis-line {
+  position: absolute;
+  z-index: 1;
+  left: -10%;
+  top: 52%;
+  width: 120%;
+  border-top: clamp(0.5rem, 1.1vw, 1.2rem) solid var(--color-line);
+  transform: rotate(var(--construct-axis));
+}
+
+.room-constructivism .axis-line-2 {
+  top: 61%;
+  border-width: var(--line-medium);
+}
+
+.room-constructivism .hero-seed {
+  position: absolute;
+  z-index: 5;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  display: grid;
+}
+
+.room-constructivism .hero-direction {
+  position: absolute;
+  z-index: 5;
+  right: var(--space-4);
+  bottom: var(--space-4);
+}
+
+.room-constructivism .construct-section {
+  min-height: 76svh;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(12rem, 28%) 1fr;
+  gap: var(--space-5);
+  padding: var(--space-8) clamp(1rem, 4vw, 4rem);
+  border-top: var(--line-heavy) solid var(--color-line);
+  border-inline: var(--line-medium) solid var(--color-line);
+}
+
+.room-constructivism .construct-section::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: -10%;
+  top: 18%;
+  width: 120%;
+  border-top: var(--line-medium) solid var(--color-line);
+  transform: rotate(var(--construct-axis));
+  pointer-events: none;
+}
+
+.room-constructivism .construct-section > header,
+.room-constructivism .construct-content {
+  position: relative;
+  z-index: 2;
+}
+
+.room-constructivism .construct-section > header {
+  align-self: start;
+  border: var(--line-heavy) solid var(--color-line);
+  background: var(--color-accent);
+  color: var(--color-surface);
+  clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+}
+
+.room-constructivism .construct-section > header span,
+.room-constructivism .construct-section > header b {
+  display: block;
+  padding: var(--space-3);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.1em;
+}
+
+.room-constructivism .construct-section > header h2 {
+  margin: 0;
+  padding: var(--space-5) var(--space-3);
+  border-block: var(--line-heavy) solid currentColor;
+  font-size: var(--font-size-xl);
+  font-weight: 900;
+  line-height: 0.9;
+}
+
+.room-constructivism .template-overlap > header {
+  margin-right: -22%;
+}
+
+.room-constructivism .template-command-band {
+  grid-template-columns: minmax(8rem, 18%) 1fr;
+}
+
+.room-constructivism .section-command {
+  position: absolute;
+  right: -0.04em;
+  bottom: -0.18em;
+  color: color-mix(in srgb, var(--color-surface-2) 74%, transparent);
+  font-size: clamp(5rem, 15vw, 15rem);
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+}
+
+.room-constructivism .construct-project {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5rem 1fr 1.3fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-7);
+  border: var(--line-heavy) solid var(--color-line);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  clip-path: polygon(0 0, 96% 0, 100% 1.8rem, 100% 100%, 4% 100%, 0 calc(100% - 1.8rem));
+}
+
+.room-constructivism .direction-reverse {
+  grid-template-columns: 1.3fr 1fr 5rem;
+}
+
+.room-constructivism .direction-reverse .module-index {
+  grid-column: 3;
+}
+
+.room-constructivism .direction-reverse .module-heading {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.room-constructivism .direction-reverse .module-description {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.room-constructivism .module-index {
+  font-size: var(--font-size-xl);
+  font-weight: 900;
+  line-height: 0.8;
+}
+
+.room-constructivism .module-heading h3,
+.room-constructivism .mission-record h3,
+.room-constructivism .training-module h3,
+.room-constructivism .construct-manifesto h3 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  line-height: 0.9;
+}
+
+.room-constructivism .module-heading p {
+  margin-top: 0;
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.room-constructivism .module-description {
+  margin: 0;
+}
+
+.room-constructivism .module-stack,
+.room-constructivism .module-actions,
+.room-constructivism .project-details {
+  grid-column: 2 / -1;
+}
+
+.room-constructivism .direction-reverse .module-stack,
+.room-constructivism .direction-reverse .module-actions,
+.room-constructivism .direction-reverse .project-details {
+  grid-column: 1 / 3;
+}
+
+.room-constructivism .module-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.room-constructivism .module-actions button,
+.room-constructivism .construct-manifesto button {
+  border: var(--line-heavy) solid var(--color-line);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-accent-2);
+  color: var(--color-text);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.room-constructivism .module-cut {
+  position: absolute;
+  right: 4%;
+  bottom: 0;
+  width: 26%;
+  height: 0.8rem;
+  transform: skewX(var(--construct-axis));
+  background: var(--color-accent);
+}
+
+.room-constructivism .mission-record {
+  display: grid;
+  grid-template-columns: 9rem 1fr 1fr;
+  gap: var(--space-5);
+  border-block: var(--line-heavy) solid var(--color-line);
+  padding-block: var(--space-5);
+}
+
+.room-constructivism .mission-code,
+.room-constructivism .training-label {
+  align-self: start;
+  padding: var(--space-2);
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-weight: 800;
+}
+
+.room-constructivism .training-module {
+  display: grid;
+  grid-template-columns: 11rem 1.3fr 0.6fr;
+  gap: var(--space-4);
+  border: var(--line-heavy) solid var(--color-line);
+  padding: var(--space-5);
+  background: var(--color-surface);
+}
+
+.room-constructivism .training-module > p:last-child {
+  grid-column: 2 / -1;
+}
+
+.room-constructivism .machine-stack {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.room-constructivism .machine-stack section {
+  border-left: var(--line-heavy) solid var(--color-line);
+}
+
+.room-constructivism .machine-stack h3 {
+  margin: 0;
+  padding: var(--space-3);
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.room-constructivism .machine-stack ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.room-constructivism .machine-stack li {
+  width: calc(76% + (var(--bar-index) * 3%));
+  max-width: 100%;
+  margin-top: var(--space-2);
+  border: var(--line-medium) solid var(--color-line);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+}
+
+.room-constructivism .construct-manifesto {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.8fr 1.5fr;
+  gap: var(--space-6);
+  border: var(--line-heavy) solid var(--color-line);
+  padding: var(--space-6);
+  background: var(--color-surface);
+}
+
+.room-constructivism .manifesto-command {
+  position: absolute;
+  right: -3%;
+  top: -1.5rem;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-accent-2);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+}
+
+.room-constructivism .construct-manifesto dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.room-constructivism .construct-manifesto dt {
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.room-constructivism .construct-manifesto dd {
+  margin: 0;
+}
+
+.room-constructivism .contact {
+  min-height: 90svh;
+  display: grid;
+  align-items: center;
+  border: var(--line-heavy) solid var(--color-line);
+  border-bottom: 0;
+}
+
+.room-constructivism .transmission-terminal {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-7);
+  padding: var(--space-7);
+}
+
+.room-constructivism .terminal-label {
+  position: absolute;
+  left: -1%;
+  top: 0;
+  padding: var(--space-2) var(--space-6);
+  transform: rotate(var(--construct-axis));
+  background: var(--color-accent);
+  color: var(--color-surface);
+  font-weight: 900;
+}
+
+.room-constructivism .transmission-terminal h2 {
+  font-size: var(--font-size-xl);
+  line-height: 0.96;
+}
+
+.room-constructivism .transmission-terminal address {
+  display: grid;
+  align-content: center;
+  font-style: normal;
+}
+
+.room-constructivism .transmission-terminal address > * {
+  display: grid;
+  padding: var(--space-4);
+  border: var(--line-heavy) solid var(--color-line);
+  margin-top: calc(var(--line-heavy) * -1);
+  background: var(--color-surface);
+}
+
+.room-constructivism .terminal-missing {
+  color: var(--color-muted);
+}
+
+.room-constructivism .roll-again {
+  min-height: 70svh;
+  display: grid;
+  align-items: center;
+  border-inline: var(--line-heavy) solid var(--color-line);
+}
+
+.room-constructivism .construct-roll {
+  position: relative;
+  width: 100%;
+  min-height: 20rem;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto 1.5fr 1fr auto;
+  align-items: center;
+  gap: var(--space-4);
+  border: 0;
+  border-block: var(--line-heavy) solid var(--color-line);
+  padding: var(--space-6);
+  background: var(--color-accent);
+  color: var(--color-surface);
+  text-align: left;
+  cursor: pointer;
+}
+
+.room-constructivism .construct-roll strong {
+  font-size: var(--font-size-xl);
+  line-height: 0.9;
+}
+
+.room-constructivism .construct-roll i {
+  position: absolute;
+  z-index: 0;
+  right: -18%;
+  width: 42%;
+  height: 180%;
+  transform: rotate(var(--construct-axis));
+  background: var(--color-accent-2);
+  transition: right var(--duration-slow) linear;
+}
+
+.room-constructivism .construct-roll > *:not(i) {
+  position: relative;
+  z-index: 1;
+}
+
+.room-constructivism .construct-roll:hover i,
+.room-constructivism .construct-roll:focus-visible i {
+  right: -6%;
+}
+
+.room-constructivism.is-rolling .construct-section,
+.room-constructivism.is-rolling .construct-hero,
+.room-constructivism.is-rolling .contact {
+  transform: translateX(8vw);
+  transition: transform var(--duration-slow) linear;
+}
+
+@media (max-width: 62rem) {
+  .room-constructivism .site-navigation {
+    grid-template-columns: 1fr auto;
+    padding-block: var(--space-1);
+  }
+
+  .room-constructivism .command-navigation {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  .room-constructivism .command-navigation a {
+    flex: 0 0 auto;
+  }
+
+  .room-constructivism .construct-section {
+    grid-template-columns: minmax(8rem, 24%) 1fr;
+  }
+
+  .room-constructivism .mission-record {
+    grid-template-columns: 8rem 1fr;
+  }
+
+  .room-constructivism .mission-record ul {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 46rem) {
+  .room-constructivism {
+    --construct-width: calc(100vw - 2rem);
+  }
+
+  .room-constructivism .construct-hero h1 {
+    font-size: clamp(4.2rem, 25vw, 8rem);
+  }
+
+  .room-constructivism .construct-hero h2,
+  .room-constructivism .hero-secondary {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .room-constructivism .hero-action,
+  .room-constructivism .axis-line,
+  .room-constructivism .terminal-label {
+    transform: rotate(var(--construct-mobile-axis));
+  }
+
+  .room-constructivism .construct-circle {
+    right: -2rem;
+    top: 20%;
+    width: 9rem;
+  }
+
+  .room-constructivism .construct-section,
+  .room-constructivism .template-command-band {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding: var(--space-7) var(--space-3);
+  }
+
+  .room-constructivism .template-overlap > header {
+    margin-right: 0;
+  }
+
+  .room-constructivism .construct-section > header {
+    width: 78%;
+  }
+
+  .room-constructivism .construct-section > header h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .room-constructivism .construct-project,
+  .room-constructivism .direction-reverse {
+    grid-template-columns: 3rem 1fr;
+    padding: var(--space-4);
+  }
+
+  .room-constructivism .direction-reverse .module-index,
+  .room-constructivism .direction-reverse .module-heading,
+  .room-constructivism .direction-reverse .module-description,
+  .room-constructivism .module-index,
+  .room-constructivism .module-heading,
+  .room-constructivism .module-description,
+  .room-constructivism .module-stack,
+  .room-constructivism .module-actions,
+  .room-constructivism .project-details,
+  .room-constructivism .direction-reverse .module-stack,
+  .room-constructivism .direction-reverse .module-actions,
+  .room-constructivism .direction-reverse .project-details {
+    grid-column: 2;
+    grid-row: auto;
+  }
+
+  .room-constructivism .mission-record,
+  .room-constructivism .training-module,
+  .room-constructivism .machine-stack,
+  .room-constructivism .construct-manifesto,
+  .room-constructivism .transmission-terminal,
+  .room-constructivism .construct-roll {
+    grid-template-columns: 1fr;
+  }
+
+  .room-constructivism .mission-record ul,
+  .room-constructivism .training-module > p:last-child {
+    grid-column: 1;
+  }
+
+  .room-constructivism .construct-manifesto {
+    padding: var(--space-5);
+  }
+
+  .room-constructivism .construct-manifesto dl {
+    grid-template-columns: 1fr;
+  }
+
+  .room-constructivism .contact {
+    min-height: 90svh;
+  }
+
+  .room-constructivism .transmission-terminal {
+    padding: var(--space-7) var(--space-4);
+  }
+
+  .room-constructivism .construct-roll {
+    min-height: 24rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .room-constructivism.is-rolling .construct-section,
+  .room-constructivism.is-rolling .construct-hero,
+  .room-constructivism.is-rolling .contact {
+    transform: none;
+  }
+
+  .room-constructivism .construct-roll i {
+    transition: none;
+  }
+}

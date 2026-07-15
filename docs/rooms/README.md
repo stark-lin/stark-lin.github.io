@@ -29,12 +29,12 @@ rooms/NN-style-id/NN-style-id.js
 | 03 | [至上主义 / Suprematism](03-suprematism.md) | 漂浮形体与距离 | 空间探索 | 漂移与让位 |
 | 04 | [风格派 / De Stijl](04-de-stijl.md) | 可见正交网格 | 水平与垂直 | 切割与重分配 |
 
-四个展厅均遵守[首尾固定与中段可变结构](../spec/03-fixed-page-structure.md)：Hero 固定在开头，展厅说明随其他中段内容按 seed 重排，Contact → Roll Again 固定在结尾。
+按当前明确产品要求，四个展厅采用：Hero 固定开头，Projects / Experience / Education / Working Stack 按 seed 重排，展厅说明固定为档案后的最后一个中段，Contact → Roll Again 固定结尾。展厅说明不再参与随机排序；这一点是对通用规范现行文字的明确项目级覆盖。
 
-建议实现顺序为：Room 04 风格派 → Room 01 纯粹主义 → Room 02 构成主义 → Room 03 至上主义。先建立稳定的可见网格，再逐步放开到比例、对角结构和自由空间。
+对应实现已落在 `rooms/01-purism/` 至 `rooms/04-de-stijl/`，每个展厅均包含同名 HTML、CSS 和 JavaScript 文件。
 
 ## 当前状态
 
-截至 2026-07-15，本目录已包含前 4 份展厅规范，仍缺少 Room 05–42 的 38 份规范。当前实现也尚未形成规范要求的 42 组独立 HTML、CSS 和 JavaScript 文件。
+截至 2026-07-15，本目录已包含前 4 份展厅规范，对应的 4 组独立 HTML、CSS 和 JavaScript 实现也已完成。Room 05–42 的 38 份规范及实现仍缺失。
 
 影响：当前仓库仍不能通过 42 个展厅完整性和逐展厅实现文件独立性验收。这里不创建空白占位文件，因为按权威规范，空文件或仅含注释的代理文件不算有效实现。

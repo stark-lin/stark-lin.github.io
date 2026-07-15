@@ -6,19 +6,18 @@
 
 > **Design authority:** Product and implementation work must follow the [Generative Personal Homepage Design Specification](docs/GENERATIVE_PORTFOLIO_DESIGN_SPEC.md). Agent instructions enter through [AGENTS.md](AGENTS.md). If existing documentation or implementation conflicts with the specification, the specification takes precedence.
 
-> **Implementation status:** The runnable site described below is an earlier generated-portfolio prototype. It does not yet implement the required 42 independent rooms or their per-room files. This README records the current runtime only and is not an exception to the authoritative specification. See the [room documentation status](docs/rooms/README.md).
+> **Implementation status:** Rooms 01–04 are implemented as independent HTML, CSS, and JavaScript sets. Rooms 05–42 remain unimplemented, so the repository does not yet satisfy the 42-room completeness requirement. See the [room documentation status](docs/rooms/README.md).
 
-A bilingual, build-free personal portfolio written in vanilla HTML, CSS, and JavaScript. Each visit receives a reference code that deterministically composes the copy, project order, palette, background, surface, shape, and typography traits. Generate a new version when you want one; share the original URL to reproduce the same view.
+A bilingual, build-free personal portfolio written in vanilla HTML, CSS, and JavaScript. Each visit receives a seed. A dedicated seeded random stream selects one of the implemented rooms, while independent streams select the palette, copy, archive-section DOM order, project order, descriptions, and room-safe layout parameters. The Exhibition Note is fixed after the shuffled archive and before Contact. Share the URL to reproduce the same version.
 
 ### Highlights
 
-- **Reproducible generated views** — A seeded pseudo-random generator maps each reference code to a complete page configuration; the same `id` produces the same version.
-- **Native Chinese and English content** — English lives at `index.html`, Chinese at `zh.html`, and the language switch preserves query parameters and the current hash.
-- **Curated visual system** — The current pools contain 16 single-accent palettes, 16 flat patterned backgrounds, 8 solid surface treatments, and 8 restrained shape variants.
-- **Generated copy and layout** — Headlines, summaries, project descriptions, tags, section order, skill order, and visual traits are composed from the reference code.
-- **Compact and complete reading modes** — The default view keeps the signal compact, while the full-record view exposes complete project and implementation notes.
-- **Shareable state** — Each view exposes its reference code, combination rarity, and a shareable URL.
-- **Responsive and accessible** — Includes active navigation, visible keyboard focus, semantic sections, Chinese title segmentation, mobile layouts, and reduced-motion support.
+- **Seeded room selection** — The seed selects Rooms 01–04 with equal deterministic mapping; the selector does not rotate rooms or suppress repeat outcomes.
+- **Independent room implementations** — Purism, Constructivism, Suprematism, and De Stijl each own their HTML skeleton, CSS composition, and JavaScript renderer.
+- **Native Chinese and English content** — English enters through `index.html`, Chinese through `zh.html`, and room URLs preserve the seed while switching locale.
+- **Decoupled generation** — Palette, content copy, archive order, project order, descriptions, and room layout use isolated seeded streams; the Exhibition Note remains fixed at the archive's end.
+- **Shareable state** — Each room exposes its seed and a copyable URL; browser back and forward remain valid after regeneration.
+- **Responsive and accessible** — Includes semantic fixed/middle/fixed structure, active navigation, project disclosure buttons, keyboard focus, mobile translations, and reduced-motion support.
 - **Static deployment** — No framework, package manager, or build artifact is required; the site can be hosted on GitHub Pages or any static file server.
 
 ### Quick start
@@ -50,18 +49,18 @@ View state is stored in query parameters and can be used directly for testing or
 
 | Parameter | Values | Description |
 | --- | --- | --- |
-| `id` | Any string | Seed for page generation. If omitted, a 32-character code prefixed with `SL-` is created. |
-| `label` | `guide`, `surface` | `guide` keeps the first-view onboarding; `surface` is the clean presentation link. |
-| `complete` | `1` | Opens the full project record immediately. |
+| `seed` | Any string | Seed for room and page generation. If omitted, a code prefixed with `SL-` is created. |
+| `lang` | `en`, `zh` | Locale used inside an individual room URL. |
+| `entry` | `1` | Internal first-entry marker used to show the one-session Roll Again introduction. Copied URLs omit it. |
 
 Examples:
 
 ```text
-http://localhost:8080/index.html?id=SL-DEMO&label=surface
-http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
+http://localhost:8080/index.html?seed=SL-DEMO
+http://localhost:8080/zh.html?seed=SL-DEMO
 ```
 
-As long as the content pools and generation algorithm remain unchanged, the same `id` resolves to the same combination. Both locales share the reference code and generation pipeline, so they correspond to the same structural and visual configuration while selecting their own localized copy.
+As long as the pools and generation algorithm remain unchanged, the same `seed` resolves to the same room and configuration. Both locales share the seed and structural pipeline while selecting localized copy. Direct room URLs are canonicalized to the room selected by the seed.
 
 ### Project structure
 
@@ -70,34 +69,41 @@ As long as the content pools and generation algorithm remain unchanged, the same
 ├── index.html              # English entry point
 ├── zh.html                 # Chinese entry point
 ├── assets/
-│   ├── app.js              # Generation, rendering, interaction, and accessibility
-│   ├── styles.css          # Base styles and all visual variants
+│   ├── app.js              # Seeded room router for the two root entries
+│   ├── room-base.css       # Neutral tokens and shared accessibility foundations
 │   └── data/
 │       ├── en.js           # English content and UI copy
-│       ├── zh.js           # Chinese content and UI copy
-│       └── palettes.js     # Theme IDs and data-driven palettes
+│       └── zh.js           # Chinese content and UI copy
+├── core/
+│   └── room-runtime.js     # Seed streams, URL state, shared content model, and interactions
+├── rooms/
+│   ├── 01-purism/          # 01-purism.html / .css / .js
+│   ├── 02-constructivism/  # 02-constructivism.html / .css / .js
+│   ├── 03-suprematism/     # 03-suprematism.html / .css / .js
+│   └── 04-de-stijl/        # 04-de-stijl.html / .css / .js
 ├── docs/
 │   ├── README.md             # Documentation map
 │   ├── GENERATIVE_PORTFOLIO_DESIGN_SPEC.md
 │   │                         # Authoritative specification index
 │   ├── spec/                 # Specification chapters 00–28
 │   └── rooms/                # Per-room specifications and status
+├── tests/
+│   └── rooms.test.js        # Determinism and structural acceptance checks
 ├── AGENTS.md                # Agent entry point and specification precedence
 ├── LICENSE                 # AGPL-3.0-only
 ├── README.zh-CN.md          # Chinese project guide
 └── README.md                # English project guide
 ```
 
-Both HTML entry points load scripts in this order: palette data → active locale data → shared application logic. `app.js` reads `window.PORTFOLIO_LOCALE`, generates a configuration, and then builds the DOM, keeping the entry documents intentionally thin.
+Both root entries use `assets/app.js` only as a seeded room router. Inside a room, `core/room-runtime.js` loads the selected locale, builds the shared content model, and hands it to that room's independent renderer.
 
 ### How it works
 
-1. The page reads `id`; when absent, it creates a reference code with `crypto.getRandomValues()`.
-2. `cyrb128` hashes the code into four 32-bit seeds, and `sfc32` provides a deterministic random sequence.
-3. The generator selects from visual, layout, and copy pools and orders projects, sections, and skills.
-4. Style genes are merged into CSS custom properties, while theme classes provide background, surface, and shape variants.
-5. The shared renderer creates navigation, work, experience, education, principles, skills, contact, and full records from the active locale data.
-6. **Show another version** creates a new `id`; **Copy URL** creates an onboarding-free `surface` link.
+1. The root entry reads `seed`; when absent, it creates one with `crypto.getRandomValues()`.
+2. The `room` stream maps the seed to one of the implemented rooms. Repeat rooms are valid outcomes.
+3. Independent derived streams choose the palette, Hero copy, archive DOM order, project order, descriptions, skills, and room-safe variants; the Exhibition Note is then appended to the archive.
+4. The active room renders Hero, every seeded middle section, Contact, and Roll Again through its own HTML/CSS/JavaScript composition.
+5. **Generate another version** creates a new seed and navigates to its selected room; **Copy this version** copies a clean reproducible URL.
 
 ### Customizing content
 
@@ -117,47 +123,46 @@ When adding a project, use the same project `id` and project order in both local
 
 #### Edit palettes
 
-The simplest approach is to add an object to `window.PORTFOLIO_PALETTES` in `assets/data/palettes.js`:
+Shared palettes are finite token objects in `COLOR_SCHEMES` inside `core/room-runtime.js`:
 
 ```js
 {
-  id: "my-palette",
   bg: "#F5F5F5",
   surface: "#FFFFFF",
+  surface2: "#E7E7E7",
   text: "#202020",
   muted: "#6B6B6B",
   accent: "#315EFB",
-  accent2: "#315EFB",
-  border: "#DADADA"
+  accent2: "#D95F59",
+  line: "#202020"
 }
 ```
 
-These colors are mapped to CSS variables by the application. To add a traditional CSS theme, also register its ID in `window.PORTFOLIO_CSS_PALETTE_IDS` and define the matching `body.theme-<id>` in `assets/styles.css`.
+The runtime maps these values to neutral CSS tokens. Room files define color relationships only and must not hard-code their own palette.
 
 #### Edit visual variants
 
-Background, surface, and shape names live in `backgroundStyles`, `surfaceStyles`, and `shapeStyles` in both locale files, with their implementations in `assets/styles.css`. Each generated pool must remain non-empty and have a power-of-two length; the application validates palettes, backgrounds, surfaces, shapes, style genes, and layout pools at startup. The current visual lengths are 16 palettes, 16 backgrounds, 8 surfaces, and 8 shapes.
-
-Composable typography, density, border, button, and related traits are defined in `STYLE_GENES` in `assets/app.js`. Shadows are globally disabled. Changing a generation pool changes the mapping of existing IDs, so treat those pools as a versioned public interface if long-lived shared views must remain visually stable.
+Room-safe layout, decoration, and motion pools live in each room's JavaScript file. Their structural translation, responsive behavior, and reduced-motion behavior live in the matching CSS file. Changing a pool changes existing seed mappings, so treat generation pools as a versioned public interface.
 
 ### Validation and testing
 
-The project currently has no separate test framework. Before committing, run at least these checks:
+The repository includes a zero-dependency structural test. Before committing, run:
 
 ```bash
 node --check assets/app.js
+node --check core/room-runtime.js
 node --check assets/data/en.js
 node --check assets/data/zh.js
-node --check assets/data/palettes.js
+node tests/rooms.test.js
 python3 -m http.server 8080
 ```
 
 Then verify at desktop and mobile widths:
 
 - Both locale entry points load without console errors.
-- Language switching preserves `id`, `label`, `complete`, and hash state.
-- The same `id` reproduces a view, and rerolling creates a new one.
-- Copied links, first-view onboarding, and full records work.
+- Language switching preserves `seed` and room selection.
+- The same `seed` reproduces the room, DOM order, project order, copy, and safe room variants.
+- Copied links, first-view onboarding, project disclosures, and Roll Again work.
 - Project links, email, navigation, and keyboard focus work.
 - Unnecessary motion is removed under reduced-motion preferences.
 
@@ -178,11 +183,11 @@ Publish the repository root directly and leave the build command empty. Preserve
 
 ### Browser capabilities
 
-The site uses CSS custom properties, `color-mix()`, `crypto.getRandomValues()`, `URL`/`URLSearchParams`, `IntersectionObserver`, `requestAnimationFrame`, and the Clipboard API, plus `Intl.Segmenter` when available for Chinese title wrapping. A recent version of Chrome, Edge, Firefox, or Safari is recommended.
+The site uses CSS custom properties, `color-mix()`, `crypto.getRandomValues()`, `URL`/`URLSearchParams`, `IntersectionObserver`, `requestAnimationFrame`, and the Clipboard API. A recent version of Chrome, Edge, Firefox, or Safari is recommended.
 
 ### Contributing
 
-Fixes and improvements are welcome through issues or pull requests. Keep both locales synchronized, preserve the build-free deployment path, and maintain power-of-two lengths when extending visual pools.
+Fixes and improvements are welcome through issues or pull requests. Keep both locales synchronized, preserve the build-free deployment path, keep random streams seed-derived, and maintain each room's independent file set.
 
 ### License
 

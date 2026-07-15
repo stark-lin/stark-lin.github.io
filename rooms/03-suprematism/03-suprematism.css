@@ -1,0 +1,804 @@
+.room-suprematism {
+  --sup-width: min(94vw, 105rem);
+  background: var(--color-bg);
+}
+
+.room-suprematism .site-header {
+  position: sticky;
+  z-index: 50;
+  top: 0;
+  background: color-mix(in srgb, var(--color-bg) 94%, transparent);
+}
+
+.room-suprematism .site-navigation {
+  width: var(--sup-width);
+  min-height: 4rem;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-6);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.room-suprematism .site-navigation a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.room-suprematism .sup-nav-nodes {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.room-suprematism .sup-nav-nodes a:nth-child(2) {
+  transform: translateY(0.45rem);
+}
+
+.room-suprematism .sup-nav-nodes a:nth-child(3) {
+  transform: translateY(-0.3rem);
+}
+
+.room-suprematism .site-navigation a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0.35rem;
+  left: 0;
+  border-bottom: 2px solid currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.room-suprematism .site-navigation a:hover::after,
+.room-suprematism .site-navigation a:focus-visible::after,
+.room-suprematism .site-navigation a.is-current::after {
+  transform: scaleX(1);
+}
+
+.room-suprematism .room-main {
+  width: var(--sup-width);
+  margin-inline: auto;
+}
+
+.room-suprematism .hero,
+.room-suprematism .sup-hero {
+  min-height: var(--sup-hero-height, 120svh);
+}
+
+.room-suprematism .sup-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.room-suprematism .sup-name-node,
+.room-suprematism .sup-statement-node,
+.room-suprematism .sup-room-node,
+.room-suprematism .sup-path {
+  position: absolute;
+  z-index: 4;
+}
+
+.room-suprematism .sup-name-node {
+  top: 13%;
+  right: 5%;
+  width: min(57%, 60rem);
+}
+
+.room-suprematism .mirror-mirrored .sup-name-node {
+  right: auto;
+  left: 5%;
+}
+
+.room-suprematism .sup-name-node p,
+.room-suprematism .sup-room-node {
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.room-suprematism .sup-name-node h1 {
+  margin: 0;
+  font-size: var(--font-size-display);
+  font-weight: 650;
+  letter-spacing: -0.055em;
+  line-height: 0.82;
+}
+
+.room-suprematism .sup-statement-node {
+  left: 5%;
+  bottom: 14%;
+  width: min(42%, 38rem);
+}
+
+.room-suprematism .mirror-mirrored .sup-statement-node {
+  right: 5%;
+  left: auto;
+}
+
+.room-suprematism .sup-statement-node h2 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.room-suprematism .sup-room-node {
+  top: 48%;
+  left: 46%;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.room-suprematism .sup-path {
+  right: 5%;
+  bottom: 4%;
+}
+
+.room-suprematism .sup-hero-forms,
+.room-suprematism .field-decoration {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.room-suprematism .field-shape {
+  position: absolute;
+  display: block;
+  border: var(--line-medium) solid var(--color-line);
+}
+
+.room-suprematism .sup-hero-forms .shape-1 {
+  left: 8%;
+  top: 16%;
+  width: clamp(5rem, 12vw, 12rem);
+  aspect-ratio: 1;
+  transform: rotate(var(--sup-angle-a));
+  background: var(--color-accent);
+  animation: sup-drift-a 13s ease-in-out infinite alternate;
+}
+
+.room-suprematism .sup-hero-forms .shape-2 {
+  right: 9%;
+  bottom: 22%;
+  width: clamp(4rem, 8vw, 8rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-accent-2);
+  animation: sup-drift-b 16s ease-in-out infinite alternate;
+}
+
+.room-suprematism .sup-hero-forms .shape-3 {
+  left: 35%;
+  top: 34%;
+  width: 28%;
+  height: 1.1rem;
+  transform: rotate(var(--sup-angle-b));
+  background: var(--color-text);
+}
+
+.room-suprematism .sup-hero-forms .shape-4 {
+  right: 28%;
+  top: 12%;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 0;
+}
+
+.room-suprematism .sup-hero-forms .shape-4::before,
+.room-suprematism .sup-hero-forms .shape-4::after {
+  content: "";
+  position: absolute;
+  background: var(--color-line);
+}
+
+.room-suprematism .sup-hero-forms .shape-4::before {
+  left: 50%;
+  width: 0.4rem;
+  height: 100%;
+}
+
+.room-suprematism .sup-hero-forms .shape-4::after {
+  top: 50%;
+  width: 100%;
+  height: 0.4rem;
+}
+
+.room-suprematism .sup-hero-forms .shape-5 {
+  left: 62%;
+  bottom: 9%;
+  width: 8rem;
+  height: 5rem;
+  transform: rotate(var(--sup-angle-a)) skewX(-18deg);
+  background: var(--color-surface-2);
+}
+
+@keyframes sup-drift-a {
+  to { translate: 0.7rem -0.4rem; }
+}
+
+@keyframes sup-drift-b {
+  to { translate: -0.6rem 0.8rem; }
+}
+
+.room-suprematism .sup-field {
+  min-height: var(--field-height, 120svh);
+  position: relative;
+  overflow: hidden;
+  border-top: var(--line-thin) solid color-mix(in srgb, var(--color-line) 36%, transparent);
+}
+
+.room-suprematism .sup-field > header {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+.room-suprematism .sup-field > header span {
+  font-size: var(--font-size-xs);
+}
+
+.room-suprematism .sup-field > header h2 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+}
+
+.room-suprematism .field-content {
+  position: relative;
+  z-index: 3;
+  min-height: inherit;
+}
+
+.room-suprematism .preset-left-heavy > header { top: 8%; left: 4%; }
+.room-suprematism .preset-top-heavy > header { top: 8%; left: 42%; }
+.room-suprematism .preset-diagonal-drift > header { top: 17%; right: 6%; }
+.room-suprematism .preset-central-void > header { left: 5%; bottom: 10%; }
+.room-suprematism .preset-four-corners > header { top: 8%; right: 6%; }
+.room-suprematism .preset-horizontal-scatter > header { top: 48%; left: 3%; }
+.room-suprematism .preset-vertical-rise > header { top: 8%; left: 12%; }
+.room-suprematism .preset-centrifugal > header { bottom: 8%; right: 8%; }
+
+.room-suprematism .field-decoration .shape-1 {
+  left: 6%;
+  top: 40%;
+  width: 5rem;
+  aspect-ratio: 1;
+  transform: rotate(var(--sup-angle-a));
+  background: var(--color-accent);
+}
+
+.room-suprematism .field-decoration .shape-2 {
+  right: 7%;
+  top: 18%;
+  width: 3.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-accent-2);
+}
+
+.room-suprematism .field-decoration .shape-3 {
+  right: 20%;
+  bottom: 12%;
+  width: 18%;
+  height: 0.5rem;
+  transform: rotate(var(--sup-angle-b));
+  background: var(--color-line);
+}
+
+.room-suprematism .sup-projects {
+  min-height: inherit;
+  padding: 14% 4% 8%;
+}
+
+.room-suprematism .sup-project {
+  position: relative;
+  min-height: 34rem;
+}
+
+.room-suprematism .sup-project + .sup-project {
+  margin-top: 15vh;
+}
+
+.room-suprematism .sup-project > * {
+  position: absolute;
+}
+
+.room-suprematism .project-title-node {
+  top: 8%;
+  left: 10%;
+  width: 34%;
+}
+
+.room-suprematism .project-title-node h3,
+.room-suprematism .sup-experience h3,
+.room-suprematism .sup-education h3,
+.room-suprematism .sup-exhibition-note h3 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  line-height: 0.95;
+}
+
+.room-suprematism .project-copy-node {
+  right: 8%;
+  top: 32%;
+  width: min(44%, 42rem);
+}
+
+.room-suprematism .project-stack-node {
+  left: 26%;
+  bottom: 16%;
+  max-width: 36ch;
+}
+
+.room-suprematism .project-action-node {
+  right: 8%;
+  bottom: 8%;
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.room-suprematism .project-action-node button,
+.room-suprematism .sup-exhibition-note button {
+  border: var(--line-medium) solid var(--color-line);
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  cursor: pointer;
+}
+
+.room-suprematism .project-details {
+  position: relative;
+  inset: auto;
+  width: min(70%, 55rem);
+  margin: 2rem auto 0;
+  padding: var(--space-4);
+  background: var(--color-surface);
+}
+
+.room-suprematism .project-orbit {
+  left: 0;
+  top: 42%;
+  font-size: var(--font-size-lg);
+}
+
+.room-suprematism .project-form {
+  z-index: -1;
+  left: 38%;
+  top: 14%;
+  width: 18%;
+  aspect-ratio: 1;
+  transform: rotate(var(--sup-angle-a));
+  background: var(--color-surface-2);
+}
+
+.room-suprematism .composition-island .project-title-node {
+  left: 46%;
+}
+
+.room-suprematism .composition-island .project-copy-node {
+  right: auto;
+  left: 18%;
+  top: 45%;
+}
+
+.room-suprematism .sup-experience {
+  min-height: inherit;
+  position: relative;
+}
+
+.room-suprematism .sup-experience > * {
+  position: absolute;
+}
+
+.room-suprematism .experience-date { left: 8%; top: 24%; }
+.room-suprematism .sup-experience > div { left: 32%; top: 12%; width: 48%; }
+.room-suprematism .experience-copy { right: 6%; top: 44%; width: 38%; }
+.room-suprematism .sup-experience ul { left: 14%; bottom: 10%; width: 48%; }
+.room-suprematism .sup-experience > i { left: 24%; top: 38%; width: 8rem; aspect-ratio: 1; transform: rotate(var(--sup-angle-b)); background: var(--color-accent-2); }
+
+.room-suprematism .sup-education {
+  position: absolute;
+  left: 14%;
+  top: 28%;
+  width: min(62%, 56rem);
+  border-block: var(--line-medium) solid var(--color-line);
+  padding: var(--space-5) 0;
+  background: var(--color-bg);
+}
+
+.room-suprematism .sup-stack {
+  min-height: inherit;
+  position: relative;
+}
+
+.room-suprematism .sup-stack section {
+  position: absolute;
+  left: calc(8% + var(--group) * 18%);
+  top: calc(18% + (var(--group) % 2) * 28%);
+}
+
+.room-suprematism .sup-stack h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+}
+
+.room-suprematism .sup-stack ul {
+  padding: 0;
+  list-style: none;
+}
+
+.room-suprematism .sup-stack li {
+  margin-left: calc(var(--item) * 1.2rem);
+  padding: var(--space-1) 0;
+}
+
+.room-suprematism .sup-exhibition-note {
+  position: absolute;
+  left: 18%;
+  top: 22%;
+  width: min(68%, 65rem);
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: var(--space-6);
+}
+
+.room-suprematism .sup-exhibition-note > i {
+  position: absolute;
+  right: -10%;
+  top: -18%;
+  width: 4rem;
+  aspect-ratio: 1;
+  transform: rotate(var(--sup-angle-a));
+  background: var(--color-accent);
+}
+
+.room-suprematism .sup-exhibition-note dl {
+  grid-column: 2;
+  margin: 0;
+}
+
+.room-suprematism .sup-exhibition-note dt {
+  color: var(--color-muted);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+}
+
+.room-suprematism .sup-exhibition-note dd {
+  margin: 0 0 var(--space-3);
+}
+
+.room-suprematism .sup-exhibition-note button {
+  grid-column: 2;
+  justify-self: start;
+}
+
+.room-suprematism .contact,
+.room-suprematism .sup-contact-field {
+  min-height: 95svh;
+}
+
+.room-suprematism .contact {
+  border-top: var(--line-thin) solid var(--color-line);
+}
+
+.room-suprematism .sup-contact-field {
+  position: relative;
+}
+
+.room-suprematism .contact-heading-node {
+  position: absolute;
+  left: 8%;
+  top: 18%;
+  width: min(48%, 44rem);
+}
+
+.room-suprematism .contact-heading-node h2 {
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.room-suprematism .sup-contact-field address {
+  font-style: normal;
+}
+
+.room-suprematism .sup-contact-field address > * {
+  position: absolute;
+  display: grid;
+  gap: var(--space-1);
+  max-width: 32rem;
+}
+
+.room-suprematism .email-node { right: 6%; top: 18%; }
+.room-suprematism .github-node { right: 20%; bottom: 24%; }
+.room-suprematism .linkedin-node { left: 15%; bottom: 10%; }
+.room-suprematism .linkedin-node.missing { color: var(--color-muted); }
+
+.room-suprematism .contact-axis {
+  position: absolute;
+  left: 25%;
+  top: 58%;
+  width: 50%;
+  border-top: var(--line-medium) solid var(--color-line);
+  transform: rotate(var(--sup-angle-b));
+}
+
+.room-suprematism .contact-form {
+  position: absolute;
+  right: 12%;
+  top: 47%;
+  width: 6rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-accent-2);
+}
+
+.room-suprematism .roll-again,
+.room-suprematism .sup-roll-field {
+  min-height: 72svh;
+}
+
+.room-suprematism .roll-again {
+  border-top: var(--line-thin) solid var(--color-line);
+}
+
+.room-suprematism .sup-roll-field {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.room-suprematism .sup-roll-field button {
+  position: relative;
+  z-index: 2;
+  width: min(48rem, 72%);
+  min-height: 14rem;
+  display: grid;
+  align-content: center;
+  gap: var(--space-2);
+  border: 0;
+  border-bottom: var(--line-heavy) solid var(--color-line);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.room-suprematism .sup-roll-field button strong {
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+}
+
+.room-suprematism .roll-form {
+  position: absolute;
+  left: 18%;
+  top: 20%;
+  width: clamp(8rem, 18vw, 18rem);
+  aspect-ratio: 1;
+  transform: rotate(var(--sup-angle-a));
+  background: var(--color-accent);
+  transition: translate var(--duration-slow) linear, rotate var(--duration-slow) linear;
+}
+
+.room-suprematism .sup-roll-field button:hover + *,
+.room-suprematism .sup-roll-field button:focus-visible + * {
+  translate: -0.6rem 0.4rem;
+}
+
+.room-suprematism.is-rolling .roll-form {
+  translate: -40vw -20vh;
+  rotate: -18deg;
+}
+
+@media (max-width: 62rem) {
+  .room-suprematism .project-copy-node { width: 50%; }
+  .room-suprematism .sup-stack section { left: calc(4% + var(--group) * 22%); }
+}
+
+@media (max-width: 46rem) {
+  .room-suprematism {
+    --sup-width: calc(100vw - 2rem);
+  }
+
+  .room-suprematism .site-navigation {
+    grid-template-columns: 1fr auto;
+    gap: var(--space-2);
+    padding-block: var(--space-2);
+  }
+
+  .room-suprematism .sup-nav-nodes {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: space-between;
+  }
+
+  .room-suprematism .sup-nav-nodes a {
+    transform: none !important;
+  }
+
+  .room-suprematism .sup-name-node,
+  .room-suprematism .mirror-mirrored .sup-name-node {
+    top: 11%;
+    right: auto;
+    left: 4%;
+    width: 92%;
+  }
+
+  .room-suprematism .sup-name-node h1 {
+    font-size: clamp(4rem, 23vw, 7rem);
+  }
+
+  .room-suprematism .sup-statement-node,
+  .room-suprematism .mirror-mirrored .sup-statement-node {
+    left: 4%;
+    right: auto;
+    bottom: 13%;
+    width: 84%;
+  }
+
+  .room-suprematism .sup-room-node {
+    left: 58%;
+    top: 48%;
+  }
+
+  .room-suprematism .sup-hero-forms .shape-4,
+  .room-suprematism .sup-hero-forms .shape-5 {
+    display: none;
+  }
+
+  .room-suprematism .sup-field {
+    min-height: 80svh;
+    padding: var(--space-7) var(--space-3);
+  }
+
+  .room-suprematism .sup-field > header {
+    position: relative;
+    inset: auto !important;
+    margin-bottom: var(--space-6);
+  }
+
+  .room-suprematism .field-content,
+  .room-suprematism .sup-projects,
+  .room-suprematism .sup-experience,
+  .room-suprematism .sup-stack {
+    min-height: auto;
+    padding: 0;
+  }
+
+  .room-suprematism .field-decoration .shape-3 {
+    display: none;
+  }
+
+  .room-suprematism .sup-project,
+  .room-suprematism .sup-project + .sup-project {
+    min-height: auto;
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: var(--space-3);
+    margin: 0 0 var(--space-8);
+  }
+
+  .room-suprematism .sup-project > *,
+  .room-suprematism .composition-island .project-title-node,
+  .room-suprematism .composition-island .project-copy-node {
+    position: relative;
+    inset: auto;
+    width: auto;
+    grid-column: 2;
+  }
+
+  .room-suprematism .project-orbit {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+  }
+
+  .room-suprematism .project-action-node {
+    flex-wrap: wrap;
+  }
+
+  .room-suprematism .project-form {
+    position: absolute;
+    left: auto;
+    right: 4%;
+    top: -1rem;
+    width: 4rem;
+  }
+
+  .room-suprematism .sup-experience > *,
+  .room-suprematism .sup-education,
+  .room-suprematism .sup-stack section,
+  .room-suprematism .sup-exhibition-note {
+    position: relative;
+    inset: auto;
+    width: auto;
+  }
+
+  .room-suprematism .sup-experience {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .room-suprematism .sup-experience > i {
+    position: absolute;
+    right: 4%;
+    left: auto;
+    top: 3rem;
+    width: 4rem;
+  }
+
+  .room-suprematism .sup-stack {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+
+  .room-suprematism .sup-stack li {
+    margin-left: calc(var(--item) * 0.35rem);
+  }
+
+  .room-suprematism .sup-exhibition-note {
+    grid-template-columns: 1fr;
+  }
+
+  .room-suprematism .sup-exhibition-note dl,
+  .room-suprematism .sup-exhibition-note button {
+    grid-column: 1;
+  }
+
+  .room-suprematism .sup-contact-field {
+    display: grid;
+    align-content: center;
+    gap: var(--space-6);
+    padding: var(--space-7) var(--space-3);
+  }
+
+  .room-suprematism .contact-heading-node,
+  .room-suprematism .sup-contact-field address > * {
+    position: relative;
+    inset: auto;
+    width: auto;
+    max-width: none;
+  }
+
+  .room-suprematism .sup-contact-field address {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .room-suprematism .contact-axis {
+    left: 0;
+    top: 52%;
+    width: 100%;
+  }
+
+  .room-suprematism .contact-form {
+    right: 8%;
+    top: 8%;
+    width: 4rem;
+  }
+
+  .room-suprematism .sup-roll-field button {
+    width: 88%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .room-suprematism .sup-hero-forms .shape-1,
+  .room-suprematism .sup-hero-forms .shape-2 {
+    animation: none;
+  }
+
+  .room-suprematism.is-rolling .roll-form {
+    translate: none;
+    rotate: none;
+  }
+}
