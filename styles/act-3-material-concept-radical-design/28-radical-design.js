@@ -5,27 +5,30 @@
     id: "radical-design",
     classNames: ["theme-radical-design", "layout-single"],
     variables: {
-      "--bg": "#f1e8d6",
-      "--fg": "#211a2d",
-      "--muted": "#5c5266",
-      "--line": "#211a2d",
-      "--card": "#fff8e9",
-      "--card-strong": "#ef6b3f",
-      "--accent": "#7f2e74",
-      "--radius": "18px",
-      "--style-site-width": "1120px",
-      "--style-h1-max": "100px",
-      "--style-section-padding-y": "96px",
-      "--style-section-gap": "40px",
+      "--bg": "#f2e8d5",
+      "--fg": "#24152e",
+      "--muted": "#63566b",
+      "--line": "#24152e",
+      "--card": "#fff9eb",
+      "--card-strong": "#f06a3f",
+      "--accent": "#772875",
+      "--radius": "2px",
+      "--style-site-width": "1160px",
+      "--style-h1-max": "112px",
+      "--style-section-padding-y": "112px",
+      "--style-section-gap": "48px",
+      "--style-card-padding": "28px",
+      "--style-card-gap": "20px",
       "--style-component-outline": "2px solid var(--line)",
-      "--style-button-radius": "999px",
-      "--style-button-weight": "780"
+      "--style-button-radius": "0",
+      "--style-button-border-width": "2px",
+      "--style-button-weight": "820"
     },
     label: { en: "Radical Design", zh: "激进设计" },
     period: "1960s",
     introduction: {
-      en: "One existing signal—the section index—is enlarged into an elongated counter-proposal while every operation stays familiar.",
-      zh: "只把一个既有信号——章节编号——放大并拉长为反提案，其余操作仍保持熟悉。"
+      en: "Every section label is stretched into a horizontal super-object—one architectural counterproposal inside an otherwise familiar portfolio.",
+      zh: "每个章节标记都被拉伸成水平超级物体：它是熟悉作品集中唯一的建筑性反提案。"
     }
   });
 })();

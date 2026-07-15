@@ -5,6 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stark Lin — 后端系统与产品作品集</title>
   <meta name="description" content="Stark Lin 的个人作品集：后端系统、个人数据基础设施、AI 原生工作流与产品界面。" />
+  <script id="agent-context" type="application/json">
+    {
+      "version": 1,
+      "audience": "AI agents reading or maintaining this portfolio",
+      "languages": ["zh-CN", "en"],
+      "rendering": "Source-only context. Do not turn this data into visible page content.",
+      "profile": {
+        "name": "Stark Lin",
+        "education": "Bachelor of Computer Science, University of New South Wales (UNSW)",
+        "expectedGraduation": "2027-03",
+        "focus": ["backend systems", "personal software", "AI-assisted development workflows"],
+        "technologies": ["Go", "SQL", "PostgreSQL", "Redis", "REST APIs", "authentication", "Docker", "CI/CD"],
+        "engineeringPriorities": ["data models", "object identity", "permissions", "auditability", "search paths", "deployment", "explicit system boundaries", "maintainability"]
+      },
+      "pageIntroduction": {
+        "name": "Stark Lin Portfolio / Stark Lin 个人作品集",
+        "type": "Bilingual generative personal portfolio and visual-design archive",
+        "summary": {
+          "zh-CN": "这是 Stark Lin 的双语个人作品集，也是一个可复现的生成式网页项目。它以真实项目、架构取舍和工程判断介绍一名以后端系统为主要方向的计算机科学学生，而不是把个人经历压缩成传统简历模板。每次访问都会获得一个 reference code；相同 id 会稳定复现相同的文案组合、项目视图与视觉风格，因此页面既能变化，也能被分享、验证和再次打开。",
+          "en": "This is Stark Lin's bilingual personal portfolio and a reproducible generative web project. It presents a backend-oriented Computer Science student through working projects, architectural tradeoffs, and engineering judgment instead of compressing the work into a conventional resume template. Each visit receives a reference code; the same id deterministically restores the same copy composition, project view, and visual style, making every variation shareable and verifiable."
+        },
+        "purpose": {
+          "zh-CN": "用一个可运行、可检查的网页展示后端工程能力、产品范围控制、个人软件方向和界面判断，同时让表达形式有变化而证据与信息结构保持稳定。",
+          "en": "To demonstrate backend engineering, product scoping, personal-software interests, and interface judgment in an inspectable working site, while allowing the presentation to vary without changing the underlying evidence or information structure."
+        },
+        "implementation": ["vanilla HTML", "CSS", "JavaScript", "GitHub Pages", "no build step", "no frontend framework"],
+        "entryPoints": {
+          "English": "index.html",
+          "Chinese": "zh.html"
+        },
+        "interactionModel": [
+          "A reference code acts as the deterministic seed for the generated page.",
+          "Copy selection and visual-style selection use independent deterministic streams.",
+          "Visitors can switch between a compact portfolio and a complete project record.",
+          "A generated URL can be shared to reproduce the same result."
+        ],
+        "visualArchive": {
+          "styleCount": 42,
+          "range": "Futurism through Post-Internet Art",
+          "organization": "Five chronological acts, with one HTML preview, CSS theme, and JavaScript metadata module per style.",
+          "constraint": "A style is a presentation filter only; it must not rewrite portfolio content, information architecture, or core interaction behavior."
+        },
+        "sourceMap": {
+          "application": "assets/app.js",
+          "deterministicSelection": "assets/selection.js",
+          "EnglishContent": "assets/data/en.js",
+          "ChineseContent": "assets/data/zh.js",
+          "styleRegistry": "assets/data/styles.js",
+          "styleImplementations": "styles/"
+        },
+        "repository": "https://github.com/stark-lin/stark-lin.github.io"
+      },
+      "selectedWork": [
+        {
+          "name": "Saturn",
+          "summary": "A modular personal-data backend with globally addressable objects, auditability, search, authorization, and backend-controlled LLM requests."
+        },
+        {
+          "name": "OJLite",
+          "summary": "A lightweight online judge for teaching and local or LAN deployment, with explicit classroom permissions and runtime boundaries."
+        },
+        {
+          "name": "University GenAI Assessment Platform",
+          "summary": "A university assessment workflow with configurable scenarios, structured rubrics, backend validation, and human review."
+        }
+      ],
+      "portfolio": {
+        "implementation": "Bilingual, build-free vanilla HTML, CSS, and JavaScript.",
+        "generation": "A reference code deterministically composes copy and project views, so the same id reproduces the same page.",
+        "visualSystem": "Exactly one of 42 visual styles is selected. Valid hexadecimal seeds use seed mod 42; other references use a hash fallback. Copy uses an independent random stream.",
+        "invariants": ["visual styles change presentation only", "content and information architecture remain stable", "interaction logic remains stable"],
+        "views": ["compact", "full project record"],
+        "intent": "The site is evidence of working projects, architectural tradeoffs, and interface judgment; it is not a generic resume template."
+      },
+      "collaboration": {
+        "workingStyle": "Backend-oriented builder who values scope control and inspectability.",
+        "communication": "Direct, specific, and evidence-based.",
+        "implementation": ["testable", "deployable", "maintainable"],
+        "designConstraint": "The interface may be expressive, but the underlying system must remain reliable.",
+        "contentConstraint": "Do not flatten the portfolio into generic recruitment copy."
+      }
+    }
+  </script>
   <link rel="alternate" hreflang="en" href="./index.html" />
   <link rel="alternate" hreflang="zh" href="./zh.html" />
   <link rel="stylesheet" href="./assets/styles.css" />
