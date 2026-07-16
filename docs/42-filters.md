@@ -298,7 +298,17 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 25. Conceptual Art, 1960s–1970s
+#### 25. Soviet Modernism, 1950s–1990s
+
+**Historical core:** Post-Stalinist modernization, public infrastructure, standardized production, monumental spaces, regional adaptation, and visions of a technological future.
+
+**Filter language:** Monumental cantilevers and heavy masses, repetitive window grids, deep frames, circular or polyhedral civic structures, abstract mural-like color fields, and large areas of open space at an architectural scale.
+
+**Boundary:** Do not lock the palette to gray concrete; do not use red stars, portraits of leaders, Cyrillic text, or propaganda slogans; and do not turn the result into a military base, nuclear control room, or science-fiction HUD.
+
+---
+
+#### 26. Conceptual Art, 1960s–1970s
 
 **Historical core:** The primacy of ideas, language, definitions, documentation, and the dematerialization of the art object.
 
@@ -308,7 +318,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 26. Arte Povera, 1960s–1970s
+#### 27. Arte Povera, 1960s–1970s
 
 **Historical core:** Everyday materials, non-precious matter, transience, and resistance to the commodification of art.
 
@@ -318,7 +328,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 27. Metabolism, 1960s–1970s
+#### 28. Metabolism, 1960s–1970s
 
 **Historical core:** Infrastructure, growing units, replaceable modules, and imagination at an urban scale.
 
@@ -328,7 +338,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 28. High-Tech, 1960s–1980s
+#### 29. High-Tech, 1960s–1980s
 
 **Historical core:** Exposed technology, lightweight frameworks, connectors, tracks, and precision construction.
 
@@ -338,7 +348,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 29. Radical Design, 1960s–1970s
+#### 30. Radical Design, 1960s–1970s
 
 **Historical core:** Conceptual counterproposals to functionalism, standardized ways of living, and the conventions of modern design.
 
@@ -348,7 +358,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 30. Anti-Design, 1960s–1980s
+#### 31. Anti-Design, 1960s–1980s
 
 **Historical core:** Rejection of unified standards, rational functionalism, and so-called “good taste.”
 
@@ -360,7 +370,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ### Act IV: Postmodernism and Plural Surfaces
 
-#### 31. Postmodernism, 1970s–1990s
+#### 32. Postmodernism, 1970s–1990s
 
 **Historical core:** Historical reference, parody, complexity and contradiction, the return of ornament, and stylistic self-awareness.
 
@@ -370,7 +380,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 32. Memphis, 1980s
+#### 33. Memphis, 1980s
 
 **Historical core:** Synthetic materials, vivid patterns, humor, strange geometry, and anti-functionalism.
 
@@ -380,7 +390,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 33. New Wave Typography, 1970s–1990s
+#### 34. New Wave Typography, 1970s–1990s
 
 **Historical core:** Breaking the Swiss grid, transparent layering, displaced baselines, and multidirectional type.
 
@@ -390,7 +400,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 34. Deconstructivism, 1980s–1990s
+#### 35. Deconstructivism, 1980s–1990s
 
 **Historical core:** Fractured grids, displaced planes, non-orthogonal structures, and unstable boundaries.
 
@@ -400,7 +410,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 35. Neo-Geo, 1980s–1990s
+#### 36. Neo-Geo, 1980s–1990s
 
 **Historical core:** Polished geometry, repeated symbols, commercial surfaces, and critical distance from systems of consumption.
 
@@ -410,7 +420,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 36. Pattern and Decoration, 1970s–1980s
+#### 37. Pattern and Decoration, 1970s–1980s
 
 **Historical core:** Continuous patterns, decorative surfaces, craft traditions, and a challenge to modernism's rejection of ornament.
 
@@ -422,23 +432,13 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ### Act V: Computers, the Web, and Future Visual Culture
 
-#### 37. Early Computer Art, 1950s–1970s
+#### 38. Early Computer Art, 1950s–1970s
 
 **Historical core:** Plotters, matrices, limited computation, linear algorithms, and deterministic variation.
 
 **Filter language:** Fine-line structures, sequences, grid deformations, and limited algorithmic graphics generated with SVG or Canvas.
 
 **Boundary:** Do not redraw continuously in real time, place real text inside Canvas, or turn the result into contemporary particle art.
-
----
-
-#### 38. ASCII Art, 1960s–1990s
-
-**Historical core:** Character grids, monospaced text, and digital images formed through character density.
-
-**Filter language:** Character borders, character-based numbering, abstract character fields, and monospaced typographic surfaces.
-
-**Boundary:** Real copy must display normally; do not use green text on black, code rain, or ASCII portraits.
 
 ---
 
@@ -451,8 +451,6 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 **Filter language:** System fonts, direct links, simple horizontal rules, thin-bordered tables, native-looking buttons, and limited repeating backgrounds.
 
 **Boundary:** Do not add “Under Construction” notices, visitor counters, animated icons, compatibility badges, or other fictional content.
-
-**Difference from ASCII:** ASCII uses characters as image-making material; Early Web uses the structure of an HTML document as page-making material.
 
 **Difference from Early Computer Art:** Early Computer Art explores how computers generate graphics; Early Web explores how browsers organize information.
 
@@ -494,9 +492,9 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 | --- | ---: |
 | The Avant-Garde and Modern Order | 12 |
 | Postwar Abstraction, Perception, and Popular Culture | 11 |
-| Material, Concept, and Radical Design | 7 |
+| Material, Concept, and Radical Design | 8 |
 | Postmodernism and Plural Surfaces | 6 |
-| Computers, the Web, and Future Visual Culture | 6 |
+| Computers, the Web, and Future Visual Culture | 5 |
 | **Total** | **42** |
 
 ---
@@ -524,13 +522,22 @@ They should not be exaggerated or caricatured simply to make them look more like
 
 ---
 
-### Three Starting Points for Digital Media
+### Soviet Modernism and Adjacent Filters
+
+- **Constructivism:** Revolutionary action, diagonals, typographic dynamism, and structural organization.
+- **Brutalism:** Material weight, exposed structure, and a raw sense of construction.
+- **Soviet Modernism:** Public institutions, megastructural massing, modular repetition, and an unfamiliar collective future.
+- **Atomic Age Futurism:** Optimistic products of the future aimed at consumers.
+- **Cyberpunk:** Social wear after technological systems have become highly developed.
+
+---
+
+### Two Starting Points for Digital Media
 
 - **Early Computer Art:** The computer becomes a tool for generating graphics.
-- **ASCII Art:** Characters become material for digital images.
 - **Early Web Design:** HTML and the browser establish a new page-based medium.
 
-They represent three distinct starting points for digital visual culture: graphics, characters, and web pages.
+They represent two distinct starting points for digital visual culture: graphics and web pages.
 
 ---
 

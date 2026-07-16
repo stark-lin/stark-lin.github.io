@@ -8,7 +8,6 @@ body.theme-futurism {
 .theme-futurism .topbar {
   border-bottom-width: 3px;
   background: color-mix(in srgb, var(--bg), transparent 8%);
-  clip-path: polygon(0 0, 100% 0, 98% 100%, 0 100%);
 }
 
 .theme-futurism .brand::before {

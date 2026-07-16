@@ -1,2 +1,4 @@
 .kagent
 .agents
+.openai/
+dist/

@@ -32,20 +32,20 @@ const STYLE_ENTRIES = [
   ["act-2-postwar-abstraction-perception-popular-culture", "21-atomic-age-futurism"],
   ["act-2-postwar-abstraction-perception-popular-culture", "22-supergraphics"],
   ["act-3-material-concept-radical-design", "23-brutalism"],
-  ["act-3-material-concept-radical-design", "24-conceptual-art"],
-  ["act-3-material-concept-radical-design", "25-arte-povera"],
-  ["act-3-material-concept-radical-design", "26-metabolism"],
-  ["act-3-material-concept-radical-design", "27-high-tech"],
-  ["act-3-material-concept-radical-design", "28-radical-design"],
-  ["act-3-material-concept-radical-design", "29-anti-design"],
-  ["act-4-postmodernism-plural-surfaces", "30-postmodernism"],
-  ["act-4-postmodernism-plural-surfaces", "31-memphis"],
-  ["act-4-postmodernism-plural-surfaces", "32-new-wave-typography"],
-  ["act-4-postmodernism-plural-surfaces", "33-deconstructivism"],
-  ["act-4-postmodernism-plural-surfaces", "34-neo-geo"],
-  ["act-4-postmodernism-plural-surfaces", "35-pattern-and-decoration"],
-  ["act-5-computers-web-future-visual-culture", "36-early-computer-art"],
-  ["act-5-computers-web-future-visual-culture", "37-ascii-art"],
+  ["act-3-material-concept-radical-design", "24-soviet-modernism"],
+  ["act-3-material-concept-radical-design", "25-conceptual-art"],
+  ["act-3-material-concept-radical-design", "26-arte-povera"],
+  ["act-3-material-concept-radical-design", "27-metabolism"],
+  ["act-3-material-concept-radical-design", "28-high-tech"],
+  ["act-3-material-concept-radical-design", "29-radical-design"],
+  ["act-3-material-concept-radical-design", "30-anti-design"],
+  ["act-4-postmodernism-plural-surfaces", "31-postmodernism"],
+  ["act-4-postmodernism-plural-surfaces", "32-memphis"],
+  ["act-4-postmodernism-plural-surfaces", "33-new-wave-typography"],
+  ["act-4-postmodernism-plural-surfaces", "34-deconstructivism"],
+  ["act-4-postmodernism-plural-surfaces", "35-neo-geo"],
+  ["act-4-postmodernism-plural-surfaces", "36-pattern-and-decoration"],
+  ["act-5-computers-web-future-visual-culture", "37-early-computer-art"],
   ["act-5-computers-web-future-visual-culture", "38-early-web-design"],
   ["act-5-computers-web-future-visual-culture", "39-cyberpunk-visual-culture"],
   ["act-5-computers-web-future-visual-culture", "40-glitch-art"],
@@ -114,7 +114,7 @@ test("deconstructivism separates clipped surfaces with color instead of outline 
     ROOT,
     "styles",
     "act-4-postmodernism-plural-surfaces",
-    "33-deconstructivism.css"
+    "34-deconstructivism.css"
   ));
 
   assert.match(css, /\.theme-deconstructivism :is\(\.card, \.principle, \.timeline-item\)\s*{[^}]*border:\s*0;/s);
@@ -147,26 +147,25 @@ test("surrealism gives the arched profile card enough roof clearance for educati
   assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.theme-surrealism \.hero-card\s*{[^}]*padding:\s*26px 18px 18px/s);
 });
 
-test("ascii art builds component frames from literal ASCII glyphs instead of visible CSS borders", () => {
+test("soviet modernism uses a wide civic canvas and modular facade rhythm", () => {
   const css = read(path.join(
     ROOT,
     "styles",
-    "act-5-computers-web-future-visual-culture",
-    "37-ascii-art.css"
+    "act-3-material-concept-radical-design",
+    "24-soviet-modernism.css"
   ));
   const script = read(path.join(
     ROOT,
     "styles",
-    "act-5-computers-web-future-visual-culture",
-    "37-ascii-art.js"
+    "act-3-material-concept-radical-design",
+    "24-soviet-modernism.js"
   ));
 
-  assert.match(script, /function buildRule\(width, label = ""\)/);
-  assert.match(script, /for \(const edge of \["top", "left", "right", "bottom"\]\)/);
-  assert.match(script, /frame\.setAttribute\("aria-hidden", "true"\)/);
-  assert.match(css, /\.theme-ascii-art \.ascii-frame\s*{[^}]*font:\s*10px\/14px var\(--mono\)/s);
-  assert.match(css, /\.theme-ascii-art \.ascii-framed::before,[\s\S]*?content:\s*none;/);
-  assert.match(css, /\.theme-ascii-art \.hero-grid,[\s\S]*?border:\s*0;/);
+  assert.match(script, /id:\s*"soviet-modernism"/);
+  assert.match(script, /period:\s*"1950s"/);
+  assert.match(css, /body\.theme-soviet-modernism\.layout-single \.site\s*{[^}]*max-width:\s*var\(--style-site-width\)/s);
+  assert.match(css, /\.theme-soviet-modernism \.hero::before\s*{[^}]*clip-path:/s);
+  assert.match(css, /\.theme-soviet-modernism \.section-index\s*{[^}]*repeating-linear-gradient/s);
 });
 
 test("both locale entry points load every style in registry order", () => {
@@ -212,7 +211,7 @@ test("high-tech preserves its wide construction canvas", () => {
     ROOT,
     "styles",
     "act-3-material-concept-radical-design",
-    "27-high-tech.css"
+    "28-high-tech.css"
   ));
 
   assert.match(css, /body\.theme-high-tech\.layout-single \.site\s*{[^}]*max-width:\s*var\(--style-site-width\)/s);

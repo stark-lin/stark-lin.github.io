@@ -104,11 +104,11 @@ As long as each pool, its version, and its generation algorithm remain unchanged
 │   ├── act-2-postwar-abstraction-perception-popular-culture/
 │   │   └── 12–22 HTML/JS/CSS theme trios
 │   ├── act-3-material-concept-radical-design/
-│   │   └── 23–29 HTML/JS/CSS theme trios
+│   │   └── 23–30 HTML/JS/CSS theme trios
 │   ├── act-4-postmodernism-plural-surfaces/
-│   │   └── 30–35 HTML/JS/CSS theme trios
+│   │   └── 31–36 HTML/JS/CSS theme trios
 │   └── act-5-computers-web-future-visual-culture/
-│       └── 36–41 HTML/JS/CSS theme trios
+│       └── 37–41 HTML/JS/CSS theme trios
 ├── docs/
 │   ├── 42-filters.md       # English specification for the 42-filter exhibition
 │   └── 42-filters-zh.md    # Chinese specification for the 42-filter exhibition
@@ -307,11 +307,11 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 │   ├── act-2-postwar-abstraction-perception-popular-culture/
 │   │   └── 12–22 同名 HTML/JS/CSS 主题文件组
 │   ├── act-3-material-concept-radical-design/
-│   │   └── 23–29 同名 HTML/JS/CSS 主题文件组
+│   │   └── 23–30 同名 HTML/JS/CSS 主题文件组
 │   ├── act-4-postmodernism-plural-surfaces/
-│   │   └── 30–35 同名 HTML/JS/CSS 主题文件组
+│   │   └── 31–36 同名 HTML/JS/CSS 主题文件组
 │   └── act-5-computers-web-future-visual-culture/
-│       └── 36–41 同名 HTML/JS/CSS 主题文件组
+│       └── 37–41 同名 HTML/JS/CSS 主题文件组
 ├── docs/
 │   ├── 42-filters.md       # 42 种滤镜连续展览英文规格
 │   └── 42-filters-zh.md    # 42 种滤镜连续展览中文规格
