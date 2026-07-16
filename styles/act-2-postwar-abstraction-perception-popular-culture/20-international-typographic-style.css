@@ -1,44 +1,55 @@
 body.theme-international-typographic-style {
-  background: var(--bg);
+  --its-columns: repeat(12, minmax(0, 1fr));
+  --its-gutter: clamp(10px, 1.2vw, 18px);
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 7px,
+      color-mix(in srgb, var(--line), transparent 78%) 8px
+    ),
+    var(--bg);
   font-kerning: normal;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: tabular-nums lining-nums;
   text-align: left;
 }
 
+body.theme-international-typographic-style.layout-single .site {
+  max-width: var(--style-site-width);
+}
+
 .theme-international-typographic-style .topbar {
-  border-bottom: 1px solid var(--fg);
-  background: color-mix(in srgb, var(--bg), transparent 3%);
+  border: 0;
+  background: color-mix(in srgb, var(--bg), transparent 4%);
+  box-shadow: inset 0 -1px var(--fg);
   backdrop-filter: none;
 }
 
 .theme-international-typographic-style .topbar-inner {
-  width: min(var(--style-site-width), calc(100vw - 32px));
+  width: min(var(--style-site-width), calc(100vw - 40px));
+  min-height: 56px;
   margin-inline: auto;
-  padding: 12px 0 11px;
+  padding: 0;
 }
 
 .theme-international-typographic-style .brand {
-  gap: 10px;
-  font-size: 14px;
+  gap: 0;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: -.015em;
-}
-
-.theme-international-typographic-style .brand::before {
-  content: "";
-  flex: 0 0 auto;
-  width: 11px;
-  height: 11px;
-  background: var(--accent);
+  letter-spacing: -.025em;
 }
 
 .theme-international-typographic-style nav {
-  gap: clamp(16px, 2.4vw, 32px);
+  gap: clamp(14px, 2vw, 30px);
   color: var(--fg);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
+}
+
+.theme-international-typographic-style nav a {
+  position: relative;
 }
 
 .theme-international-typographic-style nav a.current {
@@ -46,24 +57,42 @@ body.theme-international-typographic-style {
   text-decoration: none;
 }
 
+.theme-international-typographic-style nav a.current::before {
+  content: "";
+  position: absolute;
+  right: 5px;
+  bottom: -13px;
+  left: 5px;
+  height: 4px;
+  background: var(--accent);
+}
+
 .theme-international-typographic-style .topbar .button.language-switch {
   border: 0;
-  padding: 4px 0;
+  padding: 6px 0;
   background: transparent;
   color: var(--fg);
 }
 
+.theme-international-typographic-style :is(a, button, summary):focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .theme-international-typographic-style .hero {
-  min-height: min(720px, 82vh);
-  border-bottom: 1px solid var(--fg);
+  position: relative;
+  min-height: min(780px, calc(100vh - 56px));
   align-items: end;
+  padding: clamp(72px, 10vw, 144px) 0 48px;
+  border-bottom: 1px solid var(--fg);
 }
 
 .theme-international-typographic-style .hero-grid {
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 16px;
-  row-gap: 40px;
+  grid-template-columns: var(--its-columns);
+  column-gap: var(--its-gutter);
+  row-gap: 48px;
   width: 100%;
+  align-items: end;
 }
 
 .theme-international-typographic-style .hero-grid > div:first-child {
@@ -73,20 +102,13 @@ body.theme-international-typographic-style {
 .theme-international-typographic-style .hero-card {
   grid-column: 10 / -1;
   align-self: end;
-}
-
-.theme-international-typographic-style h1 {
-  max-width: 880px;
-  font-weight: 700;
-  line-height: .89;
-  text-wrap: balance;
-}
-
-.theme-international-typographic-style .hero-sub {
-  max-width: 560px;
-  color: var(--fg);
-  font-size: clamp(17px, 2vw, 22px);
-  line-height: 1.42;
+  border: 0;
+  border-top: 8px solid var(--accent);
+  border-radius: 0;
+  outline: 0;
+  padding: 12px 0 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .theme-international-typographic-style .kicker,
@@ -95,32 +117,92 @@ body.theme-international-typographic-style {
 .theme-international-typographic-style .generated-desc-meta,
 .theme-international-typographic-style .time-label,
 .theme-international-typographic-style .stat-label,
-.theme-international-typographic-style .reveal-stat-label {
+.theme-international-typographic-style .reveal-stat-label,
+.theme-international-typographic-style .style-period {
   color: var(--accent);
   font-family: var(--sans);
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .09em;
   text-transform: uppercase;
 }
 
+.theme-international-typographic-style .kicker {
+  max-width: 32ch;
+  margin-bottom: clamp(32px, 6vw, 72px);
+  padding-top: 10px;
+  border-top: 1px solid var(--fg);
+}
+
+.theme-international-typographic-style h1 {
+  max-width: 980px;
+  font-weight: 700;
+  line-height: .84;
+  letter-spacing: -.065em;
+  text-wrap: balance;
+}
+
+.theme-international-typographic-style .hero-sub {
+  grid-column: 1 / 7;
+  max-width: 550px;
+  margin-top: 32px;
+  color: var(--fg);
+  font-size: clamp(16px, 1.8vw, 20px);
+  line-height: 1.45;
+}
+
 .theme-international-typographic-style .hero-actions {
-  gap: 8px;
+  gap: 0;
+  margin-top: 40px;
 }
 
 .theme-international-typographic-style .button {
-  min-height: 36px;
+  min-height: 38px;
   justify-content: center;
+  border-width: 1px;
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
 }
 
 .theme-international-typographic-style .button.secondary {
   background: transparent;
 }
 
-.theme-international-typographic-style .button:focus-visible,
-.theme-international-typographic-style a:focus-visible,
-.theme-international-typographic-style summary:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 3px;
+.theme-international-typographic-style .button:hover {
+  transform: none;
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+.theme-international-typographic-style .stat-grid {
+  gap: 0;
+}
+
+.theme-international-typographic-style .stat {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3px;
+  padding: 8px 0 15px;
+  border-bottom: 1px solid var(--line);
+}
+
+.theme-international-typographic-style .stat:last-child {
+  padding-bottom: 8px;
+  border-bottom: 0;
+}
+
+.theme-international-typographic-style .stat-label {
+  margin: 0;
+}
+
+.theme-international-typographic-style .stat-value {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -.015em;
 }
 
 .theme-international-typographic-style main {
@@ -128,50 +210,70 @@ body.theme-international-typographic-style {
 }
 
 .theme-international-typographic-style .section {
-  border-top: 0;
+  position: relative;
+  padding: clamp(64px, 8vw, 104px) 0;
+  border: 0;
   border-bottom: 1px solid var(--fg);
 }
 
 .theme-international-typographic-style .section-head,
 .theme-international-typographic-style .complete-head {
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 16px;
-  row-gap: 16px;
+  display: grid;
+  grid-template-columns: var(--its-columns);
+  column-gap: var(--its-gutter);
+  row-gap: 24px;
+  margin-bottom: clamp(48px, 7vw, 88px);
 }
 
 .theme-international-typographic-style .section-index,
 .theme-international-typographic-style .complete-head > .section-index {
   grid-column: 1 / 4;
-  padding-top: .45em;
+  padding-top: 7px;
+  border-top: 4px solid var(--accent);
 }
 
 .theme-international-typographic-style .section-head > div:last-child,
 .theme-international-typographic-style .complete-head > div:last-child {
   grid-column: 4 / -1;
-}
-
-.theme-international-typographic-style h2,
-.theme-international-typographic-style h3 {
-  font-weight: 700;
-  text-wrap: balance;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  column-gap: var(--its-gutter);
+  align-items: start;
 }
 
 .theme-international-typographic-style h2 {
-  max-width: 720px;
+  grid-column: 1 / 6;
+  max-width: 640px;
+  font-size: clamp(40px, 5vw, 66px);
+  font-weight: 700;
+  line-height: .9;
+  letter-spacing: -.05em;
+  text-wrap: balance;
+}
+
+.theme-international-typographic-style h3 {
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -.035em;
+  text-wrap: balance;
 }
 
 .theme-international-typographic-style .section-lead {
-  max-width: 600px;
+  grid-column: 6 / -1;
+  max-width: 430px;
+  margin: 4px 0 0;
   color: var(--fg);
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.55;
 }
 
 .theme-international-typographic-style .cards,
 .theme-international-typographic-style .principles,
 .theme-international-typographic-style .timeline {
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 16px;
-  row-gap: 24px;
+  display: grid;
+  grid-template-columns: var(--its-columns);
+  column-gap: var(--its-gutter);
+  row-gap: 0;
 }
 
 .theme-international-typographic-style .cards .card,
@@ -183,27 +285,55 @@ body.theme-international-typographic-style {
   grid-column: 4 / -1;
 }
 
-.theme-international-typographic-style :is(.card, .timeline-item, .principle, .hero-card) {
-  border-top: 4px solid var(--fg);
-  padding: 20px 0 32px;
+.theme-international-typographic-style :is(.card, .timeline-item, .principle) {
+  min-height: 0;
+  border: 0;
+  border-top: 1px solid var(--fg);
+  border-radius: 0;
+  outline: 0;
+  padding: 24px 0 clamp(48px, 6vw, 72px);
   background: transparent;
+  box-shadow: none;
 }
 
-.theme-international-typographic-style .hero-card {
-  border-top-color: var(--accent);
+.theme-international-typographic-style :is(.card, .timeline-item, .principle):last-child {
   padding-bottom: 0;
 }
 
-.theme-international-typographic-style .timeline-item {
-  grid-template-columns: 2fr 7fr;
-  column-gap: 16px;
+.theme-international-typographic-style .project-card {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  column-gap: var(--its-gutter);
+  align-items: start;
+}
+
+.theme-international-typographic-style .project-card .card-title-row {
+  grid-column: 1 / 5;
+  grid-row: 1 / span 4;
+}
+
+.theme-international-typographic-style .project-card > .generated-desc-meta,
+.theme-international-typographic-style .project-card > .generated-description,
+.theme-international-typographic-style .project-card > p:not(.generated-description) {
+  grid-column: 6 / -1;
+}
+
+.theme-international-typographic-style .project-card > .generated-desc-meta {
+  margin-top: 3px;
+}
+
+.theme-international-typographic-style .project-card > .generated-description {
+  margin-top: 16px;
 }
 
 .theme-international-typographic-style .card-title-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 16px;
+  display: block;
+  padding: 0;
+  border: 0;
+}
+
+.theme-international-typographic-style .card-title-row .tag {
+  margin-top: 20px;
 }
 
 .theme-international-typographic-style .tag,
@@ -216,72 +346,134 @@ body.theme-international-typographic-style {
   font-family: var(--sans);
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: .04em;
+  letter-spacing: .06em;
   text-align: left;
+  text-transform: uppercase;
+}
+
+.theme-international-typographic-style .stack {
+  margin-top: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.theme-international-typographic-style .generated-description {
+  max-width: 590px;
+  color: var(--fg);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.theme-international-typographic-style .timeline-item {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  column-gap: var(--its-gutter);
+}
+
+.theme-international-typographic-style .timeline-item > .time-label {
+  grid-column: 1 / 4;
+}
+
+.theme-international-typographic-style .timeline-item > div:last-child {
+  grid-column: 4 / -1;
 }
 
 .theme-international-typographic-style .skill-cloud {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px 16px;
+  gap: 12px var(--its-gutter);
+  margin-top: 24px !important;
+  padding-top: 14px;
   border-top: 1px solid var(--line);
-  padding-top: 16px;
 }
 
 .theme-international-typographic-style .principle {
-  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  column-gap: var(--its-gutter);
 }
 
 .theme-international-typographic-style .principle .tag {
+  grid-column: 1 / 3;
   display: block;
-  margin-bottom: 0;
+  margin: 0;
   color: var(--accent);
 }
 
 .theme-international-typographic-style .principle p {
-  max-width: 640px;
-  font-size: clamp(19px, 2.4vw, 26px);
-  line-height: 1.25;
+  grid-column: 4 / -1;
+  max-width: 620px;
+  margin-top: 0 !important;
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.22;
+  letter-spacing: -.025em;
 }
 
 .theme-international-typographic-style .contact-panel {
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  column-gap: var(--its-gutter);
+  border: 0;
   border-top: 8px solid var(--accent);
   border-radius: 0;
-  padding: 32px 0 0;
+  padding: 24px 0 0;
   background: transparent;
 }
 
 .theme-international-typographic-style .contact-panel > div:first-child {
-  grid-column: 1 / 9;
+  grid-column: 1 / 6;
+}
+
+.theme-international-typographic-style .contact-panel h2 {
+  max-width: 700px;
+}
+
+.theme-international-typographic-style .contact-panel .section-lead {
+  max-width: 520px;
+  margin-top: 24px;
 }
 
 .theme-international-typographic-style .contact-links {
-  grid-column: 10 / -1;
+  grid-column: 7 / -1;
   display: grid;
   align-self: end;
-  gap: 8px;
+  gap: 0;
 }
 
 .theme-international-typographic-style .contact-links .button {
   width: 100%;
 }
 
+.theme-international-typographic-style .contact-links .button:is(:hover, :focus-visible, :active) {
+  border-color: var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+  opacity: 1;
+  text-decoration: none;
+}
+
+.theme-international-typographic-style .contact-links .button::selection {
+  background: var(--bg);
+  color: var(--fg);
+}
+
 .theme-international-typographic-style .reveal {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 16px;
-  border-top: 8px solid var(--accent);
+  grid-template-columns: var(--its-columns);
+  column-gap: var(--its-gutter);
+  row-gap: 0;
+  border: 0;
+  border-bottom: 1px solid var(--fg);
   border-radius: 0;
-  padding: 32px 0 40px;
+  padding: clamp(64px, 8vw, 104px) 0;
   background: transparent;
 }
 
 .theme-international-typographic-style .reveal > .kicker {
   grid-column: 1 / 4;
   margin: 0;
-  padding-top: .45em;
+  padding-top: 7px;
+  border-top: 4px solid var(--accent);
 }
 
 .theme-international-typographic-style .reveal > h2,
@@ -291,26 +483,65 @@ body.theme-international-typographic-style {
   grid-column: 4 / -1;
 }
 
-.theme-international-typographic-style .reveal > p,
-.theme-international-typographic-style .reveal-grid {
-  max-width: 600px;
+.theme-international-typographic-style .reveal > p {
+  max-width: 590px;
+  font-size: 17px;
+  line-height: 1.55;
 }
 
 .theme-international-typographic-style .reveal-grid {
   width: 100%;
+  max-width: 720px;
+  margin-top: 40px;
 }
 
 .theme-international-typographic-style .reveal-stat {
   border: 0;
   border-top: 1px solid var(--fg);
   border-radius: 0;
-  padding: 16px 0 0;
+  padding: 0;
   background: transparent;
 }
 
+.theme-international-typographic-style .reveal-stat-section {
+  padding: 16px 0 20px;
+  border: 0;
+}
+
+.theme-international-typographic-style .reveal-stat-section + .reveal-stat-section {
+  margin-top: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.theme-international-typographic-style .active-style-heading {
+  align-items: baseline;
+}
+
+.theme-international-typographic-style .active-style-value {
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.theme-international-typographic-style .style-introduction {
+  max-width: 660px;
+  margin-top: 16px;
+  color: var(--fg);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.theme-international-typographic-style .reveal-actions {
+  gap: 0;
+  margin-top: 32px;
+}
+
 .theme-international-typographic-style .complete-version {
-  border-top: 0;
+  border: 0;
   border-bottom: 1px solid var(--fg);
+  padding-top: clamp(64px, 8vw, 104px);
 }
 
 .theme-international-typographic-style .complete-project .intro-list p {
@@ -322,27 +553,92 @@ body.theme-international-typographic-style {
 }
 
 .theme-international-typographic-style .tiny-footer {
-  padding-top: 24px;
+  display: grid;
+  grid-template-columns: 3fr 6fr 3fr;
+  gap: var(--its-gutter);
+  padding: 24px 0 40px;
   font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: .03em;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: .04em;
 }
 
-@media (max-width: 720px) {
+.theme-international-typographic-style .tiny-footer > :last-child {
+  text-align: right;
+}
+
+@media (max-width: 800px) {
   .theme-international-typographic-style .topbar-inner {
     width: min(100vw - 24px, var(--style-site-width));
   }
 
   .theme-international-typographic-style .hero {
     min-height: auto;
+    padding-top: 72px;
   }
 
   .theme-international-typographic-style .hero-grid {
-    display: block;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .theme-international-typographic-style .hero-grid > div:first-child {
+    grid-column: 1 / -1;
   }
 
   .theme-international-typographic-style .hero-card {
-    margin-top: 40px;
+    grid-column: 4 / -1;
+    margin-top: 16px;
+  }
+
+  .theme-international-typographic-style .section-head > div:last-child,
+  .theme-international-typographic-style .complete-head > div:last-child {
+    display: block;
+  }
+
+  .theme-international-typographic-style .section-head .section-lead,
+  .theme-international-typographic-style .complete-head .section-lead {
+    margin-top: 24px;
+  }
+
+  .theme-international-typographic-style .project-card .card-title-row {
+    grid-column: 1 / 5;
+  }
+
+  .theme-international-typographic-style .project-card > .generated-desc-meta,
+  .theme-international-typographic-style .project-card > .generated-description,
+  .theme-international-typographic-style .project-card > p:not(.generated-description) {
+    grid-column: 5 / -1;
+  }
+
+  .theme-international-typographic-style .contact-panel > div:first-child {
+    grid-column: 1 / 7;
+  }
+
+  .theme-international-typographic-style .contact-links {
+    grid-column: 7 / -1;
+  }
+}
+
+@media (max-width: 620px) {
+  body.theme-international-typographic-style {
+    --its-gutter: 10px;
+  }
+
+  .theme-international-typographic-style .topbar-inner {
+    min-height: 52px;
+  }
+
+  .theme-international-typographic-style nav {
+    display: none;
+  }
+
+  .theme-international-typographic-style h1 {
+    line-height: .9;
+    letter-spacing: -.055em;
+  }
+
+  .theme-international-typographic-style .hero-card {
+    grid-column: 3 / -1;
   }
 
   .theme-international-typographic-style .section-head,
@@ -350,7 +646,71 @@ body.theme-international-typographic-style {
   .theme-international-typographic-style .cards,
   .theme-international-typographic-style .principles,
   .theme-international-typographic-style .timeline,
-  .theme-international-typographic-style .contact-panel,
+  .theme-international-typographic-style .reveal {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .theme-international-typographic-style .section-index,
+  .theme-international-typographic-style .complete-head > .section-index,
+  .theme-international-typographic-style .reveal > .kicker {
+    grid-column: 1 / 3;
+  }
+
+  .theme-international-typographic-style .section-head > div:last-child,
+  .theme-international-typographic-style .complete-head > div:last-child,
+  .theme-international-typographic-style .cards .card,
+  .theme-international-typographic-style .cards .card.full,
+  .theme-international-typographic-style .cards .card.third,
+  .theme-international-typographic-style .cards .complete-project,
+  .theme-international-typographic-style .principle,
+  .theme-international-typographic-style .timeline-item,
+  .theme-international-typographic-style .reveal > h2,
+  .theme-international-typographic-style .reveal > p,
+  .theme-international-typographic-style .reveal-grid,
+  .theme-international-typographic-style .reveal-actions {
+    grid-column: 3 / -1;
+  }
+
+  .theme-international-typographic-style .project-card,
+  .theme-international-typographic-style .timeline-item,
+  .theme-international-typographic-style .principle {
+    display: block;
+  }
+
+  .theme-international-typographic-style .project-card > .generated-desc-meta,
+  .theme-international-typographic-style .timeline-item > div:last-child,
+  .theme-international-typographic-style .principle p {
+    margin-top: 28px !important;
+  }
+
+  .theme-international-typographic-style .skill-cloud {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .theme-international-typographic-style .contact-panel {
+    display: block;
+  }
+
+  .theme-international-typographic-style .contact-links {
+    margin-top: 32px;
+  }
+
+  .theme-international-typographic-style .tiny-footer {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .theme-international-typographic-style .tiny-footer > :last-child {
+    text-align: left;
+  }
+}
+
+@media (max-width: 420px) {
+  .theme-international-typographic-style .section-head,
+  .theme-international-typographic-style .complete-head,
+  .theme-international-typographic-style .cards,
+  .theme-international-typographic-style .principles,
+  .theme-international-typographic-style .timeline,
   .theme-international-typographic-style .reveal {
     grid-template-columns: 1fr;
   }
@@ -365,8 +725,6 @@ body.theme-international-typographic-style {
   .theme-international-typographic-style .cards .complete-project,
   .theme-international-typographic-style .principle,
   .theme-international-typographic-style .timeline-item,
-  .theme-international-typographic-style .contact-panel > div:first-child,
-  .theme-international-typographic-style .contact-links,
   .theme-international-typographic-style .reveal > .kicker,
   .theme-international-typographic-style .reveal > h2,
   .theme-international-typographic-style .reveal > p,
@@ -378,29 +736,13 @@ body.theme-international-typographic-style {
   .theme-international-typographic-style .section-index,
   .theme-international-typographic-style .complete-head > .section-index,
   .theme-international-typographic-style .reveal > .kicker {
-    padding-top: 0;
+    margin-bottom: 28px;
   }
 
-  .theme-international-typographic-style .timeline-item,
-  .theme-international-typographic-style .card-title-row {
-    grid-template-columns: 1fr;
+  .theme-international-typographic-style .hero-card {
+    grid-column: 1 / -1;
   }
 
-  .theme-international-typographic-style .skill-cloud {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .theme-international-typographic-style .contact-panel,
-  .theme-international-typographic-style .reveal {
-    row-gap: 24px;
-  }
-
-  .theme-international-typographic-style .contact-links {
-    width: 100%;
-  }
-}
-
-@media (max-width: 420px) {
   .theme-international-typographic-style .skill-cloud {
     grid-template-columns: 1fr;
   }

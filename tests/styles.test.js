@@ -240,6 +240,36 @@ test("post-internet art preserves its wide catalog canvas", () => {
   assert.match(css, /body\.theme-post-internet-art\.layout-single \.site\s*{[^}]*max-width:\s*var\(--style-site-width\)/s);
 });
 
+test("international typographic style is identified as typography rather than architectural International Style", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-2-postwar-abstraction-perception-popular-culture",
+    "20-international-typographic-style.css"
+  ));
+  const script = read(path.join(
+    ROOT,
+    "styles",
+    "act-2-postwar-abstraction-perception-popular-culture",
+    "20-international-typographic-style.js"
+  ));
+
+  assert.match(script, /zh:\s*"国际字体排印风格"/);
+  assert.match(script, /不是 1920 年代的建筑“国际风格”/);
+  assert.match(script, /“瑞士风格”是它的别称/);
+  assert.doesNotMatch(script, /瑞士国际主义排版/);
+  assert.match(css, /--its-columns:\s*repeat\(12, minmax\(0, 1fr\)\)/);
+  assert.match(css, /repeating-linear-gradient/);
+  assert.match(css, /\.theme-international-typographic-style \.project-card\s*{[^}]*grid-template-columns:\s*repeat\(9, minmax\(0, 1fr\)\)/s);
+  assert.doesNotMatch(css, /content:\s*"20"/);
+  assert.doesNotMatch(css, /INTERNATIONAL\\A TYPOGRAPHIC STYLE/);
+  assert.doesNotMatch(css, /font-size:\s*(?:10|11)px/);
+  assert.match(css, /\.theme-international-typographic-style \.contact-links \.button:is\(:hover, :focus-visible, :active\)\s*{[^}]*background:\s*var\(--fg\);[^}]*color:\s*var\(--bg\);/s);
+  assert.match(css, /\.theme-international-typographic-style \.contact-links \.button::selection\s*{[^}]*background:\s*var\(--bg\);[^}]*color:\s*var\(--fg\);/s);
+  assert.match(css, /\.theme-international-typographic-style \.reveal-stat-section\s*{[^}]*border:\s*0;/s);
+  assert.match(css, /\.theme-international-typographic-style \.reveal-stat-section \+ \.reveal-stat-section\s*{[^}]*margin-top:\s*0;[^}]*border-top:\s*1px solid var\(--line\);/s);
+});
+
 test("cyberpunk visual culture uses a yellow field-dossier system without fake status copy", () => {
   const css = read(path.join(
     ROOT,
