@@ -147,6 +147,28 @@ test("surrealism gives the arched profile card enough roof clearance for educati
   assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.theme-surrealism \.hero-card\s*{[^}]*padding:\s*26px 18px 18px/s);
 });
 
+test("purism uses stable proportions, clear outlines, and a reduced geometric still life", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-1-avant-garde-modern-order",
+    "04-purism.css"
+  ));
+  const script = read(path.join(
+    ROOT,
+    "styles",
+    "act-1-avant-garde-modern-order",
+    "04-purism.js"
+  ));
+
+  assert.match(script, /"--radius":\s*"2px"/);
+  assert.match(css, /body\.theme-purism\s*{[^}]*background:\s*var\(--bg\)/s);
+  assert.match(css, /\.theme-purism \.hero-grid\s*{[^}]*grid-template-columns:\s*minmax\(0, 1\.55fr\) minmax\(236px, \.52fr\)/s);
+  assert.match(css, /\.theme-purism \.hero::before\s*{[^}]*border:\s*1px solid/s);
+  assert.match(css, /\.theme-purism \.hero::after\s*{[^}]*border-radius:\s*50%/s);
+  assert.match(css, /\.theme-purism \.card,[\s\S]*?\.theme-purism \.timeline-item\s*{[^}]*box-shadow:\s*none/s);
+});
+
 test("soviet modernism uses a wide civic canvas and modular facade rhythm", () => {
   const css = read(path.join(
     ROOT,

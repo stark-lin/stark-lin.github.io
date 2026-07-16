@@ -1,116 +1,415 @@
+/*
+ * Purism
+ * Simplified objects, stable ratios, clear contours, and machine-age order.
+ */
+
 body.theme-purism {
-  background:
-    radial-gradient(circle at 88% 9%, color-mix(in srgb, #9eb9b2, transparent 45%) 0 8vw, transparent 8.1vw),
-    linear-gradient(90deg, transparent 0 11%, color-mix(in srgb, var(--line), transparent 88%) 11% calc(11% + 1px), transparent calc(11% + 1px)),
-    var(--bg);
+  background: var(--bg);
+}
+
+body.theme-purism.layout-single .site {
+  max-width: var(--style-site-width);
 }
 
 .theme-purism .topbar {
-  background: color-mix(in srgb, var(--bg), transparent 6%);
-  border-bottom-color: color-mix(in srgb, var(--line), transparent 35%);
+  background: color-mix(in srgb, var(--bg), transparent 4%);
+  border-bottom-color: var(--line);
+  backdrop-filter: blur(10px);
+}
+
+.theme-purism .topbar-inner {
+  width: min(var(--style-site-width), calc(100vw - 32px));
+  margin-inline: auto;
+  padding: 12px 0;
 }
 
 .theme-purism .brand {
-  font-weight: 620;
-  letter-spacing: .02em;
+  font-size: 14px;
+  font-weight: 640;
+  letter-spacing: .015em;
+}
+
+.theme-purism nav {
+  gap: clamp(12px, 2vw, 24px);
+  color: var(--muted);
+}
+
+.theme-purism nav a.current {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.theme-purism nav a.current::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 7px 1px 0;
+  border: 1px solid currentColor;
+  border-radius: 50%;
 }
 
 .theme-purism .hero {
-  min-height: min(760px, 86vh);
+  min-height: min(820px, calc(100vh - 48px));
+  overflow: hidden;
 }
 
-.theme-purism .hero-grid {
-  grid-template-columns: minmax(0, 1.6fr) minmax(220px, .55fr);
-  align-items: end;
-}
-
+.theme-purism .hero::before,
 .theme-purism .hero::after {
   content: "";
   position: absolute;
   z-index: -1;
-  right: 2%;
-  bottom: 10%;
-  width: clamp(120px, 18vw, 210px);
-  height: clamp(190px, 29vw, 330px);
-  border: 1px solid var(--line);
-  border-radius: 50% 50% 18px 18px;
-  background: color-mix(in srgb, var(--card), transparent 20%);
+  pointer-events: none;
 }
 
-.theme-purism h1 {
-  max-width: 800px;
-  font-weight: 540;
-  line-height: 1;
+/* One rectangle and one circle: a reduced machine-age still life. */
+.theme-purism .hero::before {
+  top: 17%;
+  right: 2%;
+  width: clamp(152px, 20vw, 224px);
+  aspect-ratio: 2 / 3;
+  border: 1px solid color-mix(in srgb, var(--line), transparent 8%);
+  background: color-mix(in srgb, var(--card), transparent 34%);
+}
+
+.theme-purism .hero::after {
+  right: clamp(112px, 15vw, 168px);
+  bottom: 18%;
+  width: clamp(96px, 13vw, 144px);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 18%);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--card-strong), transparent 28%);
+}
+
+.theme-purism .hero-grid {
+  position: relative;
+  z-index: 1;
+  grid-template-columns: minmax(0, 1.55fr) minmax(236px, .52fr);
+  align-items: end;
+}
+
+.theme-purism .hero-grid > :first-child {
+  max-width: 760px;
+}
+
+.theme-purism .kicker,
+.theme-purism :is(.section-index, .stat-label, .time-label, .generated-desc-meta, .reveal-stat-label) {
+  color: var(--accent);
+  letter-spacing: .12em;
 }
 
 .theme-purism .kicker {
-  color: var(--muted);
-  letter-spacing: .18em;
+  margin-bottom: 22px;
+  font-size: 11px;
+}
+
+.theme-purism h1 {
+  max-width: 760px;
+  font-weight: 520;
+  line-height: 1.01;
+}
+
+.theme-purism h2 {
+  font-weight: 520;
+  line-height: 1.02;
+}
+
+.theme-purism h3 {
+  font-weight: 600;
 }
 
 .theme-purism .hero-sub {
-  max-width: 600px;
+  max-width: 620px;
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: clamp(18px, 2vw, 22px);
   font-weight: 390;
+  line-height: 1.5;
+}
+
+.theme-purism .hero-card {
+  padding: 24px;
+  background: color-mix(in srgb, var(--card), transparent 7%);
+  box-shadow: none;
+}
+
+.theme-purism .stat-grid {
+  gap: 0;
+}
+
+.theme-purism .stat {
+  padding: 0 0 18px;
+  border-bottom-color: var(--line);
+}
+
+.theme-purism .stat + .stat {
+  padding-top: 18px;
+}
+
+.theme-purism .stat-label {
+  margin-bottom: 6px;
+  font-size: 10px;
+}
+
+.theme-purism .stat-value {
+  font-size: 16px;
+  font-weight: 560;
+  letter-spacing: -.01em;
+}
+
+.theme-purism .button {
+  font-weight: 560;
+  box-shadow: none;
+}
+
+.theme-purism .button.secondary {
+  background: transparent;
+}
+
+.theme-purism .button:hover,
+.theme-purism .button:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--card);
+}
+
+.theme-purism .button:focus-visible,
+.theme-purism a:focus-visible,
+.theme-purism summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .theme-purism .section {
-  border-top-color: color-mix(in srgb, var(--line), transparent 40%);
+  border-top-color: var(--line);
 }
 
-.theme-purism .section-head {
-  grid-template-columns: minmax(90px, .22fr) minmax(0, 1fr);
-  gap: clamp(24px, 5vw, 72px);
+.theme-purism .section-head,
+.theme-purism .complete-version .complete-head {
+  grid-template-columns: minmax(128px, .24fr) minmax(0, 1fr);
+  gap: clamp(28px, 6vw, 80px);
 }
-
-.theme-purism h2 { font-weight: 520; }
 
 .theme-purism .section-index {
+  padding-top: 9px;
+  border-top: 1px solid var(--accent);
+  font-size: 10px;
+}
+
+.theme-purism .section-lead {
+  max-width: 680px;
+  line-height: 1.65;
+}
+
+.theme-purism .cards {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.theme-purism .card,
+.theme-purism .principle,
+.theme-purism .timeline-item {
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--card), transparent 5%);
+  box-shadow: none;
+}
+
+.theme-purism .card {
+  grid-column: 1 / -1;
+}
+
+.theme-purism #skills .card.third {
+  grid-column: span 4;
+}
+
+.theme-purism .card-title-row {
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.theme-purism .stack {
+  margin: 9px 0 0;
   color: var(--muted);
-  border-top: 1px solid var(--line);
-  padding-top: 10px;
 }
 
-.theme-purism :is(.card, .hero-card, .principle, .timeline-item) {
-  box-shadow: 0 14px 36px color-mix(in srgb, var(--fg), transparent 92%);
+.theme-purism .generated-desc-meta {
+  margin-top: 0;
+  font-size: 10px;
 }
 
-.theme-purism .cards .card:nth-child(odd)::after,
-.theme-purism .principle:nth-child(odd)::after {
-  content: "";
-  position: absolute;
-  right: 22px;
-  bottom: 22px;
-  width: 38px;
-  height: 38px;
-  border: 1px solid color-mix(in srgb, var(--line), transparent 25%);
-  border-radius: 50%;
+.theme-purism .generated-description {
+  max-width: 760px;
+  margin-top: 12px;
 }
 
 .theme-purism .tag,
 .theme-purism .skill-pill {
-  border-color: color-mix(in srgb, var(--line), transparent 20%);
-  border-radius: 8px;
+  border-color: var(--line);
+  border-radius: 2px;
+  background: transparent;
 }
 
-.theme-purism .skill-cloud { gap: 10px; }
+.theme-purism .tag {
+  padding: 6px 8px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.theme-purism .skill-cloud {
+  gap: 8px;
+}
+
+.theme-purism .skill-pill {
+  padding: 7px 10px;
+  font-size: 13px;
+}
+
+.theme-purism .principles {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.theme-purism .principle {
+  min-height: 176px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.theme-purism .principle p {
+  max-width: 32rem;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.theme-purism .timeline-item {
+  grid-template-columns: minmax(128px, .24fr) minmax(0, 1fr);
+  gap: clamp(28px, 6vw, 80px);
+}
+
+.theme-purism .time-label {
+  padding-top: 4px;
+  font-size: 10px;
+}
 
 .theme-purism .contact-panel {
-  grid-template-columns: minmax(0, 1.3fr) auto;
+  grid-template-columns: minmax(0, 1.4fr) auto;
   align-items: end;
-  background:
-    radial-gradient(circle at 90% 18%, color-mix(in srgb, var(--accent), transparent 72%) 0 52px, transparent 53px),
-    var(--card-strong);
+  gap: 48px;
+  border-radius: var(--radius);
+  background: var(--card-strong);
+  box-shadow: none;
+}
+
+.theme-purism .contact-links {
+  justify-content: flex-end;
 }
 
 .theme-purism .reveal {
-  border-radius: 72px 18px 72px 18px;
+  margin-top: 96px;
+  border-radius: var(--radius);
   background: var(--card-strong);
+  box-shadow: none;
 }
 
-@media (max-width: 720px) {
+.theme-purism .reveal-grid {
+  max-width: 680px;
+}
+
+.theme-purism .reveal-stat {
+  border-color: var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--card), transparent 12%);
+}
+
+.theme-purism .complete-project .intro-list p {
+  border-color: var(--line);
+  border-radius: var(--radius);
+  background: transparent;
+}
+
+.theme-purism .tiny-footer {
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 820px) {
+  .theme-purism .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(210px, .55fr);
+  }
+
+  .theme-purism #skills .card.third {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 680px) {
+  .theme-purism .topbar-inner {
+    width: min(100vw - 24px, var(--style-site-width));
+  }
+
+  .theme-purism .hero {
+    min-height: auto;
+  }
+
+  .theme-purism .hero::before {
+    top: 42px;
+    right: -58px;
+    opacity: .38;
+  }
+
+  .theme-purism .hero::after {
+    right: 46px;
+    bottom: 52px;
+    opacity: .42;
+  }
+
   .theme-purism .hero-grid,
-  .theme-purism .contact-panel { grid-template-columns: 1fr; }
-  .theme-purism .hero::after { opacity: .22; }
-  .theme-purism .section-head { grid-template-columns: 1fr; gap: 18px; }
-  .theme-purism .reveal { border-radius: 42px 14px; }
+  .theme-purism .section-head,
+  .theme-purism .complete-version .complete-head,
+  .theme-purism .timeline-item,
+  .theme-purism .contact-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-purism .hero-grid {
+    align-items: start;
+  }
+
+  .theme-purism .section-head,
+  .theme-purism .complete-version .complete-head,
+  .theme-purism .timeline-item {
+    gap: 24px;
+  }
+
+  .theme-purism .principles {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-purism #skills .card.third {
+    grid-column: 1 / -1;
+  }
+
+  .theme-purism .contact-links {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .theme-purism .hero {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .theme-purism .hero-card {
+    padding: 20px;
+  }
+
+  .theme-purism .section {
+    padding-block: 64px;
+  }
+
+  .theme-purism .principle {
+    min-height: 144px;
+  }
 }

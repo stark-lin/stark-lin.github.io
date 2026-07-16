@@ -1,89 +1,198 @@
 body.theme-cyberpunk-visual-culture {
+  --cyber-alert: #ff633f;
+  --cyber-dim: #252d28;
+  isolation: isolate;
   background:
-    repeating-linear-gradient(90deg, transparent 0 47px, color-mix(in srgb, var(--line), transparent 94%) 47px 48px),
-    radial-gradient(circle at 86% 14%, color-mix(in srgb, #8f2d22, transparent 78%) 0 18vw, transparent 18.2vw),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 94%) 1px, transparent 1px) 0 0 / 64px 100%,
+    radial-gradient(circle at 78% 6%, color-mix(in srgb, var(--cyber-alert), transparent 88%), transparent 28rem),
+    linear-gradient(115deg, transparent 0 70%, color-mix(in srgb, var(--fg), transparent 98%) 70% 71%, transparent 71%),
     var(--bg);
 }
 
-.theme-cyberpunk-visual-culture .topbar {
-  border-bottom: 1px solid var(--accent);
-  background: color-mix(in srgb, var(--bg), transparent 4%);
+body.theme-cyberpunk-visual-culture.layout-single .site {
+  position: relative;
+  z-index: 1;
+  max-width: var(--style-site-width);
 }
 
-.theme-cyberpunk-visual-culture .topbar::after {
+body.theme-cyberpunk-visual-culture::before,
+body.theme-cyberpunk-visual-culture::after {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+}
+
+body.theme-cyberpunk-visual-culture::before {
+  inset: 52px auto 0 max(10px, calc((100vw - var(--style-site-width)) / 2 - 28px));
+  width: 12px;
+  background:
+    repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 10px),
+    linear-gradient(90deg, transparent 0 5px, color-mix(in srgb, var(--accent), transparent 58%) 5px 7px, transparent 7px);
+  opacity: .62;
+}
+
+body.theme-cyberpunk-visual-culture::after {
+  top: 72px;
+  right: max(12px, calc((100vw - var(--style-site-width)) / 2 - 34px));
+  width: 18px;
+  height: min(68vh, 620px);
+  border-top: 6px solid var(--cyber-alert);
+  border-bottom: 1px solid var(--line);
+  background: repeating-linear-gradient(0deg, var(--accent) 0 2px, transparent 2px 17px);
+  opacity: .46;
+}
+
+.theme-cyberpunk-visual-culture .topbar {
+  border-top: 3px solid var(--accent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent), transparent 30%);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 82%) 0 12%, transparent 12% 82%, color-mix(in srgb, var(--cyber-alert), transparent 84%) 82%),
+    color-mix(in srgb, var(--bg), transparent 5%);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .32);
+  backdrop-filter: blur(16px) saturate(.75);
+}
+
+.theme-cyberpunk-visual-culture .topbar-inner {
+  padding: 7px clamp(10px, 2vw, 24px);
+}
+
+.theme-cyberpunk-visual-culture .topbar-inner::before {
   content: "";
   position: absolute;
   left: 0;
   bottom: -5px;
-  width: 42%;
+  width: min(34vw, 440px);
   height: 4px;
-  background: repeating-linear-gradient(90deg, var(--accent) 0 24px, transparent 24px 31px);
+  background: repeating-linear-gradient(90deg, var(--accent) 0 28px, transparent 28px 34px);
 }
 
 .theme-cyberpunk-visual-culture .brand {
   font-family: var(--mono);
-  font-weight: 760;
-  letter-spacing: .12em;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .15em;
   text-transform: uppercase;
 }
 
 .theme-cyberpunk-visual-culture .brand::before {
   content: "";
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--accent);
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--accent);
+  background:
+    linear-gradient(90deg, transparent 9px, var(--accent) 9px 11px, transparent 11px),
+    linear-gradient(0deg, transparent 9px, var(--accent) 9px 11px, transparent 11px);
   clip-path: polygon(0 0, 72% 0, 100% 28%, 100% 100%, 28% 100%, 0 72%);
-  background: linear-gradient(135deg, transparent 45%, #9d3327 46% 58%, transparent 59%);
 }
 
-.theme-cyberpunk-visual-culture nav,
+.theme-cyberpunk-visual-culture nav {
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid color-mix(in srgb, var(--line), transparent 16%);
+  background: color-mix(in srgb, var(--bg), transparent 18%);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.theme-cyberpunk-visual-culture nav a {
+  margin: 0;
+  padding: 4px 7px;
+  border-right: 1px solid var(--line);
+}
+
+.theme-cyberpunk-visual-culture nav a:last-child { border-right: 0; }
+
+.theme-cyberpunk-visual-culture nav a.current {
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+.theme-cyberpunk-visual-culture .hero {
+  min-height: min(880px, 92vh);
+  margin-top: clamp(20px, 4vw, 50px);
+  padding: clamp(84px, 11vw, 142px) clamp(22px, 5vw, 72px) clamp(62px, 9vw, 112px);
+  border: 1px solid var(--line);
+  border-left: 8px solid var(--accent);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 90%), transparent 22%),
+    repeating-linear-gradient(0deg, transparent 0 6px, color-mix(in srgb, var(--fg), transparent 97%) 6px 7px),
+    color-mix(in srgb, var(--card), transparent 16%);
+  clip-path: polygon(0 0, calc(100% - 56px) 0, 100% 56px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+  box-shadow: 14px 14px 0 color-mix(in srgb, #000, transparent 24%);
+}
+
+.theme-cyberpunk-visual-culture .hero-grid {
+  grid-template-columns: minmax(0, 1.42fr) minmax(230px, .58fr);
+  gap: clamp(34px, 7vw, 96px);
+  align-items: end;
+}
+
+.theme-cyberpunk-visual-culture .hero-grid > div:first-child:only-child {
+  grid-column: 1 / -1;
+  max-width: 980px;
+}
+
+.theme-cyberpunk-visual-culture .hero::before,
+.theme-cyberpunk-visual-culture .hero::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.theme-cyberpunk-visual-culture .hero::before {
+  z-index: -1;
+  top: 18px;
+  right: 22px;
+  bottom: 18px;
+  width: clamp(98px, 19vw, 246px);
+  border-left: 1px solid var(--line);
+  border-right: 6px solid var(--cyber-alert);
+  background:
+    repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 12px),
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--cyber-alert), transparent 86%));
+  opacity: .7;
+}
+
+.theme-cyberpunk-visual-culture .hero::after {
+  z-index: 2;
+  left: 0;
+  right: 0;
+  top: 31%;
+  height: 22px;
+  border-block: 1px solid color-mix(in srgb, var(--accent), transparent 66%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent), transparent 86%) 45%, transparent);
+  opacity: .52;
+  mix-blend-mode: screen;
+}
+
+.theme-cyberpunk-visual-culture h1 {
+  max-width: 930px;
+  color: var(--fg);
+  font-weight: 830;
+  line-height: .84;
+  letter-spacing: -.065em;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0 color-mix(in srgb, var(--cyber-alert), transparent 62%);
+}
+
+.theme-cyberpunk-visual-culture .hero-sub {
+  max-width: 760px;
+  padding-left: 18px;
+  border-left: 1px solid var(--accent);
+  color: color-mix(in srgb, var(--fg), var(--muted) 32%);
+}
+
 .theme-cyberpunk-visual-culture .kicker,
 .theme-cyberpunk-visual-culture .section-index,
 .theme-cyberpunk-visual-culture .stack,
 .theme-cyberpunk-visual-culture .generated-desc-meta,
-.theme-cyberpunk-visual-culture .time-label {
+.theme-cyberpunk-visual-culture .time-label,
+.theme-cyberpunk-visual-culture .tiny-footer {
   font-family: var(--mono);
-}
-
-.theme-cyberpunk-visual-culture .hero {
-  min-height: min(840px, 92vh);
-  border-inline: 1px solid color-mix(in srgb, var(--line), transparent 50%);
-  padding-inline: clamp(20px, 5vw, 72px);
-  background:
-    repeating-linear-gradient(0deg, transparent 0 7px, color-mix(in srgb, var(--accent), transparent 94%) 7px 8px);
-}
-
-.theme-cyberpunk-visual-culture .hero::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 8% 0 auto auto;
-  width: clamp(120px, 24vw, 250px);
-  height: 72%;
-  border-right: 10px solid var(--accent);
-  border-left: 1px solid var(--accent);
-  background:
-    repeating-linear-gradient(0deg, var(--accent) 0 1px, transparent 1px 13px),
-    linear-gradient(90deg, transparent, color-mix(in srgb, #8f2d22, transparent 55%));
-  clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%, 0 8%);
-  opacity: .48;
-}
-
-.theme-cyberpunk-visual-culture .hero::after {
-  content: "39";
-  position: absolute;
-  z-index: -1;
-  right: 4%;
-  top: 22%;
-  color: color-mix(in srgb, var(--accent), transparent 68%);
-  font: 800 clamp(96px, 18vw, 210px)/1 var(--mono);
-}
-
-.theme-cyberpunk-visual-culture h1 {
-  max-width: 820px;
-  font-weight: 780;
-  line-height: .9;
-  text-transform: uppercase;
 }
 
 .theme-cyberpunk-visual-culture .kicker {
@@ -96,82 +205,329 @@ body.theme-cyberpunk-visual-culture {
 .theme-cyberpunk-visual-culture .kicker::before {
   content: "";
   width: 54px;
-  height: 7px;
-  background: repeating-linear-gradient(90deg, var(--accent) 0 7px, transparent 7px 10px);
+  height: 8px;
+  flex: 0 0 auto;
+  background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 9px);
 }
+
+.theme-cyberpunk-visual-culture .hero-card {
+  align-self: end;
+  padding-top: 44px;
+}
+
+.theme-cyberpunk-visual-culture .hero-card::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  left: 12px;
+  height: 7px;
+  background: repeating-linear-gradient(90deg, var(--accent) 0 22px, transparent 22px 28px, var(--cyber-alert) 28px 37px, transparent 37px 42px);
+  opacity: .74;
+}
+
+.theme-cyberpunk-visual-culture .stat {
+  display: grid;
+  grid-template-columns: minmax(84px, .45fr) minmax(0, 1fr);
+  gap: 16px;
+  border-color: var(--line);
+}
+
+.theme-cyberpunk-visual-culture .stat-label { color: var(--accent); }
 
 .theme-cyberpunk-visual-culture .section {
+  padding: clamp(72px, 10vw, 126px) clamp(18px, 3vw, 44px);
   border-top: 0;
-  padding-left: clamp(16px, 4vw, 52px);
   background:
-    repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 8px) left top / 14px 96px no-repeat,
-    linear-gradient(90deg, var(--accent), transparent 52%) left top / 100% 1px no-repeat;
+    repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 11px) left top / min(32%, 330px) 8px no-repeat,
+    linear-gradient(90deg, var(--accent), transparent 68%) left 7px / 100% 1px no-repeat;
 }
 
-.theme-cyberpunk-visual-culture .section-head {
-  grid-template-columns: 130px minmax(0, 1fr);
-  gap: clamp(24px, 5vw, 72px);
+.theme-cyberpunk-visual-culture .section:nth-child(even) {
+  background:
+    repeating-linear-gradient(90deg, var(--cyber-alert) 0 2px, transparent 2px 13px) right top / min(27%, 270px) 8px no-repeat,
+    linear-gradient(270deg, var(--line), transparent 70%) right 7px / 100% 1px no-repeat;
+}
+
+.theme-cyberpunk-visual-culture .section-head,
+.theme-cyberpunk-visual-culture .complete-head {
+  grid-template-columns: minmax(112px, .23fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 76px);
+  align-items: start;
 }
 
 .theme-cyberpunk-visual-culture .section-index {
-  align-self: start;
-  padding: 10px 12px;
+  width: fit-content;
+  min-width: 112px;
+  padding: 10px 22px 10px 12px;
   border: 1px solid var(--accent);
+  border-left-width: 5px;
   color: var(--accent);
-  background: var(--bg);
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 84%), transparent),
+    var(--bg);
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+}
+
+.theme-cyberpunk-visual-culture h2 {
+  font-weight: 760;
+  text-transform: uppercase;
+}
+
+.theme-cyberpunk-visual-culture .cards,
+.theme-cyberpunk-visual-culture .principles,
+.theme-cyberpunk-visual-culture .timeline {
+  gap: clamp(20px, 3vw, 34px);
 }
 
 .theme-cyberpunk-visual-culture :is(.card, .hero-card, .principle, .timeline-item) {
-  border-left: 4px solid var(--accent);
-  outline-color: color-mix(in srgb, var(--accent), transparent 36%);
+  border: 0;
+  border-left: 5px solid var(--accent);
+  outline: 1px solid color-mix(in srgb, var(--line), transparent 2%);
   background:
-    linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 88%), transparent 38%),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 91%), transparent 34%),
+    repeating-linear-gradient(0deg, transparent 0 7px, color-mix(in srgb, var(--fg), transparent 98%) 7px 8px),
     var(--card);
-  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  box-shadow: 9px 10px 0 color-mix(in srgb, #000, transparent 34%);
+}
+
+.theme-cyberpunk-visual-culture :is(.card, .principle, .timeline-item)::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 26px;
+  width: min(31%, 260px);
+  height: 7px;
+  background: repeating-linear-gradient(90deg, var(--line) 0 18px, transparent 18px 23px);
+  pointer-events: none;
+}
+
+.theme-cyberpunk-visual-culture :is(.card, .principle, .timeline-item)::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: var(--scan-position, 68%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent), transparent 24%), transparent);
+  opacity: .46;
+  pointer-events: none;
 }
 
 .theme-cyberpunk-visual-culture .cards .card:nth-child(even),
-.theme-cyberpunk-visual-culture .principle:nth-child(even) { border-left-color: #a83c2c; }
+.theme-cyberpunk-visual-culture .principle:nth-child(even) {
+  --scan-position: 34%;
+  border-left-color: var(--cyber-alert);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--cyber-alert), transparent 93%), transparent 34%),
+    repeating-linear-gradient(0deg, transparent 0 7px, color-mix(in srgb, var(--fg), transparent 98%) 7px 8px),
+    var(--card);
+}
+
+.theme-cyberpunk-visual-culture .card-title-row {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.theme-cyberpunk-visual-culture .stack {
+  color: var(--accent);
+  letter-spacing: .035em;
+}
+
+.theme-cyberpunk-visual-culture .generated-desc-meta {
+  display: inline-block;
+  padding: 4px 8px;
+  border-left: 3px solid var(--cyber-alert);
+  background: color-mix(in srgb, var(--cyber-alert), transparent 91%);
+  color: color-mix(in srgb, var(--cyber-alert), var(--fg) 16%);
+}
 
 .theme-cyberpunk-visual-culture .tag,
 .theme-cyberpunk-visual-culture .skill-pill,
-.theme-cyberpunk-visual-culture .reveal-stat {
+.theme-cyberpunk-visual-culture .reveal-stat,
+.theme-cyberpunk-visual-culture .complete-project .intro-list p {
   border-radius: 0;
-  border-color: color-mix(in srgb, var(--accent), transparent 38%);
+  border-color: var(--line);
   font-family: var(--mono);
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
 }
 
+.theme-cyberpunk-visual-culture .tag {
+  border-color: color-mix(in srgb, var(--accent), transparent 32%);
+  background: color-mix(in srgb, var(--accent), transparent 91%);
+  color: var(--accent);
+}
+
+.theme-cyberpunk-visual-culture .skill-pill {
+  padding: 7px 12px;
+  background: var(--cyber-dim);
+  color: var(--fg);
+}
+
+.theme-cyberpunk-visual-culture .timeline-item {
+  grid-template-columns: minmax(120px, .25fr) minmax(0, 1fr);
+}
+
+.theme-cyberpunk-visual-culture .time-label {
+  padding-top: 4px;
+  color: var(--accent);
+}
+
 .theme-cyberpunk-visual-culture .button {
+  position: relative;
+  border-radius: 0;
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.theme-cyberpunk-visual-culture .button:hover,
+.theme-cyberpunk-visual-culture .button:focus-visible {
+  box-shadow: inset 0 -4px 0 var(--cyber-alert), 0 0 0 1px var(--accent);
+  text-decoration: none;
+}
+
+.theme-cyberpunk-visual-culture :focus-visible {
+  outline: 2px solid var(--cyber-alert);
+  outline-offset: 4px;
 }
 
 .theme-cyberpunk-visual-culture .contact-panel,
 .theme-cyberpunk-visual-culture .reveal {
   border-radius: 0;
-  outline-color: var(--accent);
+  border: 1px solid var(--line);
+  border-top: 9px solid var(--accent);
+  outline: 0;
   background:
-    repeating-linear-gradient(0deg, transparent 0 5px, color-mix(in srgb, var(--accent), transparent 94%) 5px 6px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 91%), transparent 42%),
+    repeating-linear-gradient(0deg, transparent 0 6px, color-mix(in srgb, var(--fg), transparent 97%) 6px 7px),
     var(--card-strong);
-  clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+  clip-path: polygon(0 0, calc(100% - 34px) 0, 100% 34px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+  box-shadow: 12px 12px 0 rgba(0, 0, 0, .34);
 }
+
+.theme-cyberpunk-visual-culture .contact-panel {
+  grid-template-columns: minmax(0, 1.5fr) minmax(220px, .5fr);
+  align-items: end;
+}
+
+.theme-cyberpunk-visual-culture .contact-links { justify-content: flex-end; }
 
 .theme-cyberpunk-visual-culture .reveal::before {
   content: "";
   position: absolute;
-  right: 0;
-  top: 0;
-  width: 32%;
-  height: 8px;
-  background: repeating-linear-gradient(90deg, #a83c2c 0 18px, transparent 18px 24px, var(--accent) 24px 42px, transparent 42px 50px);
+  inset: 22px 14px 22px auto;
+  width: 12px;
+  background: repeating-linear-gradient(0deg, var(--cyber-alert) 0 2px, transparent 2px 11px);
+  opacity: .7;
+}
+
+.theme-cyberpunk-visual-culture .reveal-grid { max-width: 760px; }
+
+.theme-cyberpunk-visual-culture .reveal-stat {
+  border-left: 5px solid var(--accent);
+  background: color-mix(in srgb, var(--card), transparent 5%);
+}
+
+.theme-cyberpunk-visual-culture .style-period { color: var(--accent); }
+
+.theme-cyberpunk-visual-culture .complete-version {
+  border-top: 1px solid var(--accent);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 95%), transparent 40%);
+}
+
+.theme-cyberpunk-visual-culture .tiny-footer {
+  padding-inline: 12px;
+  border-left: 3px solid var(--cyber-alert);
+}
+
+.theme-cyberpunk-visual-culture .regenerating {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 5px, color-mix(in srgb, var(--accent), transparent 91%) 5px 6px),
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-cyberpunk-visual-culture .regen-box {
+  padding: 28px;
+  border: 1px solid var(--accent);
+  border-left-width: 8px;
+  background: var(--card);
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .theme-cyberpunk-visual-culture .hero::after {
+    animation: cyber-local-scan 8s linear infinite;
+  }
+}
+
+@keyframes cyber-local-scan {
+  0% { transform: translateY(-70px); opacity: 0; }
+  12%, 78% { opacity: .52; }
+  100% { transform: translateY(310px); opacity: 0; }
+}
+
+@media (max-width: 900px) {
+  .theme-cyberpunk-visual-culture .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .theme-cyberpunk-visual-culture .hero-card {
+    width: min(100%, 560px);
+  }
+
+  .theme-cyberpunk-visual-culture .contact-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .theme-cyberpunk-visual-culture .contact-links { justify-content: flex-start; }
 }
 
 @media (max-width: 720px) {
-  .theme-cyberpunk-visual-culture .hero { min-height: auto; padding-inline: 18px; }
-  .theme-cyberpunk-visual-culture .hero::before,
-  .theme-cyberpunk-visual-culture .hero::after { opacity: .16; }
-  .theme-cyberpunk-visual-culture .section { padding-left: 18px; }
-  .theme-cyberpunk-visual-culture .section-head { grid-template-columns: 1fr; }
-  .theme-cyberpunk-visual-culture .section-index { width: fit-content; }
+  body.theme-cyberpunk-visual-culture::before,
+  body.theme-cyberpunk-visual-culture::after {
+    display: none;
+  }
+
+  .theme-cyberpunk-visual-culture .hero {
+    min-height: auto;
+    margin-top: 14px;
+    padding: 70px 20px 58px;
+    border-left-width: 5px;
+    clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  }
+
+  .theme-cyberpunk-visual-culture .hero::before {
+    width: 84px;
+    right: 10px;
+    opacity: .3;
+  }
+
+  .theme-cyberpunk-visual-culture .hero::after { opacity: .22; }
+  .theme-cyberpunk-visual-culture h1 { text-shadow: 2px 2px 0 color-mix(in srgb, var(--cyber-alert), transparent 70%); }
+  .theme-cyberpunk-visual-culture .section { padding-inline: 8px; }
+  .theme-cyberpunk-visual-culture .section-head,
+  .theme-cyberpunk-visual-culture .complete-head { grid-template-columns: minmax(0, 1fr); }
+  .theme-cyberpunk-visual-culture .section-index { min-width: 0; }
+  .theme-cyberpunk-visual-culture .timeline-item { grid-template-columns: minmax(0, 1fr); }
+  .theme-cyberpunk-visual-culture .contact-panel { padding: 28px 22px; }
+}
+
+@media (max-width: 520px) {
+  .theme-cyberpunk-visual-culture .topbar-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .theme-cyberpunk-visual-culture .topbar .button.language-switch { grid-column: 2; }
+  .theme-cyberpunk-visual-culture .brand { letter-spacing: .08em; }
+  .theme-cyberpunk-visual-culture .brand::before { width: 18px; height: 18px; }
+  .theme-cyberpunk-visual-culture .stat { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .theme-cyberpunk-visual-culture :is(.card, .hero-card, .principle, .timeline-item) { padding: 22px; }
+  .theme-cyberpunk-visual-culture .active-style-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-cyberpunk-visual-culture .hero::after { animation: none; }
 }
