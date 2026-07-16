@@ -147,6 +147,18 @@ test("surrealism gives the arched profile card enough roof clearance for educati
   assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.theme-surrealism \.hero-card\s*{[^}]*padding:\s*26px 18px 18px/s);
 });
 
+test("abstract expressionism keeps the animated hero content above its paint strokes", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-2-postwar-abstraction-perception-popular-culture",
+    "12-abstract-expressionism.css"
+  ));
+
+  assert.match(css, /\.theme-abstract-expressionism \.hero-grid\s*{[^}]*position:\s*relative;[^}]*z-index:\s*2;/s);
+  assert.match(css, /\.theme-abstract-expressionism \.hero::after\s*{[^}]*z-index:\s*1;/s);
+});
+
 test("purism uses stable proportions, clear outlines, and a reduced geometric still life", () => {
   const css = read(path.join(
     ROOT,
@@ -226,6 +238,36 @@ test("post-internet art preserves its wide catalog canvas", () => {
   ));
 
   assert.match(css, /body\.theme-post-internet-art\.layout-single \.site\s*{[^}]*max-width:\s*var\(--style-site-width\)/s);
+});
+
+test("cyberpunk visual culture uses a yellow field-dossier system without fake status copy", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-5-computers-web-future-visual-culture",
+    "39-cyberpunk-visual-culture.css"
+  ));
+  const script = read(path.join(
+    ROOT,
+    "styles",
+    "act-5-computers-web-future-visual-culture",
+    "39-cyberpunk-visual-culture.js"
+  ));
+
+  assert.match(script, /"--bg":\s*"#050707"/);
+  assert.match(script, /"--accent":\s*"#ffd43b"/);
+  assert.match(css, /--cyber-yellow:\s*#ffd43b/);
+  assert.match(css, /--cyber-acid:\s*#c8ff32/);
+  assert.match(css, /--cyber-coral:\s*#ff4b35/);
+  assert.match(css, /--cyber-ice:\s*#78f3e5/);
+  assert.match(css, /\.theme-cyberpunk-visual-culture \.cyber-field-strip\s*{/);
+  assert.match(css, /\.theme-cyberpunk-visual-culture h1\s*{[^}]*overflow:\s*visible;[^}]*text-shadow:/s);
+  assert.doesNotMatch(css, /\.theme-cyberpunk-visual-culture h1::after/);
+  assert.match(css, /\.theme-cyberpunk-visual-culture \.project-card::after\s*{[^}]*content:\s*attr\(data-number\)/s);
+  assert.match(css, /\.theme-cyberpunk-visual-culture \.cyber-filter\s*{/);
+  assert.match(script, /filterLabel:\s*"按技术筛选项目索引"/);
+  assert.doesNotMatch(css, /\.generated-description::(?:before|after)/);
+  assert.doesNotMatch(script, /上行链路|uplink|signal interference|信号干扰|system notice|系统通知/i);
 });
 
 test("high-tech preserves its wide construction canvas", () => {

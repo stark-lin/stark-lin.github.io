@@ -458,11 +458,11 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 #### 40. Cyberpunk Visual Culture, 1980s–1990s
 
-**Historical core:** High tech and low life, corporate systems, industrial density, information overload, and social wear.
+**Historical core:** Cyberpunk emerged from the science-fiction literature, film, comics, and video-game culture of the 1980s and 1990s, organized around the contradiction of “high tech, low life.” It imagines near futures where computer networks, artificial intelligence, body augmentation, transnational corporations, and urban infrastructure have become highly advanced while inequality, environmental decay, social disorder, identity crises, and continuous surveillance intensify. Technology is not inherently liberating; it often becomes a medium through which capital, power, and control expand, while individuals search for autonomy at the edges, in the loopholes, and beneath the surfaces of enormous systems.
 
-**Filter language:** Segmented borders, clipped corners, monospaced metadata, edge graduations, localized scan lines, and dense peripheral structures.
+**Filter language:** Establish night-time cities and electronic space with black or near-black grounds, then add highly saturated neon, cold light, localized warning colors, and hard contrast. Controlled glitch text, scan lines, electronic noise, pixel displacement, chromatic separation, terminal characters, surveillance marks, identity numbers, coordinates, system states, data streams, and intrusive notices are permitted. Information density may be high: advertising, system messages, corporate marks, data fragments, and private content should appear to compete for attention. Borders, dividers, and controls may borrow from industrial terminals, street signage, surveillance equipment, and early computer interfaces, making the page feel like a personal access terminal deployed within city infrastructure.
 
-**Boundary:** Do not lock the palette to neon purple and cyan, reproduce a specific film or game, or add fictional copy such as access permissions or threat levels.
+**Boundary:** Preserve cyberpunk’s most recognizable elements—neon light, deep backgrounds, glitch text, and electronic noise—but do not rely on random neon gradients, meaningless gibberish, or excessive malfunction effects to manufacture a superficial sense of technology. Visual interference must not damage body-copy legibility, interaction feedback, or information hierarchy. Glitches should remain local and controlled, serving the narrative of unstable systems, information overload, or machine-managed identity. Avoid collapsing into a generic game UI, esports interface, vaporwave styling, pure terminal aesthetic, or generic science-fiction control panel. The page should remain seductive, oppressive, and operable at once: a city operating system that still runs, but should not be fully trusted.
 
 ---
 

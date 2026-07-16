@@ -108,6 +108,8 @@ body.theme-abstract-expressionism {
 }
 
 .theme-abstract-expressionism .hero-grid {
+  position: relative;
+  z-index: 2;
   grid-template-columns: minmax(0, 1fr) minmax(190px, .31fr);
   gap: clamp(28px, 5vw, 64px);
   align-items: end;

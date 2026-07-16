@@ -1,7 +1,7 @@
 body.theme-soviet-modernism {
   background:
-    linear-gradient(90deg, transparent 0 72%, color-mix(in srgb, var(--accent), transparent 86%) 72% 84%, transparent 84%),
-    repeating-linear-gradient(90deg, transparent 0 95px, color-mix(in srgb, var(--line), transparent 91%) 95px 97px),
+    linear-gradient(90deg, transparent 0 8%, color-mix(in srgb, var(--line), transparent 92%) 8% calc(8% + 1px), transparent calc(8% + 1px) 100%),
+    linear-gradient(90deg, transparent 0 82%, color-mix(in srgb, var(--accent), transparent 88%) 82% 100%),
     var(--bg);
 }
 
@@ -10,260 +10,527 @@ body.theme-soviet-modernism.layout-single .site {
 }
 
 .theme-soviet-modernism .topbar {
-  border-bottom: 8px solid var(--line);
-  background: color-mix(in srgb, var(--card), transparent 6%);
-  backdrop-filter: blur(10px);
+  border: 0;
+  border-bottom: 6px solid var(--accent);
+  background: color-mix(in srgb, var(--fg), transparent 2%);
+  color: var(--card);
+  backdrop-filter: none;
 }
 
 .theme-soviet-modernism .topbar-inner {
-  min-height: 68px;
+  min-height: 64px;
+  padding: 10px clamp(12px, 2.4vw, 34px);
 }
 
 .theme-soviet-modernism .brand {
-  font-weight: 820;
-  letter-spacing: .02em;
+  gap: 12px;
+  font-weight: 780;
+  letter-spacing: .06em;
+  text-transform: uppercase;
 }
 
 .theme-soviet-modernism .brand::before {
   content: "";
-  width: 23px;
-  height: 23px;
-  background: var(--accent);
-  clip-path: polygon(27% 0, 73% 0, 100% 27%, 100% 73%, 73% 100%, 27% 100%, 0 73%, 0 27%);
-  box-shadow: inset 0 0 0 5px var(--card);
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  border: 5px solid var(--accent-2);
+  border-radius: 50%;
+}
+
+.theme-soviet-modernism nav {
+  color: color-mix(in srgb, var(--card), transparent 28%);
+  font-family: var(--mono);
+  letter-spacing: .04em;
+}
+
+.theme-soviet-modernism nav a.current {
+  color: var(--fg);
+  background: var(--accent-2);
+  text-decoration: none;
+}
+
+.theme-soviet-modernism .topbar .language-switch {
+  box-shadow: none;
 }
 
 .theme-soviet-modernism .hero {
-  position: relative;
-  isolation: isolate;
-  min-height: min(760px, 86vh);
-  margin: 36px 0 92px;
-  padding: clamp(54px, 8vw, 112px) clamp(24px, 7vw, 88px);
-  border: 3px solid var(--line);
+  min-height: min(780px, calc(100svh - 110px));
+  margin: clamp(38px, 5vw, 72px) 0 clamp(90px, 12vw, 156px);
+  padding: clamp(220px, 23vw, 300px) clamp(22px, 5vw, 72px) clamp(54px, 7vw, 92px);
   background:
-    linear-gradient(90deg, var(--card) 0 72%, var(--card-strong) 72% 100%);
-  box-shadow:
-    inset 0 0 0 10px var(--card),
-    18px 18px 0 color-mix(in srgb, var(--line), transparent 24%);
+    linear-gradient(90deg, var(--accent) 0 12px, transparent 12px),
+    linear-gradient(132deg, var(--card) 0 72%, var(--card-strong) 72% 100%);
+  box-shadow: 24px 24px 0 var(--line);
   overflow: hidden;
-}
-
-.theme-soviet-modernism .hero > * {
-  position: relative;
-  z-index: 2;
 }
 
 .theme-soviet-modernism .hero::before {
   content: "";
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   top: 0;
-  right: -1px;
-  width: 47%;
-  height: 31%;
-  background: var(--accent);
-  clip-path: polygon(20% 0, 100% 0, 100% 72%, 0 72%, 0 52%, 20% 52%);
+  left: 0;
+  width: 82%;
+  height: clamp(150px, 17vw, 218px);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 42px, color-mix(in srgb, var(--card), transparent 12%) 42px 47px),
+    linear-gradient(180deg, var(--accent-2) 0 72%, var(--fg) 72% 100%);
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+  box-shadow: 42px 36px 0 color-mix(in srgb, var(--fg), transparent 10%);
 }
 
 .theme-soviet-modernism .hero::after {
   content: "";
   position: absolute;
-  z-index: 1;
-  right: 7%;
-  bottom: 9%;
-  width: clamp(120px, 18vw, 220px);
+  z-index: 0;
+  right: clamp(-86px, -4vw, -32px);
+  bottom: clamp(-110px, -6vw, -58px);
+  width: clamp(210px, 27vw, 360px);
   aspect-ratio: 1;
-  border: clamp(12px, 2vw, 24px) solid var(--line);
-  background: var(--card);
-  clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
-  opacity: .9;
+  border: clamp(28px, 4vw, 54px) solid var(--fg);
+  border-radius: 50%;
+  background: var(--accent-2);
+  box-shadow: inset 0 0 0 12px var(--card);
+  opacity: .96;
+}
+
+.theme-soviet-modernism .hero-grid {
+  position: relative;
+  z-index: 1;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 54px);
+  align-items: end;
+}
+
+.theme-soviet-modernism .hero-grid > :first-child {
+  grid-column: 1 / 9;
+}
+
+.theme-soviet-modernism .hero-card {
+  grid-column: 9 / 13;
+  padding: 28px;
+  border: 0;
+  border-top: 14px solid var(--accent);
+  border-radius: 0;
+  outline: 2px solid var(--line);
+  background: color-mix(in srgb, var(--card), transparent 4%);
+  box-shadow: 10px 10px 0 color-mix(in srgb, var(--line), transparent 12%);
+  backdrop-filter: none;
+}
+
+.theme-soviet-modernism .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  color: var(--fg);
+  font-weight: 760;
+  letter-spacing: .16em;
+}
+
+.theme-soviet-modernism .kicker::before {
+  content: "";
+  width: 46px;
+  height: 8px;
+  background: var(--accent);
 }
 
 .theme-soviet-modernism h1 {
-  max-width: min(800px, 78%);
-  font-weight: 850;
-  line-height: .91;
-  letter-spacing: -.045em;
+  max-width: 880px;
+  font-weight: 790;
+  line-height: .86;
+  letter-spacing: -.055em;
 }
 
 .theme-soviet-modernism .hero-sub {
-  max-width: 670px;
-  padding: 22px 24px;
-  border-left: 12px solid var(--accent);
-  background: color-mix(in srgb, var(--card), transparent 10%);
+  max-width: 720px;
+  margin-top: 30px;
+  padding: 18px 22px;
+  border-left: 9px solid var(--accent-2);
+  background: color-mix(in srgb, var(--card), transparent 12%);
+  color: var(--fg);
+}
+
+.theme-soviet-modernism .stat {
+  border-color: color-mix(in srgb, var(--line), transparent 58%);
+}
+
+.theme-soviet-modernism .stat-label,
+.theme-soviet-modernism .generated-desc-meta,
+.theme-soviet-modernism .time-label {
+  color: var(--accent);
+  font-weight: 760;
 }
 
 .theme-soviet-modernism main {
-  padding-top: 12px;
+  padding-top: 0;
 }
 
 .theme-soviet-modernism .section {
-  position: relative;
-  border-top: 3px solid var(--line);
+  padding: clamp(76px, 9vw, 126px) 0;
+  border-top: 2px solid var(--line);
 }
 
-.theme-soviet-modernism .section::before {
-  content: "";
-  position: absolute;
-  top: -3px;
-  right: 0;
-  width: clamp(110px, 22vw, 280px);
-  height: 18px;
-  background: repeating-linear-gradient(90deg, var(--line) 0 22px, transparent 22px 34px);
-}
-
-.theme-soviet-modernism .section:nth-of-type(3n + 2)::after {
+.theme-soviet-modernism .section::after {
   content: "";
   position: absolute;
   z-index: -1;
-  top: 10%;
-  right: calc(50% - 50vw);
-  bottom: 10%;
-  left: 58%;
-  background: color-mix(in srgb, var(--card-strong), transparent 42%);
+  top: -2px;
+  right: 0;
+  width: min(34vw, 420px);
+  height: 16px;
+  background: var(--accent);
 }
 
-.theme-soviet-modernism .section-head {
-  grid-template-columns: minmax(150px, .3fr) minmax(0, 1fr);
+.theme-soviet-modernism .section:nth-of-type(even)::after {
+  width: min(18vw, 240px);
+  background: var(--accent-2);
+}
+
+.theme-soviet-modernism .section-head,
+.theme-soviet-modernism .complete-head {
+  grid-template-columns: minmax(180px, 3fr) minmax(0, 9fr);
+  gap: clamp(28px, 6vw, 84px);
   align-items: stretch;
-  gap: clamp(24px, 5vw, 64px);
+  margin-bottom: clamp(42px, 6vw, 76px);
 }
 
 .theme-soviet-modernism .section-index {
   display: grid;
-  align-content: end;
-  min-height: 116px;
+  min-height: 130px;
   padding: 18px;
-  border: 3px solid var(--line);
+  align-content: end;
+  border: 0;
   background:
-    repeating-linear-gradient(90deg, transparent 0 18px, color-mix(in srgb, var(--line), transparent 18%) 18px 22px),
+    repeating-linear-gradient(90deg, var(--fg) 0 20px, transparent 20px 30px),
     var(--card-strong);
+  background-size: auto 18px, auto;
+  background-repeat: repeat-x, no-repeat;
   color: var(--fg);
-  font-weight: 850;
+  font-size: 13px;
+  font-weight: 780;
 }
 
 .theme-soviet-modernism h2,
 .theme-soviet-modernism h3 {
-  font-weight: 820;
-  letter-spacing: -.025em;
+  font-weight: 760;
+  letter-spacing: -.035em;
 }
 
-.theme-soviet-modernism :is(.card, .hero-card, .timeline-item, .principle) {
-  position: relative;
-  border: 3px solid var(--line);
-  border-radius: 0;
-  box-shadow:
-    inset 0 0 0 7px color-mix(in srgb, var(--card), transparent 18%),
-    9px 9px 0 color-mix(in srgb, var(--line), transparent 72%);
-  overflow: hidden;
+.theme-soviet-modernism .section-lead {
+  max-width: 780px;
+  color: var(--muted);
 }
 
-.theme-soviet-modernism :is(.card, .hero-card, .principle) {
-  padding-top: 42px;
+.theme-soviet-modernism .cards,
+.theme-soviet-modernism .principles,
+.theme-soviet-modernism .timeline {
+  gap: clamp(24px, 3vw, 38px);
 }
 
-.theme-soviet-modernism :is(.card, .hero-card, .principle)::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 18px;
-  border-bottom: 3px solid var(--line);
-  background: repeating-linear-gradient(90deg, var(--line) 0 26px, var(--card-strong) 26px 38px);
+.theme-soviet-modernism .cards {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
-.theme-soviet-modernism .cards .card:nth-child(3n + 2),
-.theme-soviet-modernism .principle:nth-child(3n + 2) {
-  background:
-    linear-gradient(90deg, var(--card) 0 67%, color-mix(in srgb, var(--accent), var(--card) 42%) 67% 100%);
-}
-
-.theme-soviet-modernism .hero-card::after {
-  content: "";
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
-  width: 58px;
-  aspect-ratio: 1;
-  border: 8px solid var(--accent);
-  clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
-  opacity: .72;
-}
-
+.theme-soviet-modernism .card,
+.theme-soviet-modernism .principle,
 .theme-soviet-modernism .timeline-item {
-  border-left-width: 18px;
-  background:
-    linear-gradient(90deg, var(--card) 0 78%, color-mix(in srgb, var(--card-strong), var(--card) 52%) 78%);
+  border: 0;
+  border-radius: 0;
+  outline: 2px solid var(--line);
+  background: var(--card);
+  box-shadow: 12px 12px 0 color-mix(in srgb, var(--line), transparent 12%);
+  transition: translate .2s ease, box-shadow .2s ease;
 }
 
-.theme-soviet-modernism :is(.tag, .skill-pill, .reveal-stat, .complete-project .intro-list p) {
+.theme-soviet-modernism .card,
+.theme-soviet-modernism .principle {
+  padding: clamp(28px, 4vw, 52px);
+}
+
+.theme-soviet-modernism .card::before,
+.theme-soviet-modernism .principle::before,
+.theme-soviet-modernism .timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 14px;
+  background: repeating-linear-gradient(90deg, var(--accent-2) 0 34px, var(--line) 34px 40px, transparent 40px 54px);
+}
+
+.theme-soviet-modernism .card:nth-child(even)::before,
+.theme-soviet-modernism .principle:nth-child(even)::before {
+  background: linear-gradient(90deg, var(--accent) 0 28%, var(--line) 28% 30%, var(--card-strong) 30% 100%);
+}
+
+.theme-soviet-modernism .card:hover,
+.theme-soviet-modernism .principle:hover,
+.theme-soviet-modernism .timeline-item:hover {
+  translate: -3px -3px;
+  box-shadow: 17px 17px 0 color-mix(in srgb, var(--line), transparent 4%);
+}
+
+.theme-soviet-modernism #work .project-card {
+  min-height: 280px;
+  padding-top: clamp(46px, 5vw, 68px);
+}
+
+.theme-soviet-modernism .card.third {
+  grid-column: span 4;
+}
+
+.theme-soviet-modernism .principles {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.theme-soviet-modernism .principle {
+  min-height: 220px;
+  padding-top: 44px;
+}
+
+.theme-soviet-modernism .card-title-row {
+  border-bottom-width: 2px;
+}
+
+.theme-soviet-modernism .tag,
+.theme-soviet-modernism .skill-pill,
+.theme-soviet-modernism .complete-project .intro-list p {
   border: 2px solid var(--line);
   border-radius: 0;
-}
-
-.theme-soviet-modernism .skill-pill:nth-child(4n + 1) {
   background: var(--card-strong);
   color: var(--fg);
 }
 
+.theme-soviet-modernism .tag {
+  box-shadow: 4px 4px 0 var(--line);
+}
+
+.theme-soviet-modernism .skill-pill {
+  padding: 9px 13px;
+}
+
+.theme-soviet-modernism .timeline-item {
+  grid-template-columns: minmax(150px, 2fr) minmax(0, 8fr);
+  gap: clamp(24px, 5vw, 64px);
+  padding: clamp(44px, 5vw, 66px) clamp(28px, 5vw, 64px);
+  background: linear-gradient(90deg, var(--card-strong) 0 20%, var(--card) 20% 100%);
+}
+
 .theme-soviet-modernism .contact-panel,
 .theme-soviet-modernism .reveal {
-  position: relative;
-  border: 3px solid var(--line);
+  border: 0;
   border-radius: 0;
-  background:
-    linear-gradient(118deg, var(--card) 0 62%, var(--card-strong) 62% 79%, color-mix(in srgb, var(--accent), var(--card) 28%) 79%);
-  box-shadow: 16px 16px 0 color-mix(in srgb, var(--line), transparent 22%);
+  outline: 2px solid var(--line);
+  background: var(--fg);
+  color: var(--card);
+  box-shadow: 18px 18px 0 var(--accent);
+}
+
+.theme-soviet-modernism .contact-panel {
+  grid-template-columns: minmax(0, 7fr) minmax(210px, 3fr);
+  gap: clamp(32px, 6vw, 80px);
+  padding: clamp(38px, 6vw, 76px);
+  align-items: end;
+}
+
+.theme-soviet-modernism .contact-panel .section-lead,
+.theme-soviet-modernism .reveal p {
+  color: color-mix(in srgb, var(--card), transparent 26%);
+}
+
+.theme-soviet-modernism .contact-links {
+  justify-content: flex-end;
+}
+
+.theme-soviet-modernism .reveal {
+  margin: 112px 0 76px;
+  padding: clamp(46px, 7vw, 88px);
   overflow: hidden;
 }
 
 .theme-soviet-modernism .reveal::before {
   content: "";
   position: absolute;
-  inset: 0 0 auto;
-  height: 24px;
-  background: repeating-linear-gradient(90deg, var(--accent) 0 48px, var(--line) 48px 56px, var(--card-strong) 56px 92px);
+  z-index: 0;
+  top: -74px;
+  right: -42px;
+  width: clamp(180px, 24vw, 310px);
+  aspect-ratio: 1;
+  border: 36px solid var(--accent-2);
+  border-radius: 50%;
+  opacity: .72;
+}
+
+.theme-soviet-modernism .reveal-stat {
+  border: 2px solid color-mix(in srgb, var(--card), transparent 38%);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--fg), var(--card) 8%);
+  color: var(--card);
+}
+
+.theme-soviet-modernism .reveal-stat-label,
+.theme-soviet-modernism .style-period,
+.theme-soviet-modernism .style-introduction {
+  color: color-mix(in srgb, var(--card), transparent 34%);
+}
+
+.theme-soviet-modernism .reveal-stat-section + .reveal-stat-section {
+  border-color: color-mix(in srgb, var(--card), transparent 68%);
 }
 
 .theme-soviet-modernism .button {
+  min-height: 44px;
   border-radius: 0;
-  box-shadow: 5px 5px 0 var(--line);
+  box-shadow: 5px 5px 0 var(--accent-2);
 }
 
 .theme-soviet-modernism .button:is(:hover, :focus-visible) {
-  transform: translate(-2px, -2px);
-  box-shadow: 8px 8px 0 var(--line);
+  translate: -2px -2px;
+  box-shadow: 8px 8px 0 var(--accent-2);
 }
 
-@media (max-width: 720px) {
+.theme-soviet-modernism .contact-panel .button.secondary,
+.theme-soviet-modernism .reveal .button.secondary {
+  background: transparent;
+  color: var(--card);
+  border-color: var(--card);
+}
+
+.theme-soviet-modernism .complete-version {
+  border-color: var(--line);
+}
+
+@media (max-width: 900px) {
   .theme-soviet-modernism .hero {
     min-height: auto;
-    margin-right: 8px;
-    padding: 72px 20px 40px;
-    background: var(--card);
-    box-shadow: 9px 9px 0 color-mix(in srgb, var(--line), transparent 24%);
+    padding-top: 210px;
+  }
+
+  .theme-soviet-modernism .hero-grid > :first-child,
+  .theme-soviet-modernism .hero-card {
+    grid-column: 1 / -1;
+  }
+
+  .theme-soviet-modernism .hero-card {
+    max-width: 560px;
+  }
+
+  .theme-soviet-modernism .section-head,
+  .theme-soviet-modernism .complete-head {
+    grid-template-columns: minmax(130px, 2fr) minmax(0, 7fr);
+  }
+
+  .theme-soviet-modernism .card.third {
+    grid-column: span 6;
+  }
+
+  .theme-soviet-modernism .principles {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  body.theme-soviet-modernism {
+    background: linear-gradient(90deg, var(--bg) 0 88%, color-mix(in srgb, var(--accent), transparent 88%) 88% 100%);
+  }
+
+  .theme-soviet-modernism .topbar-inner {
+    min-height: 56px;
+  }
+
+  .theme-soviet-modernism .brand {
+    font-size: 13px;
+    letter-spacing: .03em;
+  }
+
+  .theme-soviet-modernism .hero {
+    margin: 24px 8px 88px 0;
+    padding: 150px 20px 48px;
+    box-shadow: 10px 10px 0 var(--line);
   }
 
   .theme-soviet-modernism .hero::before {
-    width: 72%;
-    height: 58px;
+    width: 94%;
+    height: 112px;
+    box-shadow: 18px 22px 0 color-mix(in srgb, var(--fg), transparent 10%);
   }
 
   .theme-soviet-modernism .hero::after {
-    right: -34px;
-    bottom: 24px;
-    width: 112px;
-    opacity: .24;
+    right: -88px;
+    bottom: -56px;
+    width: 190px;
+    border-width: 28px;
+    opacity: .3;
   }
 
-  .theme-soviet-modernism h1 { max-width: 100%; }
-  .theme-soviet-modernism .hero-sub { padding: 16px; border-left-width: 8px; }
-  .theme-soviet-modernism .section-head { grid-template-columns: 1fr; }
-  .theme-soviet-modernism .section-index { width: min(220px, 100%); min-height: 82px; }
-  .theme-soviet-modernism .section:nth-of-type(3n + 2)::after { display: none; }
+  .theme-soviet-modernism .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-soviet-modernism .hero-sub {
+    padding: 14px 16px;
+    border-left-width: 7px;
+  }
+
+  .theme-soviet-modernism .section::after {
+    width: 110px;
+    height: 10px;
+  }
+
+  .theme-soviet-modernism .section-head,
+  .theme-soviet-modernism .complete-head {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .theme-soviet-modernism .section-index {
+    min-height: 78px;
+    width: min(210px, 72%);
+  }
+
+  .theme-soviet-modernism .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-soviet-modernism .card.third {
+    grid-column: 1;
+  }
+
+  .theme-soviet-modernism .timeline-item,
+  .theme-soviet-modernism .contact-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-soviet-modernism .timeline-item {
+    background: linear-gradient(180deg, var(--card-strong) 0 74px, var(--card) 74px 100%);
+  }
+
+  .theme-soviet-modernism .contact-links {
+    justify-content: flex-start;
+  }
+
   .theme-soviet-modernism .contact-panel,
-  .theme-soviet-modernism .reveal { box-shadow: 8px 8px 0 color-mix(in srgb, var(--line), transparent 22%); }
+  .theme-soviet-modernism .reveal {
+    margin-right: 8px;
+    box-shadow: 9px 9px 0 var(--accent);
+  }
+
+  .theme-soviet-modernism .active-style-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .theme-soviet-modernism .button { transition: none; }
+  .theme-soviet-modernism :is(.card, .principle, .timeline-item, .button) {
+    transition: none;
+  }
+
+  .theme-soviet-modernism :is(.card, .principle, .timeline-item, .button):is(:hover, :focus-visible) {
+    translate: 0;
+  }
 }
