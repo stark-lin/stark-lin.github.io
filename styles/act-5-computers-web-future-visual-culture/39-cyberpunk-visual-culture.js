@@ -59,8 +59,8 @@
 
   const COPY = {
     en: {
-      field: "Visual field / Cyberpunk",
-      period: "1980s—present",
+      field: "Project dossier / 42",
+      period: "Backend / Systems / Tools",
       subject: "Stark Lin / Selected work",
       filterLabel: "Filter project index by technology",
       all: "Full index",
@@ -68,8 +68,8 @@
       project: "Project record"
     },
     zh: {
-      field: "视觉场 / 赛博朋克",
-      period: "1980年代至今",
+      field: "作品档案 / 42",
+      period: "后端 / 系统 / 工具",
       subject: "Stark Lin / 作品选集",
       filterLabel: "按技术筛选项目索引",
       all: "完整索引",

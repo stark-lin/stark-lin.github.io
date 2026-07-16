@@ -291,11 +291,17 @@ test("cyberpunk visual culture uses a yellow field-dossier system without fake s
   assert.match(css, /--cyber-coral:\s*#ff4b35/);
   assert.match(css, /--cyber-ice:\s*#78f3e5/);
   assert.match(css, /\.theme-cyberpunk-visual-culture \.cyber-field-strip\s*{/);
+  assert.match(css, /\.theme-cyberpunk-visual-culture \.button::before\s*{[^}]*background:\s*var\(--cyber-button-edge\);[^}]*transform:\s*rotate\(45deg\);/s);
   assert.match(css, /\.theme-cyberpunk-visual-culture h1\s*{[^}]*overflow:\s*visible;[^}]*text-shadow:/s);
   assert.doesNotMatch(css, /\.theme-cyberpunk-visual-culture h1::after/);
   assert.match(css, /\.theme-cyberpunk-visual-culture \.project-card::after\s*{[^}]*content:\s*attr\(data-number\)/s);
   assert.match(css, /\.theme-cyberpunk-visual-culture \.cyber-filter\s*{/);
   assert.match(script, /filterLabel:\s*"按技术筛选项目索引"/);
+  assert.match(script, /field:\s*"Project dossier \/ 42"/);
+  assert.match(script, /field:\s*"作品档案 \/ 42"/);
+  assert.match(css, /content:\s*"42 \/ VISUAL CULTURE"/);
+  assert.match(css, /content:\s*"STYLE RECORD \/ 042"/);
+  assert.doesNotMatch(css, /content:\s*"[^"\n]*\b0?39\b/);
   assert.doesNotMatch(css, /\.generated-description::(?:before|after)/);
   assert.doesNotMatch(script, /上行链路|uplink|signal interference|信号干扰|system notice|系统通知/i);
 });

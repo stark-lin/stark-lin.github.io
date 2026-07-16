@@ -7,17 +7,19 @@ body.theme-cyberpunk-visual-culture {
   --cyber-acid: #c8ff32;
   --cyber-coral: #ff4b35;
   --cyber-ice: #78f3e5;
-  --cyber-grid: rgba(200, 255, 50, .085);
+  --cyber-grid: rgba(200, 255, 50, .16);
   --cyber-pointer-x: 78%;
   --cyber-pointer-y: 18%;
   isolation: isolate;
   color-scheme: dark;
   background:
-    radial-gradient(circle at var(--cyber-pointer-x) var(--cyber-pointer-y), rgba(120, 243, 229, .09), transparent 23rem),
-    linear-gradient(rgba(200, 255, 50, .028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200, 255, 50, .028) 1px, transparent 1px),
+    radial-gradient(circle at var(--cyber-pointer-x) var(--cyber-pointer-y), rgba(120, 243, 229, .16), transparent 26rem),
+    radial-gradient(circle at 12% 72%, rgba(255, 212, 59, .1), transparent 28rem),
+    radial-gradient(circle at 94% 48%, rgba(255, 75, 53, .07), transparent 24rem),
+    linear-gradient(rgba(200, 255, 50, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 255, 50, .055) 1px, transparent 1px),
     var(--cyber-void);
-  background-size: auto, 64px 64px, 64px 64px, auto;
+  background-size: auto, auto, auto, 48px 48px, 48px 48px, auto;
 }
 
 body.theme-cyberpunk-visual-culture::before {
@@ -25,14 +27,16 @@ body.theme-cyberpunk-visual-culture::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  opacity: .17;
-  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(233, 240, 232, .09) 3px 4px);
+  opacity: .26;
+  background:
+    linear-gradient(112deg, transparent 0 68%, rgba(255, 212, 59, .08) 68% 70%, transparent 70%),
+    repeating-linear-gradient(0deg, transparent 0 3px, rgba(233, 240, 232, .11) 3px 4px);
   mix-blend-mode: screen;
   pointer-events: none;
 }
 
 body.theme-cyberpunk-visual-culture::after {
-  content: "39 / VISUAL CULTURE";
+  content: "42 / VISUAL CULTURE";
   position: fixed;
   right: 14px;
   bottom: 20px;
@@ -144,15 +148,16 @@ body.theme-cyberpunk-visual-culture.layout-single .site {
   overflow: hidden;
   border: 1px solid rgba(233, 240, 232, .16);
   background:
-    linear-gradient(90deg, transparent 0 68%, rgba(200, 255, 50, .035) 68%),
-    linear-gradient(rgba(233, 240, 232, .035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(233, 240, 232, .035) 1px, transparent 1px),
+    radial-gradient(circle at 82% 22%, rgba(120, 243, 229, .08), transparent 22rem),
+    linear-gradient(90deg, transparent 0 68%, rgba(200, 255, 50, .065) 68%),
+    linear-gradient(rgba(233, 240, 232, .06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(233, 240, 232, .06) 1px, transparent 1px),
     var(--cyber-panel);
-  background-size: auto, 100% 12.5%, 8.333% 100%, auto;
+  background-size: auto, auto, 100% 12.5%, 8.333% 100%, auto;
 }
 
 .theme-cyberpunk-visual-culture .hero::before {
-  content: "39";
+  content: "42";
   position: absolute;
   right: clamp(10px, 3vw, 42px);
   bottom: -8%;
@@ -300,11 +305,30 @@ html[lang^="zh"] .theme-cyberpunk-visual-culture h1 {
 }
 
 .theme-cyberpunk-visual-culture .button {
+  --cyber-button-edge: var(--style-button-border-color);
   position: relative;
   min-height: 40px;
   justify-content: center;
   border-width: 1px;
   clip-path: polygon(0 0, calc(100% - 11px) 0, 100% 11px, 100% 100%, 0 100%);
+}
+
+.theme-cyberpunk-visual-culture .button.secondary {
+  --cyber-button-edge: var(--style-button-secondary-border-color);
+}
+
+.theme-cyberpunk-visual-culture .button::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: -3px;
+  width: 16px;
+  height: 1px;
+  z-index: 2;
+  background: var(--cyber-button-edge);
+  transform: rotate(45deg);
+  transform-origin: center;
+  pointer-events: none;
 }
 
 .theme-cyberpunk-visual-culture .button::after {
@@ -321,6 +345,7 @@ html[lang^="zh"] .theme-cyberpunk-visual-culture h1 {
 
 .theme-cyberpunk-visual-culture .button:hover,
 .theme-cyberpunk-visual-culture .button:focus-visible {
+  --cyber-button-edge: var(--cyber-coral);
   border-color: var(--cyber-coral);
   background: var(--cyber-coral);
   color: var(--cyber-void);
@@ -731,7 +756,7 @@ html[lang^="zh"] .theme-cyberpunk-visual-culture h1 {
 }
 
 .theme-cyberpunk-visual-culture .reveal::before {
-  content: "STYLE RECORD / 039";
+  content: "STYLE RECORD / 042";
   position: absolute;
   top: 0;
   right: 0;
