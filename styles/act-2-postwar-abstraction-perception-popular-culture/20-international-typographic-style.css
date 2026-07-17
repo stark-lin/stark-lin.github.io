@@ -747,3 +747,87 @@ body.theme-international-typographic-style.layout-single .site {
     grid-template-columns: 1fr;
   }
 }
+
+/* The loading report follows the same baseline and twelve-column Swiss grid. */
+.theme-international-typographic-style .regenerating {
+  color: var(--fg);
+  background:
+    repeating-linear-gradient(to bottom, transparent 0, transparent 7px, color-mix(in srgb, var(--line), transparent 58%) 8px),
+    var(--bg);
+}
+
+.theme-international-typographic-style .regen-box {
+  position: relative;
+  isolation: isolate;
+  width: min(680px, 100%);
+  padding: clamp(36px, 8vw, 66px) clamp(24px, 7vw, 54px) clamp(28px, 7vw, 50px);
+  overflow: hidden;
+  border: 0;
+  border-top: 8px solid var(--accent);
+  border-bottom: 1px solid var(--fg);
+  border-radius: 0;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 calc(8.333% - 1px), color-mix(in srgb, var(--line), transparent 55%) calc(8.333% - 1px) 8.333%),
+    var(--bg);
+  color: var(--fg);
+  counter-reset: regen-step;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.theme-international-typographic-style .regen-box::before {
+  content: "01 / 04";
+  position: absolute;
+  top: 12px;
+  left: clamp(24px, 7vw, 54px);
+  color: var(--accent);
+  font: 700 11px/1 var(--sans);
+  letter-spacing: .1em;
+}
+
+.theme-international-typographic-style .regen-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 16.666%;
+  bottom: 0;
+  width: 1px;
+  background: color-mix(in srgb, var(--accent), transparent 34%);
+  pointer-events: none;
+}
+
+.theme-international-typographic-style .regen-line {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+  margin: 0;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  opacity: .78;
+  counter-increment: regen-step;
+}
+
+.theme-international-typographic-style .regen-line::before {
+  content: "0" counter(regen-step);
+  position: static;
+  inset: auto;
+  width: auto;
+  height: auto;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  line-height: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.theme-international-typographic-style .regen-line.active {
+  background: var(--card-strong);
+  color: var(--fg);
+  opacity: 1;
+}

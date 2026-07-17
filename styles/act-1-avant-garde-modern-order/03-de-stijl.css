@@ -119,6 +119,93 @@ body.theme-de-stijl {
 .theme-de-stijl .reveal-grid,
 .theme-de-stijl .reveal-actions { width: 74%; }
 
+.theme-de-stijl .regenerating {
+  background:
+    linear-gradient(90deg, transparent 0 17%, var(--line) 17% calc(17% + 6px), transparent calc(17% + 6px)),
+    linear-gradient(0deg, #cfb843 0 14%, var(--line) 14% calc(14% + 7px), transparent calc(14% + 7px)),
+    linear-gradient(90deg, transparent 0 76%, #315d7a 76% 100%),
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-de-stijl .regenerating::before,
+.theme-de-stijl .regenerating::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.theme-de-stijl .regenerating::before {
+  inset: 0 auto auto 17%;
+  width: 28%;
+  height: 22%;
+  border: 7px solid var(--line);
+  border-top: 0;
+  background: #b72c2b;
+}
+
+.theme-de-stijl .regenerating::after {
+  right: 0;
+  bottom: 14%;
+  width: 24%;
+  height: 7px;
+  background: var(--line);
+}
+
+.theme-de-stijl .regen-box {
+  border: 8px solid var(--line);
+  background:
+    linear-gradient(90deg, transparent 0 78%, #d5e0df 78% 100%),
+    var(--card);
+  color: var(--fg);
+  box-shadow: 12px 12px 0 #cfb843;
+}
+
+.theme-de-stijl .regen-box::before,
+.theme-de-stijl .regen-box::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.theme-de-stijl .regen-box::before {
+  inset: 0 16% auto auto;
+  width: 7px;
+  height: 100%;
+  background: var(--line);
+}
+
+.theme-de-stijl .regen-box::after {
+  top: 0;
+  right: 0;
+  width: 16%;
+  height: 36%;
+  border-bottom: 7px solid var(--line);
+  background: #b72c2b;
+}
+
+.theme-de-stijl .regen-line {
+  max-width: 76%;
+  padding-inline-start: 32px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.theme-de-stijl .regen-line::before,
+.theme-de-stijl .regen-line.active::before {
+  top: .42em;
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--line);
+  border-radius: 0;
+  background: #cfb843;
+}
+
+.theme-de-stijl .regen-line:nth-child(2)::before { background: #b72c2b; }
+.theme-de-stijl .regen-line:nth-child(3)::before { background: #315d7a; }
+.theme-de-stijl .regen-line:nth-child(4)::before { background: var(--card); }
+
 @media (max-width: 720px) {
   .theme-de-stijl nav { display: none; }
   .theme-de-stijl .brand { border-right-width: 4px; }

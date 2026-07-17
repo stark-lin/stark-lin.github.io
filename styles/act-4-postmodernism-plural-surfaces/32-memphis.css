@@ -174,3 +174,39 @@ body.theme-memphis {
   .theme-memphis .contact-panel,
   .theme-memphis .reveal { padding: 30px 24px; }
 }
+
+.theme-memphis .regenerating {
+  background:
+    radial-gradient(circle at 12% 22%, #72b7ad 0 12px, transparent 13px),
+    radial-gradient(circle at 88% 76%, var(--accent) 0 16px, transparent 17px),
+    linear-gradient(135deg, transparent 0 45%, color-mix(in srgb, var(--card-strong), transparent 22%) 45% 51%, transparent 51%) 0 0 / 72px 72px,
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-memphis .regen-box {
+  border: 3px solid var(--line);
+  border-radius: 7px;
+  background: var(--card);
+  box-shadow: 12px 12px 0 #72b7ad, -7px -7px 0 var(--accent);
+  font-family: var(--sans);
+  font-weight: 750;
+}
+
+.theme-memphis .regen-box::before {
+  content: "";
+  position: absolute;
+  right: clamp(18px, 6vw, 54px);
+  top: -22px;
+  width: 92px;
+  height: 54px;
+  border: 3px solid var(--line);
+  border-radius: 92px 92px 0 0;
+  background: var(--card-strong);
+  transform: rotate(-8deg);
+}
+
+.theme-memphis .regen-line:nth-child(even) { margin-inline-start: clamp(0px, 5vw, 42px); }
+.theme-memphis .regen-line::before { border: 2px solid var(--line); border-radius: 50%; }
+.theme-memphis .regen-line:nth-child(2n).active::before { background: #72b7ad; }
+.theme-memphis .regen-line:nth-child(2n + 1).active::before { background: var(--accent); }

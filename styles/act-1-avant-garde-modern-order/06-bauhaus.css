@@ -137,6 +137,94 @@ body.theme-bauhaus {
     var(--card);
 }
 
+.theme-bauhaus .regenerating {
+  background:
+    linear-gradient(90deg, transparent 0 9%, color-mix(in srgb, var(--line), transparent 48%) 9% calc(9% + 2px), transparent calc(9% + 2px)),
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-bauhaus .regenerating::before,
+.theme-bauhaus .regenerating::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.theme-bauhaus .regenerating::before {
+  top: 6%;
+  right: 4%;
+  width: clamp(126px, 23vw, 270px);
+  aspect-ratio: 1;
+  border: clamp(20px, 4vw, 44px) solid #d2b62f;
+  border-radius: 50%;
+  opacity: .86;
+}
+
+.theme-bauhaus .regenerating::after {
+  left: 4%;
+  bottom: 4%;
+  width: 0;
+  height: 0;
+  border-left: clamp(54px, 9vw, 102px) solid transparent;
+  border-right: clamp(54px, 9vw, 102px) solid transparent;
+  border-bottom: clamp(96px, 16vw, 178px) solid #2c6f8c;
+  opacity: .76;
+}
+
+.theme-bauhaus .regen-box {
+  border: 2px solid var(--line);
+  border-radius: 4px 4px 72px 4px;
+  background: var(--card);
+  color: var(--fg);
+  box-shadow: 10px 10px 0 #d2b62f;
+}
+
+.theme-bauhaus .regen-box::before,
+.theme-bauhaus .regen-box::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.theme-bauhaus .regen-box::before {
+  inset: 0 0 auto;
+  height: 12px;
+  background: linear-gradient(90deg, #c84432 0 33.333%, #d2b62f 33.333% 66.666%, #2c6f8c 66.666%);
+}
+
+.theme-bauhaus .regen-box::after {
+  right: 24px;
+  bottom: 22px;
+  width: 34px;
+  aspect-ratio: 1;
+  border: 7px solid #2c6f8c;
+  border-radius: 50%;
+}
+
+.theme-bauhaus .regen-line {
+  max-width: calc(100% - 42px);
+  padding-inline-start: 32px;
+  font-family: var(--sans);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.theme-bauhaus .regen-line::before,
+.theme-bauhaus .regen-line.active::before {
+  top: .42em;
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: #c84432;
+}
+
+.theme-bauhaus .regen-line:nth-child(2)::before { border-radius: 0; background: #d2b62f; }
+.theme-bauhaus .regen-line:nth-child(3)::before { background: #2c6f8c; }
+.theme-bauhaus .regen-line:nth-child(4)::before { border-radius: 0; background: var(--fg); transform: rotate(45deg); }
+
 @media (max-width: 720px) {
   .theme-bauhaus .brand::before { box-shadow: 18px 0 0 #d2b62f, 36px 0 0 #2c6f8c; margin-right: 36px; }
   .theme-bauhaus .hero-grid,

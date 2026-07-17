@@ -148,6 +148,82 @@ body.theme-brutalism {
   box-shadow: 2px 2px 0 var(--line);
 }
 
+.theme-brutalism .regenerating {
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 0 calc(50% - 4px), var(--line) calc(50% - 4px) calc(50% + 4px), transparent calc(50% + 4px)),
+    repeating-linear-gradient(0deg, var(--bg) 0 76px, color-mix(in srgb, var(--line), transparent 62%) 76px 80px);
+  color: var(--fg);
+}
+
+.theme-brutalism .regenerating::before,
+.theme-brutalism .regenerating::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: clamp(92px, 22vw, 240px);
+  height: clamp(92px, 22vw, 240px);
+  border: clamp(10px, 2vw, 22px) solid var(--line);
+  background: var(--accent);
+}
+
+.theme-brutalism .regenerating::before { top: -42px; left: -42px; }
+.theme-brutalism .regenerating::after { right: -42px; bottom: -42px; }
+
+.theme-brutalism .regen-box {
+  position: relative;
+  width: min(610px, calc(100vw - 48px));
+  max-width: 100%;
+  padding: clamp(24px, 6vw, 48px);
+  border: 6px solid var(--line);
+  background: var(--card);
+  box-shadow: 12px 12px 0 var(--line);
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.theme-brutalism .regen-box::before {
+  content: "";
+  position: absolute;
+  inset: 12px 12px auto auto;
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--line);
+  background: var(--accent);
+}
+
+.theme-brutalism .regen-line {
+  position: relative;
+  min-width: 0;
+  padding: 10px 12px 10px 42px;
+  border-bottom: 3px solid var(--line);
+  opacity: 1;
+  overflow-wrap: anywhere;
+}
+
+.theme-brutalism .regen-line::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--line);
+  background: var(--bg);
+  transform: translateY(-50%);
+}
+
+.theme-brutalism .regen-line.active {
+  background: var(--line);
+  color: var(--bg);
+}
+
+.theme-brutalism .regen-line.active::before {
+  border-color: var(--bg);
+  background: var(--accent);
+}
+
 @media (max-width: 720px) {
   .theme-brutalism .hero {
     margin-right: 8px;

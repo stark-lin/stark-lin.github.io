@@ -140,6 +140,90 @@ body.theme-radical-design.layout-single .site {
   background: var(--card);
 }
 
+.theme-radical-design .regenerating {
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 72% 23% at 112% 14%, var(--card-strong) 0 72%, transparent 73%),
+    radial-gradient(ellipse 68% 26% at -12% 88%, var(--accent) 0 72%, transparent 73%),
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-radical-design .regenerating::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 9%;
+  left: -12%;
+  width: 84%;
+  height: clamp(96px, 22vh, 190px);
+  border: 3px solid var(--line);
+  border-radius: 999px;
+  background: var(--accent);
+  transform: rotate(-5deg);
+}
+
+.theme-radical-design .regen-box {
+  position: relative;
+  isolation: isolate;
+  width: min(650px, calc(100vw - 48px));
+  max-width: 100%;
+  padding: clamp(30px, 7vw, 58px) clamp(24px, 6vw, 52px);
+  border: 3px solid var(--line);
+  border-radius: clamp(28px, 7vw, 68px);
+  background: var(--card);
+  box-shadow: 12px 12px 0 var(--card-strong);
+}
+
+.theme-radical-design .regen-box::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -18px 7% auto -8%;
+  height: 44px;
+  border: 3px solid var(--line);
+  border-radius: 999px;
+  background: var(--card-strong);
+  transform: rotate(2deg);
+}
+
+.theme-radical-design .regen-line {
+  position: relative;
+  min-width: 0;
+  padding: 11px 18px 11px 46px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  font-weight: 820;
+  opacity: 1;
+  overflow-wrap: anywhere;
+}
+
+.theme-radical-design .regen-line + .regen-line { margin-top: 8px; }
+
+.theme-radical-design .regen-line::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 11px;
+  width: 22px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  transform: translateY(-50%);
+}
+
+.theme-radical-design .regen-line.active {
+  color: var(--bg);
+  background: var(--accent);
+}
+
+.theme-radical-design .regen-line.active::before {
+  background: var(--card-strong);
+  box-shadow: 0 0 0 2px var(--bg);
+}
+
 @media (max-width: 720px) {
   .theme-radical-design .hero {
     margin-top: 20px;

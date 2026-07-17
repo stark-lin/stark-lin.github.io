@@ -122,6 +122,78 @@ body.theme-futurism {
   opacity: .36;
 }
 
+.theme-futurism .regenerating {
+  background:
+    repeating-linear-gradient(112deg, transparent 0 38px, color-mix(in srgb, var(--accent), transparent 56%) 38px 44px),
+    linear-gradient(112deg, var(--fg) 0 68%, color-mix(in srgb, var(--accent), var(--fg) 28%) 68% 76%, var(--fg) 76%);
+  color: var(--bg);
+}
+
+.theme-futurism .regenerating::before,
+.theme-futurism .regenerating::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.theme-futurism .regenerating::before {
+  inset: 8% -10% auto auto;
+  width: min(62vw, 720px);
+  height: min(58vh, 520px);
+  background: var(--accent);
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  opacity: .38;
+}
+
+.theme-futurism .regenerating::after {
+  inset: auto 0 8%;
+  height: 10px;
+  background: repeating-linear-gradient(90deg, var(--bg) 0 42px, transparent 42px 58px);
+  opacity: .72;
+}
+
+.theme-futurism .regen-box {
+  border: 4px solid var(--bg);
+  border-left: 14px solid var(--accent);
+  background: var(--bg);
+  color: var(--fg);
+  box-shadow: 12px 12px 0 var(--accent);
+  clip-path: polygon(0 0, calc(100% - 34px) 0, 100% 34px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.theme-futurism .regen-box::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0 0 auto auto;
+  width: 42%;
+  height: 12px;
+  background: repeating-linear-gradient(112deg, var(--accent) 0 18px, var(--fg) 18px 23px);
+}
+
+.theme-futurism .regen-line {
+  padding-inline-start: 36px;
+  overflow-wrap: anywhere;
+}
+
+.theme-futurism .regen-line::before,
+.theme-futurism .regen-line.active::before {
+  content: ">>";
+  top: .2em;
+  width: auto;
+  height: auto;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font-weight: 950;
+  letter-spacing: -.22em;
+  transform: skewX(-12deg);
+}
+
 @media (max-width: 720px) {
   .theme-futurism .hero {
     min-height: auto;

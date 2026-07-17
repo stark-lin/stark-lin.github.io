@@ -134,3 +134,74 @@ body.theme-zero {
 @keyframes zero-vibration {
   to { transform: translateY(5px); opacity: .54; }
 }
+
+/* Perforation, hairlines, and a single empty circle hold the surface near zero. */
+.theme-zero .regenerating {
+  color: var(--fg);
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--fg), transparent 83%) 0 1px, transparent 1.4px) 0 0 / 12px 12px,
+    linear-gradient(90deg, transparent 49.8%, color-mix(in srgb, var(--line), transparent 36%) 50%, transparent 50.2%),
+    var(--bg);
+}
+
+.theme-zero .regen-box {
+  position: relative;
+  isolation: isolate;
+  width: min(590px, 100%);
+  padding: clamp(30px, 8vw, 58px);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line), transparent 20%);
+  border-radius: 1px;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--fg), transparent 88%) 0 1px, transparent 1.4px) 0 0 / 11px 11px,
+    var(--card);
+  color: var(--fg);
+  box-shadow: 0 10px 30px rgba(41, 48, 51, .1);
+  font-family: var(--sans);
+}
+
+.theme-zero .regen-box::before {
+  content: "○";
+  position: absolute;
+  top: 8%;
+  right: 8%;
+  z-index: -1;
+  color: color-mix(in srgb, var(--fg), transparent 44%);
+  font: 300 clamp(70px, 20vw, 142px)/1 var(--sans);
+}
+
+.theme-zero .regen-box::after {
+  content: "";
+  position: absolute;
+  right: 8%;
+  bottom: 15%;
+  left: 8%;
+  z-index: -1;
+  height: 1px;
+  background: var(--line);
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--line), transparent 32%), 0 12px 0 color-mix(in srgb, var(--line), transparent 60%);
+}
+
+.theme-zero .regen-line {
+  position: relative;
+  z-index: 1;
+  margin: 5px 0;
+  padding: 4px 8px;
+  padding-inline-start: 28px;
+  border: 1px solid color-mix(in srgb, var(--line), transparent 18%);
+  border-radius: 1px;
+  background: var(--card);
+  color: var(--fg);
+  letter-spacing: .05em;
+  opacity: .8;
+}
+
+.theme-zero .regen-line.active {
+  background: var(--fg);
+  color: var(--card);
+  opacity: 1;
+}
+
+.theme-zero .regen-line::before {
+  border-radius: 50%;
+}

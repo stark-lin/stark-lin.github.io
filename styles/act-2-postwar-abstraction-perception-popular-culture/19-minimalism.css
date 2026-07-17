@@ -126,3 +126,67 @@ body.theme-minimalism {
   .theme-minimalism :is(.card, .timeline-item, .principle, .hero-card) { min-height: auto; }
 }
 
+/* Four serial modules carry the refresh without adding a second hierarchy. */
+.theme-minimalism .regenerating {
+  color: var(--fg);
+  background:
+    linear-gradient(90deg, transparent 0 75%, color-mix(in srgb, var(--card-strong), transparent 28%) 75% 100%),
+    var(--bg);
+}
+
+.theme-minimalism .regen-box {
+  position: relative;
+  isolation: isolate;
+  width: min(580px, 100%);
+  padding: clamp(30px, 8vw, 56px);
+  padding-bottom: clamp(58px, 14vw, 86px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--card);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-weight: 540;
+}
+
+.theme-minimalism .regen-box::before {
+  content: "";
+  position: absolute;
+  right: clamp(30px, 8vw, 56px);
+  bottom: 24px;
+  left: clamp(30px, 8vw, 56px);
+  z-index: -1;
+  height: 24px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 25% 100%,
+    var(--card-strong);
+}
+
+.theme-minimalism .regen-box::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 38%;
+  height: 8px;
+  background: var(--accent);
+}
+
+.theme-minimalism .regen-line {
+  position: relative;
+  z-index: 1;
+  padding: 6px 8px;
+  padding-inline-start: 28px;
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+  color: var(--fg);
+  opacity: .78;
+}
+
+.theme-minimalism .regen-line.active {
+  background: var(--card-strong);
+  color: var(--fg);
+  box-shadow: inset 4px 0 0 var(--accent);
+  opacity: 1;
+}

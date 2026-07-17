@@ -526,3 +526,39 @@ body.theme-deconstructivism.layout-single .site {
     padding: 34px 24px 42px;
   }
 }
+
+.theme-deconstructivism .regenerating {
+  background:
+    linear-gradient(101deg, transparent 0 12%, color-mix(in srgb, var(--accent), transparent 18%) 12.2% 17%, transparent 17.2% 100%),
+    linear-gradient(171deg, transparent 0 63%, color-mix(in srgb, var(--decon-blue), transparent 36%) 63.2% 72%, transparent 72.2%),
+    var(--fg);
+  color: var(--fg);
+}
+
+.theme-deconstructivism .regen-box {
+  border: 0;
+  background: var(--card);
+  box-shadow: 16px 12px 0 var(--accent), -11px -9px 0 var(--decon-blue);
+  clip-path: polygon(3% 0, 78% 3%, 81% 0, 100% 8%, 96% 87%, 100% 94%, 71% 100%, 29% 96%, 26% 100%, 0 91%, 4% 38%);
+  font-family: var(--mono);
+  font-weight: 760;
+  transform: rotate(-.7deg);
+}
+
+.theme-deconstructivism .regen-box::after {
+  content: "";
+  position: absolute;
+  inset: 17% -4% auto 38%;
+  height: 7px;
+  background: var(--accent);
+  box-shadow: 0 21px 0 color-mix(in srgb, var(--decon-blue), transparent 10%);
+  transform: rotate(-7deg);
+}
+
+.theme-deconstructivism .regen-line::before {
+  border: 0;
+  background: var(--decon-blue);
+  clip-path: polygon(50% 0, 100% 32%, 68% 100%, 0 72%);
+}
+
+.theme-deconstructivism .regen-line.active::before { background: var(--accent); }

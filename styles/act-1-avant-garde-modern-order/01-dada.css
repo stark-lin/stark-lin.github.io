@@ -591,18 +591,100 @@ html[lang^="zh"] .theme-dada h2 {
 }
 
 .theme-dada .regenerating {
-  background: var(--bg);
+  background:
+    linear-gradient(11deg, transparent 0 64%, color-mix(in srgb, var(--accent), transparent 78%) 64% 72%, transparent 72%),
+    repeating-linear-gradient(87deg, transparent 0 54px, color-mix(in srgb, var(--line), transparent 91%) 54px 56px),
+    var(--bg);
   color: var(--fg);
 }
 
+.theme-dada .regenerating::before,
+.theme-dada .regenerating::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.theme-dada .regenerating::before {
+  top: 8%;
+  left: -5%;
+  width: clamp(110px, 25vw, 310px);
+  aspect-ratio: 1.8;
+  border: 8px solid var(--line);
+  background: var(--accent);
+  transform: rotate(-9deg);
+}
+
+.theme-dada .regenerating::after {
+  right: -34px;
+  bottom: 7%;
+  width: clamp(100px, 22vw, 250px);
+  aspect-ratio: 1;
+  border: 3px dashed var(--line);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--card), transparent 18%);
+  transform: rotate(7deg);
+}
+
 .theme-dada .regen-box {
-  padding: 28px;
+  padding: clamp(28px, 6vw, 58px);
   border-width: 8px 2px 3px 6px;
   border-style: solid dashed double solid;
   border-color: var(--line);
   background: var(--card);
   box-shadow: 9px 9px 0 var(--accent);
   transform: rotate(-.5deg);
+}
+
+.theme-dada .regen-box::before,
+.theme-dada .regen-box::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.theme-dada .regen-box::before {
+  inset: 12px -16px auto auto;
+  width: 38%;
+  height: 18px;
+  border-block: 3px solid var(--line);
+  background: var(--accent);
+  transform: rotate(3deg);
+}
+
+.theme-dada .regen-box::after {
+  right: 18px;
+  bottom: -24px;
+  width: 68px;
+  height: 68px;
+  border: 5px double var(--line);
+  border-radius: 50%;
+  background: var(--card-strong);
+}
+
+.theme-dada .regen-line {
+  padding-inline-start: 30px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+  text-transform: uppercase;
+}
+
+.theme-dada .regen-line::before,
+.theme-dada .regen-line.active::before {
+  top: .42em;
+  width: 13px;
+  height: 13px;
+  border: 3px solid var(--line);
+  border-radius: 0;
+  background: var(--accent);
+  transform: rotate(11deg);
+}
+
+.theme-dada .regen-line:nth-child(even)::before {
+  border-radius: 50%;
+  background: var(--fg);
+  transform: rotate(-8deg);
 }
 
 @media (max-width: 820px) {

@@ -607,3 +607,56 @@ body.theme-post-internet-art.layout-single .site {
     animation-iteration-count: 1 !important;
   }
 }
+
+.theme-post-internet-art .regenerating {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.theme-post-internet-art .regen-box {
+  padding-top: clamp(70px, 11vw, 84px);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--card);
+  box-shadow: 0 24px 60px rgba(23, 33, 31, .12);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.theme-post-internet-art .regen-box::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 46px;
+  border-bottom: 1px solid var(--line);
+  border-radius: 24px 24px 0 0;
+  background:
+    radial-gradient(circle at 22px 23px, color-mix(in srgb, var(--accent), white 34%) 0 4px, transparent 5px),
+    radial-gradient(circle at 38px 23px, color-mix(in srgb, var(--muted), white 58%) 0 4px, transparent 5px),
+    radial-gradient(circle at 54px 23px, color-mix(in srgb, var(--line), var(--fg) 18%) 0 4px, transparent 5px),
+    var(--card-strong);
+}
+
+.theme-post-internet-art .regen-line {
+  margin-top: 7px;
+  padding: 10px 14px 10px 36px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--card-strong), transparent 24%);
+}
+
+.theme-post-internet-art .regen-line::before {
+  inset-inline-start: 14px;
+  top: 1.05em;
+  border: 0;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.theme-post-internet-art .regen-line.active {
+  border-color: color-mix(in srgb, var(--accent), transparent 45%);
+  background: color-mix(in srgb, var(--accent), white 89%);
+}
+
+.theme-post-internet-art .regen-line.active::before { background: var(--accent); }

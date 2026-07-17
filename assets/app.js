@@ -387,7 +387,7 @@
       const languageSwitch = getLanguageSwitch();
       const licenseUrl = new URL("LICENSE", new URL(ENTRY_ROOT, window.location.href));
       document.body.innerHTML = `
-        <div class="regenerating" id="regenerating" aria-hidden="true">
+        <div class="regenerating" id="regenerating" role="status" aria-live="polite" aria-atomic="true" aria-hidden="true">
           <div class="regen-box">
             ${shell.regenerating.map((line, index) => `<div class="regen-line${index === 0 ? " active" : ""}">${escapeHtml(line)}</div>`).join("")}
           </div>
@@ -841,6 +841,10 @@
 
     function rollAgain() {
       const overlay = document.getElementById("regenerating");
+      if (!overlay || overlay.classList.contains("active")) return;
+
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.setAttribute("aria-busy", "true");
       overlay.classList.add("active");
       const lines = [...overlay.querySelectorAll(".regen-line")];
       lines.forEach((line, index) => {

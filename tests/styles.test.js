@@ -65,6 +65,61 @@ function loadStyleRegistry() {
   return context.window.PORTFOLIO_STYLE_POOL;
 }
 
+function splitSelectorList(selectorList) {
+  const selectors = [];
+  let start = 0;
+  let depth = 0;
+  let quote = "";
+
+  for (let index = 0; index < selectorList.length; index += 1) {
+    const character = selectorList[index];
+
+    if (quote) {
+      if (character === quote && selectorList[index - 1] !== "\\") quote = "";
+      continue;
+    }
+    if (character === '"' || character === "'") {
+      quote = character;
+      continue;
+    }
+    if (character === "(" || character === "[") depth += 1;
+    else if (character === ")" || character === "]") depth = Math.max(0, depth - 1);
+    else if (character === "," && depth === 0) {
+      selectors.push(selectorList.slice(start, index).trim());
+      start = index + 1;
+    }
+  }
+
+  selectors.push(selectorList.slice(start).trim());
+  return selectors.filter(Boolean);
+}
+
+function hasScopedThemeSelector(css, themeId, targetClass) {
+  const themeClass = `.theme-${themeId}`;
+  const target = `.${targetClass}`;
+  const source = css.replace(/\/\*[\s\S]*?\*\//g, "");
+
+  for (const match of source.matchAll(/([^{}]+)\{/g)) {
+    const selectorList = match[1].trim();
+    if (!selectorList || selectorList.startsWith("@")) continue;
+
+    for (const selector of splitSelectorList(selectorList)) {
+      let themeIndex = selector.indexOf(themeClass);
+
+      while (themeIndex !== -1) {
+        const themeEnd = themeIndex + themeClass.length;
+        const targetIndex = selector.indexOf(target, themeEnd);
+        const relationship = targetIndex === -1 ? "" : selector.slice(themeEnd, targetIndex);
+
+        if (targetIndex !== -1 && /[\s>]/.test(relationship)) return true;
+        themeIndex = selector.indexOf(themeClass, themeEnd);
+      }
+    }
+  }
+
+  return false;
+}
+
 test("the style folder contains one complete, continuously numbered trio per style", () => {
   STYLE_ENTRIES.forEach(([directory, stem], index) => {
     assert.equal(stem.slice(0, 2), String(index).padStart(2, "0"));
@@ -226,6 +281,22 @@ test("theme stylesheets target their own class and have balanced blocks", () => 
     const opening = (css.match(/{/g) || []).length;
     const closing = (css.match(/}/g) || []).length;
     assert.equal(opening, closing, `${stem}.css has unbalanced blocks`);
+  });
+});
+
+test("every theme scopes its regeneration overlay and box", () => {
+  const styles = loadStyleRegistry();
+
+  STYLE_ENTRIES.forEach(([directory, stem], index) => {
+    const css = read(path.join(ROOT, "styles", directory, `${stem}.css`));
+    const style = styles[index];
+
+    for (const targetClass of ["regenerating", "regen-box"]) {
+      assert.ok(
+        hasScopedThemeSelector(css, style.id, targetClass),
+        `${stem}.css must scope .${targetClass} beneath .theme-${style.id}`
+      );
+    }
   });
 });
 

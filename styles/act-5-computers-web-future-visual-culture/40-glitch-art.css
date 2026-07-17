@@ -164,3 +164,58 @@ body.theme-glitch-art {
   .theme-glitch-art .section-index { width: fit-content; }
   .theme-glitch-art h1 { text-shadow: 2px 0 0 color-mix(in srgb, var(--accent), transparent 62%), -1px 0 0 color-mix(in srgb, #2b69d1, transparent 62%); }
 }
+
+.theme-glitch-art .regenerating {
+  background:
+    linear-gradient(0deg, transparent 0 18%, color-mix(in srgb, var(--accent), transparent 52%) 18% 21%, transparent 21% 67%, color-mix(in srgb, #2b69d1, transparent 58%) 67% 71%, transparent 71%),
+    linear-gradient(90deg, transparent 0 76%, color-mix(in srgb, #2b69d1, transparent 84%) 76% 79%, transparent 79%),
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-glitch-art .regen-box {
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--card);
+  box-shadow: 9px 6px 0 color-mix(in srgb, #2b69d1, transparent 42%), -7px -5px 0 color-mix(in srgb, var(--accent), transparent 45%);
+  font-family: var(--mono);
+}
+
+.theme-glitch-art .regen-box::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 24% -7px auto;
+  height: 6px;
+  background: linear-gradient(90deg, #2b69d1 0 17%, transparent 17% 64%, var(--accent) 64% 91%, transparent 91%);
+  opacity: .56;
+}
+
+.theme-glitch-art .regen-box::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: auto -5px 22%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0 34%, transparent 34% 71%, #2b69d1 71% 100%);
+  opacity: .46;
+}
+
+.theme-glitch-art .regen-line.active {
+  text-shadow: 2px 0 0 color-mix(in srgb, var(--accent), transparent 35%), -2px 0 0 color-mix(in srgb, #2b69d1, transparent 38%);
+}
+
+.theme-glitch-art .regen-line::before { border-radius: 0; }
+.theme-glitch-art .regen-line.active::before { background: var(--accent); box-shadow: 3px 0 0 #2b69d1; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .theme-glitch-art .regenerating.active .regen-box::before {
+    animation: glitch-regen-slice .72s steps(2, end) both;
+  }
+}
+
+@keyframes glitch-regen-slice {
+  0%, 39%, 62%, 100% { transform: translateX(0); }
+  40% { transform: translateX(8px); }
+  61% { transform: translateX(-5px); }
+}

@@ -147,6 +147,93 @@ body.theme-concrete-art {
   padding-left: calc(var(--style-card-padding) + 14%);
 }
 
+.theme-concrete-art .regenerating {
+  background:
+    linear-gradient(90deg, transparent 0 calc(12.5% - 1px), color-mix(in srgb, var(--line), transparent 38%) calc(12.5% - 1px) calc(12.5% + 1px), transparent calc(12.5% + 1px)),
+    linear-gradient(0deg, transparent 0 calc(25% - 1px), color-mix(in srgb, var(--line), transparent 42%) calc(25% - 1px) calc(25% + 1px), transparent calc(25% + 1px)),
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-concrete-art .regenerating::before,
+.theme-concrete-art .regenerating::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.theme-concrete-art .regenerating::before {
+  top: 8%;
+  right: 6%;
+  width: clamp(116px, 22vw, 260px);
+  aspect-ratio: 1;
+  background:
+    linear-gradient(90deg, var(--accent) 0 50%, transparent 50%),
+    linear-gradient(0deg, #d6ad42 0 50%, transparent 50%);
+}
+
+.theme-concrete-art .regenerating::after {
+  left: 5%;
+  bottom: 7%;
+  width: clamp(132px, 28vw, 320px);
+  height: clamp(20px, 4vw, 44px);
+  background: linear-gradient(90deg, var(--accent) 0 25%, #d6ad42 25% 50%, #356b88 50% 75%, var(--fg) 75%);
+}
+
+.theme-concrete-art .regen-box {
+  border: 2px solid var(--line);
+  background:
+    linear-gradient(90deg, var(--accent) 0 12.5%, transparent 12.5%),
+    linear-gradient(0deg, transparent 0 87.5%, #d6ad42 87.5%),
+    var(--card);
+  color: var(--fg);
+  box-shadow: 12px 12px 0 color-mix(in srgb, var(--accent), transparent 18%);
+  padding-inline-start: calc(clamp(24px, 5vw, 52px) + 12.5%);
+}
+
+.theme-concrete-art .regen-box::before,
+.theme-concrete-art .regen-box::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.theme-concrete-art .regen-box::before {
+  inset: 0 auto 0 12.5%;
+  width: 2px;
+  background: var(--line);
+}
+
+.theme-concrete-art .regen-box::after {
+  top: 0;
+  right: 12.5%;
+  width: 2px;
+  height: 25%;
+  background: var(--line);
+}
+
+.theme-concrete-art .regen-line {
+  padding-inline-start: 36px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.theme-concrete-art .regen-line::before,
+.theme-concrete-art .regen-line.active::before {
+  top: .48em;
+  width: 18px;
+  height: 12px;
+  border: 2px solid var(--line);
+  border-radius: 0;
+  background: var(--card);
+}
+
+.theme-concrete-art .regen-line.active::before { background: var(--accent); }
+.theme-concrete-art .regen-line:nth-child(2).active::before { background: #d6ad42; }
+.theme-concrete-art .regen-line:nth-child(3).active::before { background: #356b88; }
+.theme-concrete-art .regen-line:nth-child(4).active::before { background: var(--fg); }
+
 @media (max-width: 720px) {
   .theme-concrete-art .hero { min-height: auto; }
   .theme-concrete-art .hero::before { opacity: .14; }

@@ -147,6 +147,93 @@ body.theme-conceptual-art {
   text-decoration: none;
 }
 
+.theme-conceptual-art .regenerating {
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 0 8%, var(--line) 8% calc(8% + 1px), transparent calc(8% + 1px) 92%, var(--line) 92% calc(92% + 1px), transparent calc(92% + 1px)),
+    repeating-linear-gradient(0deg, var(--bg) 0 31px, color-mix(in srgb, var(--line), transparent 84%) 31px 32px);
+  color: var(--fg);
+}
+
+.theme-conceptual-art .regenerating::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 8%;
+  bottom: 8%;
+  left: clamp(22px, 8vw, 120px);
+  width: 1px;
+  background: var(--accent);
+  box-shadow: 5px 0 0 color-mix(in srgb, var(--accent), transparent 68%);
+}
+
+.theme-conceptual-art .regen-box {
+  position: relative;
+  width: min(620px, calc(100vw - 48px));
+  max-width: 100%;
+  padding: clamp(34px, 7vw, 64px) clamp(24px, 6vw, 52px);
+  border: 1px solid var(--line);
+  border-left: 7px double var(--fg);
+  background: color-mix(in srgb, var(--card), transparent 2%);
+  box-shadow: 8px 8px 0 color-mix(in srgb, var(--line), transparent 78%);
+  font-family: var(--mono);
+}
+
+.theme-conceptual-art .regen-box::before,
+.theme-conceptual-art .regen-box::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+}
+
+.theme-conceptual-art .regen-box::before {
+  top: 14px;
+  right: 14px;
+  border-top: 1px solid var(--fg);
+  border-right: 1px solid var(--fg);
+}
+
+.theme-conceptual-art .regen-box::after {
+  bottom: 14px;
+  left: 14px;
+  border-bottom: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+}
+
+.theme-conceptual-art .regen-line {
+  position: relative;
+  min-width: 0;
+  padding: 10px 10px 10px 30px;
+  border-bottom: 1px dotted var(--line);
+  opacity: 1;
+  overflow-wrap: anywhere;
+}
+
+.theme-conceptual-art .regen-line::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--fg);
+  border-radius: 50%;
+  background: var(--card);
+  transform: translateY(-50%);
+}
+
+.theme-conceptual-art .regen-line.active {
+  color: var(--fg);
+  background: color-mix(in srgb, var(--accent), transparent 90%);
+}
+
+.theme-conceptual-art .regen-line.active::before {
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--card), 0 0 0 4px var(--accent);
+}
+
 @media (max-width: 720px) {
   .theme-conceptual-art .section-head { grid-template-columns: 1fr; gap: 20px; }
   .theme-conceptual-art .section-index { width: max-content; max-width: 100%; }

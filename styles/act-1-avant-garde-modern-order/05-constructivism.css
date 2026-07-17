@@ -130,6 +130,82 @@ body.theme-constructivism {
 .theme-constructivism .reveal-grid,
 .theme-constructivism .reveal-actions { max-width: 70%; }
 
+.theme-constructivism .regenerating {
+  background:
+    radial-gradient(circle at 88% 16%, transparent 0 72px, color-mix(in srgb, var(--accent), transparent 6%) 73px 98px, transparent 99px),
+    linear-gradient(168deg, transparent 0 43%, color-mix(in srgb, var(--accent), transparent 8%) 43% 55%, transparent 55%),
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-constructivism .regenerating::before,
+.theme-constructivism .regenerating::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.theme-constructivism .regenerating::before {
+  left: -16%;
+  top: 42%;
+  width: 132%;
+  height: clamp(62px, 12vw, 132px);
+  background: var(--accent);
+  transform: rotate(-12deg);
+  opacity: .82;
+}
+
+.theme-constructivism .regenerating::after {
+  right: 4%;
+  top: 8%;
+  width: clamp(112px, 21vw, 250px);
+  aspect-ratio: 1;
+  border: clamp(14px, 2.5vw, 28px) solid var(--fg);
+  border-radius: 50%;
+  opacity: .34;
+}
+
+.theme-constructivism .regen-box {
+  border: 8px solid var(--line);
+  border-left: 16px solid var(--accent);
+  background: var(--card);
+  color: var(--fg);
+  box-shadow: 14px 14px 0 var(--accent);
+  clip-path: polygon(0 0, calc(100% - 34px) 0, 100% 34px, 100% 100%, 0 100%);
+  font-weight: 850;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+
+.theme-constructivism .regen-box::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0 0 auto auto;
+  width: 38%;
+  height: 16px;
+  background: var(--fg);
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.theme-constructivism .regen-line {
+  padding-inline-start: 34px;
+  overflow-wrap: anywhere;
+}
+
+.theme-constructivism .regen-line::before,
+.theme-constructivism .regen-line.active::before {
+  top: .35em;
+  width: 16px;
+  height: 16px;
+  border: 5px solid var(--accent);
+  border-radius: 50%;
+  background: var(--card);
+}
+
+.theme-constructivism .regen-line.active::before { background: var(--accent); }
+.theme-constructivism .regen-line:nth-child(even)::before { border-radius: 0; transform: rotate(9deg); }
+
 @media (max-width: 720px) {
   .theme-constructivism .hero { min-height: auto; padding-inline: 18px; }
   .theme-constructivism .section-head { grid-template-columns: 1fr; }

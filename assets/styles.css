@@ -785,16 +785,52 @@
       display: none;
       place-items: center;
       padding: 24px;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .regenerating.active { display: grid; }
+    .regenerating.active {
+      display: grid;
+      animation: regenerating-in .18s ease-out both;
+    }
     .regen-box {
-      width: min(624px, 100%);
+      position: relative;
+      z-index: 1;
+      width: min(680px, 100%);
+      padding: clamp(24px, 5vw, 52px);
+      border: 1px solid currentColor;
       font-family: var(--mono);
       font-size: 14px;
       line-height: 1.9;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .regen-line { opacity: .58; }
-    .regen-line.active { opacity: 1; }
+    .regen-line {
+      position: relative;
+      z-index: 1;
+      padding-inline-start: 22px;
+      opacity: .34;
+      transform: translateX(-6px);
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .regen-line::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: 0;
+      top: .76em;
+      width: 7px;
+      height: 7px;
+      border: 1px solid currentColor;
+    }
+    .regen-line.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .regen-line.active::before { background: currentColor; }
+
+    @keyframes regenerating-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
     .fade-in {
       opacity: 0;
@@ -974,6 +1010,13 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      .regenerating.active { animation: none; }
+
+      .regen-line {
+        transform: none;
+        transition: none;
+      }
+
       .footer-spotlight-scrim,
       .footer-spotlight-button,
       .footer-spotlight-card {

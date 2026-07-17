@@ -403,6 +403,87 @@ body.theme-soviet-modernism.layout-single .site {
   border-color: var(--line);
 }
 
+.theme-soviet-modernism .regenerating {
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, var(--fg) 0 12%, transparent 12% 84%, var(--accent) 84% 100%),
+    repeating-linear-gradient(90deg, var(--bg) 0 54px, color-mix(in srgb, var(--line), transparent 64%) 54px 58px);
+  color: var(--fg);
+}
+
+.theme-soviet-modernism .regenerating::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: clamp(26px, 8vh, 84px);
+  left: 6%;
+  width: min(72vw, 820px);
+  height: clamp(72px, 14vh, 140px);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 52px, color-mix(in srgb, var(--card), transparent 12%) 52px 58px),
+    var(--accent-2);
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+  box-shadow: 26px 22px 0 var(--fg);
+}
+
+.theme-soviet-modernism .regen-box {
+  position: relative;
+  width: min(640px, calc(100vw - 48px));
+  max-width: 100%;
+  padding: clamp(28px, 6vw, 54px);
+  border: 2px solid var(--line);
+  border-top: 16px solid var(--accent);
+  border-left: 18px solid var(--fg);
+  background: var(--card);
+  box-shadow: 14px 14px 0 var(--accent-2);
+  font-weight: 760;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+.theme-soviet-modernism .regen-box::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  aspect-ratio: 1;
+  border: 8px solid var(--fg);
+  border-radius: 50%;
+  background: var(--accent-2);
+}
+
+.theme-soviet-modernism .regen-line {
+  position: relative;
+  min-width: 0;
+  padding: 11px 68px 11px 20px;
+  border-bottom: 2px solid var(--line);
+  opacity: 1;
+  overflow-wrap: anywhere;
+}
+
+.theme-soviet-modernism .regen-line::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 10px;
+  height: 70%;
+  background: var(--card-strong);
+  transform: translateY(-50%);
+}
+
+.theme-soviet-modernism .regen-line.active::before {
+  width: 14px;
+  background: var(--accent);
+}
+
+.theme-soviet-modernism .regen-line.active {
+  color: var(--fg);
+  background: color-mix(in srgb, var(--accent-2), transparent 78%);
+}
+
 @media (max-width: 900px) {
   .theme-soviet-modernism .hero {
     min-height: auto;

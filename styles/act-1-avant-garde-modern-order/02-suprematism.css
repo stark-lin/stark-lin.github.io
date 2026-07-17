@@ -109,6 +109,94 @@ body.theme-suprematism { background: var(--bg); }
     var(--card-strong);
 }
 
+.theme-suprematism .regenerating {
+  background:
+    linear-gradient(15deg, transparent 0 18%, color-mix(in srgb, #d0a52e, transparent 12%) 18% 20%, transparent 20%),
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-suprematism .regenerating::before,
+.theme-suprematism .regenerating::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.theme-suprematism .regenerating::before {
+  top: -5%;
+  right: 8%;
+  width: clamp(92px, 17vw, 210px);
+  height: clamp(150px, 29vw, 340px);
+  background: var(--fg);
+  transform: rotate(18deg);
+}
+
+.theme-suprematism .regenerating::after {
+  right: -20px;
+  bottom: 7%;
+  width: clamp(82px, 14vw, 170px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.theme-suprematism .regen-box {
+  border: 1px solid color-mix(in srgb, var(--line), transparent 22%);
+  background: color-mix(in srgb, var(--card), transparent 4%);
+  color: var(--fg);
+  box-shadow: 18px 18px 0 #d0a52e;
+}
+
+.theme-suprematism .regen-box::before,
+.theme-suprematism .regen-box::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.theme-suprematism .regen-box::before {
+  top: 15px;
+  right: 16px;
+  width: 24px;
+  height: 72px;
+  background: #2a5276;
+  transform: rotate(9deg);
+}
+
+.theme-suprematism .regen-box::after {
+  right: 58px;
+  bottom: 18px;
+  width: 34px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: .88;
+}
+
+.theme-suprematism .regen-line {
+  padding-inline-start: 34px;
+  overflow-wrap: anywhere;
+}
+
+.theme-suprematism .regen-line::before,
+.theme-suprematism .regen-line.active::before {
+  top: .48em;
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 0;
+  background: var(--fg);
+  transform: rotate(13deg) scale(.72);
+}
+
+.theme-suprematism .regen-line.active::before { transform: rotate(13deg) scale(1); }
+.theme-suprematism .regen-line:nth-child(2)::before { border-radius: 50%; background: var(--accent); }
+.theme-suprematism .regen-line:nth-child(3)::before { width: 20px; height: 7px; background: #d0a52e; }
+.theme-suprematism .regen-line:nth-child(4)::before { background: #2a5276; transform: rotate(-12deg) scale(.72); }
+.theme-suprematism .regen-line:nth-child(4).active::before { transform: rotate(-12deg) scale(1); }
+
 @media (max-width: 720px) {
   .theme-suprematism .hero { min-height: 690px; }
   .theme-suprematism .hero::before { opacity: .12; }

@@ -715,3 +715,78 @@ body.theme-abstract-expressionism {
     box-shadow: none;
   }
 }
+
+/* The refresh keeps the copy still while painted planes replace the canvas. */
+.theme-abstract-expressionism .regenerating {
+  color: var(--ae-ink);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(23, 23, 20, .16) 0 2px, transparent 2.6px) 0 0 / 23px 27px,
+    linear-gradient(112deg, transparent 0 68%, rgba(49, 89, 106, .32) 68% 78%, transparent 78%),
+    var(--ae-paper);
+}
+
+.theme-abstract-expressionism .regen-box {
+  position: relative;
+  isolation: isolate;
+  width: min(620px, 100%);
+  padding: clamp(28px, 7vw, 54px);
+  overflow: hidden;
+  border: 4px solid var(--ae-ink);
+  border-radius: 1px;
+  background:
+    linear-gradient(171deg, rgba(255, 255, 255, .42), transparent 54%),
+    var(--card);
+  color: var(--ae-ink);
+  box-shadow: 9px 10px 0 var(--ae-ink), 16px 17px 0 var(--ae-red);
+  font-family: var(--mono);
+  font-weight: 800;
+}
+
+.theme-abstract-expressionism .regen-box::before,
+.theme-abstract-expressionism .regen-box::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.theme-abstract-expressionism .regen-box::before {
+  top: -6%;
+  right: -4%;
+  width: 46%;
+  height: 44%;
+  background: var(--ae-blue);
+  opacity: .82;
+  clip-path: polygon(4% 9%, 38% 0, 69% 13%, 100% 5%, 91% 76%, 54% 100%, 12% 79%);
+}
+
+.theme-abstract-expressionism .regen-box::after {
+  right: -7%;
+  bottom: 13%;
+  width: 72%;
+  height: 18px;
+  background: var(--ae-red);
+  clip-path: polygon(0 42%, 16% 4%, 43% 33%, 66% 0, 100% 45%, 76% 78%, 47% 56%, 18% 100%);
+  transform: rotate(-4deg);
+}
+
+.theme-abstract-expressionism .regen-line {
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  max-width: 100%;
+  margin: 7px 0;
+  padding: 3px 8px;
+  padding-inline-start: 28px;
+  border-left: 4px solid var(--ae-ink);
+  background: color-mix(in srgb, var(--ae-paper), transparent 4%);
+  color: var(--ae-ink);
+  opacity: .78;
+}
+
+.theme-abstract-expressionism .regen-line.active {
+  border-left-color: var(--ae-red);
+  background: var(--ae-ink);
+  color: var(--ae-paper);
+  opacity: 1;
+}

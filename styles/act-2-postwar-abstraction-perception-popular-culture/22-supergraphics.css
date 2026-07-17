@@ -160,3 +160,76 @@ body.theme-supergraphics {
   .theme-supergraphics .section-head { width: 92%; padding: 20px; }
   .theme-supergraphics .reveal::before { font-size: 42vw; opacity: .35; }
 }
+
+/* One oversized number and a continuous band turn the refresh into wayfinding. */
+.theme-supergraphics .regenerating {
+  color: var(--fg);
+  background:
+    linear-gradient(90deg, transparent 0 7%, var(--accent) 7% 11%, transparent 11% 100%),
+    var(--bg);
+}
+
+.theme-supergraphics .regen-box {
+  position: relative;
+  isolation: isolate;
+  width: min(620px, 100%);
+  padding: clamp(32px, 8vw, 60px);
+  overflow: hidden;
+  border: 3px solid var(--line);
+  border-radius: 0;
+  background: var(--card);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-weight: 800;
+}
+
+.theme-supergraphics .regen-box::before {
+  content: "23";
+  position: absolute;
+  right: -4%;
+  bottom: -20%;
+  z-index: -2;
+  color: var(--accent);
+  font: 950 clamp(150px, 44vw, 290px)/.8 var(--sans);
+  letter-spacing: -.13em;
+  opacity: .72;
+  pointer-events: none;
+}
+
+.theme-supergraphics .regen-box::after {
+  content: "";
+  position: absolute;
+  top: 42%;
+  right: -8%;
+  left: -8%;
+  z-index: -1;
+  height: clamp(18px, 6vw, 32px);
+  background: #2d7770;
+  transform: rotate(-3deg);
+  pointer-events: none;
+}
+
+.theme-supergraphics .regen-line {
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  max-width: 100%;
+  margin: 7px 0;
+  padding: 5px 10px;
+  padding-inline-start: 30px;
+  border: 2px solid var(--line);
+  border-left: 10px solid var(--accent);
+  background: var(--card);
+  color: var(--fg);
+  opacity: .8;
+}
+
+.theme-supergraphics .regen-line:nth-child(even) {
+  border-left-color: #2d7770;
+}
+
+.theme-supergraphics .regen-line.active {
+  background: var(--card-strong);
+  color: var(--fg);
+  opacity: 1;
+}

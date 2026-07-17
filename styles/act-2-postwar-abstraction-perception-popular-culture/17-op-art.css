@@ -143,3 +143,72 @@ body.theme-op-art {
   to { transform: translateX(-3%) scale(1.025); }
 }
 
+/* Optical tension stays localized around a stable, high-contrast reading card. */
+.theme-op-art .regenerating {
+  color: var(--fg);
+  background:
+    repeating-linear-gradient(86deg, transparent 0 8px, color-mix(in srgb, var(--fg), transparent 90%) 8px 10px),
+    var(--bg);
+}
+
+.theme-op-art .regen-box {
+  position: relative;
+  isolation: isolate;
+  width: min(600px, 100%);
+  padding: clamp(30px, 8vw, 58px);
+  overflow: hidden;
+  border: 2px solid var(--line);
+  border-radius: 0;
+  background: var(--card);
+  color: var(--fg);
+  font-family: var(--sans);
+}
+
+.theme-op-art .regen-box::before,
+.theme-op-art .regen-box::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border: 2px solid var(--line);
+  pointer-events: none;
+}
+
+.theme-op-art .regen-box::before {
+  top: -22%;
+  right: -12%;
+  width: min(230px, 58%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle, var(--fg) 0 2px, var(--card) 2px 9px);
+  opacity: .46;
+}
+
+.theme-op-art .regen-box::after {
+  bottom: -16%;
+  left: -8%;
+  width: 42%;
+  height: 44%;
+  background:
+    linear-gradient(45deg, var(--fg) 25%, transparent 25% 75%, var(--fg) 75%) 0 0 / 16px 16px,
+    linear-gradient(45deg, transparent 25%, var(--fg) 25% 75%, transparent 75%) 8px 8px / 16px 16px,
+    var(--card);
+  opacity: .22;
+}
+
+.theme-op-art .regen-line {
+  position: relative;
+  z-index: 1;
+  margin: 5px 0;
+  padding: 5px 9px;
+  padding-inline-start: 29px;
+  border: 2px solid var(--line);
+  background: var(--card);
+  color: var(--fg);
+  opacity: .78;
+}
+
+.theme-op-art .regen-line.active {
+  background: var(--fg);
+  color: var(--bg);
+  opacity: 1;
+}

@@ -158,6 +158,100 @@ body.theme-high-tech.layout-single .site {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent), transparent 72%);
 }
 
+.theme-high-tech .regenerating {
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(color-mix(in srgb, var(--line), transparent 68%) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--line), transparent 68%) 1px, transparent 1px),
+    var(--bg);
+  background-size: 40px 40px;
+  color: var(--fg);
+}
+
+.theme-high-tech .regenerating::before,
+.theme-high-tech .regenerating::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.theme-high-tech .regenerating::before {
+  inset: 6%;
+  border: 1px solid var(--line);
+  background:
+    repeating-linear-gradient(90deg, var(--accent) 0 2px, transparent 2px 18px) 0 0 / 100% 7px no-repeat,
+    repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 12px) 100% 0 / 7px 100% no-repeat;
+}
+
+.theme-high-tech .regenerating::after {
+  inset: 10% 8%;
+  background:
+    radial-gradient(circle at 7px 7px, var(--accent) 0 3px, var(--card) 3px 6px, var(--line) 6px 7px, transparent 7px),
+    radial-gradient(circle at calc(100% - 7px) 7px, var(--accent) 0 3px, var(--card) 3px 6px, var(--line) 6px 7px, transparent 7px),
+    radial-gradient(circle at 7px calc(100% - 7px), var(--accent) 0 3px, var(--card) 3px 6px, var(--line) 6px 7px, transparent 7px),
+    radial-gradient(circle at calc(100% - 7px) calc(100% - 7px), var(--accent) 0 3px, var(--card) 3px 6px, var(--line) 6px 7px, transparent 7px);
+}
+
+.theme-high-tech .regen-box {
+  position: relative;
+  width: min(620px, calc(100vw - 48px));
+  max-width: 100%;
+  padding: clamp(30px, 7vw, 58px) clamp(24px, 6vw, 50px);
+  border: 1px solid var(--line);
+  border-top: 8px solid var(--line);
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 15px, color-mix(in srgb, var(--line), transparent 70%) 15px 16px, transparent 16px 31px) 0 0 / 100% 6px no-repeat,
+    color-mix(in srgb, var(--card), transparent 3%);
+  box-shadow: 0 9px 0 color-mix(in srgb, var(--line), transparent 72%);
+}
+
+.theme-high-tech .regen-box::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 2px 2px, var(--accent) 0 2px, transparent 3px),
+    radial-gradient(circle at calc(100% - 2px) 2px, var(--accent) 0 2px, transparent 3px),
+    radial-gradient(circle at 2px calc(100% - 2px), var(--accent) 0 2px, transparent 3px),
+    radial-gradient(circle at calc(100% - 2px) calc(100% - 2px), var(--accent) 0 2px, transparent 3px);
+}
+
+.theme-high-tech .regen-line {
+  position: relative;
+  min-width: 0;
+  padding: 10px 14px 10px 38px;
+  border-bottom: 1px solid var(--line);
+  opacity: 1;
+  overflow-wrap: anywhere;
+}
+
+.theme-high-tech .regen-line::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  width: 16px;
+  height: 8px;
+  border: 1px solid var(--line);
+  background: var(--card-strong);
+  transform: translateY(-50%);
+}
+
+.theme-high-tech .regen-line.active {
+  color: var(--fg);
+  background: color-mix(in srgb, var(--accent), transparent 88%);
+  box-shadow: inset 5px 0 0 var(--accent);
+}
+
+.theme-high-tech .regen-line.active::before {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
 @media (max-width: 720px) {
   .theme-high-tech .hero { padding-right: 24px; padding-left: 24px; }
   .theme-high-tech .section-head { grid-template-columns: 1fr; }

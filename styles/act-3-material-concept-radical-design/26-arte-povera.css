@@ -128,6 +128,82 @@ body.theme-arte-povera {
   border-radius: 2px;
 }
 
+.theme-arte-povera .regenerating {
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(87deg, transparent 0 71px, color-mix(in srgb, var(--line), transparent 80%) 71px 72px, transparent 72px 146px),
+    repeating-linear-gradient(4deg, transparent 0 113px, color-mix(in srgb, var(--accent), transparent 82%) 113px 115px),
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-arte-povera .regenerating::before,
+.theme-arte-povera .regenerating::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 1px;
+  height: 74%;
+  background: var(--accent);
+  box-shadow: 5px 0 0 color-mix(in srgb, var(--line), transparent 54%);
+}
+
+.theme-arte-povera .regenerating::before { top: -8%; left: 12%; transform: rotate(-7deg); }
+.theme-arte-povera .regenerating::after { right: 13%; bottom: -8%; transform: rotate(8deg); }
+
+.theme-arte-povera .regen-box {
+  position: relative;
+  width: min(600px, calc(100vw - 48px));
+  max-width: 100%;
+  padding: clamp(28px, 7vw, 58px) clamp(24px, 6vw, 48px);
+  border: 1px dashed var(--line);
+  background: var(--card);
+  box-shadow: 7px 8px 0 color-mix(in srgb, var(--line), transparent 54%);
+  clip-path: polygon(3px 8px, 19% 0, 53% 5px, 83% 1px, calc(100% - 4px) 10px, 100% calc(100% - 7px), 71% 100%, 38% calc(100% - 4px), 2px 100%);
+}
+
+.theme-arte-povera .regen-box::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px dashed color-mix(in srgb, var(--line), transparent 46%);
+  pointer-events: none;
+}
+
+.theme-arte-povera .regen-line {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding: 10px 12px 10px 38px;
+  border-bottom: 1px dashed var(--line);
+  opacity: 1;
+  overflow-wrap: anywhere;
+}
+
+.theme-arte-povera .regen-line::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  width: 13px;
+  height: 13px;
+  border: 1px solid var(--line);
+  border-radius: 48% 52% 42% 58%;
+  background: var(--bg);
+  transform: translateY(-50%) rotate(8deg);
+}
+
+.theme-arte-povera .regen-line.active {
+  color: var(--fg);
+  background: color-mix(in srgb, var(--accent), transparent 86%);
+}
+
+.theme-arte-povera .regen-line.active::before {
+  background: var(--accent);
+  box-shadow: 4px 3px 0 color-mix(in srgb, var(--line), transparent 40%);
+}
+
 @media (max-width: 720px) {
   .theme-arte-povera .hero { padding-right: 24px; padding-left: 24px; }
   .theme-arte-povera .section-head { grid-template-columns: 1fr; }

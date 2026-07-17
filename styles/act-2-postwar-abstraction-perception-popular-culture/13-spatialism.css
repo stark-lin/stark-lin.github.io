@@ -141,3 +141,71 @@ body.theme-spatialism {
   .theme-spatialism .section-head { grid-template-columns: 1fr; }
 }
 
+/* A pale reading plane opens onto the darker field through measured slits. */
+.theme-spatialism .regenerating {
+  color: var(--fg);
+  background:
+    linear-gradient(90deg, transparent 0 78%, rgba(38, 18, 17, .2) 78% 84%, transparent 84%),
+    var(--bg);
+}
+
+.theme-spatialism .regen-box {
+  position: relative;
+  isolation: isolate;
+  width: min(600px, 100%);
+  padding: clamp(28px, 7vw, 52px);
+  padding-right: clamp(54px, 13vw, 92px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--card);
+  color: var(--fg);
+  box-shadow: 20px 0 0 rgba(38, 18, 17, .24);
+  font-family: var(--sans);
+}
+
+.theme-spatialism .regen-box::before,
+.theme-spatialism .regen-box::after {
+  content: "";
+  position: absolute;
+  background: #382321;
+  box-shadow: inset 3px 0 5px rgba(0, 0, 0, .34);
+  pointer-events: none;
+}
+
+.theme-spatialism .regen-box::before {
+  top: 12%;
+  right: clamp(22px, 7vw, 54px);
+  width: 9px;
+  height: 72%;
+  border-radius: 0 0 100% 100%;
+  transform: rotate(5deg);
+}
+
+.theme-spatialism .regen-box::after {
+  bottom: 10%;
+  left: 8%;
+  width: 6px;
+  height: 22%;
+  border-radius: 100%;
+  transform: rotate(-9deg);
+}
+
+.theme-spatialism .regen-line {
+  position: relative;
+  z-index: 1;
+  margin: 5px 0;
+  padding: 4px 8px;
+  padding-inline-start: 28px;
+  border-bottom: 1px solid color-mix(in srgb, var(--line), transparent 58%);
+  background: var(--card);
+  color: var(--fg);
+  opacity: .78;
+}
+
+.theme-spatialism .regen-line.active {
+  border-left: 6px solid var(--accent);
+  background: var(--card-strong);
+  color: var(--fg);
+  opacity: 1;
+}

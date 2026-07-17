@@ -138,6 +138,96 @@ body.theme-metabolism {
   border-radius: 6px;
 }
 
+.theme-metabolism .regenerating {
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 0 calc(50% - 7px), var(--line) calc(50% - 7px) calc(50% + 7px), transparent calc(50% + 7px)),
+    repeating-linear-gradient(0deg, var(--bg) 0 63px, color-mix(in srgb, var(--line), transparent 84%) 63px 64px);
+  color: var(--fg);
+}
+
+.theme-metabolism .regenerating::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 8% auto 8% calc(50% - 22px);
+  width: 44px;
+  background:
+    radial-gradient(circle at 50% 18px, var(--accent) 0 8px, var(--bg) 8px 12px, var(--line) 12px 15px, transparent 15px),
+    radial-gradient(circle at 50% 50%, var(--accent) 0 8px, var(--bg) 8px 12px, var(--line) 12px 15px, transparent 15px),
+    radial-gradient(circle at 50% calc(100% - 18px), var(--accent) 0 8px, var(--bg) 8px 12px, var(--line) 12px 15px, transparent 15px);
+}
+
+.theme-metabolism .regen-box {
+  position: relative;
+  width: min(620px, calc(100vw - 48px));
+  max-width: 100%;
+  padding: clamp(28px, 6vw, 52px) clamp(24px, 6vw, 48px);
+  border: 2px solid var(--line);
+  border-left: 15px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  box-shadow: 8px 8px 0 color-mix(in srgb, var(--line), transparent 64%);
+}
+
+.theme-metabolism .regen-box::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  bottom: 16px;
+  left: -12px;
+  width: 8px;
+  background: repeating-linear-gradient(0deg, var(--bg) 0 7px, transparent 7px 16px);
+}
+
+.theme-metabolism .regen-line {
+  position: relative;
+  min-width: 0;
+  margin-left: 18px;
+  padding: 10px 14px 10px 42px;
+  border: 2px solid var(--line);
+  border-left: 10px solid var(--card-strong);
+  border-radius: 4px 999px 999px 4px;
+  background: var(--card);
+  opacity: 1;
+  overflow-wrap: anywhere;
+}
+
+.theme-metabolism .regen-line + .regen-line { margin-top: 8px; }
+
+.theme-metabolism .regen-line::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  width: 22px;
+  height: 4px;
+  background: var(--line);
+  transform: translateY(-50%);
+}
+
+.theme-metabolism .regen-line::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  transform: translateY(-50%);
+}
+
+.theme-metabolism .regen-line.active {
+  border-left-color: var(--accent);
+  color: var(--fg);
+  background: color-mix(in srgb, var(--accent), transparent 88%);
+}
+
+.theme-metabolism .regen-line.active::after { background: var(--accent); }
+
 @media (max-width: 720px) {
   .theme-metabolism .hero { padding-left: 30px; border-left-width: 10px; }
   .theme-metabolism .hero::before { display: none; }

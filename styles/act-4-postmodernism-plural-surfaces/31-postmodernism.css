@@ -179,3 +179,41 @@ body.theme-postmodernism {
   .theme-postmodernism .reveal { padding: 34px 26px; }
   .theme-postmodernism .reveal::before { opacity: .26; }
 }
+
+.theme-postmodernism .regenerating {
+  background:
+    linear-gradient(90deg, transparent 0 10%, color-mix(in srgb, var(--accent), transparent 86%) 10% 10.5%, transparent 10.5% 89.5%, color-mix(in srgb, var(--accent), transparent 86%) 89.5% 90%, transparent 90%),
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-postmodernism .regen-box {
+  border: 4px double var(--line);
+  outline: 1px solid var(--line);
+  outline-offset: -12px;
+  background: var(--card);
+  box-shadow: 14px 14px 0 color-mix(in srgb, var(--accent), transparent 58%);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.theme-postmodernism .regen-box::before {
+  content: "IV";
+  position: absolute;
+  right: clamp(18px, 5vw, 42px);
+  top: 50%;
+  color: color-mix(in srgb, var(--accent), transparent 82%);
+  font: 600 clamp(88px, 22vw, 170px)/1 Georgia, "Times New Roman", serif;
+  transform: translateY(-50%);
+}
+
+.theme-postmodernism .regen-line {
+  font-family: var(--mono);
+  letter-spacing: .02em;
+}
+
+.theme-postmodernism .regen-line::before {
+  border-color: var(--accent);
+  transform: rotate(45deg);
+}
+
+.theme-postmodernism .regen-line.active::before { background: var(--accent); }

@@ -1040,3 +1040,68 @@ html[lang^="zh"] .theme-cyberpunk-visual-culture h1 {
     transition: none;
   }
 }
+
+.theme-cyberpunk-visual-culture .regenerating {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 3px, rgba(233, 240, 232, .08) 3px 4px),
+    linear-gradient(rgba(200, 255, 50, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 255, 50, .055) 1px, transparent 1px),
+    var(--cyber-void);
+  background-size: auto, 48px 48px, 48px 48px, auto;
+  color: var(--cyber-acid);
+}
+
+.theme-cyberpunk-visual-culture .regen-box {
+  border: 1px solid var(--cyber-acid);
+  background: var(--cyber-panel);
+  box-shadow:
+    10px 10px 0 rgba(255, 75, 53, .2),
+    0 0 32px rgba(200, 255, 50, .13);
+  clip-path: polygon(0 0, calc(100% - 34px) 0, 100% 34px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.theme-cyberpunk-visual-culture .regen-box::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--cyber-yellow) 0 62%, var(--cyber-coral) 62% 78%, var(--cyber-ice) 78% 100%);
+}
+
+.theme-cyberpunk-visual-culture .regen-box::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 8%;
+  bottom: 8%;
+  left: 4%;
+  width: 1px;
+  background: var(--cyber-ice);
+  box-shadow: 0 0 12px var(--cyber-ice);
+  opacity: 0;
+}
+
+.theme-cyberpunk-visual-culture .regen-line::before {
+  border-color: var(--cyber-acid);
+  box-shadow: 0 0 8px rgba(200, 255, 50, .4);
+}
+
+.theme-cyberpunk-visual-culture .regen-line:nth-child(even).active::before { background: var(--cyber-coral); }
+.theme-cyberpunk-visual-culture .regen-line:nth-child(odd).active::before { background: var(--cyber-acid); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .theme-cyberpunk-visual-culture .regenerating.active .regen-box::after {
+    animation: cyber-regen-scan .82s linear both;
+  }
+}
+
+@keyframes cyber-regen-scan {
+  0% { left: 4%; opacity: 0; }
+  12%, 82% { opacity: .7; }
+  100% { left: 96%; opacity: 0; }
+}

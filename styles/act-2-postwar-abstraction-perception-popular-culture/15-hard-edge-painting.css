@@ -140,3 +140,70 @@ body.theme-hard-edge-painting {
   .theme-hard-edge-painting .contact-panel,
   .theme-hard-edge-painting .reveal { box-shadow: 8px 8px 0 #2c7772; }
 }
+
+/* Crisp adjoining planes replace the page without gradients or soft edges. */
+.theme-hard-edge-painting .regenerating {
+  color: var(--fg);
+  background:
+    linear-gradient(118deg, var(--bg) 0 52%, #2c7772 52% 68%, var(--bg) 68% 100%);
+}
+
+.theme-hard-edge-painting .regen-box {
+  position: relative;
+  isolation: isolate;
+  width: min(610px, 100%);
+  padding: clamp(28px, 7vw, 54px);
+  overflow: hidden;
+  border: 3px solid var(--line);
+  border-radius: 0;
+  background: var(--card);
+  color: var(--fg);
+  box-shadow: 14px 14px 0 #2c7772;
+  font-family: var(--sans);
+}
+
+.theme-hard-edge-painting .regen-box::before,
+.theme-hard-edge-painting .regen-box::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.theme-hard-edge-painting .regen-box::before {
+  inset: 0 0 0 auto;
+  width: 22%;
+  background: var(--card-strong);
+}
+
+.theme-hard-edge-painting .regen-box::after {
+  right: 22%;
+  bottom: 0;
+  width: 14%;
+  height: 34%;
+  background: var(--accent);
+}
+
+.theme-hard-edge-painting .regen-line {
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 12px);
+  margin: 6px 0;
+  padding: 4px 9px;
+  padding-inline-start: 29px;
+  border: 2px solid var(--line);
+  background: var(--card);
+  color: var(--fg);
+  opacity: .78;
+}
+
+.theme-hard-edge-painting .regen-line.active {
+  border-left: 14px solid var(--accent);
+  background: var(--card-strong);
+  color: var(--fg);
+  opacity: 1;
+}
+
+.theme-hard-edge-painting .regen-line:nth-child(even).active {
+  border-left-color: #2c7772;
+}

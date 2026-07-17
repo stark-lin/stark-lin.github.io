@@ -118,3 +118,73 @@ body.theme-color-field-painting {
   .theme-color-field-painting .reveal { width: 100%; }
 }
 
+/* The transition remains a quiet text island inside one continuous colour field. */
+.theme-color-field-painting .regenerating {
+  color: var(--fg);
+  background:
+    linear-gradient(168deg, #85464c 0 17%, #b47c60 34%, #516b70 52%, #8c6b73 72%, #70404a 100%);
+}
+
+.theme-color-field-painting .regen-box {
+  position: relative;
+  isolation: isolate;
+  width: min(600px, 100%);
+  padding: clamp(30px, 8vw, 58px);
+  overflow: hidden;
+  border: 0;
+  border-radius: 30px;
+  background: var(--card);
+  color: var(--fg);
+  box-shadow: 0 28px 84px rgba(37, 25, 31, .24);
+  font-family: var(--sans);
+}
+
+.theme-color-field-painting .regen-box::before,
+.theme-color-field-painting .regen-box::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.theme-color-field-painting .regen-box::before {
+  top: -18%;
+  right: -14%;
+  width: 48%;
+  aspect-ratio: 1;
+  background: #5d7276;
+  opacity: .2;
+}
+
+.theme-color-field-painting .regen-box::after {
+  right: 12%;
+  bottom: -16%;
+  left: -10%;
+  height: 38%;
+  background: var(--accent);
+  opacity: .13;
+}
+
+.theme-color-field-painting .regen-line {
+  position: relative;
+  z-index: 1;
+  margin: 6px 0;
+  padding: 5px 12px;
+  padding-inline-start: 30px;
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--fg);
+  opacity: .78;
+}
+
+.theme-color-field-painting .regen-line.active {
+  background: var(--card-strong);
+  color: var(--fg);
+  box-shadow: inset 5px 0 0 var(--accent);
+  opacity: 1;
+}
+
+.theme-color-field-painting .regen-line::before {
+  border-radius: 50%;
+}

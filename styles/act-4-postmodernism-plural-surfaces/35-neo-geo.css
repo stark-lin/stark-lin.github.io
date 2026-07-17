@@ -181,3 +181,38 @@ body.theme-neo-geo {
   .theme-neo-geo .section-head,
   .theme-neo-geo .contact-panel { grid-template-columns: 1fr; }
 }
+
+.theme-neo-geo .regenerating {
+  background:
+    radial-gradient(circle, transparent 0 9px, color-mix(in srgb, var(--line), transparent 70%) 9px 10px, transparent 10px) 0 0 / 58px 58px,
+    linear-gradient(90deg, transparent 0 81%, color-mix(in srgb, var(--accent), transparent 86%) 81% 100%),
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-neo-geo .regen-box {
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--card);
+  box-shadow: 0 18px 38px color-mix(in srgb, var(--fg), transparent 76%);
+  font-family: var(--sans);
+  font-weight: 700;
+}
+
+.theme-neo-geo .regen-box::before {
+  content: "";
+  position: absolute;
+  right: clamp(18px, 6vw, 52px);
+  top: 50%;
+  width: clamp(74px, 18vw, 118px);
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 0 22%, var(--accent) 23% 31%, transparent 32% 47%, var(--line) 48% 49%, transparent 50%);
+  opacity: .24;
+  transform: translateY(-50%);
+}
+
+.theme-neo-geo .regen-line::before { border-radius: 50%; border-color: var(--accent); }
+.theme-neo-geo .regen-line:nth-child(even)::before { border-radius: 0; transform: rotate(45deg); }
+.theme-neo-geo .regen-line.active::before { background: var(--accent); }

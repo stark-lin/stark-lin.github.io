@@ -565,6 +565,92 @@ body.theme-international-style.layout-single .site {
   font-size: 10px;
 }
 
+.theme-international-style .regenerating {
+  background:
+    linear-gradient(90deg, transparent 0 calc(16.666% - .5px), color-mix(in srgb, var(--line), transparent 4%) calc(16.666% - .5px) calc(16.666% + .5px), transparent calc(16.666% + .5px)),
+    linear-gradient(90deg, transparent 0 calc(66.666% - .5px), color-mix(in srgb, var(--line), transparent 4%) calc(66.666% - .5px) calc(66.666% + .5px), transparent calc(66.666% + .5px)),
+    var(--bg);
+  color: var(--fg);
+}
+
+.theme-international-style .regenerating::before,
+.theme-international-style .regenerating::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.theme-international-style .regenerating::before {
+  inset: 0 auto 0 8.333%;
+  width: clamp(18px, 3vw, 44px);
+  background: var(--accent);
+}
+
+.theme-international-style .regenerating::after {
+  right: 5%;
+  top: 10%;
+  width: min(28vw, 340px);
+  height: 1px;
+  background: var(--fg);
+  box-shadow: 0 18px 0 var(--line), 0 36px 0 var(--line);
+}
+
+.theme-international-style .regen-box {
+  padding: clamp(36px, 7vw, 72px) clamp(24px, 6vw, 64px);
+  border: 0;
+  border-top: 7px solid var(--fg);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  box-shadow: none;
+  font-family: var(--sans);
+  font-weight: 650;
+  letter-spacing: -.01em;
+}
+
+.theme-international-style .regen-box::before,
+.theme-international-style .regen-box::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.theme-international-style .regen-box::before {
+  top: 0;
+  left: 0;
+  width: 31%;
+  height: 7px;
+  background: var(--accent);
+}
+
+.theme-international-style .regen-box::after {
+  inset: 0 31% 0 auto;
+  width: 1px;
+  background: var(--line);
+}
+
+.theme-international-style .regen-line {
+  max-width: 66%;
+  padding-inline-start: 44px;
+  overflow-wrap: anywhere;
+}
+
+.theme-international-style .regen-line::before,
+.theme-international-style .regen-line.active::before {
+  top: .68em;
+  width: 26px;
+  height: 3px;
+  border: 0;
+  border-radius: 0;
+  background: var(--muted);
+}
+
+.theme-international-style .regen-line.active::before {
+  width: 36px;
+  background: var(--accent);
+}
+
 @media (max-width: 900px) {
   .theme-international-style .hero-grid {
     grid-template-columns: minmax(0, 1fr);
