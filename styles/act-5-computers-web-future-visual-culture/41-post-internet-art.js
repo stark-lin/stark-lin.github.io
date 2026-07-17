@@ -47,7 +47,7 @@
       "--style-meta-spacing": ".04em"
     },
     label: { en: "Post-Internet Art", zh: "后互联网艺术" },
-    period: "2000s",
+    period: "2020s",
     introduction: {
       en: "An AI-era personal homepage built from calm, rounded interface surfaces: one flat palette, clear hierarchy, and no borrowed glow.",
       zh: "面向 AI 时代的个人主页：用克制的圆角界面、单一实色调色板和清楚层级组织内容，不借泛光制造高级感。"

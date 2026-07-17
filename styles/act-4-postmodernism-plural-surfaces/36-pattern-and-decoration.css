@@ -38,7 +38,6 @@ body.theme-pattern-and-decoration {
   background:
     radial-gradient(circle at 100% 50%, transparent 0 42px, color-mix(in srgb, var(--accent), transparent 28%) 43px 46px, transparent 47px 68px, color-mix(in srgb, var(--line), transparent 42%) 69px 71px, transparent 72px) right center / 150px 150px repeat-y,
     var(--card);
-  box-shadow: 12px 12px 0 color-mix(in srgb, var(--accent), transparent 64%);
 }
 
 .theme-pattern-and-decoration .hero-grid { width: 86%; }
@@ -59,7 +58,6 @@ body.theme-pattern-and-decoration {
   display: inline-block;
   padding: 8px 12px;
   border: 1px solid var(--line);
-  border-radius: 999px;
   color: var(--accent);
   background: var(--card);
 }
@@ -74,13 +72,17 @@ body.theme-pattern-and-decoration {
 }
 
 .theme-pattern-and-decoration .section-index {
+  display: inline-flex;
+  align-items: center;
+  align-self: start;
+  justify-self: start;
   width: max-content;
   padding: 10px 14px;
   border: 1px solid var(--line);
-  border-radius: 999px;
   color: var(--fg);
   background: var(--card);
-  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent), transparent 76%);
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .theme-pattern-and-decoration h2 {
@@ -92,10 +94,9 @@ body.theme-pattern-and-decoration {
   border: 1px solid var(--line);
   outline: 1px solid var(--line);
   outline-offset: -7px;
-  background:
-    linear-gradient(45deg, transparent 43%, color-mix(in srgb, var(--accent), transparent 90%) 43% 48%, transparent 48% 52%, color-mix(in srgb, var(--accent), transparent 90%) 52% 57%, transparent 57%) 0 0 / 38px 38px,
-    linear-gradient(-45deg, transparent 43%, color-mix(in srgb, var(--line), transparent 92%) 43% 48%, transparent 48% 52%, color-mix(in srgb, var(--line), transparent 92%) 52% 57%, transparent 57%) 0 0 / 38px 38px,
-    var(--card);
+  background: var(--card);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .theme-pattern-and-decoration .card-title-row {
@@ -106,13 +107,7 @@ body.theme-pattern-and-decoration {
 .theme-pattern-and-decoration .tag,
 .theme-pattern-and-decoration .skill-pill {
   border-color: var(--line);
-  border-radius: 999px;
   background: var(--card);
-}
-
-.theme-pattern-and-decoration .skill-pill:nth-child(even) {
-  border-radius: 8px;
-  box-shadow: inset 0 -4px 0 color-mix(in srgb, var(--accent), transparent 66%);
 }
 
 .theme-pattern-and-decoration .contact-panel,
@@ -124,6 +119,8 @@ body.theme-pattern-and-decoration {
   background:
     radial-gradient(circle at 0 50%, transparent 0 31px, color-mix(in srgb, var(--accent), transparent 30%) 32px 35px, transparent 36px 51px, color-mix(in srgb, var(--line), transparent 52%) 52px 54px, transparent 55px) left center / 116px 116px repeat-y,
     var(--card-strong);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .theme-pattern-and-decoration .contact-panel {
@@ -136,13 +133,16 @@ body.theme-pattern-and-decoration {
 }
 
 .theme-pattern-and-decoration .reveal-stat {
-  border-radius: 10px;
   outline: 1px solid var(--line);
   outline-offset: -6px;
 }
 
+.theme-pattern-and-decoration .complete-project .intro-list p {
+  background: var(--card);
+}
+
 @media (max-width: 720px) {
-  .theme-pattern-and-decoration .hero { min-height: auto; background: var(--card); box-shadow: 7px 7px 0 color-mix(in srgb, var(--accent), transparent 64%); }
+  .theme-pattern-and-decoration .hero { min-height: auto; background: var(--card); }
   .theme-pattern-and-decoration .hero-grid { width: 100%; }
   .theme-pattern-and-decoration .section-head,
   .theme-pattern-and-decoration .contact-panel { grid-template-columns: 1fr; }
@@ -161,11 +161,9 @@ body.theme-pattern-and-decoration {
 .theme-pattern-and-decoration .regen-box {
   padding-inline-start: clamp(50px, 9vw, 86px);
   border: 1px solid var(--line);
-  border-radius: 18px;
   outline: 3px double var(--line);
   outline-offset: -10px;
   background: var(--card);
-  box-shadow: 10px 10px 0 color-mix(in srgb, var(--accent), transparent 62%);
   font-family: Georgia, "Times New Roman", serif;
 }
 
@@ -185,3 +183,7 @@ body.theme-pattern-and-decoration {
 }
 
 .theme-pattern-and-decoration .regen-line.active::before { background: var(--accent); }
+
+.theme-pattern-and-decoration :is(.hero, .kicker, .section-index, .tag, .skill-pill, .contact-panel, .reveal, .reveal-stat, .complete-project .intro-list p, .regen-box) {
+  border-radius: var(--radius);
+}

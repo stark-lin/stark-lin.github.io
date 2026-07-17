@@ -476,7 +476,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 
 ---
 
-#### 42. Post-Internet Art, 2000s–2010s
+#### 42. Post-Internet Art, 2020s
 
 **Historical core:** How platforms, copying, circulation, and interface packaging shape identity and culture after the internet has become the default cultural environment.
 

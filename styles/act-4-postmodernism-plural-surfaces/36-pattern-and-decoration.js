@@ -18,9 +18,7 @@
       "--style-h1-tracking": "-0.045em",
       "--style-card-gap": "22px",
       "--style-component-outline": "1px solid var(--line)",
-      "--style-card-shadow": "0 8px 0 color-mix(in srgb, var(--accent), transparent 72%)",
-      "--style-panel-shadow": "0 10px 0 color-mix(in srgb, var(--line), transparent 66%)",
-      "--style-button-radius": "9px",
+      "--style-button-radius": "var(--radius)",
       "--style-button-weight": "740",
       "--style-button-tracking": ".04em"
     },

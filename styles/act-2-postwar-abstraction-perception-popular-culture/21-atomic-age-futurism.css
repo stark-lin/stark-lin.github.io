@@ -1,227 +1,1072 @@
 body.theme-atomic-age-futurism {
+  --atomic-ink: #17343b;
+  --atomic-paper: #f8efd8;
+  --atomic-paper-deep: #ead9b6;
+  --atomic-red: #e4573d;
+  --atomic-blue: #2b7f83;
+  --atomic-gold: #f2b84b;
+  --atomic-mint: #b9d8ca;
+  --atomic-white: #fffaf0;
+  --atomic-shadow: rgba(23, 52, 59, .2);
+  isolation: isolate;
   background:
-    radial-gradient(circle at 12% 22%, color-mix(in srgb, var(--card-strong), transparent 28%) 0 2px, transparent 3px),
-    radial-gradient(circle at 86% 47%, color-mix(in srgb, var(--accent), transparent 35%) 0 3px, transparent 4px),
-    var(--bg);
-  background-size: 44px 44px, 72px 72px, auto;
+    radial-gradient(circle at 12px 12px, rgba(23, 52, 59, .13) 0 1px, transparent 1.5px) 0 0 / 24px 24px,
+    linear-gradient(120deg, transparent 0 74%, rgba(228, 87, 61, .035) 74% 76%, transparent 76%),
+    var(--atomic-paper);
 }
 
+body.theme-atomic-age-futurism::before {
+  content: "";
+  position: fixed;
+  top: 14vh;
+  left: -72px;
+  z-index: -1;
+  width: 170px;
+  aspect-ratio: 1;
+  border: 2px solid rgba(43, 127, 131, .32);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 22px var(--atomic-paper),
+    0 0 0 24px rgba(43, 127, 131, .2),
+    0 0 0 50px var(--atomic-paper),
+    0 0 0 52px rgba(43, 127, 131, .13);
+  pointer-events: none;
+}
+
+body.theme-atomic-age-futurism::after {
+  content: "";
+  position: fixed;
+  right: -44px;
+  bottom: 9vh;
+  z-index: -1;
+  width: 124px;
+  aspect-ratio: 1;
+  background: repeating-conic-gradient(var(--atomic-red) 0 7deg, transparent 7deg 15deg);
+  clip-path: polygon(50% 0, 57% 38%, 78% 11%, 65% 42%, 100% 26%, 69% 49%, 100% 72%, 62% 59%, 72% 100%, 54% 63%, 34% 94%, 43% 58%, 0 74%, 35% 50%, 0 27%, 39% 41%);
+  opacity: .18;
+  pointer-events: none;
+}
+
+body.theme-atomic-age-futurism.layout-single .site {
+  width: min(1240px, calc(100vw - 40px));
+  max-width: 1240px;
+}
+
+.theme-atomic-age-futurism :focus-visible {
+  outline: 3px solid var(--atomic-red);
+  outline-offset: 4px;
+}
+
+/* Flight-deck navigation */
 .theme-atomic-age-futurism .topbar {
-  border-bottom: 2px solid var(--line);
-  background: color-mix(in srgb, var(--card), transparent 8%);
+  border: 0;
+  border-top: 5px solid var(--atomic-red);
+  border-bottom: 2px solid var(--atomic-ink);
+  background: color-mix(in srgb, var(--atomic-paper), transparent 7%);
+  box-shadow: 0 8px 0 rgba(23, 52, 59, .08);
+  backdrop-filter: blur(18px) saturate(.9);
+}
+
+.theme-atomic-age-futurism .topbar-inner {
+  min-height: 64px;
+  padding: 8px clamp(14px, 3vw, 42px);
+  gap: 18px;
+}
+
+.theme-atomic-age-futurism .brand {
+  gap: 10px;
+  color: var(--atomic-ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .13em;
+  text-transform: uppercase;
 }
 
 .theme-atomic-age-futurism .brand::before {
-  content: "✦";
-  color: var(--accent);
-  font-size: 20px;
+  content: "";
+  width: 29px;
+  height: 29px;
+  border: 2px solid var(--atomic-ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--atomic-red) 0 4px, transparent 5px),
+    linear-gradient(25deg, transparent 45%, var(--atomic-ink) 46% 52%, transparent 53%);
+  box-shadow: inset 0 0 0 4px var(--atomic-paper), inset 0 0 0 6px var(--atomic-blue);
 }
 
+.theme-atomic-age-futurism nav {
+  gap: 3px;
+  padding: 4px;
+  border: 2px solid var(--atomic-ink);
+  border-radius: 999px;
+  background: var(--atomic-paper-deep);
+  color: var(--atomic-ink);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.theme-atomic-age-futurism nav a {
+  margin: 0;
+  padding: 7px 10px;
+  border-radius: 999px;
+}
+
+.theme-atomic-age-futurism nav a.current,
+.theme-atomic-age-futurism nav a:hover,
+.theme-atomic-age-futurism nav a:focus-visible {
+  background: var(--atomic-red);
+  color: var(--atomic-white);
+  text-decoration: none;
+}
+
+.theme-atomic-age-futurism .topbar .language-switch {
+  min-height: 35px;
+  padding-inline: 13px;
+}
+
+/* Hero / atomic observatory */
 .theme-atomic-age-futurism .hero {
-  min-height: min(800px, 88vh);
+  min-height: min(820px, calc(100svh - 64px));
   margin-top: 28px;
-  padding-inline: clamp(24px, 6vw, 72px);
-  border: 2px solid var(--line);
-  border-radius: 42px 10px 42px 10px;
-  background: var(--card);
-  box-shadow: 14px 16px 0 color-mix(in srgb, var(--line), transparent 80%);
+  padding: clamp(76px, 10vw, 132px) clamp(28px, 6vw, 84px) clamp(62px, 8vw, 108px);
   overflow: hidden;
+  border: 3px solid var(--atomic-ink);
+  border-radius: 104px 12px 104px 12px;
+  background:
+    radial-gradient(circle at 76% 24%, rgba(242, 184, 75, .11) 0 1px, transparent 2px) 0 0 / 18px 18px,
+    linear-gradient(115deg, rgba(255, 255, 255, .035), transparent 42%),
+    var(--atomic-ink);
+  box-shadow: 14px 16px 0 var(--atomic-gold), 20px 23px 0 rgba(23, 52, 59, .18);
+  color: var(--atomic-paper);
 }
 
 .theme-atomic-age-futurism .hero::before {
   content: "";
   position: absolute;
-  z-index: -1;
-  top: 8%;
-  right: -9%;
-  width: min(470px, 50vw);
-  aspect-ratio: 1.65;
-  border: 3px solid var(--accent);
+  right: -12%;
+  bottom: -31%;
+  z-index: 0;
+  width: min(620px, 58vw);
+  aspect-ratio: 1;
+  border: 1px solid rgba(185, 216, 202, .18);
   border-radius: 50%;
-  transform: rotate(-18deg);
-  box-shadow: inset 0 0 0 28px var(--card), inset 0 0 0 31px var(--card-strong), inset 0 0 0 58px var(--card);
+  box-shadow:
+    0 0 0 64px var(--atomic-ink),
+    0 0 0 66px rgba(185, 216, 202, .14),
+    0 0 0 136px var(--atomic-ink),
+    0 0 0 138px rgba(185, 216, 202, .1);
+  pointer-events: none;
 }
 
 .theme-atomic-age-futurism .hero::after {
-  content: "";
+  content: "42";
   position: absolute;
-  z-index: -1;
-  right: 13%;
-  bottom: 16%;
-  width: 92px;
-  aspect-ratio: 1;
-  background: repeating-conic-gradient(var(--accent) 0 9deg, transparent 9deg 18deg);
-  clip-path: polygon(50% 0, 58% 39%, 100% 24%, 65% 50%, 100% 76%, 58% 61%, 50% 100%, 42% 61%, 0 76%, 35% 50%, 0 24%, 42% 39%);
+  left: clamp(28px, 6vw, 84px);
+  bottom: 22px;
+  color: rgba(248, 239, 216, .5);
+  font: 800 10px/1 var(--mono);
+  letter-spacing: .22em;
+}
+
+.theme-atomic-age-futurism .hero-grid {
+  position: relative;
+  z-index: 2;
+  grid-template-columns: minmax(0, 1.35fr) minmax(250px, .56fr);
+  gap: clamp(30px, 6vw, 86px);
+  align-items: end;
+}
+
+.theme-atomic-age-futurism .hero-grid > div:first-child {
+  min-width: 0;
+}
+
+.theme-atomic-age-futurism .hero-grid > div:first-child:only-child {
+  grid-column: 1 / -1;
+  width: min(72%, 780px);
+}
+
+.theme-atomic-age-futurism .kicker {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: clamp(22px, 4vw, 44px);
+  padding: 8px 13px;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  background: var(--atomic-gold);
+  color: var(--atomic-ink);
+  box-shadow: 4px 4px 0 var(--atomic-red);
+  font-weight: 900;
+  letter-spacing: .15em;
+}
+
+.theme-atomic-age-futurism .kicker::before {
+  content: "✦";
+  margin-right: 8px;
+  color: var(--atomic-red);
+  font-size: 15px;
+}
+
+.theme-atomic-age-futurism h1,
+.theme-atomic-age-futurism h2,
+.theme-atomic-age-futurism h3 {
+  font-weight: 900;
 }
 
 .theme-atomic-age-futurism h1 {
-  max-width: 740px;
+  max-width: 860px;
+  color: var(--atomic-paper);
+  font-size: clamp(56px, 7.2vw, 104px);
+  line-height: .84;
+  letter-spacing: -.055em;
+  text-shadow: 5px 5px 0 var(--atomic-red);
+}
+
+html[lang^="zh"] .theme-atomic-age-futurism h1 {
+  line-height: 1.02;
+  letter-spacing: .025em;
+  text-shadow: 4px 4px 0 var(--atomic-red);
+}
+
+.theme-atomic-age-futurism .hero-sub {
+  max-width: 680px;
+  margin-top: 30px;
+  color: var(--atomic-mint);
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.5;
+}
+
+.theme-atomic-age-futurism .hero-actions {
+  margin-top: 36px;
+}
+
+.theme-atomic-age-futurism .button {
+  min-height: 44px;
+  justify-content: center;
+}
+
+.theme-atomic-age-futurism .button::after {
+  content: "→";
+  font-size: 1.15em;
+  transition: translate .16s ease;
+}
+
+.theme-atomic-age-futurism .button:hover::after {
+  translate: 3px 0;
+}
+
+.theme-atomic-age-futurism .language-switch::after,
+.theme-atomic-age-futurism .reveal-actions .button::after,
+.theme-atomic-age-futurism .footer-spotlight-button::after {
+  content: none;
+}
+
+.theme-atomic-age-futurism .hero .button.secondary {
+  border-color: var(--atomic-paper);
+  background: transparent;
+  color: var(--atomic-paper);
+}
+
+.theme-atomic-age-futurism .hero-card {
+  padding: 20px;
+  border: 3px solid var(--atomic-gold);
+  outline: 0;
+  border-radius: 62px 8px 62px 8px;
+  background: var(--atomic-paper);
+  color: var(--atomic-ink);
+  box-shadow: 9px 10px 0 var(--atomic-red);
+}
+
+.theme-atomic-age-futurism .hero-card::before {
+  content: "";
+  display: block;
+  width: 54px;
+  height: 9px;
+  margin: 2px auto 20px;
+  border-radius: 999px;
+  background: var(--atomic-ink);
+  box-shadow: 20px 0 0 -2px var(--atomic-red);
+}
+
+.theme-atomic-age-futurism .hero-card .stat {
+  padding: 15px 12px;
+  border-bottom: 2px dotted rgba(23, 52, 59, .35);
+}
+
+.theme-atomic-age-futurism .hero-card .stat:last-child {
+  padding-bottom: 8px;
+}
+
+.theme-atomic-age-futurism .stat-label {
+  color: var(--atomic-blue);
+  font-weight: 800;
+}
+
+.theme-atomic-age-futurism .stat-value {
   font-weight: 850;
-  line-height: .94;
+}
+
+.theme-atomic-age-futurism .atomic-stage {
+  position: absolute;
+  top: 8%;
+  right: 3%;
+  z-index: 1;
+  width: clamp(290px, 38vw, 540px);
+  aspect-ratio: 1.2;
+  translate: var(--atomic-shift-x, 0) var(--atomic-shift-y, 0);
+  transition: translate .5s cubic-bezier(.2, .8, .2, 1);
+  pointer-events: none;
+}
+
+.theme-atomic-age-futurism .atomic-sun {
+  position: absolute;
+  top: 38%;
+  left: 51%;
+  width: clamp(82px, 10vw, 138px);
+  aspect-ratio: 1;
+  border: 4px solid var(--atomic-paper);
+  border-radius: 50%;
+  background: var(--atomic-gold);
+  box-shadow: inset -18px -12px 0 rgba(228, 87, 61, .38), 10px 12px 0 rgba(0, 0, 0, .16);
+  transform: translate(-50%, -50%);
+}
+
+.theme-atomic-age-futurism .atomic-sun::before,
+.theme-atomic-age-futurism .atomic-sun::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(23, 52, 59, .25);
+}
+
+.theme-atomic-age-futurism .atomic-sun::before {
+  top: 22%;
+  left: 24%;
+  width: 12%;
+  aspect-ratio: 1;
+  box-shadow: 42px 18px 0 rgba(23, 52, 59, .18), 14px 49px 0 rgba(23, 52, 59, .2);
+}
+
+.theme-atomic-age-futurism .atomic-orbit {
+  position: absolute;
+  top: 38%;
+  left: 51%;
+  width: 88%;
+  height: 34%;
+  border: 3px solid var(--atomic-mint);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(var(--orbit-angle));
+  opacity: .86;
+}
+
+.theme-atomic-age-futurism .atomic-orbit--one { --orbit-angle: 16deg; }
+.theme-atomic-age-futurism .atomic-orbit--two { --orbit-angle: -18deg; }
+.theme-atomic-age-futurism .atomic-orbit--three { --orbit-angle: 70deg; width: 72%; height: 29%; }
+
+.theme-atomic-age-futurism .atomic-satellite {
+  position: absolute;
+  top: 50%;
+  left: -9px;
+  width: 17px;
+  aspect-ratio: 1;
+  border: 3px solid var(--atomic-paper);
+  border-radius: 50%;
+  background: var(--atomic-red);
+  box-shadow: 0 0 0 4px var(--atomic-ink);
+  transform: translateY(-50%);
+}
+
+.theme-atomic-age-futurism .atomic-orbit--two .atomic-satellite {
+  right: -9px;
+  left: auto;
+  background: var(--atomic-blue);
+}
+
+.theme-atomic-age-futurism .atomic-orbit--three .atomic-satellite {
+  top: auto;
+  bottom: -9px;
+  left: 48%;
+  background: var(--atomic-gold);
+}
+
+.theme-atomic-age-futurism .atomic-starburst {
+  position: absolute;
+  top: 3%;
+  right: 5%;
+  width: 66px;
+  aspect-ratio: 1;
+  background: var(--atomic-red);
+  clip-path: polygon(50% 0, 58% 39%, 79% 8%, 65% 42%, 100% 25%, 69% 49%, 100% 74%, 61% 59%, 72% 100%, 54% 63%, 34% 94%, 43% 58%, 0 74%, 35% 50%, 0 27%, 39% 41%);
+}
+
+.theme-atomic-age-futurism .atomic-boomerang {
+  position: absolute;
+  right: 6%;
+  bottom: 3%;
+  width: 84px;
+  height: 52px;
+  border-right: 17px solid var(--atomic-gold);
+  border-bottom: 17px solid var(--atomic-gold);
+  border-radius: 0 4px 42px 4px;
+  transform: skewX(-18deg) rotate(-9deg);
+}
+
+/* Exhibition sections */
+.theme-atomic-age-futurism main {
+  padding-top: clamp(72px, 10vw, 126px);
 }
 
 .theme-atomic-age-futurism .section {
-  border-top: 2px solid var(--line);
+  padding: clamp(72px, 9vw, 116px) 0;
+  border-top: 3px solid var(--atomic-ink);
+}
+
+.theme-atomic-age-futurism .section::after {
+  content: "";
+  position: absolute;
+  top: -9px;
+  right: 0;
+  width: 58px;
+  height: 15px;
+  border: 3px solid var(--atomic-ink);
+  border-radius: 999px;
+  background: var(--atomic-red);
+  box-shadow: -72px 0 0 -3px var(--atomic-gold), -72px 0 0 0 var(--atomic-ink);
 }
 
 .theme-atomic-age-futurism .section-head {
-  grid-template-columns: minmax(96px, .24fr) minmax(0, 1fr);
+  grid-template-columns: minmax(150px, .27fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 72px);
+  margin-bottom: clamp(34px, 5vw, 64px);
+  align-items: start;
 }
 
 .theme-atomic-age-futurism .section-index {
-  width: max-content;
-  padding: 8px 14px;
-  border: 2px solid var(--line);
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 39px;
+  padding: 8px 15px;
+  border: 2px solid var(--atomic-ink);
+  border-radius: 999px;
+  background: var(--atomic-gold);
+  color: var(--atomic-ink);
+  box-shadow: 4px 4px 0 var(--atomic-red);
+  font-weight: 900;
+}
+
+.theme-atomic-age-futurism .section-head h2 {
+  max-width: 850px;
+  color: var(--atomic-ink);
+  font-size: clamp(44px, 7vw, 88px);
+  line-height: .9;
+  letter-spacing: -.045em;
+}
+
+html[lang^="zh"] .theme-atomic-age-futurism .section-head h2 {
+  line-height: 1.08;
+  letter-spacing: .01em;
+}
+
+.theme-atomic-age-futurism .section-lead {
+  max-width: 700px;
+  color: var(--atomic-blue);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.theme-atomic-age-futurism .cards {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.theme-atomic-age-futurism :is(.card, .timeline-item, .principle) {
+  border: 3px solid var(--atomic-ink);
+  outline: 0;
+  border-radius: 46px 7px 46px 7px;
+  background: var(--atomic-white);
+  color: var(--atomic-ink);
+  box-shadow: 8px 9px 0 var(--atomic-shadow);
+}
+
+.theme-atomic-age-futurism .card {
+  padding: clamp(26px, 3vw, 40px);
+}
+
+.theme-atomic-age-futurism .card.third {
+  grid-column: span 4;
+}
+
+.theme-atomic-age-futurism .card.full {
+  grid-column: 1 / -1;
+}
+
+.theme-atomic-age-futurism .project-card {
+  counter-increment: atomic-project;
+  min-height: 272px;
+  padding-inline-start: clamp(78px, 9vw, 128px);
+  transition: translate .2s ease, box-shadow .2s ease;
+}
+
+.theme-atomic-age-futurism #work .cards {
+  counter-reset: atomic-project;
+}
+
+.theme-atomic-age-futurism .project-card::before {
+  content: counter(atomic-project, decimal-leading-zero);
+  position: absolute;
+  top: 34px;
+  left: 30px;
+  display: grid;
+  width: clamp(42px, 5vw, 62px);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 3px solid var(--atomic-ink);
   border-radius: 50%;
-  background: var(--card-strong);
-  color: var(--fg);
-  transform: rotate(-4deg);
+  background: var(--atomic-gold);
+  color: var(--atomic-ink);
+  box-shadow: 4px 4px 0 var(--atomic-red);
+  font: 900 13px/1 var(--mono);
 }
 
-.theme-atomic-age-futurism :is(.card, .timeline-item, .principle, .hero-card) {
-  border-radius: 28px 6px 28px 6px;
+.theme-atomic-age-futurism .project-card::after {
+  content: "";
+  position: absolute;
+  right: -28px;
+  bottom: -42px;
+  width: 132px;
+  aspect-ratio: 1.7;
+  border: 10px solid color-mix(in srgb, var(--atomic-blue), transparent 34%);
+  border-radius: 50%;
+  transform: rotate(-24deg);
+  pointer-events: none;
 }
 
-.theme-atomic-age-futurism .cards .card:nth-child(even),
-.theme-atomic-age-futurism .principle:nth-child(even) {
-  transform: translateY(12px);
-  border-radius: 6px 28px 6px 28px;
+.theme-atomic-age-futurism .project-card:hover {
+  translate: -3px -3px;
+  box-shadow: 12px 13px 0 var(--atomic-shadow);
+}
+
+.theme-atomic-age-futurism .project-card:nth-child(even) {
+  border-radius: 7px 46px 7px 46px;
+  background: var(--atomic-ink);
+  color: var(--atomic-paper);
+  box-shadow: 8px 9px 0 var(--atomic-red);
+}
+
+.theme-atomic-age-futurism .project-card:nth-child(even) :is(.generated-description, h3) {
+  color: var(--atomic-paper);
+}
+
+.theme-atomic-age-futurism .project-card:nth-child(even) :is(.stack, .generated-desc-meta) {
+  color: var(--atomic-mint);
+}
+
+.theme-atomic-age-futurism .project-card:nth-child(even) .tag {
+  border-color: var(--atomic-paper);
+  background: var(--atomic-red);
+  color: var(--atomic-paper);
+}
+
+.theme-atomic-age-futurism .card-title-row {
+  padding-bottom: 18px;
+  border-bottom: 2px dotted currentColor;
+}
+
+.theme-atomic-age-futurism h3 {
+  font-size: clamp(22px, 2.5vw, 31px);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+
+.theme-atomic-age-futurism .stack,
+.theme-atomic-age-futurism .generated-desc-meta,
+.theme-atomic-age-futurism .time-label {
+  color: var(--atomic-blue);
+  font-weight: 800;
+}
+
+.theme-atomic-age-futurism .generated-description {
+  max-width: 850px;
+  font-size: 17px;
+  line-height: 1.7;
 }
 
 .theme-atomic-age-futurism .tag,
 .theme-atomic-age-futurism .skill-pill {
-  border-width: 2px;
-  background: var(--card-strong);
-  color: var(--fg);
+  border: 2px solid var(--atomic-ink);
+  border-radius: 999px;
+  background: var(--atomic-mint);
+  color: var(--atomic-ink);
+  font-family: var(--mono);
+  font-weight: 800;
+}
+
+.theme-atomic-age-futurism .tag {
+  padding: 8px 12px;
+  box-shadow: 3px 3px 0 var(--atomic-gold);
+}
+
+.theme-atomic-age-futurism .principles {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.theme-atomic-age-futurism .principle {
+  min-height: 220px;
+  padding: clamp(28px, 4vw, 48px);
+  font-size: clamp(19px, 2vw, 24px);
+  line-height: 1.55;
+}
+
+.theme-atomic-age-futurism .principle:nth-child(3n + 2) {
+  border-radius: 7px 46px 7px 46px;
+  background: var(--atomic-gold);
+}
+
+.theme-atomic-age-futurism .principle:nth-child(3n) {
+  background: var(--atomic-mint);
+}
+
+.theme-atomic-age-futurism .skill-cloud {
+  gap: 10px;
+}
+
+.theme-atomic-age-futurism .skill-pill {
+  padding: 9px 14px;
+  background: var(--atomic-paper);
 }
 
 .theme-atomic-age-futurism .skill-pill:nth-child(3n + 2) {
-  border-radius: 58% 42% 52% 48% / 44% 58% 42% 56%;
+  background: var(--atomic-gold);
 }
 
-.theme-atomic-age-futurism .contact-panel,
+.theme-atomic-age-futurism .skill-pill:nth-child(3n) {
+  background: var(--atomic-mint);
+}
+
+.theme-atomic-age-futurism .timeline-item {
+  grid-template-columns: minmax(150px, .3fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 72px);
+  padding: clamp(30px, 5vw, 54px);
+  background: var(--atomic-mint);
+}
+
+.theme-atomic-age-futurism .time-label {
+  width: fit-content;
+  height: fit-content;
+  padding: 9px 13px;
+  border: 2px solid var(--atomic-ink);
+  border-radius: 50%;
+  background: var(--atomic-gold);
+  color: var(--atomic-ink);
+  text-align: center;
+  transform: rotate(-3deg);
+}
+
+/* Transmission panel and room control */
+.theme-atomic-age-futurism .contact-panel {
+  grid-template-columns: minmax(0, 1.25fr) auto;
+  align-items: end;
+  padding: clamp(34px, 6vw, 76px);
+  border: 3px solid var(--atomic-ink);
+  outline: 0;
+  border-radius: 86px 8px 86px 8px;
+  background: var(--atomic-red);
+  color: var(--atomic-paper);
+  box-shadow: 12px 14px 0 var(--atomic-gold);
+}
+
+.theme-atomic-age-futurism .contact-panel::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  width: 84px;
+  height: 48px;
+  border-right: 15px solid var(--atomic-paper);
+  border-bottom: 15px solid var(--atomic-paper);
+  border-radius: 0 0 50px 0;
+  opacity: .28;
+  transform: skewX(-18deg) rotate(-8deg);
+}
+
+.theme-atomic-age-futurism .contact-panel .section-lead {
+  color: var(--atomic-paper);
+  opacity: .86;
+}
+
+.theme-atomic-age-futurism .contact-panel .button {
+  border-color: var(--atomic-ink);
+  background: var(--atomic-gold);
+  color: var(--atomic-ink);
+}
+
+.theme-atomic-age-futurism .contact-panel .button.secondary {
+  background: var(--atomic-paper);
+}
+
 .theme-atomic-age-futurism .reveal {
-  border: 2px solid var(--line);
-  border-radius: 48px 8px 48px 8px;
-  background: var(--card-strong);
+  margin: clamp(90px, 12vw, 154px) 0 70px;
+  padding: clamp(38px, 7vw, 84px);
+  border: 3px solid var(--atomic-ink);
+  outline: 0;
+  border-radius: 8px 96px 8px 96px;
+  background: var(--atomic-gold);
+  color: var(--atomic-ink);
+  box-shadow: 13px 15px 0 var(--atomic-red);
 }
 
 .theme-atomic-age-futurism .reveal::before {
   content: "";
-  top: 18px;
-  right: 18px;
+  top: clamp(24px, 5vw, 60px);
+  right: clamp(20px, 5vw, 68px);
   left: auto;
-  width: 96px;
-  height: 96px;
-  background: repeating-conic-gradient(var(--accent) 0 8deg, transparent 8deg 16deg);
-  clip-path: polygon(50% 0, 59% 39%, 100% 26%, 65% 50%, 100% 75%, 59% 61%, 50% 100%, 41% 61%, 0 75%, 35% 50%, 0 26%, 41% 39%);
-  opacity: .68;
+  width: clamp(74px, 11vw, 142px);
+  height: auto;
+  aspect-ratio: 1;
+  background: repeating-conic-gradient(var(--atomic-red) 0 7deg, transparent 7deg 15deg);
+  clip-path: polygon(50% 0, 58% 39%, 79% 8%, 65% 42%, 100% 25%, 69% 49%, 100% 74%, 61% 59%, 72% 100%, 54% 63%, 34% 94%, 43% 58%, 0 74%, 35% 50%, 0 27%, 39% 41%);
+  opacity: .72;
+}
+
+.theme-atomic-age-futurism .reveal > :not(.reveal-grid, .reveal-actions) {
+  max-width: min(720px, 72%);
+}
+
+.theme-atomic-age-futurism .reveal .kicker {
+  background: var(--atomic-paper);
+}
+
+.theme-atomic-age-futurism .reveal-grid {
+  max-width: 690px;
 }
 
 .theme-atomic-age-futurism .reveal-stat {
-  border-radius: 20px 4px 20px 4px;
-  border-width: 2px;
+  padding: 24px;
+  border: 3px solid var(--atomic-ink);
+  border-radius: 38px 6px 38px 6px;
+  background: var(--atomic-paper);
+  box-shadow: 6px 7px 0 var(--atomic-blue);
 }
 
-@media (max-width: 720px) {
-  .theme-atomic-age-futurism .hero {
-    min-height: auto;
-    padding-inline: 18px;
-    border-radius: 28px 6px 28px 6px;
-    box-shadow: 7px 8px 0 color-mix(in srgb, var(--line), transparent 80%);
-  }
-
-  .theme-atomic-age-futurism .hero::before { right: -34%; width: 74vw; opacity: .38; }
-  .theme-atomic-age-futurism .hero::after { width: 54px; right: 5%; bottom: 8%; opacity: .55; }
-  .theme-atomic-age-futurism .section-head { grid-template-columns: 1fr; }
-  .theme-atomic-age-futurism .cards .card:nth-child(even),
-  .theme-atomic-age-futurism .principle:nth-child(even) { transform: none; }
-  .theme-atomic-age-futurism .reveal::before { width: 56px; height: 56px; opacity: .35; }
+.theme-atomic-age-futurism .style-period {
+  color: var(--atomic-red);
+  font-family: var(--mono);
+  font-weight: 900;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .theme-atomic-age-futurism .hero::after { animation: atomic-spin 18s linear infinite; }
+.theme-atomic-age-futurism .style-introduction {
+  color: var(--atomic-blue);
 }
 
-@keyframes atomic-spin {
-  to { transform: rotate(1turn); }
+.theme-atomic-age-futurism .reveal-stat-section + .reveal-stat-section {
+  border-top: 2px dotted var(--atomic-ink);
 }
 
-/* Orbit, starburst, and buoyant corners frame the four refresh signals. */
+.theme-atomic-age-futurism .reveal .button {
+  border-color: var(--atomic-ink);
+  background: var(--atomic-ink);
+  color: var(--atomic-paper);
+}
+
+.theme-atomic-age-futurism .reveal .button.secondary {
+  background: var(--atomic-paper);
+  color: var(--atomic-ink);
+}
+
+.theme-atomic-age-futurism .complete-version {
+  border-top: 3px solid var(--atomic-ink);
+}
+
+.theme-atomic-age-futurism .complete-version .complete-head {
+  grid-template-columns: minmax(150px, .27fr) minmax(0, 1fr);
+  gap: 40px;
+}
+
+.theme-atomic-age-futurism .complete-project .intro-list p {
+  border: 2px solid var(--atomic-ink);
+  border-radius: 26px 4px 26px 4px;
+  background: var(--atomic-paper);
+  color: var(--atomic-blue);
+}
+
+.theme-atomic-age-futurism .tiny-footer {
+  padding-bottom: 44px;
+  border-top: 2px dotted var(--atomic-ink);
+  padding-top: 24px;
+  color: var(--atomic-blue);
+  font-weight: 700;
+}
+
+/* Regeneration / launch sequence */
 .theme-atomic-age-futurism .regenerating {
-  color: var(--fg);
+  color: var(--atomic-paper);
   background:
-    radial-gradient(circle at 12% 22%, color-mix(in srgb, var(--card-strong), transparent 24%) 0 2px, transparent 3px) 0 0 / 44px 44px,
-    radial-gradient(circle at 86% 47%, color-mix(in srgb, var(--accent), transparent 28%) 0 3px, transparent 4px) 0 0 / 72px 72px,
-    var(--bg);
+    radial-gradient(circle at 50% 50%, rgba(242, 184, 75, .14), transparent 26rem),
+    radial-gradient(circle, rgba(248, 239, 216, .16) 0 1px, transparent 1.5px) 0 0 / 20px 20px,
+    var(--atomic-ink);
 }
 
 .theme-atomic-age-futurism .regen-box {
-  position: relative;
-  isolation: isolate;
-  width: min(610px, 100%);
-  padding: clamp(32px, 8vw, 60px);
-  overflow: hidden;
-  border: 2px solid var(--line);
-  border-radius: 42px 10px 42px 10px;
-  background: var(--card);
-  color: var(--fg);
-  box-shadow: 12px 14px 0 color-mix(in srgb, var(--line), transparent 78%);
-  font-family: var(--sans);
+  width: min(640px, 100%);
+  padding: clamp(34px, 8vw, 64px);
+  border: 3px solid var(--atomic-paper);
+  border-radius: 76px 8px 76px 8px;
+  background: var(--atomic-ink);
+  box-shadow: 12px 14px 0 var(--atomic-gold), 18px 21px 0 var(--atomic-red);
   font-weight: 800;
 }
 
 .theme-atomic-age-futurism .regen-box::before {
   content: "";
   position: absolute;
-  top: -20%;
-  right: -12%;
+  top: -18%;
+  right: -10%;
   z-index: -1;
-  width: 58%;
-  aspect-ratio: 1.65;
-  border: 3px solid var(--accent);
+  width: 52%;
+  aspect-ratio: 1.7;
+  border: 3px solid var(--atomic-mint);
   border-radius: 50%;
-  box-shadow: inset 0 0 0 18px var(--card), inset 0 0 0 21px var(--card-strong);
-  transform: rotate(-16deg);
-  pointer-events: none;
+  transform: rotate(-18deg);
 }
 
 .theme-atomic-age-futurism .regen-box::after {
   content: "";
   position: absolute;
-  right: 8%;
-  bottom: 8%;
+  right: 7%;
+  bottom: 7%;
   z-index: -1;
-  width: clamp(52px, 15vw, 88px);
+  width: 74px;
   aspect-ratio: 1;
-  background: repeating-conic-gradient(var(--accent) 0 9deg, transparent 9deg 18deg);
-  clip-path: polygon(50% 0, 58% 39%, 100% 24%, 65% 50%, 100% 76%, 58% 61%, 50% 100%, 42% 61%, 0 76%, 35% 50%, 0 24%, 42% 39%);
-  opacity: .66;
-  pointer-events: none;
+  background: var(--atomic-red);
+  clip-path: polygon(50% 0, 58% 39%, 79% 8%, 65% 42%, 100% 25%, 69% 49%, 100% 74%, 61% 59%, 72% 100%, 54% 63%, 34% 94%, 43% 58%, 0 74%, 35% 50%, 0 27%, 39% 41%);
 }
 
 .theme-atomic-age-futurism .regen-line {
-  position: relative;
-  z-index: 1;
   width: fit-content;
   max-width: 100%;
-  margin: 6px 0;
-  padding: 5px 11px;
-  padding-inline-start: 31px;
-  border: 2px solid var(--line);
-  border-radius: 28px 6px 28px 6px;
-  background: var(--card);
-  color: var(--fg);
-  opacity: .78;
+  margin: 7px 0;
+  padding: 6px 12px 6px 34px;
+  border: 2px solid var(--atomic-mint);
+  border-radius: 999px;
+  background: var(--atomic-ink);
+  color: var(--atomic-paper);
 }
 
 .theme-atomic-age-futurism .regen-line.active {
-  border-radius: 6px 28px 6px 28px;
-  background: var(--card-strong);
-  color: var(--fg);
-  opacity: 1;
+  border-color: var(--atomic-paper);
+  background: var(--atomic-gold);
+  color: var(--atomic-ink);
 }
 
 .theme-atomic-age-futurism .regen-line::before {
   border-radius: 50%;
+}
+
+@media (max-width: 980px) {
+  .theme-atomic-age-futurism .hero {
+    min-height: 720px;
+    border-radius: 76px 10px 76px 10px;
+  }
+
+  .theme-atomic-age-futurism .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(210px, .46fr);
+    gap: 28px;
+  }
+
+  .theme-atomic-age-futurism .atomic-stage {
+    top: 10%;
+    right: -8%;
+    opacity: .42;
+  }
+
+  .theme-atomic-age-futurism .section-head {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-atomic-age-futurism .card.third {
+    grid-column: span 6;
+  }
+
+  .theme-atomic-age-futurism .contact-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  body.theme-atomic-age-futurism.layout-single .site {
+    width: min(100vw - 24px, 1240px);
+  }
+
+  .theme-atomic-age-futurism .topbar-inner {
+    min-height: 56px;
+  }
+
+  .theme-atomic-age-futurism .brand {
+    font-size: 10px;
+    letter-spacing: .08em;
+  }
+
+  .theme-atomic-age-futurism .brand::before {
+    width: 25px;
+    height: 25px;
+  }
+
+  .theme-atomic-age-futurism .hero {
+    min-height: auto;
+    margin-top: 18px;
+    padding: 62px 22px 56px;
+    border-radius: 48px 7px 48px 7px;
+    box-shadow: 7px 8px 0 var(--atomic-gold), 11px 13px 0 rgba(23, 52, 59, .16);
+  }
+
+  .theme-atomic-age-futurism .hero-grid,
+  .theme-atomic-age-futurism .hero-grid > div:first-child:only-child {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .theme-atomic-age-futurism .hero-card {
+    margin-top: 20px;
+  }
+
+  .theme-atomic-age-futurism .atomic-stage {
+    top: 9%;
+    right: -26%;
+    width: 340px;
+    opacity: .22;
+  }
+
+  .theme-atomic-age-futurism .hero::before {
+    right: -44%;
+    bottom: -18%;
+    width: 380px;
+    opacity: .6;
+  }
+
+  .theme-atomic-age-futurism .hero::after {
+    left: 22px;
+    bottom: 16px;
+  }
+
+  .theme-atomic-age-futurism .section::after {
+    right: 2px;
+    width: 42px;
+    box-shadow: -54px 0 0 -3px var(--atomic-gold), -54px 0 0 0 var(--atomic-ink);
+  }
+
+  .theme-atomic-age-futurism .section-head h2 {
+    font-size: clamp(38px, 13vw, 62px);
+  }
+
+  .theme-atomic-age-futurism .cards,
+  .theme-atomic-age-futurism .principles {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-atomic-age-futurism .card.third,
+  .theme-atomic-age-futurism .card.full {
+    grid-column: 1;
+  }
+
+  .theme-atomic-age-futurism .project-card {
+    min-height: auto;
+    padding: 78px 24px 30px;
+  }
+
+  .theme-atomic-age-futurism .project-card::before {
+    top: 19px;
+    left: 22px;
+    width: 42px;
+  }
+
+  .theme-atomic-age-futurism .timeline-item {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-atomic-age-futurism .contact-panel {
+    padding: 34px 24px;
+    border-radius: 52px 7px 52px 7px;
+    box-shadow: 7px 8px 0 var(--atomic-gold);
+  }
+
+  .theme-atomic-age-futurism .contact-panel::before {
+    display: none;
+  }
+
+  .theme-atomic-age-futurism .reveal {
+    padding: 42px 24px;
+    border-radius: 7px 54px 7px 54px;
+    box-shadow: 7px 8px 0 var(--atomic-red);
+  }
+
+  .theme-atomic-age-futurism .reveal::before {
+    width: 62px;
+    opacity: .24;
+  }
+
+  .theme-atomic-age-futurism .reveal > :not(.reveal-grid, .reveal-actions) {
+    max-width: 100%;
+  }
+
+  .theme-atomic-age-futurism .active-style-heading,
+  .theme-atomic-age-futurism .complete-version .complete-head {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-atomic-age-futurism .brand span {
+    max-width: 112px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .theme-atomic-age-futurism h1 {
+    font-size: clamp(44px, 12.5vw, 52px);
+    text-shadow: 3px 3px 0 var(--atomic-red);
+  }
+
+  .theme-atomic-age-futurism .kicker {
+    font-size: 10px;
+  }
+
+  .theme-atomic-age-futurism .project-card::after {
+    opacity: .34;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .theme-atomic-age-futurism .atomic-orbit--one { animation: atomic-pulse-one 7s ease-in-out infinite; }
+  .theme-atomic-age-futurism .atomic-orbit--two { animation: atomic-pulse-two 9s ease-in-out infinite; }
+  .theme-atomic-age-futurism .atomic-starburst { animation: atomic-spin 22s linear infinite; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-atomic-age-futurism .atomic-stage,
+  .theme-atomic-age-futurism .project-card {
+    transition: none;
+  }
+}
+
+@keyframes atomic-pulse-one {
+  0%, 100% { transform: translate(-50%, -50%) rotate(16deg) scale(1); }
+  50% { transform: translate(-50%, -50%) rotate(16deg) scale(1.035); }
+}
+
+@keyframes atomic-pulse-two {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-18deg) scale(1); }
+  50% { transform: translate(-50%, -50%) rotate(-18deg) scale(.965); }
+}
+
+@keyframes atomic-spin {
+  to { transform: rotate(1turn); }
 }

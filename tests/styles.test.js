@@ -202,6 +202,30 @@ test("surrealism gives the arched profile card enough roof clearance for educati
   assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.theme-surrealism \.hero-card\s*{[^}]*padding:\s*26px 18px 18px/s);
 });
 
+test("pattern and decoration keeps content surfaces opaque and section badges content-sized", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-4-postmodernism-plural-surfaces",
+    "36-pattern-and-decoration.css"
+  ));
+  const script = read(path.join(
+    ROOT,
+    "styles",
+    "act-4-postmodernism-plural-surfaces",
+    "36-pattern-and-decoration.js"
+  ));
+
+  assert.match(css, /\.theme-pattern-and-decoration \.section-index\s*{[^}]*align-self:\s*start;[^}]*white-space:\s*nowrap;/s);
+  assert.match(css, /\.theme-pattern-and-decoration :is\(\.card, \.hero-card, \.principle, \.timeline-item\)\s*{[^}]*background:\s*var\(--card\);[^}]*backdrop-filter:\s*none;/s);
+  assert.match(css, /\.theme-pattern-and-decoration :is\([^}]*\.section-index[^}]*\.contact-panel[^}]*\.regen-box\)\s*{[^}]*border-radius:\s*var\(--radius\);/s);
+  assert.match(css, /\.theme-pattern-and-decoration \.complete-project \.intro-list p\s*{[^}]*background:\s*var\(--card\);/s);
+  assert.doesNotMatch(css, /border-radius:\s*(?:999|8|10|18)px/);
+  assert.doesNotMatch(css, /box-shadow\s*:/);
+  assert.doesNotMatch(script, /--style-(?:card|panel)-shadow/);
+  assert.match(script, /"--style-button-radius":\s*"var\(--radius\)"/);
+});
+
 test("abstract expressionism keeps the animated hero content above its paint strokes", () => {
   const css = read(path.join(
     ROOT,
@@ -212,6 +236,27 @@ test("abstract expressionism keeps the animated hero content above its paint str
 
   assert.match(css, /\.theme-abstract-expressionism \.hero-grid\s*{[^}]*position:\s*relative;[^}]*z-index:\s*2;/s);
   assert.match(css, /\.theme-abstract-expressionism \.hero::after\s*{[^}]*z-index:\s*1;/s);
+});
+
+test("compact decorated section indexes opt out of grid-row stretching", () => {
+  const themes = [
+    ["act-2-postwar-abstraction-perception-popular-culture", "12-abstract-expressionism", "abstract-expressionism"],
+    ["act-3-material-concept-radical-design", "28-high-tech", "high-tech"],
+    ["act-3-material-concept-radical-design", "30-anti-design", "anti-design"],
+    ["act-4-postmodernism-plural-surfaces", "31-postmodernism", "postmodernism"],
+    ["act-4-postmodernism-plural-surfaces", "36-pattern-and-decoration", "pattern-and-decoration"],
+    ["act-5-computers-web-future-visual-culture", "40-glitch-art", "glitch-art"]
+  ];
+
+  themes.forEach(([directory, stem, themeId]) => {
+    const css = read(path.join(ROOT, "styles", directory, `${stem}.css`));
+    const compactBadgeRule = new RegExp(
+      `\\.theme-${themeId} \\.section-index\\s*\\{[^}]*align-self:\\s*start;`,
+      "s"
+    );
+
+    assert.match(css, compactBadgeRule, `${themeId} must keep its section badge at intrinsic height`);
+  });
 });
 
 test("purism uses stable proportions, clear outlines, and a reduced geometric still life", () => {

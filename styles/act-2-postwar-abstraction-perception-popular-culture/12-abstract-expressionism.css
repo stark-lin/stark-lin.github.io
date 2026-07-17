@@ -318,6 +318,8 @@ body.theme-abstract-expressionism {
 }
 
 .theme-abstract-expressionism .section-index {
+  align-self: start;
+  justify-self: start;
   width: fit-content;
   padding: 4px 8px;
   background: var(--ae-red);
