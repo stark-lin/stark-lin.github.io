@@ -15,3 +15,8 @@
 ## Border integrity
 
 - Always check that borders and outlines are not accidentally clipped. Unless clipping is an intentional part of the design, use either a complete, uninterrupted border or a solid color block with no border.
+
+## Visual component consistency
+
+- Remove shadows that have no clear visual or functional purpose.
+- Use a consistent component shape system throughout the design. Similar components must share one clearly defined form, such as rounded rectangles, square-cornered boxes, or another deliberately unified shape language.

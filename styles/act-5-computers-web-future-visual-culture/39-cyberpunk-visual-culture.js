@@ -5,27 +5,27 @@
     id: "cyberpunk-visual-culture",
     classNames: ["theme-cyberpunk-visual-culture", "layout-single"],
     variables: {
-      "--bg": "#050707",
-      "--fg": "#e9f0e8",
-      "--muted": "#8c9690",
-      "--line": "#39413d",
-      "--card": "#0b1010",
-      "--card-strong": "#101716",
-      "--accent": "#ffd43b",
+      "--bg": "#040606",
+      "--fg": "#f0f4ef",
+      "--muted": "#9ba7a0",
+      "--line": "#34403c",
+      "--card": "#09100f",
+      "--card-strong": "#0d1513",
+      "--accent": "#ffd84f",
       "--radius": "0px",
       "--style-site-width": "1460px",
       "--style-line-height": "1.62",
-      "--style-hero-pad-top": "clamp(104px, 13vw, 190px)",
-      "--style-hero-pad-bottom": "clamp(58px, 8vw, 108px)",
-      "--style-hero-gap": "clamp(30px, 6vw, 92px)",
-      "--style-section-padding-y": "clamp(82px, 10vw, 144px)",
-      "--style-section-gap": "clamp(30px, 5vw, 72px)",
+      "--style-hero-pad-top": "clamp(84px, 7.5vw, 108px)",
+      "--style-hero-pad-bottom": "clamp(44px, 5vw, 64px)",
+      "--style-hero-gap": "clamp(28px, 5vw, 72px)",
+      "--style-section-padding-y": "clamp(76px, 8vw, 118px)",
+      "--style-section-gap": "clamp(28px, 4.5vw, 60px)",
       "--style-card-padding": "clamp(24px, 3vw, 42px)",
       "--style-card-gap": "12px",
-      "--style-h1-min": "58px",
-      "--style-h1-fluid": "10.4vw",
-      "--style-h1-max": "158px",
-      "--style-h1-tracking": "-.085em",
+      "--style-h1-min": "54px",
+      "--style-h1-fluid": "6.4vw",
+      "--style-h1-max": "104px",
+      "--style-h1-tracking": "-.072em",
       "--style-h2-tracking": "-.065em",
       "--style-h3-tracking": "-.035em",
       "--style-desc-size": "16px",
@@ -39,7 +39,7 @@
       "--style-button-x": "18px",
       "--style-button-size": "10px",
       "--style-button-bg": "var(--accent)",
-      "--style-button-color": "#050707",
+      "--style-button-color": "#040606",
       "--style-button-border-color": "var(--accent)",
       "--style-button-secondary-bg": "transparent",
       "--style-button-secondary-color": "var(--fg)",
@@ -94,7 +94,7 @@
       .filter(([, count]) => count < cards.length)
       .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
       .slice(0, 4)
-      .map(([token]) => token);
+      .map(([token, count]) => ({ token, count }));
   }
 
   function createFieldStrip(hero, copy) {
@@ -152,11 +152,16 @@
     const buttonGroup = document.createElement("div");
     buttonGroup.className = "cyber-filter-buttons";
 
-    [{ value: "all", label: copy.all }, ...filters.map(value => ({ value, label: value }))]
+    [
+      { value: "all", label: copy.all, count: cards.length },
+      ...filters.map(({ token, count }) => ({ value: token, label: token, count }))
+    ]
       .forEach((filter, index) => {
         const button = document.createElement("button");
         button.type = "button";
         button.dataset.filter = filter.value;
+        button.dataset.count = String(filter.count).padStart(2, "0");
+        button.setAttribute("aria-label", filter.label);
         button.setAttribute("aria-pressed", String(index === 0));
         button.textContent = filter.label;
         buttonGroup.appendChild(button);
@@ -167,7 +172,7 @@
     status.setAttribute("aria-live", "polite");
     status.value = copy.showing(cards.length, cards.length);
     toolbar.append(buttonGroup, status);
-    cardsContainer.before(toolbar);
+    cardsContainer.prepend(toolbar);
 
     buttonGroup.addEventListener("click", event => {
       const button = event.target.closest("button[data-filter]");

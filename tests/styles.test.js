@@ -399,19 +399,27 @@ test("cyberpunk visual culture uses a yellow field-dossier system without fake s
     "act-5-computers-web-future-visual-culture",
     "39-cyberpunk-visual-culture.js"
   ));
+  const boxShadows = [...css.matchAll(/box-shadow\s*:\s*([^;]+);/g)].map(match => match[1].trim());
+  const borderRadii = [...css.matchAll(/border-radius\s*:\s*([^;]+);/g)].map(match => match[1].trim());
 
-  assert.match(script, /"--bg":\s*"#050707"/);
-  assert.match(script, /"--accent":\s*"#ffd43b"/);
-  assert.match(css, /--cyber-yellow:\s*#ffd43b/);
-  assert.match(css, /--cyber-acid:\s*#c8ff32/);
-  assert.match(css, /--cyber-coral:\s*#ff4b35/);
-  assert.match(css, /--cyber-ice:\s*#78f3e5/);
+  assert.match(script, /"--bg":\s*"#040606"/);
+  assert.match(script, /"--accent":\s*"#ffd84f"/);
+  assert.match(css, /--cyber-yellow:\s*#ffd84f/);
+  assert.match(css, /--cyber-acid:\s*#c6ff3f/);
+  assert.match(css, /--cyber-coral:\s*#ff5a45/);
+  assert.match(css, /--cyber-ice:\s*#79eadf/);
   assert.match(css, /\.theme-cyberpunk-visual-culture \.cyber-field-strip\s*{/);
-  assert.match(css, /\.theme-cyberpunk-visual-culture \.button::before\s*{[^}]*background:\s*var\(--cyber-button-edge\);[^}]*transform:\s*rotate\(45deg\);/s);
-  assert.match(css, /\.theme-cyberpunk-visual-culture h1\s*{[^}]*overflow:\s*visible;[^}]*text-shadow:/s);
+  assert.match(css, /\.theme-cyberpunk-visual-culture \.button\s*{[^}]*clip-path:\s*none;/s);
+  assert.match(css, /\.theme-cyberpunk-visual-culture \.button::before\s*{[^}]*content:\s*none;/s);
+  assert.match(css, /\.theme-cyberpunk-visual-culture h1\s*{[^}]*overflow:\s*visible;[^}]*text-shadow:\s*none;/s);
   assert.doesNotMatch(css, /\.theme-cyberpunk-visual-culture h1::after/);
   assert.match(css, /\.theme-cyberpunk-visual-culture \.project-card::after\s*{[^}]*content:\s*attr\(data-number\)/s);
-  assert.match(css, /\.theme-cyberpunk-visual-culture \.cyber-filter\s*{/);
+  assert.match(css, /\.theme-cyberpunk-visual-culture \.cyber-filter\s*{[^}]*grid-column:\s*1 \/ -1;[^}]*align-self:\s*start;/s);
+  assert.match(script, /cardsContainer\.prepend\(toolbar\)/);
+  assert.match(script, /button\.setAttribute\("aria-label", filter\.label\)/);
+  assert.match(css, /\.theme-cyberpunk-visual-culture \.hero::after\s*{[^}]*border-radius:\s*0;/s);
+  assert.ok(boxShadows.every(value => /^none(?:\s*!important)?$/.test(value)));
+  assert.ok(borderRadii.every(value => /^(?:0|0px)$/.test(value)));
   assert.match(script, /filterLabel:\s*"按技术筛选项目索引"/);
   assert.match(script, /field:\s*"Project dossier \/ 42"/);
   assert.match(script, /field:\s*"作品档案 \/ 42"/);
