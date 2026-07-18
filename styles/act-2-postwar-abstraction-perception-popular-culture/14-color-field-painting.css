@@ -118,24 +118,37 @@ body.theme-color-field-painting {
   .theme-color-field-painting .reveal { width: 100%; }
 }
 
-/* The transition remains a quiet text island inside one continuous colour field. */
+/* The transition becomes a quiet progress island inside one continuous colour field. */
 .theme-color-field-painting .regenerating {
   color: var(--fg);
   background:
-    linear-gradient(168deg, #85464c 0 17%, #b47c60 34%, #516b70 52%, #8c6b73 72%, #70404a 100%);
+    linear-gradient(
+      164deg,
+      #6b3344 0 14%,
+      #8d4a4c 23%,
+      #b87259 36%,
+      #c6a079 49%,
+      #698086 61%,
+      #3d5d66 74%,
+      #715969 88%,
+      #6b3344 100%
+    );
 }
 
 .theme-color-field-painting .regen-box {
   position: relative;
   isolation: isolate;
-  width: min(600px, 100%);
-  padding: clamp(30px, 8vw, 58px);
+  display: grid;
+  gap: 8px;
+  width: min(680px, 100%);
+  padding: clamp(42px, 7vw, 64px);
+  padding-bottom: clamp(34px, 6vw, 52px);
   overflow: hidden;
   border: 0;
-  border-radius: 30px;
-  background: var(--card);
+  border-radius: 32px;
+  background: color-mix(in srgb, var(--card), transparent 3%);
   color: var(--fg);
-  box-shadow: 0 28px 84px rgba(37, 25, 31, .24);
+  box-shadow: none;
   font-family: var(--sans);
 }
 
@@ -143,48 +156,82 @@ body.theme-color-field-painting {
 .theme-color-field-painting .regen-box::after {
   content: "";
   position: absolute;
-  z-index: -1;
-  border-radius: 999px;
   pointer-events: none;
 }
 
 .theme-color-field-painting .regen-box::before {
-  top: -18%;
-  right: -14%;
-  width: 48%;
-  aspect-ratio: 1;
-  background: #5d7276;
-  opacity: .2;
+  inset: 0 0 auto;
+  height: 10px;
+  background: linear-gradient(90deg, #6b3344 0 32%, #b07960 32% 64%, #5d7276 64% 100%);
 }
 
 .theme-color-field-painting .regen-box::after {
-  right: 12%;
-  bottom: -16%;
-  left: -10%;
-  height: 38%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 6px;
+  border-radius: 0 0 32px 32px;
   background: var(--accent);
-  opacity: .13;
+  transform: scaleX(0);
+  transform-origin: left center;
 }
 
 .theme-color-field-painting .regen-line {
   position: relative;
   z-index: 1;
-  margin: 6px 0;
-  padding: 5px 12px;
-  padding-inline-start: 30px;
-  border-radius: 999px;
-  background: var(--card);
+  margin: 0;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: transparent;
   color: var(--fg);
-  opacity: .78;
+  opacity: .38;
+  transform: translateX(0);
+  transition: opacity .18s ease, background-color .18s ease, color .18s ease;
 }
 
 .theme-color-field-painting .regen-line.active {
-  background: var(--card-strong);
+  background: color-mix(in srgb, var(--card-strong), transparent 20%);
   color: var(--fg);
-  box-shadow: inset 5px 0 0 var(--accent);
   opacity: 1;
 }
 
 .theme-color-field-painting .regen-line::before {
-  border-radius: 50%;
+  display: none;
+}
+
+.theme-color-field-painting .regenerating.active .regen-box::after {
+  animation: color-field-progress .92s linear both;
+}
+
+@keyframes color-field-progress {
+  to { transform: scaleX(1); }
+}
+
+@media (max-width: 520px) {
+  .theme-color-field-painting .regenerating {
+    padding: 16px;
+  }
+
+  .theme-color-field-painting .regen-box {
+    gap: 4px;
+    padding: 36px 18px 28px;
+    border-radius: 24px;
+  }
+
+  .theme-color-field-painting .regen-box::after {
+    border-radius: 0 0 24px 24px;
+  }
+
+  .theme-color-field-painting .regen-line {
+    padding: 12px 14px;
+    border-radius: 14px;
+    line-height: 1.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-color-field-painting .regenerating.active .regen-box::after {
+    animation: none;
+    transform: scaleX(1);
+  }
 }
