@@ -156,7 +156,7 @@ body.theme-zero {
     radial-gradient(circle, color-mix(in srgb, var(--fg), transparent 88%) 0 1px, transparent 1.4px) 0 0 / 11px 11px,
     var(--card);
   color: var(--fg);
-  box-shadow: 0 10px 30px rgba(41, 48, 51, .1);
+  box-shadow: none;
   font-family: var(--sans);
 }
 

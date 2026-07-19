@@ -281,6 +281,52 @@ test("purism uses stable proportions, clear outlines, and a reduced geometric st
   assert.match(css, /\.theme-purism \.card,[\s\S]*?\.theme-purism \.timeline-item\s*{[^}]*box-shadow:\s*none/s);
 });
 
+test("ZERO keeps its regeneration surface flat and fully outlined", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-2-postwar-abstraction-perception-popular-culture",
+    "18-zero.css"
+  ));
+
+  assert.match(css, /\.theme-zero \.regen-box\s*{[^}]*border:\s*1px solid[^}]*box-shadow:\s*none;/s);
+});
+
+test("minimalism uses flat repeated modules without ornamental layers", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-2-postwar-abstraction-perception-popular-culture",
+    "19-minimalism.css"
+  ));
+  const script = read(path.join(
+    ROOT,
+    "styles",
+    "act-2-postwar-abstraction-perception-popular-culture",
+    "19-minimalism.js"
+  ));
+
+  assert.match(css, /\.theme-minimalism :is\([\s\S]*?\.reveal[\s\S]*?\)\s*{[^}]*border:\s*1px solid var\(--line\);[^}]*border-radius:\s*0;[^}]*box-shadow:\s*none;/s);
+  assert.match(css, /\.theme-minimalism \.regen-line::before\s*{[^}]*content:\s*none;/s);
+  assert.match(css, /\.theme-minimalism \.footer-spotlight-card,[\s\S]*?\.theme-minimalism \.toast\s*{[^}]*border-radius:\s*0;[^}]*box-shadow:\s*none;/s);
+  assert.doesNotMatch(css, /gradient\(|nth-child\(|\.(?:brand|hero|regen-box)::(?:before|after)/);
+  assert.match(script, /"--style-component-outline":\s*"0 solid transparent"/);
+  assert.match(script, /"--style-(?:card|panel|button)-shadow":\s*"none"/);
+});
+
+test("early computer art keeps plotted surfaces flat while retaining geometric linework", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-5-computers-web-future-visual-culture",
+    "37-early-computer-art.css"
+  ));
+
+  assert.match(css, /\.theme-early-computer-art :is\(\.card, \.hero-card, \.principle, \.timeline-item\)\s*{[^}]*box-shadow:\s*none;/s);
+  assert.match(css, /\.theme-early-computer-art \.regen-box\s*{[^}]*border:\s*1px solid[^}]*box-shadow:\s*none;/s);
+  assert.match(css, /\.theme-early-computer-art \.reveal::before\s*{[^}]*box-shadow:\s*inset 0 0 0 32px/s);
+});
+
 test("soviet modernism uses a wide civic canvas and modular facade rhythm", () => {
   const css = read(path.join(
     ROOT,

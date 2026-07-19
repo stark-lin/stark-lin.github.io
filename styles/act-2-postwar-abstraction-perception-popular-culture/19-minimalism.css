@@ -4,45 +4,29 @@ body.theme-minimalism {
 
 .theme-minimalism .topbar {
   border-bottom: 1px solid var(--line);
-  background: color-mix(in srgb, var(--bg), transparent 5%);
+  background: var(--bg);
+  backdrop-filter: none;
 }
 
 .theme-minimalism .brand {
-  font-weight: 560;
+  font-weight: 600;
   letter-spacing: 0;
 }
 
-.theme-minimalism .brand::before {
-  content: "";
-  width: 12px;
-  height: 12px;
-  border: 1px solid var(--fg);
-}
-
 .theme-minimalism .hero {
-  min-height: min(720px, 82vh);
-  border-bottom: 1px solid var(--line);
+  min-height: min(640px, 80svh);
+  border-bottom: 0;
 }
 
-.theme-minimalism .hero::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  right: 0;
-  bottom: 0;
-  width: 40%;
-  height: 22%;
-  background:
-    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 25% 100%,
-    color-mix(in srgb, var(--card-strong), transparent 25%);
-  border: 1px solid var(--line);
+.theme-minimalism main {
+  padding-top: 0;
 }
 
 .theme-minimalism h1 {
   max-width: 760px;
-  font-weight: 590;
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: -.045em;
+  letter-spacing: -.04em;
 }
 
 .theme-minimalism .hero-sub {
@@ -74,119 +58,148 @@ body.theme-minimalism {
 
 .theme-minimalism .cards,
 .theme-minimalism .principles,
-.theme-minimalism .timeline {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.theme-minimalism .cards .card,
-.theme-minimalism .cards .card.full,
-.theme-minimalism .cards .card.third {
-  grid-column: auto;
-}
-
-.theme-minimalism :is(.card, .timeline-item, .principle, .hero-card) {
-  min-height: 184px;
-  background: var(--card);
-}
-
-.theme-minimalism .cards .card:nth-child(3n),
-.theme-minimalism .principle:nth-child(3n) {
-  background: var(--card-strong);
-}
-
-.theme-minimalism .tag,
-.theme-minimalism .skill-pill {
-  border-radius: 0;
-  background: transparent;
-}
-
-.theme-minimalism .contact-panel,
-.theme-minimalism .reveal {
-  border: 1px solid var(--line);
-  background: var(--card-strong);
-}
-
-.theme-minimalism .reveal-stat {
-  border-radius: 0;
-  border-color: var(--line);
-}
-
 .theme-minimalism .complete-version .cards {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.theme-minimalism .timeline {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.theme-minimalism .cards .card,
+.theme-minimalism .cards .card.third {
+  grid-column: auto;
+}
+
+.theme-minimalism .cards .card.full,
+.theme-minimalism .complete-project {
+  grid-column: 1 / -1;
+}
+
+.theme-minimalism :is(
+  .card,
+  .timeline-item,
+  .principle,
+  .hero-card,
+  .contact-panel,
+  .reveal
+) {
+  border: 1px solid var(--line);
+  outline: 0;
+  border-radius: 0;
+  background: var(--card);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.theme-minimalism :is(.card, .timeline-item, .principle, .hero-card) {
+  min-height: 184px;
+}
+
+.theme-minimalism .tag,
+.theme-minimalism .skill-pill,
+.theme-minimalism .button,
+.theme-minimalism .reveal-stat {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.theme-minimalism .tag,
+.theme-minimalism .skill-pill {
+  background: transparent;
+}
+
+.theme-minimalism .tag {
+  padding: 4px 8px;
+}
+
+.theme-minimalism .skill-pill {
+  padding: 8px 12px;
+}
+
+.theme-minimalism .reveal-stat {
+  border: 0;
+  outline: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.theme-minimalism .complete-project .intro-list p {
+  padding: 16px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.theme-minimalism .footer-spotlight-scrim {
+  background: color-mix(in srgb, var(--fg), transparent 88%);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.theme-minimalism .footer-spotlight-button {
+  outline: 2px solid var(--fg);
+  outline-offset: 4px;
+  box-shadow: none !important;
+}
+
+.theme-minimalism .footer-spotlight-card,
+.theme-minimalism .footer-spotlight-close,
+.theme-minimalism .toast {
+  border-radius: 0;
+  box-shadow: none;
+}
+
 @media (max-width: 720px) {
   .theme-minimalism .hero { min-height: auto; }
-  .theme-minimalism .hero::after { width: 56%; height: 13%; opacity: .6; }
   .theme-minimalism .section-head { grid-template-columns: 1fr; }
   .theme-minimalism .cards,
   .theme-minimalism .principles,
-  .theme-minimalism .timeline,
   .theme-minimalism .complete-version .cards { grid-template-columns: 1fr; }
   .theme-minimalism :is(.card, .timeline-item, .principle, .hero-card) { min-height: auto; }
 }
 
-/* Four serial modules carry the refresh without adding a second hierarchy. */
+/* The refresh state repeats one quiet row treatment and adds only an active state. */
 .theme-minimalism .regenerating {
   color: var(--fg);
-  background:
-    linear-gradient(90deg, transparent 0 75%, color-mix(in srgb, var(--card-strong), transparent 28%) 75% 100%),
-    var(--bg);
+  background: var(--bg);
 }
 
 .theme-minimalism .regen-box {
-  position: relative;
-  isolation: isolate;
   width: min(580px, 100%);
   padding: clamp(30px, 8vw, 56px);
-  padding-bottom: clamp(58px, 14vw, 86px);
-  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 0;
   background: var(--card);
   color: var(--fg);
+  box-shadow: none;
   font-family: var(--sans);
   font-weight: 540;
 }
 
-.theme-minimalism .regen-box::before {
-  content: "";
-  position: absolute;
-  right: clamp(30px, 8vw, 56px);
-  bottom: 24px;
-  left: clamp(30px, 8vw, 56px);
-  z-index: -1;
-  height: 24px;
-  border: 1px solid var(--line);
-  background:
-    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 25% 100%,
-    var(--card-strong);
-}
-
-.theme-minimalism .regen-box::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 38%;
-  height: 8px;
-  background: var(--accent);
-}
-
 .theme-minimalism .regen-line {
-  position: relative;
-  z-index: 1;
-  padding: 6px 8px;
-  padding-inline-start: 28px;
+  padding: 10px 0;
   border-bottom: 1px solid var(--line);
-  background: var(--card);
+  background: transparent;
   color: var(--fg);
-  opacity: .78;
+  opacity: .42;
+  transform: none;
+  transition: opacity .18s ease;
+}
+
+.theme-minimalism .regen-line:last-child {
+  border-bottom: 0;
+}
+
+.theme-minimalism .regen-line::before {
+  content: none;
 }
 
 .theme-minimalism .regen-line.active {
-  background: var(--card-strong);
+  background: transparent;
   color: var(--fg);
-  box-shadow: inset 4px 0 0 var(--accent);
+  box-shadow: none;
+  font-weight: 600;
   opacity: 1;
 }

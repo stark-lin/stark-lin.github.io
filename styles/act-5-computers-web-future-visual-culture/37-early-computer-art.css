@@ -106,7 +106,7 @@ body.theme-early-computer-art {
 .theme-early-computer-art :is(.card, .hero-card, .principle, .timeline-item) {
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--card), transparent 5%), var(--card));
-  box-shadow: 6px 6px 0 color-mix(in srgb, var(--line), transparent 84%);
+  box-shadow: none;
 }
 
 .theme-early-computer-art .cards .card::before,
@@ -173,7 +173,7 @@ body.theme-early-computer-art {
   background:
     repeating-linear-gradient(0deg, transparent 0 23px, color-mix(in srgb, var(--line), transparent 89%) 23px 24px),
     var(--card);
-  box-shadow: 7px 7px 0 color-mix(in srgb, var(--line), transparent 72%);
+  box-shadow: none;
   font-family: var(--mono);
 }
 
