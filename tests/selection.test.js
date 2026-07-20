@@ -2,7 +2,7 @@
 
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { createPoolRandom, pick, seedModulo, shuffle } = require("../assets/selection.js");
+const { addToSeed, createPoolRandom, pick, seedModulo, shuffle } = require("../assets/selection.js");
 
 const REFERENCE_CODE_OPTIONS = Object.freeze({
   prefix: "SL-",
@@ -72,4 +72,15 @@ test("seed modulo hashes non-hex reference codes as a deterministic fallback", (
 
 test("seed modulo requires at least one seed character", () => {
   assert.throws(() => seedModulo("SL-", 42, REFERENCE_CODE_OPTIONS), /non-empty seed/);
+});
+
+test("seed addition advances the current hexadecimal reference code", () => {
+  assert.equal(addToSeed("SL-000F", 1, REFERENCE_CODE_OPTIONS), "SL-0010");
+  assert.equal(addToSeed("SL-000F", 40, REFERENCE_CODE_OPTIONS), "SL-0037");
+  assert.equal(addToSeed("ff", 1, REFERENCE_CODE_OPTIONS), "100");
+});
+
+test("seed addition rejects invalid and non-numeric reference codes", () => {
+  assert.throws(() => addToSeed("SL-DEMO!", 1, REFERENCE_CODE_OPTIONS), /outside its alphabet/);
+  assert.throws(() => addToSeed("SL-1", 0, REFERENCE_CODE_OPTIONS), /positive safe-integer/);
 });

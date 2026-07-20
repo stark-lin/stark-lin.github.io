@@ -5,7 +5,7 @@
   if (!locale) throw new Error("Portfolio locale data is missing.");
   const selection = window.PORTFOLIO_SELECTION;
   if (!selection) throw new Error("Portfolio selection engine is missing.");
-  const { createPoolRandom, pick, pickN, seedModulo, shuffle } = selection;
+  const { addToSeed, createPoolRandom, pick, pickN, seedModulo, shuffle } = selection;
   const { data: DATA, descriptions: PROJECT_DESCRIPTION_POOLS, titlePhrases: TITLE_PHRASES = {}, ui: UI } = locale;
   const registeredStyles = window.PORTFOLIO_STYLE_POOL;
   if (!Array.isArray(registeredStyles) || registeredStyles.length === 0) {
@@ -162,6 +162,31 @@
         }
       }
       return id;
+    }
+
+    function createRandomRefreshStep() {
+      const maximumStep = 41;
+      const unbiasedLimit = 256 - (256 % maximumStep);
+      const bytes = new Uint8Array(1);
+
+      do {
+        crypto.getRandomValues(bytes);
+      } while (bytes[0] >= unbiasedLimit);
+
+      return (bytes[0] % maximumStep) + 1;
+    }
+
+    function createNextId(currentId) {
+      try {
+        return addToSeed(currentId, createRandomRefreshStep(), {
+          prefix: SYSTEM_CONFIG.idPrefix,
+          alphabet: SYSTEM_CONFIG.idCharacters,
+          caseInsensitive: true
+        });
+      } catch {
+        // Legacy non-HEX links cannot be incremented numerically, so refresh them into the current ID format.
+        return createShortId();
+      }
     }
 
     function getId() {
@@ -851,9 +876,10 @@
         setTimeout(() => line.classList.add("active"), index * 210);
       });
       setTimeout(() => {
-        const id = createShortId();
         const url = new URL(window.location.href);
-        // Roll Again starts a clean generated view: keep only the new ID and drop view state such as `complete` and section hashes.
+        const currentId = url.searchParams.get("id");
+        const id = currentId ? createNextId(currentId) : createShortId();
+        // Roll Again advances the current ID and drops view state such as `complete` and section hashes.
         url.search = "";
         url.searchParams.set("id", id);
         url.searchParams.set("label", VIEW_LABELS.SURFACE);

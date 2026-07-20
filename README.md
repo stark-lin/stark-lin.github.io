@@ -13,7 +13,7 @@
 
 Molybdenum is a bilingual static portfolio implemented in vanilla HTML, CSS, and JavaScript, with no build step or runtime dependencies. Rather than presenting one fixed page, the project implements the portfolio as a deterministic visual system. Each generated view is identified by a reference code that controls the content composition and selects exactly one style from the [42-filter catalog of art, design, and visual culture](docs/42-filters.md).
 
-The reference code is the stable identifier for a generated view. Reusing the same `id` restores the same content configuration and visual filter; **Roll Again** creates a new identifier and generates another view. Filters may change typography, color, surfaces, decoration, and motion tone, but they do not rewrite copy, alter the information architecture, or replace interaction logic. Generated views therefore remain reproducible, shareable, inspectable, and testable.
+The reference code is the stable identifier for a generated view. Reusing the same `id` restores the same content configuration and visual filter; **Roll Again** advances the current hexadecimal identifier by a uniformly random value from 1 through 40 and generates another view. Filters may change typography, color, surfaces, decoration, and motion tone, but they do not rewrite copy, alter the information architecture, or replace interaction logic. Generated views therefore remain reproducible, shareable, inspectable, and testable.
 
 ### Project overview
 
@@ -128,7 +128,7 @@ Both HTML entry points load scripts in this order: selection engine → style re
 3. The `copy/v1` stream selects copy, project slices, tags, section order, and skill order exclusively from the copy and layout pools.
 4. The style selector decodes a case-insensitive HEX seed of at least one character and selects registry index `seed mod 42`; non-HEX references use a deterministic 128-bit hash fallback.
 5. The selected filter supplies one complete visual system for typography, boundaries, surfaces, patterns, decoration, and motion tone; it does not affect copy generation or renderer behavior.
-6. **Roll Again** creates a new 42-character seed, recomposes the copy, and applies its modulo-selected style; **Copy URL** creates an onboarding-free `surface` link.
+6. **Roll Again** adds a uniformly random value from 1 through 40 to the current hexadecimal seed, recomposes the copy, and applies its modulo-selected style; **Copy URL** creates an onboarding-free `surface` link. Legacy non-HEX links fall back to a fresh current-format seed when refreshed.
 
 ### Configuration and extension
 
@@ -216,7 +216,7 @@ Copyright © 2026 Stark Lin. This project is licensed under the [GNU Affero Gene
 
 Molybdenum 是一个使用原生 HTML、CSS 和 JavaScript 实现的双语静态个人作品集，无需构建步骤或运行时依赖。项目并非只呈现一个固定页面，而是将作品集实现为一套确定性、可复现的视觉系统。每个生成视图均由参考代码标识；该代码用于控制内容组合，并从[《42 种艺术、设计与视觉文化滤镜》](docs/42-filters-zh.md)中选择且只选择一种样式。
 
-参考代码是生成视图的稳定标识。再次使用相同的 `id` 即可恢复相同的内容配置与视觉滤镜；点击 **Roll Again** 会创建新的标识并生成另一个视图。滤镜可以改变字体、颜色、表面、装饰与动效语气，但不会重写文案、改变信息架构或替换交互逻辑。因此，每个生成视图都可以被准确复现、分享、检查和测试。
+参考代码是生成视图的稳定标识。再次使用相同的 `id` 即可恢复相同的内容配置与视觉滤镜；点击 **Roll Again** 会在当前十六进制标识上均匀随机增加 1–40，并生成另一个视图。滤镜可以改变字体、颜色、表面、装饰与动效语气，但不会重写文案、改变信息架构或替换交互逻辑。因此，每个生成视图都可以被准确复现、分享、检查和测试。
 
 ### 项目概览
 
@@ -331,7 +331,7 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 3. `copy/v1` 随机流只从文案池和布局池中选择文案、项目切片、标签、章节顺序与技能顺序。
 4. 样式选择器接受至少一位、不区分大小写的 HEX seed，直接选择注册表中 `seed mod 42` 对应的一项；非 HEX 参考码使用确定性的 128 位 hash 回退。
 5. 被选中的滤镜作为一个整体决定字体、边界、表面、图案、装饰和动效语气，但不会影响文案生成或渲染行为。
-6. **Roll Again** 会创建新的 42 字符 seed、重新组合文案并应用取模选中的样式；**复制 URL** 会生成不含首次引导的 `surface` 链接。
+6. **Roll Again** 会在当前十六进制 seed 上均匀随机增加 1–40、重新组合文案并应用取模选中的样式；**复制 URL** 会生成不含首次引导的 `surface` 链接。刷新旧版非 HEX 链接时，会回退生成一个符合当前格式的新 seed。
 
 ### 配置与扩展
 

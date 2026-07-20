@@ -37,7 +37,7 @@ Some styles resemble an ordinary modern website. This is not a weakness, but a c
 - The same reference code produces the same filter in both the English and Chinese versions.
 - Copy uses a versioned random stream derived from the reference code; style selection directly uses `seed mod 42`. Consuming or expanding the copy pool must not remap the selected style.
 - Each filter is a complete, indivisible visual system whose internal rules jointly determine typography, boundaries, surfaces, patterns, decoration, and motion tone.
-- **Roll Again** generates a new reference code and selects another filter from the catalog.
+- **Roll Again** adds a uniformly random value from 1 through 40 to the current hexadecimal reference code and selects the resulting filter from the catalog. Legacy non-HEX links fall back to a fresh current-format code when refreshed.
 - Random selection does not affect copy, content structure, project order, or interaction logic.
 
 ## Theme-file requirements
