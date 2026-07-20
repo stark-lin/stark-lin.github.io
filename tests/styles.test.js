@@ -202,6 +202,22 @@ test("surrealism gives the arched profile card enough roof clearance for educati
   assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.theme-surrealism \.hero-card\s*{[^}]*padding:\s*26px 18px 18px/s);
 });
 
+test("new typography keeps numbers informational and component borders complete", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-1-avant-garde-modern-order",
+    "08-new-typography.css"
+  ));
+
+  assert.doesNotMatch(css, /content:\s*["'](?:21|42|\d{2})["']/);
+  assert.match(css, /\.theme-new-typography :is\(\.card, \.principle, \.timeline-item\)\s*{[^}]*border:\s*2px solid var\(--line\);/s);
+  assert.match(css, /\.theme-new-typography \.regenerating::before,\s*\.theme-new-typography \.regenerating::after\s*{[^}]*content:\s*none;/s);
+  assert.match(css, /\.theme-new-typography \.regen-line\.active\s*{[^}]*background:\s*var\(--accent\);/s);
+  const shadows = [...css.matchAll(/box-shadow:\s*([^;]+);/g)].map(match => match[1].trim());
+  assert.ok(shadows.every(shadow => shadow === "none"));
+});
+
 test("pattern and decoration keeps content surfaces opaque and section badges content-sized", () => {
   const css = read(path.join(
     ROOT,
