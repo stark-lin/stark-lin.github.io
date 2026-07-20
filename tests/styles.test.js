@@ -218,6 +218,21 @@ test("new typography keeps numbers informational and component borders complete"
   assert.ok(shadows.every(shadow => shadow === "none"));
 });
 
+test("metabolism keeps modular surfaces flat while retaining connector rings", () => {
+  const css = read(path.join(
+    ROOT,
+    "styles",
+    "act-3-material-concept-radical-design",
+    "27-metabolism.css"
+  ));
+  const shadows = [...css.matchAll(/box-shadow:\s*([^;]+);/g)].map(match => match[1].trim());
+
+  assert.ok(shadows.every(shadow => shadow === "none" || shadow.startsWith("inset ")));
+  assert.match(css, /\.theme-metabolism :is\(\.card, \.hero-card, \.timeline-item, \.principle\)\s*{[^}]*box-shadow:\s*none;/s);
+  assert.match(css, /\.theme-metabolism \.contact-panel,[\s\S]*?\.theme-metabolism \.reveal\s*{[^}]*box-shadow:\s*none;/s);
+  assert.match(css, /\.theme-metabolism \.regen-box\s*{[^}]*border:\s*2px solid var\(--line\);[^}]*box-shadow:\s*none;/s);
+});
+
 test("pattern and decoration keeps content surfaces opaque and section badges content-sized", () => {
   const css = read(path.join(
     ROOT,

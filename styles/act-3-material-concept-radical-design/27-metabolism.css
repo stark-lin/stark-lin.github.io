@@ -92,7 +92,7 @@ body.theme-metabolism {
 .theme-metabolism :is(.card, .hero-card, .timeline-item, .principle) {
   position: relative;
   border-left: 12px solid var(--accent);
-  box-shadow: 5px 5px 0 color-mix(in srgb, var(--line), transparent 78%);
+  box-shadow: none;
 }
 
 .theme-metabolism :is(.card, .hero-card, .timeline-item, .principle)::before {
@@ -122,7 +122,7 @@ body.theme-metabolism {
   border-radius: 10px;
   outline-width: 2px;
   border-left: 14px solid var(--accent);
-  box-shadow: 7px 7px 0 color-mix(in srgb, var(--line), transparent 75%);
+  box-shadow: none;
 }
 
 .theme-metabolism .reveal::before {
@@ -168,7 +168,7 @@ body.theme-metabolism {
   border-left: 15px solid var(--line);
   border-radius: 10px;
   background: var(--card);
-  box-shadow: 8px 8px 0 color-mix(in srgb, var(--line), transparent 64%);
+  box-shadow: none;
 }
 
 .theme-metabolism .regen-box::before {
