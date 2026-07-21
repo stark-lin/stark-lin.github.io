@@ -449,7 +449,7 @@ test("international typographic style is identified as typography rather than ar
 
   assert.match(script, /zh:\s*"国际字体排印风格"/);
   assert.match(script, /不是 1920 年代的建筑“国际风格”/);
-  assert.match(script, /“瑞士风格”是它的别称/);
+  assert.doesNotMatch(script, /Swiss Style|瑞士风格/);
   assert.doesNotMatch(script, /瑞士国际主义排版/);
   assert.match(css, /--its-columns:\s*repeat\(12, minmax\(0, 1fr\)\)/);
   assert.match(css, /repeating-linear-gradient/);

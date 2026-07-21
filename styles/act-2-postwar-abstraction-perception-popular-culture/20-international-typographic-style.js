@@ -20,8 +20,8 @@
     label: { en: "International Typographic Style", zh: "国际字体排印风格" },
     period: "1950s",
     introduction: {
-      en: "A postwar graphic-design system built from asymmetric modular grids, flush-left ragged-right type, sans serif hierarchy, and text treated as image. This is typography, not the 1920s architectural International Style; historically, Swiss Style is another name for the same movement.",
-      zh: "一种由不对称模数网格、齐左不齐右、无衬线层级与文字图像化构成的战后平面设计方法。这里特指字体排印，不是 1920 年代的建筑“国际风格”；历史上“瑞士风格”是它的别称，而非另一流派。"
+      en: "A postwar graphic-design system built from asymmetric modular grids, flush-left ragged-right type, sans serif hierarchy, and text treated as image. This is typography, not the 1920s architectural International Style.",
+      zh: "一种由不对称模数网格、齐左不齐右、无衬线层级与文字图像化构成的战后平面设计方法。这里特指字体排印，不是 1920 年代的建筑“国际风格”。"
     }
   });
 })();
