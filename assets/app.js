@@ -581,7 +581,7 @@
                 <h3>${escapeHtml(education.school)}</h3>
                 <div class="stack">${escapeHtml(education.degree)}</div>
               </div>
-              <span class="tag">${escapeHtml(education.graduation)}</span>
+              <span class="tag">${escapeHtml(education.availability)}</span>
             </div>
             <p>${escapeHtml(config.educationBody)}</p>
           </article>
@@ -672,7 +672,7 @@
                 <h3>${escapeHtml(education.school)}</h3>
                 <div class="stack">${escapeHtml(education.degree)}</div>
               </div>
-              <span class="tag">${escapeHtml(education.graduation)}</span>
+              <span class="tag">${escapeHtml(education.availability)}</span>
             </div>
             <p>${escapeHtml(DATA.identity.stableLine)}</p>
           </article>
