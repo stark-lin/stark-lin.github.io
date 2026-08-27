@@ -54,7 +54,7 @@ body.theme-early-computer-art {
 }
 
 .theme-early-computer-art .hero::after {
-  content: "36 / 41";
+  content: "42 / 42";
   position: absolute;
   right: 16px;
   bottom: 10%;

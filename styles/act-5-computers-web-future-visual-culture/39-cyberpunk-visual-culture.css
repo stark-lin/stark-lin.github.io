@@ -759,7 +759,7 @@ html[lang^="zh"] .theme-cyberpunk-visual-culture h1 {
 }
 
 .theme-cyberpunk-visual-culture .reveal::before {
-  content: "STYLE RECORD / 042";
+  content: "STYLE RECORD / 42";
   position: absolute;
   top: 0;
   right: 0;

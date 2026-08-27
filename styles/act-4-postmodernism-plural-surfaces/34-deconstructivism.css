@@ -29,7 +29,7 @@ body.theme-deconstructivism.layout-single .site {
 }
 
 .theme-deconstructivism .brand::after {
-  content: "PLAN / 033";
+  content: "PLAN / 42";
   margin-left: 4px;
   padding: 3px 6px;
   color: var(--bg);
@@ -446,7 +446,7 @@ body.theme-deconstructivism.layout-single .site {
   }
 
   .theme-deconstructivism .brand::after {
-    content: "/ 033";
+    content: "/ 42";
   }
 
   .theme-deconstructivism .hero {

@@ -162,7 +162,7 @@ body.theme-postmodernism {
 }
 
 .theme-postmodernism .reveal::before {
-  content: "IV";
+  content: "42";
   position: absolute;
   right: 5%;
   top: 5%;
@@ -198,7 +198,7 @@ body.theme-postmodernism {
 }
 
 .theme-postmodernism .regen-box::before {
-  content: "IV";
+  content: "42";
   position: absolute;
   right: clamp(18px, 5vw, 42px);
   top: 50%;

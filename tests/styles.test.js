@@ -501,7 +501,7 @@ test("cyberpunk visual culture uses a yellow field-dossier system without fake s
   assert.match(script, /field:\s*"Project dossier \/ 42"/);
   assert.match(script, /field:\s*"作品档案 \/ 42"/);
   assert.match(css, /content:\s*"42 \/ VISUAL CULTURE"/);
-  assert.match(css, /content:\s*"STYLE RECORD \/ 042"/);
+  assert.match(css, /content:\s*"STYLE RECORD \/ 42"/);
   assert.doesNotMatch(css, /content:\s*"[^"\n]*\b0?39\b/);
   assert.doesNotMatch(css, /\.generated-description::(?:before|after)/);
   assert.doesNotMatch(script, /上行链路|uplink|signal interference|信号干扰|system notice|系统通知/i);

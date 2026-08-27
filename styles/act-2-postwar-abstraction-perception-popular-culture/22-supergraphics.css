@@ -11,7 +11,7 @@ body.theme-supergraphics {
 }
 
 .theme-supergraphics .brand::before {
-  content: "22";
+  content: "42";
   color: var(--accent);
   font: 900 14px/1 var(--sans);
 }
@@ -23,7 +23,7 @@ body.theme-supergraphics {
 }
 
 .theme-supergraphics .hero::before {
-  content: "II";
+  content: "42";
   position: absolute;
   z-index: -1;
   top: -12%;
@@ -130,7 +130,7 @@ body.theme-supergraphics {
 }
 
 .theme-supergraphics .reveal::before {
-  content: "23";
+  content: "42";
   inset: auto -3% -12% auto;
   width: auto;
   height: auto;
@@ -184,7 +184,7 @@ body.theme-supergraphics {
 }
 
 .theme-supergraphics .regen-box::before {
-  content: "23";
+  content: "42";
   position: absolute;
   right: -4%;
   bottom: -20%;
