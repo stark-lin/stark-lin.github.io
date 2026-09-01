@@ -11,23 +11,25 @@ body.theme-post-internet-art.layout-single .site {
   color: var(--fg);
 }
 
-/* One deliberate surface language: flat colour, hairline borders, soft depth. */
+/* A conventional product-style header: a full-width horizontal banner. */
 .theme-post-internet-art .topbar {
-  top: 12px;
-  width: min(var(--style-site-width), calc(100vw - 32px));
-  margin: 12px auto 0;
+  top: 0;
+  width: 100%;
+  margin: 0;
   border: 0;
-  border-radius: 18px;
-  outline: 1px solid var(--line);
-  outline-offset: -1px;
-  background: var(--card);
-  box-shadow: 0 8px 24px rgba(23, 33, 31, .06);
-  backdrop-filter: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  outline: 0;
+  background: color-mix(in srgb, var(--card), transparent 4%);
+  box-shadow: none;
+  backdrop-filter: blur(14px);
 }
 
 .theme-post-internet-art .topbar-inner {
-  min-height: 56px;
-  padding: 8px 10px;
+  width: min(var(--style-site-width), calc(100vw - 32px));
+  min-height: 64px;
+  margin: 0 auto;
+  padding: 8px 0;
 }
 
 .theme-post-internet-art .brand {
@@ -481,10 +483,14 @@ body.theme-post-internet-art.layout-single .site {
 
 @media (max-width: 720px) {
   .theme-post-internet-art .topbar {
-    top: 8px;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .theme-post-internet-art .topbar-inner {
     width: calc(100vw - 24px);
-    margin-top: 8px;
-    border-radius: 14px;
   }
 
   .theme-post-internet-art .topbar-inner {
