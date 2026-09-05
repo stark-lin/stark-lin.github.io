@@ -8,12 +8,23 @@ body.theme-suprematism { background: var(--bg); }
 .theme-suprematism .hero {
   min-height: min(840px, 92vh);
   overflow: visible;
+  isolation: isolate;
+}
+
+.theme-suprematism .hero-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.theme-suprematism .hero::before,
+.theme-suprematism .hero::after {
+  z-index: 0;
+  pointer-events: none;
 }
 
 .theme-suprematism .hero::before {
   content: "";
   position: absolute;
-  z-index: -1;
   top: 10%;
   right: -5%;
   width: clamp(90px, 18vw, 210px);
@@ -25,7 +36,6 @@ body.theme-suprematism { background: var(--bg); }
 .theme-suprematism .hero::after {
   content: "";
   position: absolute;
-  z-index: -1;
   right: 0;
   bottom: 12%;
   width: clamp(78px, 12vw, 140px);
