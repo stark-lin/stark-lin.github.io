@@ -2,9 +2,6 @@
 
 # Molybdenum
 
-> A deterministic, reproducible portfolio presented through 42 visual languages.<br>
-> 一个以 42 种视觉语言呈现、可确定性复现的个人作品集。
-
 [English](#english) · [中文](#中文) · [Filter specification](docs/42-filters.md) · [滤镜规范](docs/42-filters-zh.md) · [Production site](https://stark-lin.github.io/) · [License](LICENSE)
 
 <a id="english"></a>
