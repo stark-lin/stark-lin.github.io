@@ -26,5 +26,9 @@ test("locale entry points expose the same non-rendered agent context", () => {
   assert.match(englishContext.pageIntroduction.summary["zh-CN"], /双语个人作品集/);
   assert.match(englishContext.pageIntroduction.summary.en, /reproducible generative web project/);
   assert.equal(englishContext.pageIntroduction.visualArchive.styleCount, 42);
-  assert.equal(englishContext.selectedWork.length, 3);
+  assert.equal(englishContext.profile.positioning, "AI-native Product Builder");
+  assert.deepEqual(englishContext.selectedWork.map(project => project.name), [
+    "Jab", "LLMF", "Saturn", "OJLite", "University GenAI Assessment Platform"
+  ]);
+  assert.doesNotMatch(JSON.stringify(englishContext), /backend-oriented|demonstrate backend engineering|Molybdenum/i);
 });

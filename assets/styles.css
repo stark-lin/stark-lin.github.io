@@ -416,24 +416,6 @@
       letter-spacing: .08em;
     }
 
-    .principles {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: var(--style-card-gap);
-    }
-
-    .principle {
-      padding: var(--style-card-padding);
-      border: 0;
-      outline: var(--style-component-outline);
-      outline-offset: 0;
-      border-radius: var(--radius);
-      background: var(--card);
-      font-size: 19px;
-      letter-spacing: -0.025em;
-      min-height: 152px;
-    }
-
     .skill-cloud {
       display: flex;
       gap: var(--style-card-gap);
@@ -853,8 +835,6 @@
     .cards,
     .card,
     .card-title-row,
-    .principles,
-    .principle,
     .timeline,
     .timeline-item,
     .contact-panel,
@@ -874,7 +854,6 @@
     .section,
     .card,
     .hero-card,
-    .principle,
     .timeline-item,
     .contact-panel,
     .reveal,
@@ -886,7 +865,6 @@
 
     .card,
     .hero-card,
-    .principle,
     .timeline-item,
     .contact-panel,
     .reveal-stat,
@@ -949,8 +927,7 @@
     }
 
     .card::before,
-    .timeline-item::before,
-    .principle::before {
+    .timeline-item::before {
       max-width: 100%;
       overflow-wrap: anywhere;
     }
@@ -979,7 +956,6 @@
     @supports (overflow: clip) {
       .card,
       .hero-card,
-      .principle,
       .timeline-item,
       .contact-panel,
       .reveal-stat,

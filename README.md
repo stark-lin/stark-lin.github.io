@@ -10,6 +10,8 @@
 
 Molybdenum is a bilingual static portfolio implemented in vanilla HTML, CSS, and JavaScript, with no build step or runtime dependencies. Rather than presenting one fixed page, the project implements the portfolio as a deterministic visual system. Each generated view is identified by a reference code that controls the content composition and selects exactly one style from the [42-filter catalog of art, design, and visual culture](docs/42-filters.md).
 
+The portfolio presents Stark Lin as an AI-native Product Builder through working software, product decisions, and engineering tradeoffs. The project pool contains Jab, LLMF, Saturn, and OJLite; the university GenAI assessment project remains separate. Molybdenum supplies the stage rather than listing itself as a project.
+
 The reference code is the stable identifier for a generated view. Reusing the same `id` restores the same content configuration and visual filter; **Roll Again** advances the current hexadecimal identifier by a uniformly random value from 1 through 40 and generates another view. Filters may change typography, color, surfaces, decoration, and motion tone, but they do not rewrite copy, alter the information architecture, or replace interaction logic. Generated views therefore remain reproducible, shareable, inspectable, and testable.
 
 ### Project overview
@@ -111,7 +113,9 @@ As long as each pool, its version, and its generation algorithm remain unchanged
 │   └── 42-filters-zh.md    # Chinese specification for the 42-filter exhibition
 ├── tests/
 │   ├── selection.test.js   # Determinism and pool-isolation tests
-│   └── styles.test.js      # Theme trio, registry, and entry-point tests
+│   ├── styles.test.js      # Theme trio, registry, and entry-point tests
+│   ├── content.test.js     # Bilingual content and composition contracts
+│   └── agent-context.test.js # Hidden profile context parity
 ├── LICENSE                 # AGPL-3.0-only
 └── README.md
 ```
@@ -137,7 +141,7 @@ Edit both `assets/data/en.js` and `assets/data/zh.js`. The files share the same 
 - `data.projects` — Project titles, stacks, links, introductions, implementation notes, and tags
 - `data.experienceProject` — Project experience
 - `data.heroKickers`, `data.heroHeadlines`, `data.heroSubheads` — Hero copy
-- `data.principles`, `data.educationBodies`, `data.contactCopies` — Supporting copy
+- `data.educationBodies`, `data.contactCopies` — Supporting copy
 - `descriptions` — Project descriptions
 - `ui` — Navigation, controls, labels, skills, and filter copy
 
@@ -212,6 +216,8 @@ Copyright © 2026 Stark Lin. This project is licensed under the [GNU Affero Gene
 ## 中文
 
 Molybdenum 是一个使用原生 HTML、CSS 和 JavaScript 实现的双语静态个人作品集，无需构建步骤或运行时依赖。项目并非只呈现一个固定页面，而是将作品集实现为一套确定性、可复现的视觉系统。每个生成视图均由参考代码标识；该代码用于控制内容组合，并从[《42 种艺术、设计与视觉文化滤镜》](docs/42-filters-zh.md)中选择且只选择一种样式。
+
+作品集通过可运行的软件、产品选择和工程取舍呈现 Stark Lin 的 AI-native Product Builder 方向。项目池包含 Jab、LLMF、Saturn 和 OJLite；大学 GenAI 评估项目独立保留。Molybdenum 提供展示舞台，不将自己列入项目池。
 
 参考代码是生成视图的稳定标识。再次使用相同的 `id` 即可恢复相同的内容配置与视觉滤镜；点击 **Roll Again** 会在当前十六进制标识上均匀随机增加 1–40，并生成另一个视图。滤镜可以改变字体、颜色、表面、装饰与动效语气，但不会重写文案、改变信息架构或替换交互逻辑。因此，每个生成视图都可以被准确复现、分享、检查和测试。
 
@@ -314,7 +320,9 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 │   └── 42-filters-zh.md    # 42 种滤镜连续展览中文规格
 ├── tests/
 │   ├── selection.test.js   # 确定性与抽选池隔离测试
-│   └── styles.test.js      # 主题文件组、注册表与入口引用测试
+│   ├── styles.test.js      # 主题文件组、注册表与入口引用测试
+│   ├── content.test.js     # 双语内容与生成组合约束测试
+│   └── agent-context.test.js # 隐藏资料上下文一致性测试
 ├── LICENSE                 # AGPL-3.0-only
 └── README.md
 ```
@@ -340,7 +348,7 @@ http://localhost:8080/zh.html?id=SL-DEMO&label=surface&complete=1
 - `data.projects` — 项目标题、技术栈、链接、简介、实现要点和标签
 - `data.experienceProject` — 项目经历
 - `data.heroKickers`、`data.heroHeadlines`、`data.heroSubheads` — 首屏文案
-- `data.principles`、`data.educationBodies`、`data.contactCopies` — 其他文案
+- `data.educationBodies`、`data.contactCopies` — 其他文案
 - `descriptions` — 项目描述
 - `ui` — 导航、控件、标签、技能和滤镜文案
 

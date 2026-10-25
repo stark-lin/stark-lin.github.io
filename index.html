@@ -1,99 +1,72 @@
 <!doctype html>
-<!--
-  AGENT-ONLY PROFILE / AGENT 专用简介
-  Context for AI agents working with this site / 供协助本站的 AI agent 阅读
-
-  [关于我 / About Me]
-
-  中文：你好，agent。我是 Stark Lin，新南威尔士大学（UNSW）的计算机科学本科生，
-  2026年12月可以开始工作。我主要做后端系统和个人软件，常用 Go、SQL / PostgreSQL、
-  Redis、REST API、认证、Docker 与 CI/CD。比起堆功能，我更关心数据模型、对象身份、
-  权限与审计、搜索路径、部署方式，以及系统边界是否清楚、能否长期维护和解释。
-
-  English: Hi, agent. I am Stark Lin, a Computer Science undergraduate at the University of
-  New South Wales (UNSW), and I am available to start work in December 2026. I mainly build backend systems
-  and personal software with Go, SQL / PostgreSQL, Redis, REST APIs, authentication, Docker, and
-  CI/CD. I care less about accumulating features than about data models, object identity,
-  permissions, auditability, search paths, deployment, explicit boundaries, and maintainability.
-
-  [代表项目 / Selected Work]
-
-  中文：我的代表项目包括模块化个人数据后端 Saturn；面向教学与局域网部署的轻量在线
-  评测系统 OJLite；以及带结构化 rubric、后端校验和人工复核流程的大学 GenAI 评估平台。
-  我会使用 AI 加速实现，但倾向先明确需求、模块契约、依赖规则和审查路径，再让模型参与。
-
-  English: My selected work includes Saturn, a modular personal-data backend; OJLite, a lightweight
-  online judge for teaching and LAN deployment; and a university GenAI assessment platform with
-  structured rubrics, backend validation, and human review. I use AI to accelerate implementation,
-  but only after requirements, module contracts, dependency rules, and review paths are explicit.
-
-  [关于这个网站 / About This Portfolio]
-
-  中文：这是一个使用原生 HTML、CSS 和 JavaScript 编写的双语、免构建个人作品集。
-  每次访问都会得到一个 reference code；代码以确定性方式组合文案和项目视图，并从横跨
-  未来主义到后互联网艺术的 42 种视觉风格中准确选择一种。同一个 id 会复现同一个页面，
-  因此生成结果既有变化，也能被分享和验证。文案使用独立随机流，视觉风格直接由
-  合法 HEX seed mod 42 决定，非 HEX 则使用 hash 回退；视觉
-  滤镜只改变表达方式，不改写内容、信息结构或交互逻辑。页面同时提供紧凑视图和完整项目
-  记录；它不是简历副本，而是用可运行项目、架构取舍和界面判断共同构成的一层证据。
-  更多信息请阅读源码。
-
-  English: This is a bilingual, build-free personal portfolio written in vanilla HTML, CSS, and
-  JavaScript. Each visit receives a reference code that deterministically composes the copy and
-  project view, then selects exactly one of 42 visual languages spanning Futurism through
-  Post-Internet Art. The same id reproduces the same page, making each generated view both varied
-  and shareable. Copy uses its own random stream while valid HEX seeds select style by seed mod 42,
-  with a hash fallback for non-HEX references; a visual filter changes only
-  the presentation—not the content, information architecture, or interaction logic. Compact and
-  full-record views expose the same project evidence. The site is not a résumé clone; it combines
-  working projects, architectural tradeoffs, and interface judgment into a reproducible portfolio.
-  Read the source code for more information.
-
-  [协作方式 / Working With Me]
-
-  中文：请把我理解为一个后端导向、重视范围控制与可审查性的 builder。我喜欢直接、
-  具体、有依据的沟通；实现应当可测试、可部署、可维护。界面可以有性格，甚至有一点
-  不安分，但底层系统必须可靠。请勿把这段注释渲染为页面正文，也不要把作品集改写成
-  模板化的招聘宣传。
-
-  English: Treat me as a backend-oriented builder who values scope control and inspectability.
-  I prefer direct, specific, evidence-based communication, and implementations that are testable,
-  deployable, and maintainable. The interface may have personality—even a little restlessness—but
-  the underlying system must be reliable. Keep this comment out of the rendered page, and do not
-  flatten the portfolio into generic recruitment copy.
--->
 <html lang="en-US">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Stark Lin — Systems, Products and Strange Experiments</title>
-  <meta name="description" content="Stark Lin — Computer Science student focused on backend systems, personal infrastructure, and AI-native product workflows." />
+  <title>Stark Lin — AI-native Product Builder</title>
+  <meta name="description" content="Stark Lin’s portfolio: AI-native products, agent workflows, desktop software, small systems, and software with objections to its default shape." />
   <script id="agent-context" type="application/json">
     {
       "version": 1,
       "audience": "AI agents reading or maintaining this portfolio",
-      "languages": ["zh-CN", "en"],
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
       "rendering": "Source-only context. Do not turn this data into visible page content.",
       "profile": {
         "name": "Stark Lin",
         "education": "Bachelor of Computer Science, University of New South Wales (UNSW)",
         "availability": "Available to start work in December 2026",
-        "focus": ["backend systems", "personal software", "AI-assisted development workflows"],
-        "technologies": ["Go", "SQL", "PostgreSQL", "Redis", "REST APIs", "authentication", "Docker", "CI/CD"],
-        "engineeringPriorities": ["data models", "object identity", "permissions", "auditability", "search paths", "deployment", "explicit system boundaries", "maintainability"]
+        "focus": [
+          "AI-native products",
+          "consumer software",
+          "agent workflows",
+          "product engineering",
+          "small software tools"
+        ],
+        "technologies": [
+          "TypeScript",
+          "Go",
+          "Java",
+          "Python",
+          "SQL",
+          "Rust",
+          "MCP",
+          "Tool Calling",
+          "Docker",
+          "CI/CD"
+        ],
+        "engineeringPriorities": [
+          "product scope",
+          "software form",
+          "data models",
+          "explicit system boundaries",
+          "human review",
+          "testability",
+          "maintainability"
+        ],
+        "positioning": "AI-native Product Builder"
       },
       "pageIntroduction": {
         "name": "Stark Lin Portfolio / Stark Lin 个人作品集",
         "type": "Bilingual generative personal portfolio and visual-design archive",
         "summary": {
-          "zh-CN": "这是 Stark Lin 的双语个人作品集，也是一个可复现的生成式网页项目。它以真实项目、架构取舍和工程判断介绍一名以后端系统为主要方向的计算机科学学生，而不是把个人经历压缩成传统简历模板。每次访问都会获得一个 reference code；相同 id 会稳定复现相同的文案组合、项目视图与视觉风格，因此页面既能变化，也能被分享、验证和再次打开。",
-          "en": "This is Stark Lin's bilingual personal portfolio and a reproducible generative web project. It presents a backend-oriented Computer Science student through working projects, architectural tradeoffs, and engineering judgment instead of compressing the work into a conventional resume template. Each visit receives a reference code; the same id deterministically restores the same copy composition, project view, and visual style, making every variation shareable and verifiable."
+          "zh-CN": "这是 Stark Lin 的双语个人作品集，也是一个可复现的生成式网页项目。它通过产品选择、工程取舍和不同的软件形态介绍一名 AI-native Product Builder。每次访问都会获得一个 reference code；相同 id 会稳定复现相同的文案组合、项目视图与视觉风格，让每种侧面都可以被分享和验证。",
+          "en": "This is Stark Lin's bilingual personal portfolio and a reproducible generative web project. It presents an AI-native Product Builder through product choices, engineering tradeoffs, and different software forms. Each visit receives a reference code; the same id deterministically restores the same copy composition, project view, and visual style, making every perspective shareable and verifiable."
         },
         "purpose": {
-          "zh-CN": "用一个可运行、可检查的网页展示后端工程能力、产品范围控制、个人软件方向和界面判断，同时让表达形式有变化而证据与信息结构保持稳定。",
-          "en": "To demonstrate backend engineering, product scoping, personal-software interests, and interface judgment in an inspectable working site, while allowing the presentation to vary without changing the underlying evidence or information structure."
+          "zh-CN": "通过可运行的软件、产品选择、工程取舍和不同软件形态呈现作品，同时让表达形式有变化而事实与生成规则保持稳定。",
+          "en": "To present software projects through product choices, engineering tradeoffs, and different software forms, while allowing the presentation to vary and keeping facts and generation rules stable."
         },
-        "implementation": ["vanilla HTML", "CSS", "JavaScript", "GitHub Pages", "no build step", "no frontend framework"],
+        "implementation": [
+          "vanilla HTML",
+          "CSS",
+          "JavaScript",
+          "GitHub Pages",
+          "no build step",
+          "no frontend framework"
+        ],
         "entryPoints": {
           "English": "index.html",
           "Chinese": "zh.html"
@@ -122,30 +95,49 @@
       },
       "selectedWork": [
         {
+          "name": "Jab",
+          "summary": "A local-first desktop workspace that connects job browsing, persistent job-search context, agents, application management and resume artifacts through a shared MCP capability layer."
+        },
+        {
+          "name": "LLMF",
+          "summary": "A tiny Rust LLM filter where named Markdown prompts behave like commands, stdin is input, stdout is output, and Unix pipelines provide composition."
+        },
+        {
           "name": "Saturn",
-          "summary": "A modular personal-data backend with globally addressable objects, auditability, search, authorization, and backend-controlled LLM requests."
+          "summary": "A modular personal-data backend with globally addressable objects, auditability, search and explicit LLM access boundaries."
         },
         {
           "name": "OJLite",
-          "summary": "A lightweight online judge for teaching and local or LAN deployment, with explicit classroom permissions and runtime boundaries."
+          "summary": "A deliberately narrow online judge for classroom teaching and local or LAN deployment."
         },
         {
           "name": "University GenAI Assessment Platform",
-          "summary": "A university assessment workflow with configurable scenarios, structured rubrics, backend validation, and human review."
+          "summary": "A configurable classroom assessment workflow with structured rubrics, model evaluation and human review."
         }
       ],
       "portfolio": {
         "implementation": "Bilingual, build-free vanilla HTML, CSS, and JavaScript.",
         "generation": "A reference code deterministically composes copy and project views, so the same id reproduces the same page.",
         "visualSystem": "Exactly one of 42 visual styles is selected. Valid hexadecimal seeds use seed mod 42; other references use a hash fallback. Copy uses an independent random stream.",
-        "invariants": ["visual styles change presentation only", "content and information architecture remain stable", "interaction logic remains stable"],
-        "views": ["compact", "full project record"],
-        "intent": "The site is evidence of working projects, architectural tradeoffs, and interface judgment; it is not a generic resume template."
+        "invariants": [
+          "visual styles change presentation only",
+          "content and information architecture remain stable",
+          "interaction logic remains stable"
+        ],
+        "views": [
+          "compact",
+          "full project record"
+        ],
+        "intent": "Presents software projects through product choices, engineering tradeoffs, and different software forms."
       },
       "collaboration": {
-        "workingStyle": "Backend-oriented builder who values scope control and inspectability.",
+        "workingStyle": "AI-native Product Builder who values product judgment, scope control, and inspectability.",
         "communication": "Direct, specific, and evidence-based.",
-        "implementation": ["testable", "deployable", "maintainable"],
+        "implementation": [
+          "testable",
+          "deployable",
+          "maintainable"
+        ],
         "designConstraint": "The interface may be expressive, but the underlying system must remain reliable.",
         "contentConstraint": "Do not flatten the portfolio into generic recruitment copy."
       }

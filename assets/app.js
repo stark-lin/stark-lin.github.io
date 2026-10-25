@@ -5,7 +5,7 @@
   if (!locale) throw new Error("Portfolio locale data is missing.");
   const selection = window.PORTFOLIO_SELECTION;
   if (!selection) throw new Error("Portfolio selection engine is missing.");
-  const { addToSeed, createPoolRandom, pick, pickN, seedModulo, shuffle } = selection;
+  const { addToSeed, createPoolRandom, pick, seedModulo, shuffle } = selection;
   const { data: DATA, descriptions: PROJECT_DESCRIPTION_POOLS, titlePhrases: TITLE_PHRASES = {}, ui: UI } = locale;
   const registeredStyles = window.PORTFOLIO_STYLE_POOL;
   if (!Array.isArray(registeredStyles) || registeredStyles.length === 0) {
@@ -45,7 +45,7 @@
     { zh: "它有时像档案，有时像便利贴墙，但都能点开项目。", en: "Sometimes it is a dossier, sometimes a wall of sticky notes. The projects still open." },
     { zh: "这页不是为了显得完美，是为了显得有人在场。", en: "This page is not trying to look perfect. It is trying to show someone is present." },
     { zh: "如果它看起来像草稿，那也是可部署草稿。", en: "If it looks like a draft, it is still a deployable draft." },
-    { zh: "主页在换装，后端在值班。", en: "The homepage is changing outfits. The backend is on duty." },
+    { zh: "主页在换装，软件在值班。", en: "The homepage is changing outfits. The software is on duty." },
     { zh: "我没有隐藏个性，只是给它加了版本号。", en: "I did not hide personality. I gave it a version number." },
     { zh: "随机不是借口，是一种有 ID 的展示方式。", en: "Randomness is not an excuse. It is presentation with an ID." },
     { zh: "这页没有端着，但也没有乱扔信息。", en: "This page is not stiff, but it does not throw information around." },
@@ -60,7 +60,7 @@
   ];
   const LAYOUT_POOL = Object.freeze({
     educationPlacements: Object.freeze(["hero", "section"]),
-    sections: Object.freeze(["work", "experience", "principles", "skills"])
+    sections: Object.freeze(["work", "experience", "skills"])
   });
 
   const SYSTEM_CONFIG = Object.freeze({
@@ -82,7 +82,6 @@
     kickers: DATA.heroKickers,
     headlines: DATA.heroHeadlines,
     subheads: DATA.heroSubheads,
-    principles: DATA.principles,
     educationBodies: DATA.educationBodies,
     contactCopies: DATA.contactCopies,
     revealCopies: DATA.revealCopies,
@@ -259,7 +258,6 @@
         sections,
         projects,
         experienceProject,
-        principles: pickN(rng, COPY_POOL.principles, 2 + Math.floor(rng() * 4)),
         educationBody: pick(rng, COPY_POOL.educationBodies),
         contactCopy: pick(rng, COPY_POOL.contactCopies),
         revealCopy: pick(rng, COPY_POOL.revealCopies),
@@ -590,15 +588,6 @@
       return sectionShell(index, "education", UI.sectionTitles.education, config.leads.education, body);
     }
 
-    function renderPrinciples(config, index) {
-      const body = `
-        <div class="principles">
-          ${config.principles.map((principle, i) => `<div class="principle"><span class="tag">P${String(i + 1).padStart(2, "0")}</span><p style="margin-top:16px">${escapeHtml(principle)}</p></div>`).join("")}
-        </div>
-      `;
-      return sectionShell(index, "principles", UI.sectionTitles.principles, config.leads.principles, body);
-    }
-
     function renderSkills(config, index) {
       const body = `
         <div class="cards">
@@ -696,7 +685,6 @@
         work: renderWork,
         experience: renderExperience,
         education: renderEducation,
-        principles: renderPrinciples,
         skills: renderSkills
       };
       const sections = config.sections.map((key, i) => renderers[key](config, i + 1)).join("");
