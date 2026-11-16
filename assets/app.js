@@ -17,6 +17,7 @@
   });
   const VIEW_LABELS = Object.freeze({ GUIDE: "guide", SURFACE: "surface" });
   const ENTRY_ROOT = window.PORTFOLIO_ENTRY_ROOT || "./";
+  const OFFLINE = window.PORTFOLIO_OFFLINE;
   const SAFE_BILINGUAL_QUIPS = [
     { zh: "这页会变，但不是在逃避责任。", en: "This page changes, but it is not dodging responsibility." },
     { zh: "随机的是外观，固定的是链接能点。", en: "The surface is random. The links are reliably clickable." },
@@ -219,7 +220,15 @@
     }
 
     function getSurfaceUrl() {
-      const url = new URL(window.location.href);
+      const currentUrl = new URL(window.location.href);
+      const url = OFFLINE
+        ? new URL(localePage(document.documentElement.lang), "https://stark-lin.github.io/")
+        : currentUrl;
+      if (OFFLINE) {
+        url.search = currentUrl.search;
+        url.hash = currentUrl.hash;
+        url.searchParams.delete("lang");
+      }
       url.searchParams.set("label", VIEW_LABELS.SURFACE);
       return url.toString();
     }
@@ -387,16 +396,23 @@
       });
     }
 
+    function localePage(lang) {
+      return lang.startsWith("zh") ? "zh.html" : "index.html";
+    }
+
     function getLanguageSwitch() {
       const isChinese = document.documentElement.lang.startsWith("zh");
-      const siteRootUrl = new URL(ENTRY_ROOT, window.location.href);
-      const targetUrl = new URL(isChinese ? "index.html" : "zh.html", siteRootUrl);
-      targetUrl.search = window.location.search;
-      targetUrl.hash = window.location.hash;
-
+      const targetLanguage = isChinese ? "en" : "zh";
+      const currentUrl = new URL(window.location.href);
+      const targetUrl = OFFLINE
+        ? new URL(currentUrl)
+        : new URL(localePage(targetLanguage), new URL(ENTRY_ROOT, currentUrl));
+      targetUrl.search = currentUrl.search;
+      targetUrl.hash = currentUrl.hash;
+      if (OFFLINE) targetUrl.searchParams.set("lang", targetLanguage);
       return {
         href: targetUrl.href,
-        hrefLang: isChinese ? "en" : "zh",
+        hrefLang: targetLanguage,
         labelLang: isChinese ? "en" : "zh-CN",
         label: isChinese ? "EN" : "中文",
         ariaLabel: isChinese ? "切换到英文" : "Switch to Chinese"
@@ -408,7 +424,7 @@
       const language = document.documentElement.lang.startsWith("zh") ? "zh" : "en";
       const footerQuip = config.footerQuip?.[language] || shell.footer;
       const languageSwitch = getLanguageSwitch();
-      const licenseUrl = new URL("LICENSE", new URL(ENTRY_ROOT, window.location.href));
+      const licenseUrl = OFFLINE?.licenseUrl || new URL("LICENSE", new URL(ENTRY_ROOT, window.location.href)).href;
       document.body.innerHTML = `
         <div class="regenerating" id="regenerating" role="status" aria-live="polite" aria-atomic="true" aria-hidden="true">
           <div class="regen-box">
@@ -434,12 +450,16 @@
         <span>${escapeHtml(footerQuip)}</span>
         <span>
           <a href="https://github.com/stark-lin/stark-lin.github.io" target="_blank" rel="noreferrer">${escapeHtml(shell.sourceLabel)}</a>
-          · <a href="${escapeHtml(licenseUrl.href)}">AGPL-3.0</a>
+          · <a href="${escapeHtml(licenseUrl)}"${OFFLINE ? ' download="LICENSE"' : ""}>AGPL-3.0</a>
         </span>
       </footer>
         </div>
         <div class="toast" id="toast">${escapeHtml(shell.copied)}</div>
       `;
+      const languageLink = document.querySelector(".language-switch");
+      languageLink.addEventListener("click", () => {
+        languageLink.href = getLanguageSwitch().href;
+      });
     }
 
     function renderNav(config) {
@@ -833,16 +853,18 @@
       observer.observe(target);
     }
 
-    function copyText(text, message) {
-      navigator.clipboard.writeText(text).then(() => showToast(message)).catch(() => {
+    async function copyText(text, message) {
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
         const input = document.createElement("input");
         input.value = text;
         document.body.appendChild(input);
         input.select();
         document.execCommand("copy");
         input.remove();
-        showToast(message);
-      });
+      }
+      showToast(message);
     }
 
     function showToast(message) {
@@ -867,8 +889,10 @@
         const url = new URL(window.location.href);
         const currentId = url.searchParams.get("id");
         const id = currentId ? createNextId(currentId) : createShortId();
+        const lang = url.searchParams.get("lang");
         // Roll Again advances the current ID and drops view state such as `complete` and section hashes.
         url.search = "";
+        if (OFFLINE && lang) url.searchParams.set("lang", lang);
         url.searchParams.set("id", id);
         url.searchParams.set("label", VIEW_LABELS.SURFACE);
         url.hash = "";

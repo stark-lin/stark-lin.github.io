@@ -1,0 +1,43 @@
+name: Package offline HTML
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: offline-release-${{ github.ref }}
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the release commit
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Test
+        run: node --test tests/*.test.js
+      - name: Build offline HTML
+        run: node scripts/build-offline.mjs
+      - name: Attach HTML to the release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          asset=dist/molybdenum-offline.html
+          digest="sha256:$(sha256sum "$asset" | cut -d ' ' -f 1)"
+          uploaded_digest="$(gh release view --json assets --jq '.assets[] | select(.name == "molybdenum-offline.html" and .state == "uploaded") | .digest' -- "$RELEASE_TAG")"
+          if [[ "$uploaded_digest" == "$digest" ]]; then
+            echo "The release already has this offline HTML."
+          else
+            gh release upload --clobber -- "$RELEASE_TAG" "$asset"
+          fi
