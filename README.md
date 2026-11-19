@@ -197,9 +197,9 @@ Publish the repository root directly and leave the build command empty. Preserve
 
 #### Offline Release download
 
-Publish a GitHub Release for a tag that includes the packaging workflow. Find `molybdenum-offline.html` under **Assets** once the workflow completes. Send the file as-is and open it in a browser. Both languages and all 42 filters are embedded. External project links and links from **Copy URL** still point to their online destinations.
+Every push to `main` runs the tests and publishes a `main-<run number>` GitHub Release for the pushed commit. Download `molybdenum-offline.html` under **Assets**. Send the file as-is and open it in a browser. Both languages and all 42 filters are embedded. External project links and links from **Copy URL** still point to their online destinations.
 
-To build the same file locally, run `node scripts/build-offline.mjs` from the repository root. The output is `dist/molybdenum-offline.html`. If immutable releases are enabled, attach this file to the draft before publishing.
+To build the same file locally, run `node scripts/build-offline.mjs` from the repository root. The output is `dist/molybdenum-offline.html`.
 
 ### Browser compatibility
 
@@ -410,9 +410,9 @@ python3 -m http.server 8080
 
 #### 下载 Release 离线版
 
-用包含打包工作流的 Git 标签发布 GitHub Release。工作流完成后，从 **Assets** 下载 `molybdenum-offline.html`。可以直接转发这个文件，用浏览器打开即可。中英文和全部 42 个滤镜都已内嵌。外部项目链接和「复制 URL」生成的链接仍指向线上页面。
+每次 push 到 `main` 都会运行测试，随后为该次推送的提交自动发布一个 `main-<运行编号>` GitHub Release。从 **Assets** 下载 `molybdenum-offline.html`，即可直接转发并用浏览器打开。中英文和全部 42 个滤镜都已内嵌。外部项目链接和「复制 URL」生成的链接仍指向线上页面。
 
-在仓库根目录运行 `node scripts/build-offline.mjs`，也能生成同样的 `dist/molybdenum-offline.html`。如果仓库启用了不可变 Release，请在发布前把该文件附加到草稿。
+在仓库根目录运行 `node scripts/build-offline.mjs`，也能生成同样的 `dist/molybdenum-offline.html`。
 
 ### 浏览器兼容性
 

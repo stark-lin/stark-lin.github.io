@@ -1,22 +1,20 @@
-name: Package offline HTML
+name: Release offline HTML
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: [main]
 
 permissions:
   contents: write
-
-concurrency:
-  group: offline-release-${{ github.ref }}
 
 jobs:
   package:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the release commit
+      - name: Check out the pushed commit
         uses: actions/checkout@v6
         with:
+          ref: ${{ github.sha }}
           persist-credentials: false
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -26,18 +24,24 @@ jobs:
         run: node --test tests/*.test.js
       - name: Build offline HTML
         run: node scripts/build-offline.mjs
-      - name: Attach HTML to the release
+      - name: Publish release with offline HTML
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
+          tag="main-${GITHUB_RUN_NUMBER}"
           asset=dist/molybdenum-offline.html
-          digest="sha256:$(sha256sum "$asset" | cut -d ' ' -f 1)"
-          uploaded_digest="$(gh release view --json assets --jq '.assets[] | select(.name == "molybdenum-offline.html" and .state == "uploaded") | .digest' -- "$RELEASE_TAG")"
-          if [[ "$uploaded_digest" == "$digest" ]]; then
-            echo "The release already has this offline HTML."
+          if draft="$(gh release view "$tag" --json isDraft --jq .isDraft)"; then
+            if [[ "$draft" == true ]]; then
+              gh release upload "$tag" "$asset" --clobber
+              gh release edit "$tag" --draft=false
+            else
+              echo "Release $tag is already published."
+            fi
           else
-            gh release upload --clobber -- "$RELEASE_TAG" "$asset"
+            gh release create "$tag" "$asset" \
+              --target "$GITHUB_SHA" \
+              --title "$tag" \
+              --notes "Offline portfolio built from main commit $GITHUB_SHA. Download molybdenum-offline.html and open it in a browser."
           fi
